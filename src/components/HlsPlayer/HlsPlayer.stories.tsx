@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
 import HlsPlayer from "./HlsPlayer";
-import { useRef } from "react";
+import React from 'react';
+import { MdAccessible } from "react-icons/md";
 
 const meta = {
   title: "Example/HlsPlayer",
@@ -37,3 +38,19 @@ export const Primary: Story = {
       "https://static.namava.ir/Content/Upload/Images/ad00cc89-74fe-4264-9210-9571d4c6cb42.jpg?anchor=middlecenter&crop=auto&scale=both&w=1920&h=900",
   },
 };
+
+export const Another: Story = {
+  args: {
+    src: "https://cdn.theoplayer.com/video/elephants-dream/playlist.m3u8",
+    controls: false,
+    loop: true,
+    muted: false,
+    customTheme: theme,
+    onPlay: playFn,
+    playIcon: <MdAccessible />,
+    poster:
+      "https://static.namava.ir/Content/Upload/Images/ad00cc89-74fe-4264-9210-9571d4c6cb42.jpg?anchor=middlecenter&crop=auto&scale=both&w=1920&h=500",
+  },
+  render: (args: any) => <HlsPlayer {...args} />
+
+}
