@@ -3,7 +3,7 @@ import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import { theme } from "../../theme";
 import { useCallback, useEffect, useImperativeHandle } from "react";
-import { HlsPlayerPropsType } from "../../@types/HlsPlayerType";
+import { HlsPlayerPropsType } from "../../@types";
 import React from "react";
 /*
 ui components
