@@ -5,6 +5,8 @@ import { theme } from "../../theme";
 import { useCallback, useEffect, useImperativeHandle } from "react";
 import { HlsPlayerPropsType } from "../../@types";
 import React from "react";
+import { MdPlayArrow } from "react-icons/md";
+
 /*
 ui components
 */
@@ -65,7 +67,7 @@ const HlsPlayer = ({
   loop = false,
   topRightContainer = null,
   topLeftContainer = null,
-
+  playIcon = <MdPlayArrow />,
   muted = false,
   poster,
   onPlay,
@@ -141,7 +143,8 @@ const HlsPlayer = ({
           />
         )}
         <Button onClick={playClicked}>
-          {videoRef?.current?.paused ? 'play' : 'pause'}
+          {/* {videoRef?.current?.paused ? 'play' : 'pause'} */}
+          {playIcon}
           {/* <img src="/assets/icons/play.svg" alt="" /> */}
         </Button>
       </VideoWrapper>

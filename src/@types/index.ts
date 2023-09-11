@@ -17,6 +17,7 @@ export type HlsPlayerPropsType = {
   width?: string;
   height?: string;
   autoPlay?: boolean;
+  playIcon?: ReactNode;
   onReady?: () => void;
   onPlay?: () => void;
   onPause?: () => void;
