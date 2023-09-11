@@ -1,1 +1,1 @@
-export { default as Button } from "./HlsPlayer";
+export { default as HlsPlayer } from "./HlsPlayer";
