@@ -58,6 +58,9 @@
     "url": "https://github.com/hosseintaromi/video_player"
   },
   "dependencies": {
-    "@rollup/plugin-terser": "^0.4.3"
+    "@rollup/plugin-terser": "^0.4.3",
+    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.11.1",
+    "hls.js": "^1.3.2"
   }
 }
