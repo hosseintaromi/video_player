@@ -141,7 +141,8 @@ const HlsPlayer = ({
           />
         )}
         <Button onClick={playClicked}>
-          <img src="/assets/icons/play.svg" alt="" />
+          {videoRef?.current?.paused ? 'play' : 'pause'}
+          {/* <img src="/assets/icons/play.svg" alt="" /> */}
         </Button>
       </VideoWrapper>
     </ThemeProvider>
