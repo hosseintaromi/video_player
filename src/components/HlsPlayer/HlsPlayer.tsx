@@ -5,7 +5,6 @@ import { theme } from "../../theme";
 import { useCallback, useEffect, useImperativeHandle } from "react";
 import { HlsPlayerPropsType } from "../../@types";
 import React from "react";
-import { MdPlayArrow } from "react-icons/md";
 
 /*
 ui components
@@ -67,7 +66,7 @@ const HlsPlayer = ({
   loop = false,
   topRightContainer = null,
   topLeftContainer = null,
-  playIcon = <MdPlayArrow />,
+  playIcon = <p>play</p>,
   muted = false,
   poster,
   onPlay,

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import HlsPlayer from "./HlsPlayer";
 import React from 'react';
-import { MdAccessible } from "react-icons/md";
 
 const meta = {
   title: "Example/HlsPlayer",
@@ -47,7 +46,7 @@ export const Another: Story = {
     muted: false,
     customTheme: theme,
     onPlay: playFn,
-    playIcon: <MdAccessible />,
+    playIcon: <p>slm</p>,
     poster:
       "https://static.namava.ir/Content/Upload/Images/ad00cc89-74fe-4264-9210-9571d4c6cb42.jpg?anchor=middlecenter&crop=auto&scale=both&w=1920&h=500",
   },
