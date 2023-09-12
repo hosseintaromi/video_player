@@ -1,4 +1,7 @@
 ![video player Logo](./package_logo.PNG)
+![NPM Downloads](https://img.shields.io/npm/dw/@hosseintaromi/video_player)
+![NPM License](https://img.shields.io/npm/l/@hosseintaromi/video_player)
+![Travis Status](https://img.shields.io/travis/hosseintaromi/video_player)
 
 you can play a video with all cool features
 
