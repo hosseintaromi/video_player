@@ -3,8 +3,11 @@
 you can play a video with all cool features
 
 [Key Features](#key-features)
+&nbsp;&middot;&nbsp;
 [How To Use](#how-to-use)
+&nbsp;&middot;&nbsp;
 [Credits](#credits)
+&nbsp;&middot;&nbsp;
 [License](#license)
 
 ## Key Features
