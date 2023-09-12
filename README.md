@@ -103,13 +103,13 @@ This software uses the following open source packages:
 - [hls.js](https://github.com/video-dev/hls.js)
 - [emotion](https://emotion.sh/)
 
-## Support
+<!-- ## Support
 
 <a href="https://www.buymeacoffee.com/5Zn8Xh3l9" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;" ></a>
 
 <p>Or</p>
 
-<a href="https://www.coffeebede.com/hosseintaromi"><img class="img-fluid"  src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" style="height: 49px !important;width: 174px !important;"/></a>
+<a href="https://www.coffeebede.com/hosseintaromi" style="height: 49px !important;width: 174px !important;"><img class="img-fluid"  src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" style="height: 49px !important;width: 174px !important;"/></a> -->
 
 ## License
 
