@@ -1,6 +1,6 @@
 {
   "name": "@hosseintaromi/video_player",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "A simple template for a custom React component library",
   "scripts": {
     "rollup": "rollup -c",
