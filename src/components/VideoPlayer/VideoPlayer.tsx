@@ -3,7 +3,7 @@ import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import { theme } from "../../theme";
 import { useCallback, useEffect, useImperativeHandle } from "react";
-import { HlsPlayerPropsType } from "../../@types";
+import { VideoPlayerPropsType } from "../../@types";
 import React from "react";
 
 /*
@@ -58,7 +58,7 @@ const TopLeftWrapper = styled.div({
   justifyContent: "left",
 });
 
-const HlsPlayer = ({
+const VideoPlayer = ({
   customTheme,
   controllerRef,
   src,
@@ -70,7 +70,7 @@ const HlsPlayer = ({
   muted = false,
   poster,
   onPlay,
-}: HlsPlayerPropsType) => {
+}: VideoPlayerPropsType) => {
   const { videoRef, isSupportedPlatform } = useVideoHls({
     src,
   });
@@ -152,4 +152,4 @@ const HlsPlayer = ({
 };
 
 
-export default HlsPlayer;
+export default VideoPlayer;

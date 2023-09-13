@@ -6,7 +6,7 @@ export type ControllerRefType = {
   play: (value: boolean) => void;
 };
 
-export type HlsPlayerPropsType = {
+export type VideoPlayerPropsType = {
   customTheme?: ThemeType;
   controllerRef?: RefObject<ControllerRefType>;
   controls?: boolean;

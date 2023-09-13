@@ -38,7 +38,7 @@ $ npm i @hosseintaromi/video_player@0.1.5
 ```
 
 ```tsx
-import HlsPlayer from "@hosseintaromi/video_player";
+import VideoPlayer from "@hosseintaromi/video_player";
 
 const App = () => {
   //you can control everything with this ref
@@ -67,7 +67,7 @@ const App = () => {
 
   return (
     <>
-      <HlsPlayer
+      <VideoPlayer
         src="https://videoUrl.m3u8"
         controls={false}
         loop={true}

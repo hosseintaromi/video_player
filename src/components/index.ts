@@ -1,1 +1,1 @@
-export { default as HlsPlayer } from "./HlsPlayer";
+export { default as VideoPlayer } from "./VideoPlayer";

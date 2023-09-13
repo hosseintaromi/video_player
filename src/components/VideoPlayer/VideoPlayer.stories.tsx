@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import HlsPlayer from "./HlsPlayer";
+import VideoPlayer from "./VideoPlayer";
 import React from 'react';
 
 const meta = {
-  title: "Example/HlsPlayer",
-  component: HlsPlayer,
+  title: "Example/VideoPlayer",
+  component: VideoPlayer,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof HlsPlayer>;
+} satisfies Meta<typeof VideoPlayer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -50,6 +50,6 @@ export const Another: Story = {
     poster:
       "https://static.namava.ir/Content/Upload/Images/ad00cc89-74fe-4264-9210-9571d4c6cb42.jpg?anchor=middlecenter&crop=auto&scale=both&w=1920&h=500",
   },
-  render: (args: any) => <HlsPlayer {...args} />
+  render: (args: any) => <VideoPlayer {...args} />
 
 }
