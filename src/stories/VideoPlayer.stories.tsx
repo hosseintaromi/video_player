@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import VideoPlayer from "./VideoPlayer";
+import VideoPlayer from "../components/VideoPlayer/VideoPlayer";
 import React from 'react';
 
 const meta = {
-  title: "Example/VideoPlayer",
+  title: "complete example",
   component: VideoPlayer,
   parameters: {
     layout: "centered",
