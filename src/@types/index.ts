@@ -18,6 +18,7 @@ export type VideoPlayerPropsType = {
   height?: string;
   autoPlay?: boolean;
   playIcon?: ReactNode;
+  pauseIcon?: ReactNode;
   onReady?: () => void;
   onPlay?: () => void;
   onPause?: () => void;

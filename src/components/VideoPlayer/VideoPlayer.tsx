@@ -2,9 +2,10 @@ import { useVideoHls } from "../../hooks/useVideoHls";
 import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import { theme } from "../../theme";
-import { useCallback, useEffect, useImperativeHandle } from "react";
+import { useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { VideoPlayerPropsType } from "../../@types";
 import React from "react";
+import { FaBeer } from 'react-icons/fa';
 
 /*
 ui components
@@ -26,13 +27,13 @@ const Button = styled.button({
   left: "50%",
   transform: "translate(-50%, -50%)",
   background: "transparent",
-  border: "3px solid #fff",
+  border: "none",
   borderRadius: "50%",
   color: "white",
   padding: "20px",
-  "& > img": {
-    width: "30px",
-    height: "30px",
+  "img,svg": {
+    width: "70px",
+    height: "70px",
   },
 });
 const TopRightWrapper = styled.div({
@@ -66,7 +67,8 @@ const VideoPlayer = ({
   loop = false,
   topRightContainer = null,
   topLeftContainer = null,
-  playIcon = <p>play</p>,
+  playIcon = <FaBeer />,
+  pauseIcon = <img src="https://cdn-icons-png.flaticon.com/512/4181/4181163.png" />,
   muted = false,
   poster,
   onPlay,
@@ -74,7 +76,7 @@ const VideoPlayer = ({
   const { videoRef, isSupportedPlatform } = useVideoHls({
     src,
   });
-
+  const [playState, setPlayState] = useState(true)
   useImperativeHandle(controllerRef, () => ({
     changeSpeed: handelChangeSpeed,
     play: handelPlayAction,
@@ -90,8 +92,10 @@ const VideoPlayer = ({
 
   const playClicked = useCallback(() => {
     if (videoRef?.current?.paused) {
+      setPlayState(false)
       videoRef?.current?.play();
     } else {
+      setPlayState(true);
       videoRef?.current?.pause();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -141,10 +145,10 @@ const VideoPlayer = ({
             poster={poster}
           />
         )}
+
         <Button onClick={playClicked}>
-          {/* {videoRef?.current?.paused ? 'play' : 'pause'} */}
-          {playIcon}
-          {/* <img src="/assets/icons/play.svg" alt="" /> */}
+          {playState ? playIcon : pauseIcon}
+
         </Button>
       </VideoWrapper>
     </ThemeProvider>
