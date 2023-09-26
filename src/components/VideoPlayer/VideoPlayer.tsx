@@ -5,7 +5,6 @@ import { theme } from "../../theme";
 import { useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { VideoPlayerPropsType } from "../../@types";
 import React from "react";
-import { FaBeer } from 'react-icons/fa';
 
 /*
 ui components
@@ -58,6 +57,7 @@ const TopLeftWrapper = styled.div({
   left: "0",
   justifyContent: "left",
 });
+const playIcon2 = <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path></svg>
 
 const VideoPlayer = ({
   customTheme,
@@ -67,7 +67,7 @@ const VideoPlayer = ({
   loop = false,
   topRightContainer = null,
   topLeftContainer = null,
-  playIcon = <FaBeer />,
+  playIcon = playIcon2,
   pauseIcon = <img src="https://cdn-icons-png.flaticon.com/512/4181/4181163.png" />,
   muted = false,
   poster,
