@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
 
-import VideoPlayer from "../components/VideoPlayer/VideoPlayer";
-import { FaBeer } from 'react-icons/fa';
 import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import VideoPlayer from "../components/VideoPlayer/VideoPlayer";
+import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
 
 const meta = {
   title: "Options/icons",
@@ -10,22 +10,20 @@ const meta = {
   parameters: {
     layout: "centered",
     controls: {
-      exclude: /^(?:(?!item1|item2).)*$/g
+      exclude: /^(?:(?!playIcon|pauseIcon).)*$/g
     }
   },
   tags: ["autodocs"],
-  // argTypes: {
-  //   poster: {
-  //     table: {
-  //       disable: true
-  //     }
-  //   },
-  //   controls: {
-  //     table: {
-  //       disable: true
-  //     }
-  //   }
-  // }
+  argTypes: {
+    playIcon: {
+      control: 'texct',
+      description: "You can pass ReactNode; for example, img,svg or IconComponent is not required if you don't pass show default icons.",
+    },
+    pauseIcon: {
+      control: 'texwt',
+      description: "You can pass ReactNode; for example, img,svg or IconComponent is not required if you don't pass show default icons.",
+    },
+  }
 } satisfies Meta<typeof VideoPlayer>;
 
 export default meta;
@@ -42,10 +40,12 @@ const playFn = () => {
   console.log("Play");
 };
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+
+
 export const PlayButton: Story = {
   args: {
     src: "https://cdn.theoplayer.com/video/elephants-dream/playlist.m3u8",
-    playIcon: <FaBeer />
+    playIcon: <AiFillPlayCircle />,
+    pauseIcon: <AiFillPauseCircle />
   },
 };
