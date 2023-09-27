@@ -1,18 +1,21 @@
+import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { useVideoHls } from "../../hooks/useVideoHls";
 import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import { keyframes } from '@emotion/react'
-
 import { theme } from "../../theme";
-import { useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
-import React from "react";
 
 /*
 ui components
 */
+
+type ButtonPropsType = {
+  animation: boolean,
+}
+
 const bounce = keyframes`
 from {
   opacity: 1
@@ -25,23 +28,22 @@ to {
   transform: scale(2)
 }
 `
+
 const VideoWrapper = styled.div(({ theme }) => ({
   height: "100%",
   width: "100%",
   position: "relative",
   overflow: "hidden",
 }));
+
 const Video = styled.video(({ theme }) => ({
   width: "100%",
   height: "100%",
   backgroundColor: theme.colors.videoBg,
 }));
-type ImageProps = {
-  animation: boolean,
-}
 
-const Button = styled.button<ImageProps>(props => ({
 
+const Button = styled.button<ButtonPropsType>(props => ({
   background: "transparent",
   border: "none",
   borderRadius: "50%",
@@ -51,16 +53,18 @@ const Button = styled.button<ImageProps>(props => ({
   transformOrigin: "center",
   display: `${props.animation ? 'none' : 'block'}`,
   "img,svg": {
-    width: "70px",
-    height: "70px",
+    width: "50px",
+    height: "50px",
   },
 }))
+
 const PlayIconWrapper = styled.div({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
 });
+
 const TopRightWrapper = styled.div({
   zIndex: "1",
   top: "0",
@@ -72,6 +76,7 @@ const TopRightWrapper = styled.div({
   justifyContent: "right",
   color: "white",
 });
+
 const TopLeftWrapper = styled.div({
   color: "white",
   zIndex: "1",
@@ -84,6 +89,26 @@ const TopLeftWrapper = styled.div({
   justifyContent: "left",
 
 });
+
+const PlayWrapper = styled.div({
+  zIndex: '2',
+  position: 'absolute',
+  height: '85%',
+  width: '100%',
+});
+
+const TollBarWrapper = styled.div({
+  position: 'absolute',
+  bottom: '0',
+  height: '15%',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  color: '#fff',
+  fontSize: '40px',
+  padding: '0 20px',
+  zIndex: '2'
+})
 
 const VideoPlayer = ({
   customTheme,
@@ -98,12 +123,14 @@ const VideoPlayer = ({
   muted = false,
   poster,
   onPlay,
+  showPlayIcon = true
 }: VideoPlayerPropsType) => {
   const { videoRef, isSupportedPlatform } = useVideoHls({
     src,
   });
   const [playState, setPlayState] = useState(true)
   const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
+
   useImperativeHandle(controllerRef, () => ({
     changeSpeed: handelChangeSpeed,
     play: handelPlayAction,
@@ -113,27 +140,27 @@ const VideoPlayer = ({
     if (value) videoRef?.current?.play();
     else videoRef?.current?.pause();
   };
+
   const handelChangeSpeed = (value: number) => {
     if (videoRef?.current?.playbackRate) videoRef.current.playbackRate = value;
   };
 
+  const changeAnimationForPlay = (value: boolean) => {
+    setPlayState(value)
+    setShowAnimationForPlayButton(false);
+    setTimeout(() => {
+      setShowAnimationForPlayButton(true);
+    }, 400);
+  }
+
   const playClicked = useCallback(() => {
     if (videoRef?.current?.paused) {
-      setPlayState(false)
-      setShowAnimationForPlayButton(false);
-      setTimeout(() => {
-        setShowAnimationForPlayButton(true);
-      }, 400);
+      changeAnimationForPlay(false)
       videoRef?.current?.play();
     } else {
-      setShowAnimationForPlayButton(false);
-      setTimeout(() => {
-        setShowAnimationForPlayButton(true);
-      }, 400);
-      setPlayState(true);
+      changeAnimationForPlay(true);
       videoRef?.current?.pause();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -151,12 +178,23 @@ const VideoPlayer = ({
     initVideo(videoEl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
       <VideoWrapper>
         <TopRightWrapper>{topRightContainer}</TopRightWrapper>
         <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
-
+        <PlayWrapper onClick={playClicked} />
+        <PlayIconWrapper>
+          <Button animation={showAnimationForPlayButton}>
+            {playState ? playIcon : pauseIcon}
+          </Button>
+        </PlayIconWrapper>
+        <TollBarWrapper >
+          <div onClick={playClicked}>
+            {playState ? playIcon : pauseIcon}
+          </div>
+        </TollBarWrapper>
         {isSupportedPlatform ? (
           <Video
             playsInline
@@ -181,13 +219,6 @@ const VideoPlayer = ({
             poster={poster}
           />
         )}
-        <PlayIconWrapper>
-
-          <Button animation={showAnimationForPlayButton}>
-            {playState ? playIcon : pauseIcon}
-          </Button>
-        </PlayIconWrapper>
-        <button onClick={playClicked}>helo</button>
       </VideoWrapper>
     </ThemeProvider>
   );
