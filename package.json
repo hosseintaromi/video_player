@@ -6,7 +6,8 @@
     "rollup": "rollup -c",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "publish": "npm version patch && rollup -c && npm publish"
   },
   "author": "Hossein Taromi",
   "license": "ISC",
