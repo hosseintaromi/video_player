@@ -28,6 +28,7 @@ const playFn = () => {
 export const Primary: Story = {
   args: {
     src: "https://cdn.theoplayer.com/video/elephants-dream/playlist.m3u8",
+    showPlayIcon: true,
     controls: false,
     loop: true,
     muted: false,

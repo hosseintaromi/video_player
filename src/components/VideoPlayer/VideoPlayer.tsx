@@ -7,7 +7,7 @@ import { theme } from "../../theme";
 import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
-
+import SettingMenu from "../Setting/Setting";
 /*
 ui components
 */
@@ -34,6 +34,7 @@ const VideoWrapper = styled.div(({ theme }) => ({
   width: "100%",
   position: "relative",
   overflow: "hidden",
+  boxSizing: "border-box"
 }));
 
 const Video = styled.video(({ theme }) => ({
@@ -103,6 +104,7 @@ const TollBarWrapper = styled.div({
   height: '15%',
   width: '100%',
   display: 'flex',
+  gap: '30px',
   alignItems: 'center',
   color: '#fff',
   fontSize: '40px',
@@ -145,20 +147,21 @@ const VideoPlayer = ({
     if (videoRef?.current?.playbackRate) videoRef.current.playbackRate = value;
   };
 
-  const changeAnimationForPlay = (value: boolean) => {
+  const changeAnimationForPlay = (value: boolean, showAnimation: boolean) => {
     setPlayState(value)
+    if (!showAnimation) return
     setShowAnimationForPlayButton(false);
     setTimeout(() => {
       setShowAnimationForPlayButton(true);
     }, 400);
   }
 
-  const playClicked = useCallback(() => {
+  const playClicked = useCallback((showPlayIcon: boolean) => {
     if (videoRef?.current?.paused) {
-      changeAnimationForPlay(false)
+      changeAnimationForPlay(false, showPlayIcon)
       videoRef?.current?.play();
     } else {
-      changeAnimationForPlay(true);
+      changeAnimationForPlay(true, showPlayIcon);
       videoRef?.current?.pause();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -184,15 +187,18 @@ const VideoPlayer = ({
       <VideoWrapper>
         <TopRightWrapper>{topRightContainer}</TopRightWrapper>
         <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
-        <PlayWrapper onClick={playClicked} />
+        <PlayWrapper onClick={() => playClicked(showPlayIcon)} />
         <PlayIconWrapper>
           <Button animation={showAnimationForPlayButton}>
             {playState ? playIcon : pauseIcon}
           </Button>
         </PlayIconWrapper>
         <TollBarWrapper >
-          <div onClick={playClicked}>
+          <div onClick={() => playClicked(false)}>
             {playState ? playIcon : pauseIcon}
+          </div>
+          <div>
+            <SettingMenu />
           </div>
         </TollBarWrapper>
         {isSupportedPlatform ? (

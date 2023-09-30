@@ -7,25 +7,27 @@ export type ControllerRefType = {
 };
 
 export type VideoPlayerPropsType = {
+  src: string;
+  width?: string;
+  height?: string;
   customTheme?: ThemeType;
   controllerRef?: RefObject<ControllerRefType>;
   controls?: boolean;
   loop?: boolean;
   muted?: boolean;
-  src: string;
   poster?: string;
-  width?: string;
-  height?: string;
   autoPlay?: boolean;
   playIcon?: ReactNode;
   pauseIcon?: ReactNode;
   showPlayIcon?: boolean;
+
+  topRightContainer?: ReactNode | null;
+  topLeftContainer?: ReactNode | null;
+
   onReady?: () => void;
   onPlay?: () => void;
   onPause?: () => void;
   onSeeking?: () => void;
   onSeeked?: () => void;
   onEnd?: () => void;
-  topRightContainer?: ReactNode | null;
-  topLeftContainer?: ReactNode | null;
 };
