@@ -34,7 +34,10 @@ const VideoWrapper = styled.div(({ theme }) => ({
   width: "100%",
   position: "relative",
   overflow: "hidden",
-  boxSizing: "border-box"
+  boxSizing: "border-box",
+  '> *': {
+    boxSizing: "border-box",
+  }
 }));
 
 const Video = styled.video(({ theme }) => ({
@@ -104,14 +107,21 @@ const TollBarWrapper = styled.div({
   height: '15%',
   width: '100%',
   display: 'flex',
+  justifyContent: "space-between",
   gap: '30px',
   alignItems: 'center',
   color: '#fff',
   fontSize: '40px',
-  padding: '0 20px',
+  padding: '0 50px',
   zIndex: '2'
-})
 
+})
+const SettingRightSection = styled.div({
+  // position: 'relative',
+})
+const SettingLeftSection = styled.div({
+  // position: 'relative',
+})
 const VideoPlayer = ({
   customTheme,
   controllerRef,
@@ -186,21 +196,26 @@ const VideoPlayer = ({
     <ThemeProvider theme={customTheme ? customTheme : theme}>
       <VideoWrapper>
         <TopRightWrapper>{topRightContainer}</TopRightWrapper>
+
         <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
+
         <PlayWrapper onClick={() => playClicked(showPlayIcon)} />
+
         <PlayIconWrapper>
           <Button animation={showAnimationForPlayButton}>
             {playState ? playIcon : pauseIcon}
           </Button>
         </PlayIconWrapper>
+
         <TollBarWrapper >
-          <div onClick={() => playClicked(false)}>
+          <SettingRightSection onClick={() => playClicked(false)}>
             {playState ? playIcon : pauseIcon}
-          </div>
-          <div>
+          </SettingRightSection>
+          <SettingLeftSection>
             <SettingMenu />
-          </div>
+          </SettingLeftSection>
         </TollBarWrapper>
+
         {isSupportedPlatform ? (
           <Video
             playsInline

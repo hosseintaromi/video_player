@@ -35,7 +35,7 @@ export const Primary: Story = {
     customTheme: theme,
     onPlay: playFn,
     poster:
-      "https://static.namava.ir/Content/Upload/Images/ad00cc89-74fe-4264-9210-9571d4c6cb42.jpg?anchor=middlecenter&crop=auto&scale=both&w=1920&h=900",
+      "https://static.namava.ir/Content/Upload/Images/aa602e36-f0c1-4717-81c7-4d8dbf15b09d.JPG?anchor=middlecenter&crop=auto&scale=both&w=1920&h=900",
   },
 };
 
