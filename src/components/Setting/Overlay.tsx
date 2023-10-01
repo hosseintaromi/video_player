@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 
 
 const OverlayContent = styled.div({
@@ -22,17 +22,15 @@ const Overlay = ({ children }: { children: JSX.Element[] }) => {
         setOverlayVisible(!overlayVisible)
     }
     const clickHandler = (e: any) => {
-        if (overlayContentRef.current?.contains(e.target)) {
-            return;
+        if (overlayContentRef.current && !overlayContentRef.current.contains(e.target)) {
+            setOverlayVisible(false);
         }
-        setOverlayVisible(false);
     }
+
     useEffect(() => {
-        console.log('b donya omad');
-        document.addEventListener('click', clickHandler)
+        document.addEventListener('click', clickHandler, true)
         return () => {
-            console.log('fot kard');
-            document.removeEventListener('click', clickHandler)
+            document.removeEventListener('click', clickHandler, true)
         }
     }, []);
 

@@ -29,4 +29,19 @@ export const IconWrapper = ({ children }: { children: JSX.Element[] | JSX.Elemen
             {children}
         </IconWrapperStyle>
     )
+}
+
+const SettingMenuWrapper = styled.div({
+    backgroundColor: 'rgb(40 40 39 / 60%)',
+    fontSize: '15px',
+    width: '300px',
+    transform: 'translateX(-35%)',
+    borderRadius: '',
+});
+export const SettingMenu = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
+    return (
+        <SettingMenuWrapper>
+            {children}
+        </SettingMenuWrapper>
+    )
 } 

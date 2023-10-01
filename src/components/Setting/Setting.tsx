@@ -12,9 +12,9 @@ const Setting = () => {
             case 'settingList':
                 return <SettingList changePage={changePage} />
             case 'playbackSpeed':
-                return <SettingPlaybackSpeed />
-            case 'ChangeQuality':
-                return <SettingQuality />
+                return <SettingPlaybackSpeed changePage={changePage} />
+            case 'quality':
+                return <SettingQuality changePage={changePage} />
             default:
                 return <SettingList changePage={changePage} />
 
