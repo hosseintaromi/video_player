@@ -12,13 +12,13 @@ const SettingMenuItem = styled.div({
         backgroundColor: 'rgb(40 40 39 / 60%)',
     }
 });
-type settingItemProps = { children?: JSX.Element[] | JSX.Element, startIcon: JSX.Element, content: string }
+type settingItemProps = { children?: JSX.Element[] | JSX.Element, startIcon: JSX.Element | null, content: string | number }
 const SettingItem = ({ children, startIcon, content }: settingItemProps) => {
     return (
         <SettingMenuItem>
             <FlexCenter>
                 <IconWrapper>
-                    {startIcon}
+                    {startIcon ? startIcon : <></>}
                 </IconWrapper>
                 <span>
                     {content}

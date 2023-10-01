@@ -1,23 +1,38 @@
-import styled from '@emotion/styled';
-import React from 'react'
+import React, { RefObject, useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
 import PlaybackSpeed from '../assets/Icons/PlaybackSpeed';
 import { IconWrapper, SettingMenu } from '../General/FlexCenter';
-import ArrowRight from '../assets/Icons/ArrowRight';
-import ChangeQuality from '../assets/Icons/ChangeQuality';
+import SettingHeader from './SettingHeader';
+import CheckMark from '../assets/Icons/CheckMark';
 
+type settingPlaybackSpeedPropsType = { changePage: (newPageName: string) => void, speedList: number[], videoRef: RefObject<HTMLVideoElement> }
 
-const SettingList = ({ changePage }: { changePage: (newPageName: string) => void }) => {
+const SettingPlaybackSpeed = ({ changePage, speedList, videoRef }: settingPlaybackSpeedPropsType) => {
+    const changeVideoSpeed = (newSpeed: number) => {
+        if (!videoRef?.current?.playbackRate) return
+        videoRef.current.playbackRate = newSpeed;
+        setCurrentSpeed(newSpeed)
+    }
+    const [currentSpeed, setCurrentSpeed] = useState(1)
+    useEffect(() => {
+        setCurrentSpeed(videoRef?.current?.playbackRate ? videoRef?.current?.playbackRate : 1)
+    }, [])
     return (
-        <SettingMenu >
-            <div onClick={() => changePage('settingList')}>
-                <SettingItem startIcon={<PlaybackSpeed />} content='Playback speed111222' />
-            </div>
-            <div onClick={() => changePage('settingList')}>
-                <SettingItem startIcon={<ChangeQuality />} content='ChangeQuality111222' />
-            </div>
-        </SettingMenu>
+        <>
+            <SettingHeader title="speed" hasBackButton={true} hasCustomButton={false} changePage={changePage} />
+            <SettingMenu >
+                {speedList && speedList.map((speedItem, index) =>
+                    <div onClick={() => changeVideoSpeed(speedItem)}>
+                        <SettingItem
+                            key={index}
+                            startIcon={currentSpeed === speedItem ? <CheckMark /> : <IconWrapper><></></IconWrapper>}
+                            content={speedItem} />
+                    </div>
+                )}
+
+            </SettingMenu>
+        </>
     )
 }
 
-export default SettingList
+export default SettingPlaybackSpeed

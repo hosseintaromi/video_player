@@ -212,7 +212,7 @@ const VideoPlayer = ({
             {playState ? playIcon : pauseIcon}
           </SettingRightSection>
           <SettingLeftSection>
-            <SettingMenu />
+            <SettingMenu speedList={[0.5, 1, 2]} videoRef={videoRef} />
           </SettingLeftSection>
         </TollBarWrapper>
 
