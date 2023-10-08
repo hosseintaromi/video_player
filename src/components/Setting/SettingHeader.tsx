@@ -1,16 +1,16 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import ArrowRight from '../assets/Icons/ArrowRight'
+import { pageDir, pageName } from './Setting'
 
 type settingHeaderPropsType = {
     title: string,
     hasCustomButton: boolean,
     hasBackButton: boolean,
-    changePage: (newPageName: string) => void,
+    changePage: (newPageName: pageName, dir: pageDir) => void,
 }
 
 const SettingHeaderWrapper = styled.div({
-    transform: 'translateX(-35%)',
     backgroundColor: 'rgb(40 40 39 / 60%)',
     display: 'flex',
     fontSize: '20px',
@@ -25,7 +25,7 @@ const SettingHeaderWrapper = styled.div({
 const SettingHeader = ({ title, hasCustomButton, hasBackButton, changePage }: settingHeaderPropsType) => {
     return (
         <SettingHeaderWrapper>
-            {hasBackButton && <div onClick={() => changePage('settingList')}>
+            {hasBackButton && <div onClick={() => changePage(pageName.settingList, pageDir.back)}>
                 <ArrowRight />
             </div>}
             {title}

@@ -5,12 +5,13 @@ import PlaybackSpeed from '../assets/Icons/PlaybackSpeed';
 import { IconWrapper, SettingMenu } from '../General/FlexCenter';
 import ArrowRight from '../assets/Icons/ArrowRight';
 import ChangeQuality from '../assets/Icons/ChangeQuality';
+import { pageDir, pageName } from './Setting';
 
 
-const SettingList = ({ changePage }: { changePage: (newPageName: string) => void }) => {
+const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName, dir: pageDir) => void, myRef: React.RefObject<HTMLDivElement> }) => {
     return (
-        <SettingMenu >
-            <div onClick={() => changePage('playbackSpeed')}>
+        <SettingMenu myRef={myRef}>
+            <div onClick={() => changePage(pageName.playbackSpeed, pageDir.forward)}>
                 <SettingItem startIcon={<PlaybackSpeed />} content='Playback speed' >
                     <span>
                         normal
@@ -20,7 +21,7 @@ const SettingList = ({ changePage }: { changePage: (newPageName: string) => void
                     </IconWrapper>
                 </SettingItem>
             </div>
-            <div onClick={() => changePage('quality')}>
+            <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
                 <SettingItem startIcon={<ChangeQuality />} content='ChangeQuality'>
                     <span>
                         720

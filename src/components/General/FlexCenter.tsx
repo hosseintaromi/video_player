@@ -32,15 +32,14 @@ export const IconWrapper = ({ children }: { children: JSX.Element[] | JSX.Elemen
 }
 
 const SettingMenuWrapper = styled.div({
-    backgroundColor: 'rgb(40 40 39 / 60%)',
-    fontSize: '15px',
-    width: '300px',
-    transform: 'translateX(-35%)',
-    borderRadius: '',
+    transition: 'all 0.3s ease',
+    opacity: '0',
+    width: '100%',
+    bottom: '0'
 });
-export const SettingMenu = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
+export const SettingMenu = ({ children, myRef }: { children: JSX.Element[] | JSX.Element, myRef: React.RefObject<HTMLDivElement> }) => {
     return (
-        <SettingMenuWrapper>
+        <SettingMenuWrapper ref={myRef} id='settingMenu'>
             {children}
         </SettingMenuWrapper>
     )

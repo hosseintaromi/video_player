@@ -1,18 +1,20 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useRef, useState } from 'react';
+import { pageDir, pageName } from './Setting';
 
 
 const OverlayContent = styled.div({
     position: 'absolute',
-    bottom: '100%',
-    left: '50%',
-    transform: 'translateX(-50%)',
+    bottom: '30px',
+    right: '0%',
+
 });
 const Wrapper = styled.div({
     position: 'relative',
+
 })
 
-const Overlay = ({ children }: { children: JSX.Element[] }) => {
+const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetting: any }) => {
     const overlayContentRef = useRef<HTMLDivElement>(null)
     const [overlayVisible, setOverlayVisible] = useState(false);
     const Toggler = children.find((child) => child.props['data-toggler'] === true);
@@ -28,6 +30,10 @@ const Overlay = ({ children }: { children: JSX.Element[] }) => {
     }
 
     useEffect(() => {
+        openSetting(pageName.settingList, pageDir.forward)
+
+    }, [overlayVisible])
+    useEffect(() => {
         document.addEventListener('click', clickHandler, true)
         return () => {
             document.removeEventListener('click', clickHandler, true)
@@ -40,7 +46,7 @@ const Overlay = ({ children }: { children: JSX.Element[] }) => {
                 <div onClick={toggle}>
                     {Toggler}
                 </div>
-                {overlayVisible && <OverlayContent>{Content}</OverlayContent>}
+                {overlayVisible && <>{Content}</>}
             </Wrapper>
         </div>
     )
