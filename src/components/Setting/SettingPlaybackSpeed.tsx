@@ -29,7 +29,9 @@ const SettingPlaybackSpeed = ({ changePage, speedList, videoRef, myRef }: settin
                         title="speed"
                         hasBackButton={true}
                         hasCustomButton={false}
-                        changePage={changePage} />
+                        changePage={changePage}
+                        backRoute={pageName.settingList}
+                    />
                     {speedList && speedList.map((speedItem, index) =>
                         <div key={index} onClick={() => changeVideoSpeed(speedItem)}>
                             <SettingItem

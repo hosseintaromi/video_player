@@ -5,7 +5,7 @@ import Overlay from './Overlay';
 import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import styled from '@emotion/styled';
-
+import SettingQuality from './SettingQuality';
 type settingPropsType = {
     speedList: number[]
     videoRef: React.RefObject<HTMLVideoElement>
@@ -40,15 +40,16 @@ const Setting = (props: settingPropsType) => {
         [pageName.playbackSpeed]: settingPlaybackRef,
         [pageName.quality]: settingQualityRef
     }
+
     const changePage = (newPageName: pageName, dir: pageDir) => {
         const firstEl = lastSettingRef.current;
         const secondEl = pageObj[newPageName].current;
+        debugger
         if (!secondEl) return;
         if (firstEl) {
             firstEl!.style.position = "absolute";
             firstEl!.style.opacity = "1";
             firstEl!.style.transform = `translateX(${dir === pageDir.back ? 0 : 0}%)`;
-
             secondEl!.style.opacity = "0";
             secondEl!.style.position = "absolute";
             secondEl!.style.transform = `translateX(${dir === pageDir.back ? 100 : -100}%)`;
@@ -57,52 +58,18 @@ const Setting = (props: settingPropsType) => {
             secondEl!.style.opacity = "1";
             secondEl!.style.transform = `translateX(0%)`;
         }
-
-
-
-
         if (firstEl) {
             firstEl!.style.opacity = "0";
             firstEl!.style.transform = `translateX(${dir === pageDir.back ? -100 : 100}%)`;
+            firstEl!.style.zIndex = `1`;
         }
+        secondEl!.style.zIndex = "10";
         secondEl!.style.opacity = "1";
         secondEl!.style.transform = `translateX(${dir === pageDir.back ? 0 : 0}%)`;
         secondEl!.parentElement!.style.height = secondEl?.clientHeight + 'px';
         lastSettingRef.current = secondEl;
-        // pageObj[lastPage].current!.style.opacity = '0'
-        // pageObj[lastPage].current!.style.transform = 'translateX(120%)'
-        // pageObj[newPageName].current!.style.opacity = '1'
-        // pageObj[newPageName].current!.style.transform = 'translateX(-35%)'
-
     }
 
-    // const getPage = () => {
-    //     switch (settingPage) {
-    //         case pageName.settingList:
-    //             return (<SettingList
-    //                 myRef={settingListRef}
-    //                 changePage={changePage} />)
-    //         case pageName.playbackSpeed:
-    //             return (<SettingPlaybackSpeed
-    //                 myRef={settingPlaybackRef}
-    //                 changePage={changePage}
-    //                 speedList={props.speedList}
-    //                 videoRef={props.videoRef} />)
-    //         case pageName.quality:
-    //             return (
-    //                 <SettingQuality
-    //                     myRef={settingQualityRef}
-    //                     changePage={changePage} />
-    //             )
-
-    //     }
-    // }
-    const openSetting = (val: boolean) => {
-        lastSettingRef.current = settingListRef.current;
-        if (!settingListRef.current) return;
-        settingListRef.current.style.opacity = '1';
-
-    }
     return (
         <>
             <Overlay openSetting={changePage}>
@@ -119,10 +86,9 @@ const Setting = (props: settingPropsType) => {
                         changePage={changePage}
                         speedList={props.speedList}
                         videoRef={props.videoRef} />
-                    {/* <SettingQuality
+                    <SettingQuality
                         myRef={settingQualityRef}
-                    changePage={changePage} /> */}
-                    {/* {handelSettingPage()} */}
+                        changePage={changePage} />
                 </OverlayContainer>
             </Overlay>
         </>

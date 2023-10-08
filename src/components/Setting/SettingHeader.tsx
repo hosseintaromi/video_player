@@ -8,6 +8,7 @@ type settingHeaderPropsType = {
     hasCustomButton: boolean,
     hasBackButton: boolean,
     changePage: (newPageName: pageName, dir: pageDir) => void,
+    backRoute: pageName
 }
 
 const SettingHeaderWrapper = styled.div({
