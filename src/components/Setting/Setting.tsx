@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import SettingIcon from "../assets/Icons/SettingIcon";
 import Overlay from './Overlay';
 
@@ -29,7 +29,6 @@ export enum pageName { settingList = 'settingList', playbackSpeed = 'playbackSpe
 export enum pageDir { back = 'back', forward = 'forward' }
 
 const Setting = (props: settingPropsType) => {
-    const [settingPage, setSettingPage] = useState(pageName.settingList);
     const settingListRef = useRef<HTMLDivElement>(null)
     const settingPlaybackRef = useRef<HTMLDivElement>(null)
     const settingQualityRef = useRef<HTMLDivElement>(null)
@@ -44,7 +43,6 @@ const Setting = (props: settingPropsType) => {
     const changePage = (newPageName: pageName, dir: pageDir) => {
         const firstEl = lastSettingRef.current;
         const secondEl = pageObj[newPageName].current;
-        debugger
         if (!secondEl) return;
         if (firstEl) {
             firstEl!.style.position = "absolute";
@@ -62,6 +60,14 @@ const Setting = (props: settingPropsType) => {
             firstEl!.style.opacity = "0";
             firstEl!.style.transform = `translateX(${dir === pageDir.back ? -100 : 100}%)`;
             firstEl!.style.zIndex = `1`;
+        }
+        if (newPageName === pageName.settingList) {
+            secondEl!.style.width = "300px";
+            secondEl!.parentElement!.style.width = "300px";
+
+        } else {
+            secondEl!.parentElement!.style.width = "200px";
+            secondEl!.style.width = "200px";
         }
         secondEl!.style.zIndex = "10";
         secondEl!.style.opacity = "1";
