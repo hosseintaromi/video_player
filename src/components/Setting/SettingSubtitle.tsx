@@ -4,23 +4,23 @@ import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../assets/Icons/CheckMark';
-import { qualityObjType } from '../../@types/hooks/UseVideoHlsType';
+import { subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
 
-type SettingQualityType = {
+type SettingSubtitleType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
-    quality: qualityObjType
+    subtitle: subtitleObjType
 }
 
-const SettingQuality = ({ changePage, myRef, quality }: SettingQualityType) => {
+const SettingSubtitle = ({ changePage, myRef, subtitle }: SettingSubtitleType) => {
 
-    const qualityListGenerator = () => {
-        return quality.qualityList.map((item, index) =>
+    const subtitleListGenerator = () => {
+        return subtitle.subtitleList.map((item, index) =>
             <SettingItem
                 key={index}
-                onClick={() => quality.changeHlsLevel(index)}
-                startIcon={quality.currentQuality === index ? < CheckMark /> : null}
-                content={item.height}
+                onClick={() => subtitle.changeHlsSubtitle(index)}
+                startIcon={subtitle.currentSubtitle === index ? < CheckMark /> : null}
+                content={item.name}
             />
         )
     }
@@ -35,15 +35,15 @@ const SettingQuality = ({ changePage, myRef, quality }: SettingQualityType) => {
             />
             <div>
                 <SettingItem
-                    onClick={() => quality.changeHlsLevel(-1)}
-                    startIcon={quality.currentQuality === -1 ? < CheckMark /> : null}
-                    content='auto'
+                    onClick={() => subtitle.changeHlsSubtitle}
+                    startIcon={subtitle.currentSubtitle === -1 ? < CheckMark /> : null}
+                    content='off'
                 />
-                {qualityListGenerator()}
+                {subtitleListGenerator()}
             </div>
 
         </SettingMenu>
     )
 }
 
-export default SettingQuality
+export default SettingSubtitle

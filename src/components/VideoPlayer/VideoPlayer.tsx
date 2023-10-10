@@ -12,6 +12,7 @@ import FullScreenIcon from "../assets/Icons/FullScreenIcon";
 import { useFullscreen } from "../../hooks/useFullscreen";
 import { IconWrapper } from "../General/FlexCenter";
 import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
+
 /*
 ui components
 */
@@ -151,10 +152,46 @@ const VideoPlayer = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
 
+
   useImperativeHandle(controllerRef, () => ({
     changeSpeed: handelChangeSpeed,
     play: handelPlayAction,
   }));
+
+  const [playState, setPlayState] = useState(true)
+  const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
+  const [levels, setLevels] = useState<LevelType>([]);
+  const [currentLevel, setCurrentLevel] = useState<number>(-1);
+  const [subtitleList, setSubtitleList] = useState<MediaPlaylistType>([]);
+  const [currentSubtitle, setCurrentSubtitle] = useState<number>(-1);
+  const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
+  const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
+
+  const {
+    videoRef,
+    isSupportedPlatform,
+    changeHlsLevel,
+    changeHlsSubtitle,
+    changeHlsAudioTrack,
+  }
+    = useVideoHls({
+      src,
+      getHlsLevels: (levelsArr) => {
+        setLevels(levelsArr);
+      },
+      getCurrentLevel: (currentLevel) => {
+        setCurrentLevel(currentLevel);
+      },
+      getHlsSubtitle: (subsArr, currentSub) => {
+        setSubtitleList(subsArr);
+        setCurrentSubtitle(currentSub);
+      },
+      getHlsAudioTrack: (audioArr, currentAudio) => {
+        setAudioTrackList(audioArr);
+        setCurrentAudioTrack(currentAudio);
+      },
+    });
+
 
   const handelPlayAction = (value: boolean) => {
     if (value) videoRef?.current?.play();
@@ -193,11 +230,15 @@ const VideoPlayer = ({
   const initVideo = (el: HTMLVideoElement) => {
     if (!el) return;
 
+    changeHlsLevel(-1);
+    el.onerror = (e: any) => {
+      changeHlsLevel(3);
+    };
+
     el.onplay = () => {
       if (onPlay) onPlay();
     };
   };
-
   useEffect(() => {
     const videoEl = videoRef.current;
     if (!videoEl) return;
@@ -233,6 +274,7 @@ const VideoPlayer = ({
               ))}
             </IconWrapper>
             <SettingMenu speedList={[0.5, 1, 2]} videoRef={videoRef} />
+
           </SettingLeftSection>
         </TollBarWrapper>
 

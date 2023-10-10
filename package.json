@@ -1,11 +1,11 @@
 {
   "name": "@hosseintaromi/video_player",
-  "version": "0.1.29",
+  "version": "0.1.33",
   "description": "Easily play any type of video by customizing the appearance",
   "scripts": {
     "rollup": "rollup -c",
     "test": "jest",
-    "storybook": "storybook dev -p 6006",
+    "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "pb": "npm version patch && rollup -c && npm publish"
   },
@@ -20,7 +20,7 @@
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "^3.0.2",
     "@rollup/plugin-node-resolve": "^13.0.6",
-    "@rollup/plugin-typescript": "^8.3.3",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@storybook/addon-essentials": "^7.4.0",
     "@storybook/addon-interactions": "^7.4.0",
     "@storybook/addon-links": "^7.4.0",

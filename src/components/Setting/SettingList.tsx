@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import React from 'react'
 import SettingItem from './SettingItem';
 import PlaybackSpeed from '../assets/Icons/PlaybackSpeed';
@@ -9,14 +8,30 @@ import { pageDir, pageName } from './Setting';
 import Subtitle from '../assets/Icons/Subtitle';
 import AudioIcon from '../assets/Icons/AudioIcon';
 
+type SettingListType = {
+    changePage: (newPageName: pageName, dir: pageDir) => void,
+    myRef: React.RefObject<HTMLDivElement>
+    currentLevel: string | number
+    currentSubtitle: string | number
+    currentSpeed: string | number
+    currentAudioTrack: string | number
+}
 
-const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName, dir: pageDir) => void, myRef: React.RefObject<HTMLDivElement> }) => {
+const SettingList = ({
+    changePage,
+    myRef,
+    currentLevel,
+    currentSubtitle,
+    currentSpeed,
+    currentAudioTrack
+}: SettingListType
+) => {
     return (
         <SettingMenu myRef={myRef}>
             <div onClick={() => changePage(pageName.playbackSpeed, pageDir.forward)}>
                 <SettingItem startIcon={<PlaybackSpeed />} content='Playback speed' >
                     <span>
-                        normal
+                        X {currentSpeed}
                     </span>
                     <IconWrapper>
                         <ArrowRight />
@@ -26,27 +41,27 @@ const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName
             <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
                 <SettingItem startIcon={<ChangeQuality />} content='ChangeQuality'>
                     <span>
-                        720
+                        {currentLevel}
                     </span>
                     <IconWrapper>
                         <ArrowRight />
                     </IconWrapper>
                 </SettingItem>
             </div>
-            <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
+            <div onClick={() => changePage(pageName.subtitle, pageDir.forward)}>
                 <SettingItem startIcon={<Subtitle />} content='Subtitles / cc'>
                     <span>
-                        English
+                        {currentSubtitle}
                     </span>
                     <IconWrapper>
                         <ArrowRight />
                     </IconWrapper>
                 </SettingItem>
             </div>
-            <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
+            <div onClick={() => changePage(pageName.audioTrack, pageDir.forward)}>
                 <SettingItem startIcon={<AudioIcon />} content='Audio Track'>
                     <span>
-                        English
+                        {currentAudioTrack}
                     </span>
                     <IconWrapper>
                         <ArrowRight />

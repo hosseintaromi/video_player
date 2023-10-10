@@ -4,23 +4,23 @@ import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../assets/Icons/CheckMark';
-import { qualityObjType } from '../../@types/hooks/UseVideoHlsType';
+import { audioTrackObjType } from '../../@types/hooks/UseVideoHlsType';
 
-type SettingQualityType = {
+type SettingAudioTrackType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
-    quality: qualityObjType
+    audioTrack: audioTrackObjType
 }
 
-const SettingQuality = ({ changePage, myRef, quality }: SettingQualityType) => {
+const SettingAudioTrack = ({ changePage, myRef, audioTrack }: SettingAudioTrackType) => {
 
-    const qualityListGenerator = () => {
-        return quality.qualityList.map((item, index) =>
+    const audioTrackListGenerator = () => {
+        return audioTrack.audioTrackList.map((item, index) =>
             <SettingItem
                 key={index}
-                onClick={() => quality.changeHlsLevel(index)}
-                startIcon={quality.currentQuality === index ? < CheckMark /> : null}
-                content={item.height}
+                onClick={() => audioTrack.changeHlsAudioTrack(index)}
+                startIcon={audioTrack.currentAudioTrack === index ? < CheckMark /> : null}
+                content={item.name}
             />
         )
     }
@@ -34,16 +34,11 @@ const SettingQuality = ({ changePage, myRef, quality }: SettingQualityType) => {
                 backRoute={pageName.settingList}
             />
             <div>
-                <SettingItem
-                    onClick={() => quality.changeHlsLevel(-1)}
-                    startIcon={quality.currentQuality === -1 ? < CheckMark /> : null}
-                    content='auto'
-                />
-                {qualityListGenerator()}
+                {audioTrackListGenerator()}
             </div>
 
         </SettingMenu>
     )
 }
 
-export default SettingQuality
+export default SettingAudioTrack
