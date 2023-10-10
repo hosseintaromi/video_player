@@ -4,6 +4,16 @@ export type LevelType = Level[];
 
 export type changeHlsLevelType = (level: number) => void;
 
+export type changeHlsSubtitleType = (level: number) => void;
+
+export type MediaPlaylistType = MediaPlaylist[];
+
+export type subtitleObjType = {
+  subtitleList: MediaPlaylistType;
+  currentSubtitle: number;
+  changeHlsSubtitle: changeHlsSubtitleType;
+};
+
 export type qualityObjType = {
   qualityList: LevelType;
   currentQuality: number;
@@ -16,8 +26,14 @@ export type UseVideoHlsType = {
   options?: {
     disabled: boolean;
   };
-  getHlsSubtitle?: (subsArr: MediaPlaylist[], currentSubtitle: number) => void;
-  getHlsAudioTrack?: (audioArr: MediaPlaylist[], currentAudio: number) => void;
+  getHlsSubtitle?: (
+    subsArr: MediaPlaylistType,
+    currentSubtitle: number
+  ) => void;
+  getHlsAudioTrack?: (
+    audioArr: MediaPlaylistType,
+    currentAudio: number
+  ) => void;
   getHlsLevels?: (levels: LevelType) => void;
   getCurrentLevel?: (currentLevel: number) => void;
 };

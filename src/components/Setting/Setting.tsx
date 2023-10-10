@@ -6,12 +6,14 @@ import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
-import { qualityObjType } from '../../@types/hooks/UseVideoHlsType';
+import { qualityObjType, subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
+import SettingSubtitle from './SettingSubtitle';
 
 type settingPropsType = {
     speedList: number[]
     videoRef: React.RefObject<HTMLVideoElement>
     quality: qualityObjType
+    subtitle: subtitleObjType
 }
 
 const OverlayContainer = styled.div({
@@ -27,19 +29,26 @@ const OverlayContainer = styled.div({
 
 })
 
-export enum pageName { settingList = 'settingList', playbackSpeed = 'playbackSpeed', quality = 'quality' }
+export enum pageName {
+    settingList = 'settingList',
+    playbackSpeed = 'playbackSpeed',
+    quality = 'quality',
+    subtitle = 'subtitle'
+}
 export enum pageDir { back = 'back', forward = 'forward' }
 
 const Setting = (props: settingPropsType) => {
     const settingListRef = useRef<HTMLDivElement>(null)
     const settingPlaybackRef = useRef<HTMLDivElement>(null)
     const settingQualityRef = useRef<HTMLDivElement>(null)
+    const settingSubtitleRef = useRef<HTMLDivElement>(null)
     const lastSettingRef = useRef<HTMLDivElement | null>();
 
     const pageObj = {
         [pageName.settingList]: settingListRef,
         [pageName.playbackSpeed]: settingPlaybackRef,
-        [pageName.quality]: settingQualityRef
+        [pageName.quality]: settingQualityRef,
+        [pageName.subtitle]: settingSubtitleRef,
     }
 
     const changePage = (newPageName: pageName, dir: pageDir) => {
@@ -90,16 +99,26 @@ const Setting = (props: settingPropsType) => {
                         myRef={settingListRef}
                         changePage={changePage}
                         currentLevel={props.quality.currentQuality === -1 ? 'auto' : props.quality.qualityList[props.quality.currentQuality].height}
+                        currentSubtitle={props.subtitle.currentSubtitle === -1 ? 'off' : props.subtitle.subtitleList[props.subtitle.currentSubtitle].name}
+                        currentSpeed={props.videoRef?.current?.playbackRate ? props.videoRef?.current?.playbackRate : 'normal'}
                     />
+
                     <SettingPlaybackSpeed
                         myRef={settingPlaybackRef}
                         changePage={changePage}
                         speedList={props.speedList}
                         videoRef={props.videoRef} />
+
                     <SettingQuality
                         myRef={settingQualityRef}
                         changePage={changePage}
                         quality={props.quality} />
+
+                    <SettingSubtitle
+                        myRef={settingSubtitleRef}
+                        changePage={changePage}
+                        subtitle={props.subtitle}
+                    />
 
                 </OverlayContainer>
             </Overlay>
