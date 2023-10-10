@@ -12,15 +12,17 @@ type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>
     currentLevel: string | number
+    currentSubtitle: string | number
+    currentSpeed: string | number
 }
 
-const SettingList = ({ changePage, myRef, currentLevel }: SettingListType) => {
+const SettingList = ({ changePage, myRef, currentLevel, currentSubtitle, currentSpeed }: SettingListType) => {
     return (
         <SettingMenu myRef={myRef}>
             <div onClick={() => changePage(pageName.playbackSpeed, pageDir.forward)}>
                 <SettingItem startIcon={<PlaybackSpeed />} content='Playback speed' >
                     <span>
-                        normal
+                        X {currentSpeed}
                     </span>
                     <IconWrapper>
                         <ArrowRight />
@@ -37,10 +39,10 @@ const SettingList = ({ changePage, myRef, currentLevel }: SettingListType) => {
                     </IconWrapper>
                 </SettingItem>
             </div>
-            <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
+            <div onClick={() => changePage(pageName.subtitle, pageDir.forward)}>
                 <SettingItem startIcon={<Subtitle />} content='Subtitles / cc'>
                     <span>
-                        English
+                        {currentSubtitle}
                     </span>
                     <IconWrapper>
                         <ArrowRight />

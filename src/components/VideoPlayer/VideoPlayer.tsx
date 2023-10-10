@@ -8,7 +8,7 @@ import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
 import SettingMenu from "../Setting/Setting";
-import { LevelType } from "../../@types/hooks/UseVideoHlsType";
+import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType";
 /*
 ui components
 */
@@ -148,16 +148,28 @@ const VideoPlayer = ({
   const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
   const [levels, setLevels] = useState<LevelType>([]);
   const [currentLevel, setCurrentLevel] = useState<number>(-1);
+  const [subtitleList, setSubtitleList] = useState<MediaPlaylistType>([]);
+  const [currentSubtitle, setCurrentSubtitle] = useState<number>(-1);
 
-  const { videoRef, isSupportedPlatform, changeHlsLevel } = useVideoHls({
-    src,
-    getHlsLevels: (levelsArr) => {
-      setLevels(levelsArr);
-    },
-    getCurrentLevel: (currentLevel) => {
-      setCurrentLevel(currentLevel);
-    },
-  });
+  const {
+    videoRef,
+    isSupportedPlatform,
+    changeHlsLevel,
+    changeHlsSubtitle
+  }
+    = useVideoHls({
+      src,
+      getHlsLevels: (levelsArr) => {
+        setLevels(levelsArr);
+      },
+      getCurrentLevel: (currentLevel) => {
+        setCurrentLevel(currentLevel);
+      },
+      getHlsSubtitle: (subsArr, currentSub) => {
+        setSubtitleList(subsArr);
+        setCurrentSubtitle(currentSub);
+      },
+    });
 
 
   const handelPlayAction = (value: boolean) => {
@@ -231,7 +243,10 @@ const VideoPlayer = ({
             <SettingMenu
               speedList={[0.5, 1, 2]}
               videoRef={videoRef}
-              quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }} />
+              quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }}
+              subtitle={{ subtitleList: subtitleList, currentSubtitle: currentSubtitle, changeHlsSubtitle: changeHlsSubtitle }}
+            />
+
           </SettingLeftSection>
         </TollBarWrapper>
 
