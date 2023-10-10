@@ -1,13 +1,29 @@
 import React from 'react'
 import SettingItem from './SettingItem';
-import PlaybackSpeed from '../assets/Icons/PlaybackSpeed';
 import { SettingMenu } from '../General/FlexCenter';
-import ChangeQuality from '../assets/Icons/ChangeQuality';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
+import CheckMark from '../assets/Icons/CheckMark';
+import { qualityObjType } from '../../@types/hooks/UseVideoHlsType';
 
+type SettingQualityType = {
+    changePage: (newPageName: pageName, dir: pageDir) => void,
+    myRef: React.RefObject<HTMLDivElement>,
+    quality: qualityObjType
+}
 
-const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName, dir: pageDir) => void, myRef: React.RefObject<HTMLDivElement> }) => {
+const SettingQuality = ({ changePage, myRef, quality }: SettingQualityType) => {
+
+    const qualityListGenerator = () => {
+        return quality.qualityList.map((item, index) =>
+            <SettingItem
+                key={index}
+                onClick={() => quality.changeHlsLevel(index)}
+                startIcon={quality.currentQuality === index ? < CheckMark /> : null}
+                content={item.height}
+            />
+        )
+    }
     return (
         <SettingMenu myRef={myRef}>
             <SettingHeader
@@ -17,14 +33,17 @@ const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName
                 changePage={changePage}
                 backRoute={pageName.settingList}
             />
-            <div >
-                <SettingItem startIcon={<PlaybackSpeed />} content='Playback speed111' />
+            <div>
+                <SettingItem
+                    onClick={() => quality.changeHlsLevel(-1)}
+                    startIcon={quality.currentQuality === -1 ? < CheckMark /> : null}
+                    content='auto'
+                />
+                {qualityListGenerator()}
             </div>
-            <div >
-                <SettingItem startIcon={<ChangeQuality />} content='ChangeQuality111' />
-            </div>
+
         </SettingMenu>
     )
 }
 
-export default SettingList
+export default SettingQuality

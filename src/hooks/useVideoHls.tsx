@@ -47,7 +47,7 @@ export const useVideoHls = ({
         }
       });
       hls.on(Hls.Events.LEVEL_LOADED, (event, data) => {
-        if (getHlsLevels && getCurrentLevel) {
+        if (getHlsLevels) {
           getHlsLevels(hls.levels);
         }
       });

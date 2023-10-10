@@ -8,6 +8,7 @@ import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
 import SettingMenu from "../Setting/Setting";
+import { LevelType } from "../../@types/hooks/UseVideoHlsType";
 /*
 ui components
 */
@@ -137,16 +138,27 @@ const VideoPlayer = ({
   onPlay,
   showPlayIcon = true
 }: VideoPlayerPropsType) => {
-  const { videoRef, isSupportedPlatform } = useVideoHls({
-    src,
-  });
-  const [playState, setPlayState] = useState(true)
-  const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
 
   useImperativeHandle(controllerRef, () => ({
     changeSpeed: handelChangeSpeed,
     play: handelPlayAction,
   }));
+
+  const [playState, setPlayState] = useState(true)
+  const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
+  const [levels, setLevels] = useState<LevelType>([]);
+  const [currentLevel, setCurrentLevel] = useState<number>(-1);
+
+  const { videoRef, isSupportedPlatform, changeHlsLevel } = useVideoHls({
+    src,
+    getHlsLevels: (levelsArr) => {
+      setLevels(levelsArr);
+    },
+    getCurrentLevel: (currentLevel) => {
+      setCurrentLevel(currentLevel);
+    },
+  });
+
 
   const handelPlayAction = (value: boolean) => {
     if (value) videoRef?.current?.play();
@@ -180,11 +192,15 @@ const VideoPlayer = ({
   const initVideo = (el: HTMLVideoElement) => {
     if (!el) return;
 
+    changeHlsLevel(-1);
+    el.onerror = (e: any) => {
+      changeHlsLevel(3);
+    };
+
     el.onplay = () => {
       if (onPlay) onPlay();
     };
   };
-
   useEffect(() => {
     const videoEl = videoRef.current;
     if (!videoEl) return;
@@ -212,7 +228,10 @@ const VideoPlayer = ({
             {playState ? playIcon : pauseIcon}
           </SettingRightSection>
           <SettingLeftSection>
-            <SettingMenu speedList={[0.5, 1, 2]} videoRef={videoRef} />
+            <SettingMenu
+              speedList={[0.5, 1, 2]}
+              videoRef={videoRef}
+              quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }} />
           </SettingLeftSection>
         </TollBarWrapper>
 
