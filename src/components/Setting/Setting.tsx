@@ -6,6 +6,7 @@ import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
+import { IconWrapper } from '../General/FlexCenter';
 type settingPropsType = {
     speedList: number[]
     videoRef: React.RefObject<HTMLVideoElement>
@@ -80,7 +81,9 @@ const Setting = (props: settingPropsType) => {
         <>
             <Overlay openSetting={changePage}>
                 <div data-toggler>
-                    <SettingIcon />
+                    <IconWrapper>
+                        <SettingIcon />
+                    </IconWrapper>
                 </div>
                 <OverlayContainer data-content>
 

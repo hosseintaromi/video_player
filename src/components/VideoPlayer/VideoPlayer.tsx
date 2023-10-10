@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useVideoHls } from "../../hooks/useVideoHls";
 import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -8,6 +8,10 @@ import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
 import SettingMenu from "../Setting/Setting";
+import FullScreenIcon from "../assets/Icons/FullScreenIcon";
+import { useFullscreen } from "../../hooks/useFullscreen";
+import { IconWrapper } from "../General/FlexCenter";
+import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
 /*
 ui components
 */
@@ -120,7 +124,9 @@ const SettingRightSection = styled.div({
   // position: 'relative',
 })
 const SettingLeftSection = styled.div({
-  // position: 'relative',
+  display: 'flex',
+  gap: '10px',
+  fontSize: '30px',
 })
 const VideoPlayer = ({
   customTheme,
@@ -142,6 +148,8 @@ const VideoPlayer = ({
   });
   const [playState, setPlayState] = useState(true)
   const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const videoWrapperRef = useRef<HTMLDivElement>(null)
 
   useImperativeHandle(controllerRef, () => ({
     changeSpeed: handelChangeSpeed,
@@ -165,6 +173,11 @@ const VideoPlayer = ({
       setShowAnimationForPlayButton(true);
     }, 400);
   }
+
+  const { toggleFullscreen } = useFullscreen((e) => {
+    setIsFullscreen(e);
+    (window.screen.orientation as any)?.lock("landscape-primary");
+  }, videoWrapperRef, videoRef);
 
   const playClicked = useCallback((showPlayIcon: boolean) => {
     if (videoRef?.current?.paused) {
@@ -194,7 +207,7 @@ const VideoPlayer = ({
 
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
-      <VideoWrapper>
+      <VideoWrapper ref={videoWrapperRef}>
         <TopRightWrapper>{topRightContainer}</TopRightWrapper>
 
         <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
@@ -212,6 +225,13 @@ const VideoPlayer = ({
             {playState ? playIcon : pauseIcon}
           </SettingRightSection>
           <SettingLeftSection>
+            <IconWrapper onClick={() => toggleFullscreen()}>
+              {(!isFullscreen ? (
+                <FullScreenIcon />
+              ) : (
+                <ExitFullScreenIcon />
+              ))}
+            </IconWrapper>
             <SettingMenu speedList={[0.5, 1, 2]} videoRef={videoRef} />
           </SettingLeftSection>
         </TollBarWrapper>
