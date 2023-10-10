@@ -150,12 +150,15 @@ const VideoPlayer = ({
   const [currentLevel, setCurrentLevel] = useState<number>(-1);
   const [subtitleList, setSubtitleList] = useState<MediaPlaylistType>([]);
   const [currentSubtitle, setCurrentSubtitle] = useState<number>(-1);
+  const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
+  const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
 
   const {
     videoRef,
     isSupportedPlatform,
     changeHlsLevel,
-    changeHlsSubtitle
+    changeHlsSubtitle,
+    changeHlsAudioTrack,
   }
     = useVideoHls({
       src,
@@ -168,6 +171,10 @@ const VideoPlayer = ({
       getHlsSubtitle: (subsArr, currentSub) => {
         setSubtitleList(subsArr);
         setCurrentSubtitle(currentSub);
+      },
+      getHlsAudioTrack: (audioArr, currentAudio) => {
+        setAudioTrackList(audioArr);
+        setCurrentAudioTrack(currentAudio);
       },
     });
 
@@ -245,6 +252,7 @@ const VideoPlayer = ({
               videoRef={videoRef}
               quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }}
               subtitle={{ subtitleList: subtitleList, currentSubtitle: currentSubtitle, changeHlsSubtitle: changeHlsSubtitle }}
+              audioTrack={{ audioTrackList: audioTrackList, currentAudioTrack: currentAudioTrack, changeHlsAudioTrack: changeHlsAudioTrack }}
             />
 
           </SettingLeftSection>

@@ -6,14 +6,16 @@ import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
-import { qualityObjType, subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
+import { audioTrackObjType, qualityObjType, subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
 import SettingSubtitle from './SettingSubtitle';
+import SettingAudioTrack from './SettingAudioTrack';
 
 type settingPropsType = {
     speedList: number[]
     videoRef: React.RefObject<HTMLVideoElement>
     quality: qualityObjType
     subtitle: subtitleObjType
+    audioTrack: audioTrackObjType
 }
 
 const OverlayContainer = styled.div({
@@ -33,7 +35,8 @@ export enum pageName {
     settingList = 'settingList',
     playbackSpeed = 'playbackSpeed',
     quality = 'quality',
-    subtitle = 'subtitle'
+    subtitle = 'subtitle',
+    audioTrack = 'audioTrack'
 }
 export enum pageDir { back = 'back', forward = 'forward' }
 
@@ -42,6 +45,7 @@ const Setting = (props: settingPropsType) => {
     const settingPlaybackRef = useRef<HTMLDivElement>(null)
     const settingQualityRef = useRef<HTMLDivElement>(null)
     const settingSubtitleRef = useRef<HTMLDivElement>(null)
+    const settingAudioTrackRef = useRef<HTMLDivElement>(null)
     const lastSettingRef = useRef<HTMLDivElement | null>();
 
     const pageObj = {
@@ -49,6 +53,7 @@ const Setting = (props: settingPropsType) => {
         [pageName.playbackSpeed]: settingPlaybackRef,
         [pageName.quality]: settingQualityRef,
         [pageName.subtitle]: settingSubtitleRef,
+        [pageName.audioTrack]: settingAudioTrackRef,
     }
 
     const changePage = (newPageName: pageName, dir: pageDir) => {
@@ -90,9 +95,11 @@ const Setting = (props: settingPropsType) => {
     return (
         <>
             <Overlay openSetting={changePage}>
+
                 <div data-toggler>
                     <SettingIcon />
                 </div>
+
                 <OverlayContainer data-content>
 
                     <SettingList
@@ -101,6 +108,7 @@ const Setting = (props: settingPropsType) => {
                         currentLevel={props.quality.currentQuality === -1 ? 'auto' : props.quality.qualityList[props.quality.currentQuality].height}
                         currentSubtitle={props.subtitle.currentSubtitle === -1 ? 'off' : props.subtitle.subtitleList[props.subtitle.currentSubtitle].name}
                         currentSpeed={props.videoRef?.current?.playbackRate ? props.videoRef?.current?.playbackRate : 'normal'}
+                        currentAudioTrack={props.audioTrack.currentAudioTrack === -1 ? 'off' : props.audioTrack.audioTrackList[props.audioTrack.currentAudioTrack].name}
                     />
 
                     <SettingPlaybackSpeed
@@ -120,7 +128,14 @@ const Setting = (props: settingPropsType) => {
                         subtitle={props.subtitle}
                     />
 
+                    <SettingAudioTrack
+                        myRef={settingAudioTrackRef}
+                        changePage={changePage}
+                        audioTrack={props.audioTrack}
+                    />
+
                 </OverlayContainer>
+
             </Overlay>
         </>
     )

@@ -4,22 +4,22 @@ import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../assets/Icons/CheckMark';
-import { subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
+import { audioTrackObjType } from '../../@types/hooks/UseVideoHlsType';
 
-type SettingSubtitleType = {
+type SettingAudioTrackType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
-    subtitle: subtitleObjType
+    audioTrack: audioTrackObjType
 }
 
-const SettingSubtitle = ({ changePage, myRef, subtitle }: SettingSubtitleType) => {
+const SettingAudioTrack = ({ changePage, myRef, audioTrack }: SettingAudioTrackType) => {
 
-    const subtitleListGenerator = () => {
-        return subtitle.subtitleList.map((item, index) =>
+    const audioTrackListGenerator = () => {
+        return audioTrack.audioTrackList.map((item, index) =>
             <SettingItem
                 key={index}
-                onClick={() => subtitle.changeHlsSubtitle(index)}
-                startIcon={subtitle.currentSubtitle === index ? < CheckMark /> : null}
+                onClick={() => audioTrack.changeHlsAudioTrack(index)}
+                startIcon={audioTrack.currentAudioTrack === index ? < CheckMark /> : null}
                 content={item.name}
             />
         )
@@ -34,16 +34,11 @@ const SettingSubtitle = ({ changePage, myRef, subtitle }: SettingSubtitleType) =
                 backRoute={pageName.settingList}
             />
             <div>
-                <SettingItem
-                    onClick={() => subtitle.changeHlsSubtitle}
-                    startIcon={subtitle.currentSubtitle === -1 ? < CheckMark /> : null}
-                    content='off'
-                />
-                {subtitleListGenerator()}
+                {audioTrackListGenerator()}
             </div>
 
         </SettingMenu>
     )
 }
 
-export default SettingSubtitle
+export default SettingAudioTrack

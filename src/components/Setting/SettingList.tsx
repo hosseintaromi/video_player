@@ -14,9 +14,18 @@ type SettingListType = {
     currentLevel: string | number
     currentSubtitle: string | number
     currentSpeed: string | number
+    currentAudioTrack: string | number
 }
 
-const SettingList = ({ changePage, myRef, currentLevel, currentSubtitle, currentSpeed }: SettingListType) => {
+const SettingList = ({
+    changePage,
+    myRef,
+    currentLevel,
+    currentSubtitle,
+    currentSpeed,
+    currentAudioTrack
+}: SettingListType
+) => {
     return (
         <SettingMenu myRef={myRef}>
             <div onClick={() => changePage(pageName.playbackSpeed, pageDir.forward)}>
@@ -49,10 +58,10 @@ const SettingList = ({ changePage, myRef, currentLevel, currentSubtitle, current
                     </IconWrapper>
                 </SettingItem>
             </div>
-            <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
+            <div onClick={() => changePage(pageName.audioTrack, pageDir.forward)}>
                 <SettingItem startIcon={<AudioIcon />} content='Audio Track'>
                     <span>
-                        English
+                        {currentAudioTrack}
                     </span>
                     <IconWrapper>
                         <ArrowRight />
