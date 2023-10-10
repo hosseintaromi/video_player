@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import React from 'react'
 import SettingItem from './SettingItem';
 import PlaybackSpeed from '../assets/Icons/PlaybackSpeed';
@@ -9,8 +8,13 @@ import { pageDir, pageName } from './Setting';
 import Subtitle from '../assets/Icons/Subtitle';
 import AudioIcon from '../assets/Icons/AudioIcon';
 
+type SettingListType = {
+    changePage: (newPageName: pageName, dir: pageDir) => void,
+    myRef: React.RefObject<HTMLDivElement>
+    currentLevel: string | number
+}
 
-const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName, dir: pageDir) => void, myRef: React.RefObject<HTMLDivElement> }) => {
+const SettingList = ({ changePage, myRef, currentLevel }: SettingListType) => {
     return (
         <SettingMenu myRef={myRef}>
             <div onClick={() => changePage(pageName.playbackSpeed, pageDir.forward)}>
@@ -26,7 +30,7 @@ const SettingList = ({ changePage, myRef }: { changePage: (newPageName: pageName
             <div onClick={() => changePage(pageName.quality, pageDir.forward)}>
                 <SettingItem startIcon={<ChangeQuality />} content='ChangeQuality'>
                     <span>
-                        720
+                        {currentLevel}
                     </span>
                     <IconWrapper>
                         <ArrowRight />

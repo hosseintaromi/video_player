@@ -1,6 +1,14 @@
 import { HlsConfig, Level, MediaPlaylist } from "hls.js";
 
-export type LevelType = {};
+export type LevelType = Level[];
+
+export type changeHlsLevelType = (level: number) => void;
+
+export type qualityObjType = {
+  qualityList: LevelType;
+  currentQuality: number;
+  changeHlsLevel: changeHlsLevelType;
+};
 
 export type UseVideoHlsType = {
   src: string;
@@ -10,6 +18,6 @@ export type UseVideoHlsType = {
   };
   getHlsSubtitle?: (subsArr: MediaPlaylist[], currentSubtitle: number) => void;
   getHlsAudioTrack?: (audioArr: MediaPlaylist[], currentAudio: number) => void;
-  getHlsLevels?: (levels: Level[]) => void;
+  getHlsLevels?: (levels: LevelType) => void;
   getCurrentLevel?: (currentLevel: number) => void;
 };

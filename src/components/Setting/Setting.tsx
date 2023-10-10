@@ -6,10 +6,12 @@ import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
+import { qualityObjType } from '../../@types/hooks/UseVideoHlsType';
+
 type settingPropsType = {
     speedList: number[]
     videoRef: React.RefObject<HTMLVideoElement>
-
+    quality: qualityObjType
 }
 
 const OverlayContainer = styled.div({
@@ -86,7 +88,9 @@ const Setting = (props: settingPropsType) => {
 
                     <SettingList
                         myRef={settingListRef}
-                        changePage={changePage} />
+                        changePage={changePage}
+                        currentLevel={props.quality.currentQuality === -1 ? 'auto' : props.quality.qualityList[props.quality.currentQuality].height}
+                    />
                     <SettingPlaybackSpeed
                         myRef={settingPlaybackRef}
                         changePage={changePage}
@@ -94,7 +98,9 @@ const Setting = (props: settingPropsType) => {
                         videoRef={props.videoRef} />
                     <SettingQuality
                         myRef={settingQualityRef}
-                        changePage={changePage} />
+                        changePage={changePage}
+                        quality={props.quality} />
+
                 </OverlayContainer>
             </Overlay>
         </>

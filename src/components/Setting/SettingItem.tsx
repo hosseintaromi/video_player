@@ -1,7 +1,5 @@
 import React from 'react'
 import { FlexCenter, IconWrapper } from '../General/FlexCenter'
-import PlaybackSpeed from '../assets/Icons/PlaybackSpeed'
-import ArrowRight from '../assets/Icons/ArrowRight'
 import styled from '@emotion/styled';
 
 const SettingMenuItem = styled.div({
@@ -12,10 +10,15 @@ const SettingMenuItem = styled.div({
         backgroundColor: 'rgb(40 40 39 / 60%)',
     }
 });
-type settingItemProps = { children?: JSX.Element[] | JSX.Element, startIcon: JSX.Element | null, content: string | number }
-const SettingItem = ({ children, startIcon, content }: settingItemProps) => {
+type settingItemProps = {
+    children?: JSX.Element[] | JSX.Element,
+    startIcon: JSX.Element | null,
+    content: string | number
+    onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
+}
+const SettingItem = ({ children, startIcon, content, onClick }: settingItemProps) => {
     return (
-        <SettingMenuItem>
+        <SettingMenuItem onClick={onClick}>
             <FlexCenter>
                 <IconWrapper>
                     {startIcon ? startIcon : <></>}
