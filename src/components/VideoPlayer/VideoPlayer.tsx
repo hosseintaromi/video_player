@@ -7,13 +7,8 @@ import { theme } from "../../theme";
 import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
-import SettingMenu from "../Setting/Setting";
 import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType";
-import { useFullscreen } from "../../hooks/useFullscreen";
-import { IconWrapper } from "../General/FlexCenter";
-import FullScreenIcon from "../assets/Icons/FullScreenIcon";
-import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
-import RangeSelect from "../../RangeSelect/RangeSelect";
+import Toolbar from "../Toolbar/Toolbar";
 /*
 ui components
 */
@@ -51,6 +46,7 @@ const Video = styled.video(({ theme }) => ({
   height: "100%",
   backgroundColor: theme.colors.videoBg,
 }));
+
 
 
 const Button = styled.button<ButtonPropsType>(props => ({
@@ -107,34 +103,7 @@ const PlayWrapper = styled.div({
   width: '100%',
 });
 
-const TollBarWrapper = styled.div({
-  position: 'absolute',
-  bottom: '0',
-  height: '20%',
-  width: '100%',
-  maxHeight: '70px',
-  color: '#fff',
-  fontSize: '25px',
-  padding: '0 15px',
-  zIndex: '2'
 
-})
-const SettingRightSection = styled.div({
-  display: 'flex',
-  gap: '10px',
-  fontSize: '25px',
-})
-const SettingLeftSection = styled.div({
-  // position: 'relative',
-})
-const SettingItemWrapper = styled.div({
-  // position: 'relative',
-  display: 'flex',
-
-  justifyContent: "space-between",
-  gap: '30px',
-  alignItems: 'center',
-})
 const VideoPlayer = ({
   customTheme,
   controllerRef,
@@ -164,9 +133,8 @@ const VideoPlayer = ({
   const [currentSubtitle, setCurrentSubtitle] = useState<number>(-1);
   const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
-  const [videoSlider, setVideoSlider] = useState<number>(0);
+
 
   const {
     videoRef,
@@ -193,10 +161,7 @@ const VideoPlayer = ({
       },
     });
 
-  const { toggleFullscreen } = useFullscreen((e) => {
-    setIsFullscreen(e);
-    (window.screen.orientation as any)?.lock("landscape-primary");
-  }, videoWrapperRef, videoRef);
+
 
 
   const handelPlayAction = (value: boolean) => {
@@ -244,18 +209,8 @@ const VideoPlayer = ({
     const videoEl = videoRef.current;
     if (!videoEl) return;
     initVideo(videoEl);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const videoSliderHandler = (e: number) => {
-    if (!videoRef.current) return;
-    videoRef.current.currentTime =
-      (e * Math.floor(videoRef.current.duration)) / 100;
-    setVideoSlider(
-      (videoRef.current.currentTime / videoRef.current.duration) * 100,
-    );
-    // updateBuffer(true);
-  };
 
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
@@ -272,31 +227,23 @@ const VideoPlayer = ({
           </Button>
         </PlayIconWrapper>
 
-        <TollBarWrapper >
-          <RangeSelect value={0} min={0} max={100} inputChangeValue={videoSliderHandler} />
-          <SettingItemWrapper>
-            <SettingLeftSection onClick={() => playClicked(false)}>
-              {playState ? playIcon : pauseIcon}
-            </SettingLeftSection>
-            <SettingRightSection>
-              <IconWrapper onClick={() => toggleFullscreen()}>
-                {(!isFullscreen ? (
-                  <FullScreenIcon />
-                ) : (
-                  <ExitFullScreenIcon />
-                ))}
-              </IconWrapper>
-              <SettingMenu
-                speedList={[0.5, 1, 2]}
-                videoRef={videoRef}
-                quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }}
-                subtitle={{ subtitleList: subtitleList, currentSubtitle: currentSubtitle, changeHlsSubtitle: changeHlsSubtitle }}
-                audioTrack={{ audioTrackList: audioTrackList, currentAudioTrack: currentAudioTrack, changeHlsAudioTrack: changeHlsAudioTrack }}
-              />
-
-            </SettingRightSection>
-          </SettingItemWrapper>
-        </TollBarWrapper>
+        <Toolbar
+          videoWrapperRef={videoWrapperRef}
+          videoRef={videoRef}
+          playState={playState}
+          playIcon={playIcon}
+          pauseIcon={pauseIcon}
+          levels={levels}
+          currentLevel={currentLevel}
+          subtitleList={subtitleList}
+          currentSubtitle={currentSubtitle}
+          audioTrackList={audioTrackList}
+          currentAudioTrack={currentAudioTrack}
+          changeHlsLevel={changeHlsLevel}
+          changeHlsSubtitle={changeHlsSubtitle}
+          playClicked={playClicked}
+          changeHlsAudioTrack={changeHlsAudioTrack}
+        />
 
         {isSupportedPlatform ? (
           <Video
