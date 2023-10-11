@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { ReactNode, RefObject, useEffect, useState } from 'react'
-import RangeSelect from '../../RangeSelect/RangeSelect'
+import RangeSelect from '../RangeSelect/RangeSelect'
 import FullScreenIcon from "../assets/Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
 import { IconWrapper } from '../General/FlexCenter';
