@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { MouseEventHandler } from 'react'
+import React, { CSSProperties, MouseEventHandler } from 'react'
 
 
 const CenterBox = styled.div({
@@ -20,12 +20,17 @@ const IconWrapperStyle = styled.div({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '0 10px'
 })
 
-export const IconWrapper = ({ children, onClick }: { children: JSX.Element[] | JSX.Element, onClick?: MouseEventHandler<HTMLDivElement> | undefined }) => {
+type IconWrapperType = {
+    children: JSX.Element[] | JSX.Element,
+    onClick?: MouseEventHandler<HTMLDivElement> | undefined,
+    style?: CSSProperties | undefined
+}
+
+export const IconWrapper = ({ children, onClick, style }: IconWrapperType) => {
     return (
-        <IconWrapperStyle onClick={onClick}>
+        <IconWrapperStyle onClick={onClick} style={style}>
             {children}
         </IconWrapperStyle>
     )
