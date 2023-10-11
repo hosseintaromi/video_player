@@ -78,6 +78,7 @@ const RangeSelect = (props: RangePropsType) => {
 
   const calcInputVal = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.inputChangeValue(e.target.value);
+    console.log('first')
     setCurrentValue(+e.target.value);
     if (!selector && !progressBar) return;
     selector.style.left = `calc(${e.target.value}% - 9px)`;
