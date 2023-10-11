@@ -13,6 +13,7 @@ import { useFullscreen } from "../../hooks/useFullscreen";
 import { IconWrapper } from "../General/FlexCenter";
 import FullScreenIcon from "../assets/Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
+import RangeSelect from "../../RangeSelect/RangeSelect";
 /*
 ui components
 */
@@ -102,32 +103,37 @@ const TopLeftWrapper = styled.div({
 const PlayWrapper = styled.div({
   zIndex: '2',
   position: 'absolute',
-  height: '85%',
+  height: 'calc(100% - 70px)',
   width: '100%',
 });
 
 const TollBarWrapper = styled.div({
   position: 'absolute',
   bottom: '0',
-  height: '15%',
+  height: '20%',
   width: '100%',
-  display: 'flex',
-  justifyContent: "space-between",
-  gap: '30px',
-  alignItems: 'center',
+  maxHeight: '70px',
   color: '#fff',
-  fontSize: '30px',
-  padding: '0 50px',
+  fontSize: '25px',
+  padding: '0 15px',
   zIndex: '2'
 
 })
 const SettingRightSection = styled.div({
   display: 'flex',
   gap: '10px',
-  fontSize: '30px',
+  fontSize: '25px',
 })
 const SettingLeftSection = styled.div({
   // position: 'relative',
+})
+const SettingItemWrapper = styled.div({
+  // position: 'relative',
+  display: 'flex',
+
+  justifyContent: "space-between",
+  gap: '30px',
+  alignItems: 'center',
 })
 const VideoPlayer = ({
   customTheme,
@@ -160,6 +166,7 @@ const VideoPlayer = ({
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
+  const [videoSlider, setVideoSlider] = useState<number>(0);
 
   const {
     videoRef,
@@ -240,6 +247,16 @@ const VideoPlayer = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const videoSliderHandler = (e: number) => {
+    if (!videoRef.current) return;
+    videoRef.current.currentTime =
+      (e * Math.floor(videoRef.current.duration)) / 100;
+    setVideoSlider(
+      (videoRef.current.currentTime / videoRef.current.duration) * 100,
+    );
+    // updateBuffer(true);
+  };
+
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
       <VideoWrapper ref={videoWrapperRef}>
@@ -256,26 +273,29 @@ const VideoPlayer = ({
         </PlayIconWrapper>
 
         <TollBarWrapper >
-          <SettingLeftSection onClick={() => playClicked(false)}>
-            {playState ? playIcon : pauseIcon}
-          </SettingLeftSection>
-          <SettingRightSection>
-            <IconWrapper onClick={() => toggleFullscreen()}>
-              {(!isFullscreen ? (
-                <FullScreenIcon />
-              ) : (
-                <ExitFullScreenIcon />
-              ))}
-            </IconWrapper>
-            <SettingMenu
-              speedList={[0.5, 1, 2]}
-              videoRef={videoRef}
-              quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }}
-              subtitle={{ subtitleList: subtitleList, currentSubtitle: currentSubtitle, changeHlsSubtitle: changeHlsSubtitle }}
-              audioTrack={{ audioTrackList: audioTrackList, currentAudioTrack: currentAudioTrack, changeHlsAudioTrack: changeHlsAudioTrack }}
-            />
+          <RangeSelect value={0} min={0} max={100} inputChangeValue={videoSliderHandler} />
+          <SettingItemWrapper>
+            <SettingLeftSection onClick={() => playClicked(false)}>
+              {playState ? playIcon : pauseIcon}
+            </SettingLeftSection>
+            <SettingRightSection>
+              <IconWrapper onClick={() => toggleFullscreen()}>
+                {(!isFullscreen ? (
+                  <FullScreenIcon />
+                ) : (
+                  <ExitFullScreenIcon />
+                ))}
+              </IconWrapper>
+              <SettingMenu
+                speedList={[0.5, 1, 2]}
+                videoRef={videoRef}
+                quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }}
+                subtitle={{ subtitleList: subtitleList, currentSubtitle: currentSubtitle, changeHlsSubtitle: changeHlsSubtitle }}
+                audioTrack={{ audioTrackList: audioTrackList, currentAudioTrack: currentAudioTrack, changeHlsAudioTrack: changeHlsAudioTrack }}
+              />
 
-          </SettingRightSection>
+            </SettingRightSection>
+          </SettingItemWrapper>
         </TollBarWrapper>
 
         {isSupportedPlatform ? (
