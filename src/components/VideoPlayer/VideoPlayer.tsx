@@ -9,6 +9,7 @@ import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
 import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType";
 import Toolbar from "../Toolbar/Toolbar";
+import VideoContext from "../../contexts/VideoContext";
 /*
 ui components
 */
@@ -214,62 +215,63 @@ const VideoPlayer = ({
 
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
-      <VideoWrapper ref={videoWrapperRef}>
-        <TopRightWrapper>{topRightContainer}</TopRightWrapper>
+      <VideoContext.Provider value={{ videoRef }}>
+        <VideoWrapper ref={videoWrapperRef}>
+          <TopRightWrapper>{topRightContainer}</TopRightWrapper>
 
-        <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
+          <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
 
-        <PlayWrapper onClick={() => playClicked(showPlayIcon)} />
+          <PlayWrapper onClick={() => playClicked(showPlayIcon)} />
 
-        <PlayIconWrapper>
-          <Button animation={showAnimationForPlayButton}>
-            {playState ? playIcon : pauseIcon}
-          </Button>
-        </PlayIconWrapper>
+          <PlayIconWrapper>
+            <Button animation={showAnimationForPlayButton}>
+              {playState ? playIcon : pauseIcon}
+            </Button>
+          </PlayIconWrapper>
 
-        <Toolbar
-          videoWrapperRef={videoWrapperRef}
-          videoRef={videoRef}
-          playState={playState}
-          playIcon={playIcon}
-          pauseIcon={pauseIcon}
-          levels={levels}
-          currentLevel={currentLevel}
-          subtitleList={subtitleList}
-          currentSubtitle={currentSubtitle}
-          audioTrackList={audioTrackList}
-          currentAudioTrack={currentAudioTrack}
-          changeHlsLevel={changeHlsLevel}
-          changeHlsSubtitle={changeHlsSubtitle}
-          playClicked={playClicked}
-          changeHlsAudioTrack={changeHlsAudioTrack}
-        />
-
-        {isSupportedPlatform ? (
-          <Video
-            playsInline
-            ref={videoRef}
-            id="main-video"
-            className="m-video videoBackground"
-            controls={controls}
-            loop={loop}
-            muted={muted}
-            poster={poster}
+          <Toolbar
+            videoWrapperRef={videoWrapperRef}
+            playState={playState}
+            playIcon={playIcon}
+            pauseIcon={pauseIcon}
+            levels={levels}
+            currentLevel={currentLevel}
+            subtitleList={subtitleList}
+            currentSubtitle={currentSubtitle}
+            audioTrackList={audioTrackList}
+            currentAudioTrack={currentAudioTrack}
+            changeHlsLevel={changeHlsLevel}
+            changeHlsSubtitle={changeHlsSubtitle}
+            playClicked={playClicked}
+            changeHlsAudioTrack={changeHlsAudioTrack}
           />
-        ) : (
-          <Video
-            playsInline
-            ref={videoRef}
-            src={src}
-            id="main-video"
-            className="m-video videoBackground"
-            controls={controls}
-            loop={loop}
-            muted={muted}
-            poster={poster}
-          />
-        )}
-      </VideoWrapper>
+
+          {isSupportedPlatform ? (
+            <Video
+              playsInline
+              ref={videoRef}
+              id="main-video"
+              className="m-video videoBackground"
+              controls={controls}
+              loop={loop}
+              muted={muted}
+              poster={poster}
+            />
+          ) : (
+            <Video
+              playsInline
+              ref={videoRef}
+              src={src}
+              id="main-video"
+              className="m-video videoBackground"
+              controls={controls}
+              loop={loop}
+              muted={muted}
+              poster={poster}
+            />
+          )}
+        </VideoWrapper>
+      </VideoContext.Provider>
     </ThemeProvider>
   );
 };

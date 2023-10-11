@@ -8,6 +8,7 @@ import SettingMenu from "../Setting/Setting";
 import { useFullscreen } from '../../hooks/useFullscreen';
 import { LevelType, MediaPlaylistType } from '../../@types/hooks/UseVideoHlsType';
 import { calculatePlayerTime } from '../../utils/global-filter';
+import { useVideoRefContext } from '../../contexts/VideoContext';
 
 const ToolBarWrapper = styled.div({
     position: 'absolute',
@@ -49,7 +50,6 @@ const TimeCounter = styled.span({
 })
 type Toolbar = {
     videoWrapperRef: RefObject<HTMLDivElement>,
-    videoRef: RefObject<HTMLVideoElement>,
     playState: boolean,
     playIcon: ReactNode,
     pauseIcon: ReactNode,
@@ -67,7 +67,6 @@ type Toolbar = {
 
 const Toolbar = ({
     videoWrapperRef,
-    videoRef,
     playState,
     playIcon,
     pauseIcon,
@@ -81,6 +80,9 @@ const Toolbar = ({
     changeHlsSubtitle,
     playClicked,
     changeHlsAudioTrack }: Toolbar) => {
+
+    const { videoRef } = useVideoRefContext()
+
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<string>("00:00:00");
     const [time, settime] = useState<string>("00:00:00");
@@ -90,7 +92,7 @@ const Toolbar = ({
         const videoEl = videoRef.current;
         if (!videoEl) return;
         const interval = setInterval(() => {
-            // we should add calc time functionality in toolbar components
+
             settime(calculatePlayerTime(videoEl.duration));
             setCurrentTime(calculatePlayerTime(videoEl.currentTime));
             setVideoSlider((videoEl.currentTime / videoEl.duration) * 100);
