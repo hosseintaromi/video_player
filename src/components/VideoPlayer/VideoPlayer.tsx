@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useVideoHls } from "../../hooks/useVideoHls";
 import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -9,6 +9,10 @@ import PlayIcon from "../assets/Icons/PlayIcon";
 import PauseIcon from "../assets/Icons/PauseIcon";
 import SettingMenu from "../Setting/Setting";
 import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType";
+import { useFullscreen } from "../../hooks/useFullscreen";
+import { IconWrapper } from "../General/FlexCenter";
+import FullScreenIcon from "../assets/Icons/FullScreenIcon";
+import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
 /*
 ui components
 */
@@ -112,13 +116,15 @@ const TollBarWrapper = styled.div({
   gap: '30px',
   alignItems: 'center',
   color: '#fff',
-  fontSize: '40px',
+  fontSize: '30px',
   padding: '0 50px',
   zIndex: '2'
 
 })
 const SettingRightSection = styled.div({
-  // position: 'relative',
+  display: 'flex',
+  gap: '10px',
+  fontSize: '30px',
 })
 const SettingLeftSection = styled.div({
   // position: 'relative',
@@ -152,6 +158,8 @@ const VideoPlayer = ({
   const [currentSubtitle, setCurrentSubtitle] = useState<number>(-1);
   const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const videoWrapperRef = useRef<HTMLDivElement>(null)
 
   const {
     videoRef,
@@ -177,6 +185,11 @@ const VideoPlayer = ({
         setCurrentAudioTrack(currentAudio);
       },
     });
+
+  const { toggleFullscreen } = useFullscreen((e) => {
+    setIsFullscreen(e);
+    (window.screen.orientation as any)?.lock("landscape-primary");
+  }, videoWrapperRef, videoRef);
 
 
   const handelPlayAction = (value: boolean) => {
@@ -229,7 +242,7 @@ const VideoPlayer = ({
 
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
-      <VideoWrapper>
+      <VideoWrapper ref={videoWrapperRef}>
         <TopRightWrapper>{topRightContainer}</TopRightWrapper>
 
         <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
@@ -243,10 +256,17 @@ const VideoPlayer = ({
         </PlayIconWrapper>
 
         <TollBarWrapper >
-          <SettingRightSection onClick={() => playClicked(false)}>
+          <SettingLeftSection onClick={() => playClicked(false)}>
             {playState ? playIcon : pauseIcon}
-          </SettingRightSection>
-          <SettingLeftSection>
+          </SettingLeftSection>
+          <SettingRightSection>
+            <IconWrapper onClick={() => toggleFullscreen()}>
+              {(!isFullscreen ? (
+                <FullScreenIcon />
+              ) : (
+                <ExitFullScreenIcon />
+              ))}
+            </IconWrapper>
             <SettingMenu
               speedList={[0.5, 1, 2]}
               videoRef={videoRef}
@@ -255,7 +275,7 @@ const VideoPlayer = ({
               audioTrack={{ audioTrackList: audioTrackList, currentAudioTrack: currentAudioTrack, changeHlsAudioTrack: changeHlsAudioTrack }}
             />
 
-          </SettingLeftSection>
+          </SettingRightSection>
         </TollBarWrapper>
 
         {isSupportedPlatform ? (

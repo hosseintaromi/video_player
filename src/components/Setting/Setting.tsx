@@ -9,6 +9,7 @@ import SettingQuality from './SettingQuality';
 import { audioTrackObjType, qualityObjType, subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
 import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
+import { IconWrapper } from '../General/FlexCenter';
 
 type settingPropsType = {
     speedList: number[]
@@ -97,7 +98,9 @@ const Setting = (props: settingPropsType) => {
             <Overlay openSetting={changePage}>
 
                 <div data-toggler>
-                    <SettingIcon />
+                    <IconWrapper >
+                        <SettingIcon />
+                    </IconWrapper>
                 </div>
 
                 <OverlayContainer data-content>
