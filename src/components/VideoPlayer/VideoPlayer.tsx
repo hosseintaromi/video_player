@@ -132,6 +132,7 @@ const VideoPlayer = ({
   const [currentLevel, setCurrentLevel] = useState<number>(-1);
   const [subtitleList, setSubtitleList] = useState<MediaPlaylistType>([]);
   const [currentSubtitle, setCurrentSubtitle] = useState<number>(-1);
+  const [currentSpeed, setCurrentSpeed] = useState<number>(1);
   const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
@@ -162,9 +163,6 @@ const VideoPlayer = ({
       },
     });
 
-
-
-
   const handelPlayAction = (value: boolean) => {
     if (value) videoRef?.current?.play();
     else videoRef?.current?.pause();
@@ -172,6 +170,7 @@ const VideoPlayer = ({
 
   const handelChangeSpeed = (value: number) => {
     if (videoRef?.current?.playbackRate) videoRef.current.playbackRate = value;
+    setCurrentSpeed(value)
   };
 
   const changeAnimationForPlay = (value: boolean, showAnimation: boolean) => {
@@ -211,11 +210,25 @@ const VideoPlayer = ({
     if (!videoEl) return;
     initVideo(videoEl);
   }, []);
-
+  const videoPlayerContextVal = {
+    videoRef,
+    videoWrapperRef,
+    levels,
+    currentSpeed,
+    currentLevel,
+    subtitleList,
+    currentSubtitle,
+    audioTrackList,
+    currentAudioTrack,
+    changeHlsLevel,
+    changeHlsSubtitle,
+    changeHlsAudioTrack,
+    changeSpeed: handelChangeSpeed
+  }
 
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
-      <VideoContext.Provider value={{ videoRef }}>
+      <VideoContext.Provider value={videoPlayerContextVal}>
         <VideoWrapper ref={videoWrapperRef}>
           <TopRightWrapper>{topRightContainer}</TopRightWrapper>
 
@@ -230,20 +243,10 @@ const VideoPlayer = ({
           </PlayIconWrapper>
 
           <Toolbar
-            videoWrapperRef={videoWrapperRef}
             playState={playState}
             playIcon={playIcon}
             pauseIcon={pauseIcon}
-            levels={levels}
-            currentLevel={currentLevel}
-            subtitleList={subtitleList}
-            currentSubtitle={currentSubtitle}
-            audioTrackList={audioTrackList}
-            currentAudioTrack={currentAudioTrack}
-            changeHlsLevel={changeHlsLevel}
-            changeHlsSubtitle={changeHlsSubtitle}
             playClicked={playClicked}
-            changeHlsAudioTrack={changeHlsAudioTrack}
           />
 
           {isSupportedPlatform ? (

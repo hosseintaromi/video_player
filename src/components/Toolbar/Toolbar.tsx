@@ -8,7 +8,7 @@ import SettingMenu from "../Setting/Setting";
 import { useFullscreen } from '../../hooks/useFullscreen';
 import { LevelType, MediaPlaylistType } from '../../@types/hooks/UseVideoHlsType';
 import { calculatePlayerTime } from '../../utils/global-filter';
-import { useVideoRefContext } from '../../contexts/VideoContext';
+import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
 
 const ToolBarWrapper = styled.div({
     position: 'absolute',
@@ -49,39 +49,22 @@ const TimeCounter = styled.span({
     color: '#ddd'
 })
 type Toolbar = {
-    videoWrapperRef: RefObject<HTMLDivElement>,
     playState: boolean,
     playIcon: ReactNode,
     pauseIcon: ReactNode,
-    levels: LevelType,
-    currentLevel: number,
-    subtitleList: MediaPlaylistType,
-    currentSubtitle: number,
-    audioTrackList: MediaPlaylistType,
-    currentAudioTrack: number,
     playClicked: (showPlayIcon: boolean) => void,
-    changeHlsLevel: (level: number) => void,
-    changeHlsSubtitle: (level: number) => void,
-    changeHlsAudioTrack: (audioTrack: number) => void
 }
 
 const Toolbar = ({
-    videoWrapperRef,
     playState,
     playIcon,
     pauseIcon,
-    levels,
-    currentLevel,
-    subtitleList,
-    currentSubtitle,
-    audioTrackList,
-    currentAudioTrack,
-    changeHlsLevel,
-    changeHlsSubtitle,
     playClicked,
-    changeHlsAudioTrack }: Toolbar) => {
+}: Toolbar) => {
 
     const { videoRef } = useVideoRefContext()
+    const { videoWrapperRef } = useVideoWrapperRef()
+    type testType = undefined | string;
 
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<string>("00:00:00");
@@ -91,8 +74,7 @@ const Toolbar = ({
     useEffect(() => {
         const videoEl = videoRef.current;
         if (!videoEl) return;
-        const interval = setInterval(() => {
-
+        setInterval(() => {
             settime(calculatePlayerTime(videoEl.duration));
             setCurrentTime(calculatePlayerTime(videoEl.currentTime));
             setVideoSlider((videoEl.currentTime / videoEl.duration) * 100);
@@ -137,9 +119,6 @@ const Toolbar = ({
                     <SettingMenu
                         speedList={[0.5, 1, 2]}
                         videoRef={videoRef}
-                        quality={{ qualityList: levels, currentQuality: currentLevel, changeHlsLevel: changeHlsLevel }}
-                        subtitle={{ subtitleList: subtitleList, currentSubtitle: currentSubtitle, changeHlsSubtitle: changeHlsSubtitle }}
-                        audioTrack={{ audioTrackList: audioTrackList, currentAudioTrack: currentAudioTrack, changeHlsAudioTrack: changeHlsAudioTrack }}
                     />
                 </SettingRightSection>
             </SettingItemWrapper>

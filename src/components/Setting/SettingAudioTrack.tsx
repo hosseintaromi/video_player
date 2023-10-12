@@ -5,21 +5,23 @@ import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../assets/Icons/CheckMark';
 import { audioTrackObjType } from '../../@types/hooks/UseVideoHlsType';
+import { useAudioTrack, useAudioTrackCurrent } from '../../contexts/VideoContext';
 
 type SettingAudioTrackType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
-    audioTrack: audioTrackObjType
 }
 
-const SettingAudioTrack = ({ changePage, myRef, audioTrack }: SettingAudioTrackType) => {
+const SettingAudioTrack = ({ changePage, myRef }: SettingAudioTrackType) => {
+    const { audioTrackList, changeHlsAudioTrack } = useAudioTrack();
+    const { currentAudioTrack } = useAudioTrackCurrent()
 
     const audioTrackListGenerator = () => {
-        return audioTrack.audioTrackList.map((item, index) =>
+        return audioTrackList.map((item, index) =>
             <SettingItem
                 key={index}
-                onClick={() => audioTrack.changeHlsAudioTrack(index)}
-                startIcon={audioTrack.currentAudioTrack === index ? < CheckMark /> : null}
+                onClick={() => changeHlsAudioTrack(index)}
+                startIcon={currentAudioTrack === index ? < CheckMark /> : null}
                 content={item.name}
             />
         )
