@@ -5,21 +5,24 @@ import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../assets/Icons/CheckMark';
 import { subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
+import { useSubtitle, useSubtitleCurrent } from '../../contexts/VideoContext';
 
 type SettingSubtitleType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
-    subtitle: subtitleObjType
 }
 
-const SettingSubtitle = ({ changePage, myRef, subtitle }: SettingSubtitleType) => {
+const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
+
+    const { changeHlsSubtitle, subtitleList } = useSubtitle();
+    const { currentSubtitle } = useSubtitleCurrent();
 
     const subtitleListGenerator = () => {
-        return subtitle.subtitleList.map((item, index) =>
+        return subtitleList.map((item, index) =>
             <SettingItem
                 key={index}
-                onClick={() => subtitle.changeHlsSubtitle(index)}
-                startIcon={subtitle.currentSubtitle === index ? < CheckMark /> : null}
+                onClick={() => changeHlsSubtitle(index)}
+                startIcon={currentSubtitle === index ? < CheckMark /> : null}
                 content={item.name}
             />
         )
@@ -35,8 +38,8 @@ const SettingSubtitle = ({ changePage, myRef, subtitle }: SettingSubtitleType) =
             />
             <div>
                 <SettingItem
-                    onClick={() => subtitle.changeHlsSubtitle}
-                    startIcon={subtitle.currentSubtitle === -1 ? < CheckMark /> : null}
+                    onClick={() => changeHlsSubtitle}
+                    startIcon={currentSubtitle === -1 ? < CheckMark /> : null}
                     content='off'
                 />
                 {subtitleListGenerator()}

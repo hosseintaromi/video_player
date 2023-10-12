@@ -7,31 +7,34 @@ import ChangeQuality from '../assets/Icons/ChangeQuality';
 import { pageDir, pageName } from './Setting';
 import Subtitle from '../assets/Icons/Subtitle';
 import AudioIcon from '../assets/Icons/AudioIcon';
+import {
+    useAudioTrackCurrent,
+    useLevelCurrent,
+    useSpeedCurrent,
+    useSubtitleCurrent
+} from '../../contexts/VideoContext';
 
 type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>
-    currentLevel: string | number
-    currentSubtitle: string | number
-    currentSpeed: string | number
-    currentAudioTrack: string | number
 }
 
 const SettingList = ({
     changePage,
     myRef,
-    currentLevel,
-    currentSubtitle,
-    currentSpeed,
-    currentAudioTrack
 }: SettingListType
 ) => {
+    const { currentAudioTrack } = useAudioTrackCurrent()
+    const { currentSubtitle } = useSubtitleCurrent()
+    const { currentLevel } = useLevelCurrent()
+    const { currentSpeed } = useSpeedCurrent()
     return (
         <SettingMenu myRef={myRef}>
             <div onClick={() => changePage(pageName.playbackSpeed, pageDir.forward)}>
                 <SettingItem startIcon={<PlaybackSpeed />} content='Playback speed' >
                     <span>
                         X {currentSpeed}
+
                     </span>
                     <IconWrapper>
                         <ArrowRight />

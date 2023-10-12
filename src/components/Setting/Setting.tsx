@@ -14,9 +14,6 @@ import { IconWrapper } from '../General/FlexCenter';
 type settingPropsType = {
     speedList: number[]
     videoRef: React.RefObject<HTMLVideoElement>
-    quality: qualityObjType
-    subtitle: subtitleObjType
-    audioTrack: audioTrackObjType
 }
 
 const OverlayContainer = styled.div({
@@ -108,33 +105,27 @@ const Setting = (props: settingPropsType) => {
                     <SettingList
                         myRef={settingListRef}
                         changePage={changePage}
-                        currentLevel={props.quality.currentQuality === -1 ? 'auto' : props.quality.qualityList[props.quality.currentQuality].height}
-                        currentSubtitle={props.subtitle.currentSubtitle === -1 ? 'off' : props.subtitle.subtitleList[props.subtitle.currentSubtitle].name}
-                        currentSpeed={props.videoRef?.current?.playbackRate ? props.videoRef?.current?.playbackRate : 'normal'}
-                        currentAudioTrack={props.audioTrack.currentAudioTrack === -1 ? 'off' : props.audioTrack.audioTrackList[props.audioTrack.currentAudioTrack].name}
                     />
 
                     <SettingPlaybackSpeed
                         myRef={settingPlaybackRef}
                         changePage={changePage}
                         speedList={props.speedList}
-                        videoRef={props.videoRef} />
+                    />
 
                     <SettingQuality
                         myRef={settingQualityRef}
                         changePage={changePage}
-                        quality={props.quality} />
+                    />
 
                     <SettingSubtitle
                         myRef={settingSubtitleRef}
                         changePage={changePage}
-                        subtitle={props.subtitle}
                     />
 
                     <SettingAudioTrack
                         myRef={settingAudioTrackRef}
                         changePage={changePage}
-                        audioTrack={props.audioTrack}
                     />
 
                 </OverlayContainer>
