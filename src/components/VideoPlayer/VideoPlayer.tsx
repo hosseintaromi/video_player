@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useVideoHls } from "../../hooks/useVideoHls";
 import { ThemeProvider } from "@emotion/react";
-import styled from "@emotion/styled";
-import { keyframes } from '@emotion/react'
+
 import { theme } from "../../theme";
 import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
@@ -10,99 +9,8 @@ import PauseIcon from "../assets/Icons/PauseIcon";
 import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType";
 import Toolbar from "../Toolbar/Toolbar";
 import VideoContext from "../../contexts/VideoContext";
-/*
-ui components
-*/
+import { Button, PlayIconWrapper, PlayWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
 
-type ButtonPropsType = {
-  animation: boolean,
-}
-
-const bounce = keyframes`
-from {
-  opacity: 1
-}
-
-to {
-  opacity: 0;
-  -webkit-transform: scale(2);
-  -o-transform: scale(2);
-  transform: scale(2)
-}
-`
-
-const VideoWrapper = styled.div(({ theme }) => ({
-  height: "100%",
-  width: "100%",
-  position: "relative",
-  overflow: "hidden",
-  boxSizing: "border-box",
-  '> *': {
-    boxSizing: "border-box",
-  }
-}));
-
-const Video = styled.video(({ theme }) => ({
-  width: "100%",
-  height: "100%",
-  backgroundColor: theme.colors.videoBg,
-}));
-
-
-
-const Button = styled.button<ButtonPropsType>(props => ({
-  background: "transparent",
-  border: "none",
-  borderRadius: "50%",
-  color: "white",
-  padding: "20px",
-  animation: `${!props.animation ? `${bounce} 0.45s ease` : ''}`,
-  transformOrigin: "center",
-  display: `${props.animation ? 'none' : 'block'}`,
-  "img,svg": {
-    width: "50px",
-    height: "50px",
-  },
-}))
-
-const PlayIconWrapper = styled.div({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-});
-
-const TopRightWrapper = styled.div({
-  zIndex: "1",
-  top: "0",
-  display: "flex",
-  position: "absolute",
-  height: "50%",
-  width: "40%",
-  right: "0",
-  justifyContent: "right",
-  color: "white",
-});
-
-const TopLeftWrapper = styled.div({
-  color: "white",
-  zIndex: "1",
-  top: "0",
-  display: "flex",
-  position: "absolute",
-  height: "50%",
-  width: "40%",
-  left: "0",
-  justifyContent: "left",
-
-});
-
-const PlayWrapper = styled.div({
-  zIndex: '2',
-  position: 'absolute',
-  height: 'calc(100% - 70px)',
-  width: '100%',
-});
 
 
 const VideoPlayer = ({
