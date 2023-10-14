@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { ReactNode, RefObject, useEffect, useState } from 'react'
+import React, { ReactNode, RefObject, useEffect, useMemo, useState } from 'react'
 import RangeSelect from '../RangeSelect/RangeSelect'
 import FullScreenIcon from "../assets/Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
@@ -71,6 +71,26 @@ const Toolbar = ({
     const [time, settime] = useState<string>("00:00:00");
     const [videoSlider, setVideoSlider] = useState<number>(0);
 
+    const SettingRight = useMemo(() => {
+        return (
+            <SettingRightSection>
+                <IconWrapper onClick={() => toggleFullscreen()}>
+                    {(!isFullscreen ? (
+                        <FullScreenIcon />
+                    ) : (
+                        <ExitFullScreenIcon />
+                    ))}
+                </IconWrapper>
+                <SettingMenu
+                    speedList={[0.5, 1, 2]}
+                    videoRef={videoRef}
+                />
+            </SettingRightSection>
+        )
+    }, [isFullscreen,])
+
+    const TotalTime = useMemo(() => <TimeCounter className="m-timeLeft">{time}</TimeCounter>, [time])
+
     useEffect(() => {
         const videoEl = videoRef.current;
         if (!videoEl) return;
@@ -105,22 +125,10 @@ const Toolbar = ({
                     </span>
                     <TimeCounter className="m-timeLeft">{currentTime}/</TimeCounter>
 
-                    <TimeCounter className="m-timeLeft">{time}</TimeCounter>
+                    {TotalTime}
 
                 </SettingLeftSection>
-                <SettingRightSection>
-                    <IconWrapper onClick={() => toggleFullscreen()}>
-                        {(!isFullscreen ? (
-                            <FullScreenIcon />
-                        ) : (
-                            <ExitFullScreenIcon />
-                        ))}
-                    </IconWrapper>
-                    <SettingMenu
-                        speedList={[0.5, 1, 2]}
-                        videoRef={videoRef}
-                    />
-                </SettingRightSection>
+                {SettingRight}
             </SettingItemWrapper>
         </ToolBarWrapper>
     )

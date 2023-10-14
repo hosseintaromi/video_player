@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { RangePropsType } from "./RangeSelectType.model";
 import styled from "@emotion/styled";
 
@@ -85,6 +85,10 @@ const RangeSelect = (props: RangePropsType) => {
     progressBar.style.width = `calc(${e.target.value}%)`;
   };
 
+  const TimeLineMemo = useMemo(() => {
+    return <TimeLine className="timeline" />
+  }, [])
+
   return (
     <GeneralStyleForRange>
       <Slider
@@ -111,9 +115,10 @@ const RangeSelect = (props: RangePropsType) => {
       // }}
       />
 
+
       <ProgressBar id="progressBar" />
       <Thumb id="selector" />
-      <TimeLine className="timeline" />
+      {TimeLineMemo}
     </GeneralStyleForRange>
   );
 };
