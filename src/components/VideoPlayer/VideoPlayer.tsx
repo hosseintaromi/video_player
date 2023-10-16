@@ -1,7 +1,14 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState
+} from "react";
+
 import { useVideoHls } from "../../hooks/useVideoHls";
 import { ThemeProvider } from "@emotion/react";
-
 import { theme } from "../../theme";
 import { VideoPlayerPropsType } from "../../@types";
 import PlayIcon from "../assets/Icons/PlayIcon";
@@ -11,9 +18,7 @@ import Toolbar from "../Toolbar/Toolbar";
 import VideoContext from "../../contexts/VideoContext";
 import { Button, PlayIconWrapper, PlayWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
 
-
-
-const VideoPlayer = ({
+const VideoPlayer = memo(({
   customTheme,
   controllerRef,
   src,
@@ -185,7 +190,7 @@ const VideoPlayer = ({
       </VideoContext.Provider>
     </ThemeProvider>
   );
-};
+});
 
 
 export default VideoPlayer;
