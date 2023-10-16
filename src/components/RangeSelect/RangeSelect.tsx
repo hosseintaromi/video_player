@@ -1,89 +1,25 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { RangePropsType } from "./RangeSelectType.model";
-import styled from "@emotion/styled";
+import { GeneralStyleForRange, ProgressBar, Slider, Thumb, TimeLine } from "./RangeSelectStyle";
+import { throttle } from "lodash-es"
 
-const GeneralStyleForRange = styled.div({
-  position: "relative",
-  height: "30%",
-  width: "100%",
-})
-
-const ProgressBar = styled.div({
-  width: '0%',
-  height: '3px',
-  background: '#f00',
-  borderRadius: '3px',
-  position: 'absolute',
-  top: '50%',
-  marginTop: '-4px',
-  left: '0',
-  zIndex: '3',
-})
-
-const Thumb = styled.div({
-  height: "12px",
-  width: "12px",
-  top: "22%",
-  position: "absolute",
-  left: "0%",
-  backgroundColor: "#f00",
-  border: "solid 3px #f00",
-  borderRadius: "50%",
-  zIndex: "4",
-  marginTop: "-6px",
-  marginLeft: '4px',
-})
-
-const TimeLine = styled.div({
-  width: "100%",
-  height: "3px",
-  background: "#ffffff",
-  borderRadius: "3px",
-  position: "absolute",
-  top: "50%",
-  marginTop: "-4px",
-  left: "0",
-  zIndex: "1"
-})
-
-const Slider = styled.input({
-  width: '100%',
-  '-webkit-appearance': 'none',
-  zIndex: '5',
-  position: 'absolute',
-  inset: '0',
-  opacity: '0',
-  '::-webkit-slider-thumb': {
-    '-webkit-appearance': 'none',
-    appearance: 'none',
-    width: '6px',
-    height: '17px',
-    background: 'rgba(0, 188, 212, 1)',
-  }
-})
 
 const RangeSelect = (props: RangePropsType) => {
 
-  let selector = document.getElementById("selector") as HTMLElement;
-  let progressBar = document.getElementById("progressBar") as HTMLElement;
+  const selectorRef = useRef<HTMLDivElement>(null)
+  const progressBarRef = useRef<HTMLDivElement>(null)
   const [currentValue, setCurrentValue] = useState<number>(0);
-
-  useEffect(() => {
-    setCurrentValue(props.value);
-    if (!selector && !progressBar) return;
-    selector.style.left = `calc(${props.value}% - 9px)`;
-    progressBar.style.width = `calc(${props.value}%)`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.value]);
 
   const calcInputVal = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.inputChangeValue(e.target.value);
-    console.log('first')
     setCurrentValue(+e.target.value);
-    if (!selector && !progressBar) return;
-    selector.style.left = `calc(${e.target.value}% - 9px)`;
-    progressBar.style.width = `calc(${e.target.value}%)`;
+    if (selectorRef.current && progressBarRef.current) {
+      selectorRef.current.style.left = `calc(${e.target.value}% - 9px)`;
+      progressBarRef.current.style.width = `calc(${e.target.value}%)`;
+    }
   };
+
+  const calcThrottle = useCallback(throttle(calcInputVal, 20), [])
 
   const TimeLineMemo = useMemo(() => {
     return <TimeLine className="timeline" />
@@ -98,7 +34,7 @@ const RangeSelect = (props: RangePropsType) => {
         max={props.max}
         value={currentValue}
         id="slider"
-        onChange={(e) => calcInputVal(e)}
+        onChange={(e) => calcThrottle(e)}
       // onMouseMove={(e) => {
       //   props.onMouseMove(e);
       // }}
@@ -116,8 +52,8 @@ const RangeSelect = (props: RangePropsType) => {
       />
 
 
-      <ProgressBar id="progressBar" />
-      <Thumb id="selector" />
+      <ProgressBar id="progressBar" ref={progressBarRef} />
+      <Thumb id="selector" ref={selectorRef} />
       {TimeLineMemo}
     </GeneralStyleForRange>
   );
