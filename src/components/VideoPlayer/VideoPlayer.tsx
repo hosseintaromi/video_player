@@ -1,4 +1,5 @@
 import React, {
+  MouseEventHandler,
   memo,
   useCallback,
   useEffect,
@@ -49,6 +50,8 @@ const VideoPlayer = memo(({
   const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
+  const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
+  var setTimeOutUi: string | number | NodeJS.Timeout | undefined;
 
 
   const {
@@ -80,6 +83,13 @@ const VideoPlayer = memo(({
     if (value) videoRef?.current?.play();
     else videoRef?.current?.pause();
   };
+
+  const setTimeForUi = () => {
+    setTimeOutUi = setTimeout(() => {
+      setIsFadeOut(true);
+    }, 3000);
+  };
+
 
   const handelChangeSpeed = (value: number) => {
     if (videoRef?.current?.playbackRate) videoRef.current.playbackRate = value;
@@ -118,7 +128,17 @@ const VideoPlayer = memo(({
       if (onPlay) onPlay();
     };
   };
+
+  const checkMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setIsFadeOut(false);
+    clearTimeout(setTimeOutUi);
+    if (!videoRef?.current?.paused) {
+      setTimeForUi();
+    }
+  };
+
   useEffect(() => {
+
     const videoEl = videoRef.current;
     if (!videoEl) return;
     initVideo(videoEl);
@@ -142,7 +162,7 @@ const VideoPlayer = memo(({
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
       <VideoContext.Provider value={videoPlayerContextVal}>
-        <VideoWrapper ref={videoWrapperRef}>
+        <VideoWrapper ref={videoWrapperRef} onMouseMove={(e) => checkMouse(e)}>
           <TopRightWrapper>{topRightContainer}</TopRightWrapper>
 
           <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
@@ -154,13 +174,15 @@ const VideoPlayer = memo(({
               {playState ? playIcon : pauseIcon}
             </Button>
           </PlayIconWrapper>
+          {
+            !isFadeOut && <Toolbar
+              playState={playState}
+              playIcon={playIcon}
+              pauseIcon={pauseIcon}
+              playClicked={playClicked}
+            />
+          }
 
-          <Toolbar
-            playState={playState}
-            playIcon={playIcon}
-            pauseIcon={pauseIcon}
-            playClicked={playClicked}
-          />
 
           {isSupportedPlatform ? (
             <Video
