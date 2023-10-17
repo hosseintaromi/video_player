@@ -18,6 +18,7 @@ import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType
 import Toolbar from "../Toolbar/Toolbar";
 import VideoContext from "../../contexts/VideoContext";
 import { Button, PlayIconWrapper, PlayWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
+import { throttle } from "lodash-es"
 
 const VideoPlayer = memo(({
   customTheme,
@@ -50,8 +51,9 @@ const VideoPlayer = memo(({
   const [audioTrackList, setAudioTrackList] = useState<MediaPlaylistType>([]);
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
-  const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
-  var setTimeOutUi: string | number | NodeJS.Timeout | undefined;
+  const [isFadeOut, setIsFadeOut] = useState<boolean>(true);
+  const setTimeOutUiRef = useRef<string | number | NodeJS.Timeout | undefined>(null)
+
 
 
   const {
@@ -85,10 +87,17 @@ const VideoPlayer = memo(({
   };
 
   const setTimeForUi = () => {
-    setTimeOutUi = setTimeout(() => {
-      setIsFadeOut(true);
+    if (isFadeOut)
+      setIsFadeOut(false);
+    if (setTimeOutUiRef.current)
+      clearTimeout(setTimeOutUiRef.current);
+    setTimeOutUiRef.current = setTimeout(() => {
+      if (!videoRef?.current?.paused) {
+        setIsFadeOut(true);
+      }
     }, 3000);
   };
+  const calcThrottle = useCallback(throttle(setTimeForUi, 200), [])
 
 
   const handelChangeSpeed = (value: number) => {
@@ -129,13 +138,6 @@ const VideoPlayer = memo(({
     };
   };
 
-  const checkMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    setIsFadeOut(false);
-    clearTimeout(setTimeOutUi);
-    if (!videoRef?.current?.paused) {
-      setTimeForUi();
-    }
-  };
 
   useEffect(() => {
 
@@ -162,7 +164,7 @@ const VideoPlayer = memo(({
   return (
     <ThemeProvider theme={customTheme ? customTheme : theme}>
       <VideoContext.Provider value={videoPlayerContextVal}>
-        <VideoWrapper ref={videoWrapperRef} onMouseMove={(e) => checkMouse(e)}>
+        <VideoWrapper ref={videoWrapperRef} onMouseMove={calcThrottle}>
           <TopRightWrapper>{topRightContainer}</TopRightWrapper>
 
           <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
