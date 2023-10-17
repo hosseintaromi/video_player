@@ -129,8 +129,5 @@ This software uses the following open source packages:
 
 ## License
 
-Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
-Released under the [MIT License](LICENSE).
-
-<!-- > GitHub [@hosseintaromi](https://github.com/hosseintaromi) &nbsp;&middot;&nbsp;
-> linkedin [hosseintaromi]() &nbsp;&middot;&nbsp; -->
+Copyright © 2023, [Hossein Taromi](https://github.com/hosseintaromi).
+Released under the [Apache License](LICENSE).
