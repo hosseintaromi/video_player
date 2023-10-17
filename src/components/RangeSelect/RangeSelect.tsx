@@ -16,11 +16,6 @@ const RangeSelect = (props: RangePropsType) => {
   const progressBarRef = useRef<HTMLDivElement>(null)
   const [currentValue, setCurrentValue] = useState<number>(0);
 
-  const updateVideoRefTime = () => {
-    if (!videoRef.current) return;
-
-    console.log((currentValue * Math.floor(videoRef.current.duration)) / 100);
-  }
 
   const calcInputVal = (e: number, updateParent: boolean) => {
     if (!videoRef.current) return;
@@ -32,7 +27,6 @@ const RangeSelect = (props: RangePropsType) => {
       selectorRef.current.style.left = `calc(${e}% - 9px)`;
       progressBarRef.current.style.width = `calc(${e}%)`;
     }
-    updateVideoRefTime()
   };
 
   const calcThrottle = useCallback(throttle((e: React.ChangeEvent<HTMLInputElement>) => {
