@@ -17,7 +17,7 @@ import PauseIcon from "../assets/Icons/PauseIcon";
 import { LevelType, MediaPlaylistType } from "../../@types/hooks/UseVideoHlsType";
 import Toolbar from "../Toolbar/Toolbar";
 import VideoContext from "../../contexts/VideoContext";
-import { Button, PlayIconWrapper, PlayWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
+import { Button, PlayIconWrapper, PlayWrapper, ToolBarWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
 import { throttle } from "lodash-es"
 
 type TimerType = ReturnType<typeof setTimeout> | null;
@@ -177,15 +177,14 @@ const VideoPlayer = memo(({
               {playState ? playIcon : pauseIcon}
             </Button>
           </PlayIconWrapper>
-          <div style={{ opacity: !isFadeOut ? '1' : '0' }}>
+          <ToolBarWrapper style={{ opacity: !isFadeOut ? '1' : '0' }}>
             <Toolbar
               playState={playState}
               playIcon={playIcon}
               pauseIcon={pauseIcon}
               playClicked={playClicked}
             />
-
-          </div>
+          </ToolBarWrapper>
 
 
 

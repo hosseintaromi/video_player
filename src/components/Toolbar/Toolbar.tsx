@@ -10,18 +10,6 @@ import { LevelType, MediaPlaylistType } from '../../@types/hooks/UseVideoHlsType
 import { calculatePlayerTime } from '../../utils/global-filter';
 import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
 
-const ToolBarWrapper = styled.div({
-    position: 'absolute',
-    bottom: '0',
-    height: '20%',
-    width: '100%',
-    maxHeight: '70px',
-    color: '#fff',
-    fontSize: '25px',
-    padding: '0 15px',
-    zIndex: '2',
-    background: 'linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(0,0,0,0.6012780112044818) 78%)'
-})
 
 const SettingRightSection = styled.div({
     display: 'flex',
@@ -119,7 +107,7 @@ const Toolbar = ({
     }, videoWrapperRef, videoRef);
 
     return (
-        <ToolBarWrapper >
+        < >
             <RangeSelect
                 value={videoSlider}
                 min={0}
@@ -144,7 +132,7 @@ const Toolbar = ({
                 </SettingLeftSection>
                 {SettingRight}
             </SettingItemWrapper>
-        </ToolBarWrapper>
+        </>
     )
 }
 
