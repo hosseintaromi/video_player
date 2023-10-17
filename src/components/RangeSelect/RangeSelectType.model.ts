@@ -7,4 +7,5 @@ export type RangePropsType = {
   onMouseEnter?: any;
   onMouseLeave?: any;
   onTouchMove?: any;
+  controllerRef?: any;
 };

@@ -20,6 +20,8 @@ import VideoContext from "../../contexts/VideoContext";
 import { Button, PlayIconWrapper, PlayWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
 import { throttle } from "lodash-es"
 
+type TimerType = ReturnType<typeof setTimeout> | null;
+
 const VideoPlayer = memo(({
   customTheme,
   controllerRef,
@@ -52,8 +54,7 @@ const VideoPlayer = memo(({
   const [currentAudioTrack, setCurrentAudioTrack] = useState<number>(-1);
   const videoWrapperRef = useRef<HTMLDivElement>(null)
   const [isFadeOut, setIsFadeOut] = useState<boolean>(true);
-  const setTimeOutUiRef = useRef<string | number | NodeJS.Timeout | undefined>(null)
-
+  const setTimeOutUiRef = useRef<TimerType>(null)
 
 
   const {
@@ -176,14 +177,16 @@ const VideoPlayer = memo(({
               {playState ? playIcon : pauseIcon}
             </Button>
           </PlayIconWrapper>
-          {
-            !isFadeOut && <Toolbar
+          <div style={{ opacity: !isFadeOut ? '1' : '0' }}>
+            <Toolbar
               playState={playState}
               playIcon={playIcon}
               pauseIcon={pauseIcon}
               playClicked={playClicked}
             />
-          }
+
+          </div>
+
 
 
           {isSupportedPlatform ? (
