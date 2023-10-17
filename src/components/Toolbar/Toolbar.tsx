@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { ReactNode, RefObject, useEffect, useMemo, useState } from 'react'
+import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 import RangeSelect from '../RangeSelect/RangeSelect'
 import FullScreenIcon from "../assets/Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
@@ -62,6 +62,15 @@ const Toolbar = ({
     playClicked,
 }: Toolbar) => {
 
+
+    type ChangeRangeSelectType = {
+        calcInputVal: (e: number, updateParent: boolean) => void
+    };
+
+    const controllerRef = useRef<ChangeRangeSelectType>({
+        calcInputVal: () => { }
+    });
+
     const { videoRef } = useVideoRefContext()
     const { videoWrapperRef } = useVideoWrapperRef()
     type testType = undefined | string;
@@ -95,6 +104,9 @@ const Toolbar = ({
         const videoEl = videoRef.current;
         if (!videoEl) return;
         setInterval(() => {
+            if (!videoRef.current) return;
+            const calcVideoPercentage = (videoRef.current.currentTime / videoRef.current.duration) * 100
+            controllerRef.current.calcInputVal(calcVideoPercentage, false);
             settime(calculatePlayerTime(videoEl.duration));
             setCurrentTime(calculatePlayerTime(videoEl.currentTime));
             setVideoSlider((videoEl.currentTime / videoEl.duration) * 100);
@@ -105,19 +117,21 @@ const Toolbar = ({
         setIsFullscreen(e);
         (window.screen.orientation as any)?.lock("landscape-primary");
     }, videoWrapperRef, videoRef);
-    const videoSliderHandler = (e: number) => {
-        if (!videoRef.current) return;
-        videoRef.current.currentTime =
-            (e * Math.floor(videoRef.current.duration)) / 100;
-        setVideoSlider(
-            (videoRef.current.currentTime / videoRef.current.duration) * 100,
-        );
-        // updateBuffer(true);
-    };
 
     return (
         <ToolBarWrapper >
-            <RangeSelect value={videoSlider} min={0} max={100} inputChangeValue={videoSliderHandler} />
+            <RangeSelect
+                value={videoSlider}
+                min={0}
+                max={100}
+                // inputChangeValue={videoSliderHandler}
+                controllerRef={controllerRef} />
+            {/* <button
+       
+        }}
+      >
+        speed X 4
+      </button> */}
             <SettingItemWrapper>
                 <SettingLeftSection onClick={() => playClicked(false)}>
                     <span>
