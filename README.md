@@ -1,44 +1,53 @@
-![video player Logo](./package_logo.PNG)
-![NPM Downloads](https://img.shields.io/npm/dw/@hosseintaromi/video_player)
-![NPM License](https://img.shields.io/npm/l/@hosseintaromi/video_player)
-![Travis Status](https://img.shields.io/travis/hosseintaromi/video_player)
-
-you can play a video with all cool features
-
-[Key Features](#key-features)
-&nbsp;&middot;&nbsp;
-[How To Use](#how-to-use)
-&nbsp;&middot;&nbsp;
-[Credits](#credits)
-&nbsp;&middot;&nbsp;
-[License](#license)
-
-## Key Features
-
-- Ability to stream video or play simple video
-- The default appearance is quite similar to YouTube, but you can fully customize it in the simplest way
-- All facilities are ready for you, such as control of subtitles, dubbing, playback speed and quality by default, and access to control all of these in your application.
-
-### More explanation
+# [Video Player](https://reactjs.org/) &middot; [![GitHub license](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/hosseintaromi/video_player/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@hosseintaromi/video_player.svg?style=flat)](https://www.npmjs.com/package/@hosseintaromi/video_player) ![NPM Downloads](https://img.shields.io/npm/dw/@hosseintaromi/video_player) [![stars - video_player](https://img.shields.io/github/stars/hosseintaromi/video_player?style=social)](https://github.com/hosseintaromi/video_player)
 
 A video player like YouTube that allows streaming and complete customization
 This package lets you play videos in different formats such as m3u8, mp4, or any other form.
 As you noticed, this package allows you to stream; we used HLS.
 In terms of appearance, we tried to be entirely similar to YouTube because it is standard and popular, but you will not be limited in any way. You can customize all sections individually.
 
-<img  src="./videopackage.gif"  width="100%">
+### Key Features
 
-## How To Use
+- Ability to stream video or play simple video
+- The default appearance is quite similar to YouTube, but you can fully customize it in the simplest way
+- All facilities are ready for you, such as control of subtitles, dubbing, playback speed and quality by default, and access to control all of these in your application.
 
-You can install it from npm with this command:
+<!-- You can play a video with all cool features -->
 
-```bash
-# Clone this repository
-$ npm i @hosseintaromi/video_player@0.1.5
+## Table of Content
+
+&nbsp;&middot;&nbsp;
+[Install](#Install) <br/>
+&nbsp;&middot;&nbsp;
+[Usage](#Usage)<br/>
+&nbsp;&middot;&nbsp;
+[Contributing](#Contributing)<br/>
+&nbsp;&middot;&nbsp;
+[License](#license)<br/>
+&nbsp;&middot;&nbsp;
+[Credits](#Credits)<br/>
+&nbsp;&middot;&nbsp;
+[Author](#Author)<br/>
+&nbsp;&middot;&nbsp;
+[License](#License)
+
+## Install
+
+Install with [npm](https://www.npmjs.com/):
+
+```sh
+$ npm i @hosseintaromi/video_player
 ```
 
+Install with [yarn](https://yarnpkg.com):
+
+```sh
+$ yarn add @hosseintaromi/video_player
+```
+
+## Usage
+
 ```tsx
-import VideoPlayer from "@hosseintaromi/video_player";
+import { VideoPlayer } from "@hosseintaromi/video_player";
 
 const App = () => {
   //you can control everything with this ref
@@ -93,32 +102,35 @@ const App = () => {
 export default App;
 ```
 
-## Contact with me
+## Contributing
 
-if you liked using this package or it has helped you in any way, I'd like you send me an email at <hosseintaromii@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
 
 ## Credits
 
 This software uses the following open source packages:
 
-- [React](https://react.dev/)
-- [Node.js](https://nodejs.org/)
-- [hls.js](https://github.com/video-dev/hls.js)
-- [emotion](https://emotion.sh/)
+&nbsp;&middot;&nbsp;
+[React](https://react.dev/)
+&nbsp;&middot;&nbsp;
+[Node.js](https://nodejs.org/)
+&nbsp;&middot;&nbsp;
+[hls.js](https://github.com/video-dev/hls.js)
+&nbsp;&middot;&nbsp;
+[emotion](https://emotion.sh/)
 
-<!-- ## Support
+## Author
 
-<a href="https://www.buymeacoffee.com/5Zn8Xh3l9" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;" ></a>
+&nbsp;&middot;&nbsp;
+[github/HosseinTaromi](https://github.com/hosseintaromi)
 
-<p>Or</p>
-
-<a href="https://www.coffeebede.com/hosseintaromi" style="height: 49px !important;width: 174px !important;"><img class="img-fluid"  src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" style="height: 49px !important;width: 174px !important;"/></a> -->
+&nbsp;&middot;&nbsp;
+[linkedin/HosseinTaromi](https://www.linkedin.com/in/hosseintaromi/)
 
 ## License
 
-MIT
+Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
+Released under the [MIT License](LICENSE).
 
----
-
-> GitHub [@hosseintaromi](https://github.com/hosseintaromi) &nbsp;&middot;&nbsp;
-> linkedin [hosseintaromi]() &nbsp;&middot;&nbsp;
+<!-- > GitHub [@hosseintaromi](https://github.com/hosseintaromi) &nbsp;&middot;&nbsp;
+> linkedin [hosseintaromi]() &nbsp;&middot;&nbsp; -->
