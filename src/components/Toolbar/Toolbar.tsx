@@ -87,14 +87,7 @@ const Toolbar = ({
                 value={videoSlider}
                 min={0}
                 max={100}
-                // inputChangeValue={videoSliderHandler}
                 controllerRef={controllerRef} />
-            {/* <button
-       
-        }}
-      >
-        speed X 4
-      </button> */}
             <SettingItemWrapper>
                 <SettingLeftSection onClick={() => playClicked(false)}>
                     <span>
