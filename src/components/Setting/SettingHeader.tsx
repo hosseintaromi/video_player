@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import ArrowRight from '../assets/Icons/ArrowRight'
+import ArrowRight from '../Icons/ArrowRight'
 import { pageDir, pageName } from './Setting'
 import { FlexCenter, IconWrapper } from '../General/FlexCenter'
 

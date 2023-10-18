@@ -3,8 +3,7 @@ import SettingItem from './SettingItem';
 import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
-import CheckMark from '../assets/Icons/CheckMark';
-import { subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
+import CheckMark from '../Icons/CheckMark';
 import { useSubtitle, useSubtitleCurrent } from '../../contexts/VideoContext';
 
 type SettingSubtitleType = {

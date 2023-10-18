@@ -1,41 +1,16 @@
-import styled from '@emotion/styled'
 import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 import RangeSelect from '../RangeSelect/RangeSelect'
-import FullScreenIcon from "../assets/Icons/FullScreenIcon";
-import ExitFullScreenIcon from "../assets/Icons/ExitFullScreenIcon";
+import FullScreenIcon from "../Icons/FullScreenIcon";
+import ExitFullScreenIcon from "../Icons/ExitFullScreenIcon";
 import { IconWrapper } from '../General/FlexCenter';
 import SettingMenu from "../Setting/Setting";
 import { useFullscreen } from '../../hooks/useFullscreen';
-import { LevelType, MediaPlaylistType } from '../../@types/hooks/UseVideoHlsType';
 import { calculatePlayerTime } from '../../utils/global-filter';
 import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
+import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './Toolbar';
 
 
-const SettingRightSection = styled.div({
-    display: 'flex',
-    gap: '10px',
-    fontSize: '25px',
-})
 
-const SettingLeftSection = styled.div({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-})
-
-const SettingItemWrapper = styled.div({
-    // position: 'relative',
-    display: 'flex',
-
-    justifyContent: "space-between",
-    gap: '30px',
-    alignItems: 'center',
-})
-
-const TimeCounter = styled.span({
-    fontSize: "15px",
-    color: '#ddd'
-})
 type Toolbar = {
     playState: boolean,
     playIcon: ReactNode,

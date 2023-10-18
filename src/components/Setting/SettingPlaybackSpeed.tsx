@@ -1,7 +1,7 @@
-import React, { RefObject, useEffect, useState } from 'react'
+import React from 'react'
 import SettingItem from './SettingItem';
 import { IconWrapper, SettingMenu } from '../General/FlexCenter';
-import CheckMark from '../assets/Icons/CheckMark';
+import CheckMark from '../Icons/CheckMark';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import { useSpeed, useSpeedCurrent, useVideoRefContext } from '../../contexts/VideoContext';

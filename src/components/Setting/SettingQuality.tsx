@@ -3,7 +3,7 @@ import SettingItem from './SettingItem';
 import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
-import CheckMark from '../assets/Icons/CheckMark';
+import CheckMark from '../Icons/CheckMark';
 import { useLevel, useLevelCurrent } from '../../contexts/VideoContext';
 
 type SettingQualityType = {
