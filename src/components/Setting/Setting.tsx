@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
-import SettingIcon from "../assets/Icons/SettingIcon";
+import SettingIcon from "../Icons/SettingIcon";
 import Overlay from './Overlay';
 
 import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
-import { audioTrackObjType, qualityObjType, subtitleObjType } from '../../@types/hooks/UseVideoHlsType';
 import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
 import { IconWrapper } from '../General/FlexCenter';

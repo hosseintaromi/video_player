@@ -3,12 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { pageDir, pageName } from './Setting';
 
 
-const OverlayContent = styled.div({
-    position: 'absolute',
-    bottom: '30px',
-    right: '0%',
-
-});
 const Wrapper = styled.div({
     position: 'relative',
 

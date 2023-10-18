@@ -9,10 +9,10 @@ const ClickOutWrapper = styled.div({
 const ClickOutSIde = ({ children }: { children: number | string | JSX.Element | JSX.Element[] }) => {
     const targetSection = useRef<HTMLDivElement>(null)
 
-
     return (
         <ClickOutWrapper ref={targetSection}>{children}</ClickOutWrapper>
     )
+
 }
 
 export default ClickOutSIde

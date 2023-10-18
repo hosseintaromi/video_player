@@ -1,12 +1,12 @@
 import React from 'react'
 import SettingItem from './SettingItem';
-import PlaybackSpeed from '../assets/Icons/PlaybackSpeed';
+import PlaybackSpeed from '../Icons/PlaybackSpeed';
 import { IconWrapper, SettingMenu } from '../General/FlexCenter';
-import ArrowRight from '../assets/Icons/ArrowRight';
-import ChangeQuality from '../assets/Icons/ChangeQuality';
+import ArrowRight from '../Icons/ArrowRight';
+import ChangeQuality from '../Icons/ChangeQuality';
 import { pageDir, pageName } from './Setting';
-import Subtitle from '../assets/Icons/Subtitle';
-import AudioIcon from '../assets/Icons/AudioIcon';
+import Subtitle from '../Icons/Subtitle';
+import AudioIcon from '../Icons/AudioIcon';
 import {
     useAudioTrackCurrent,
     useLevelCurrent,
