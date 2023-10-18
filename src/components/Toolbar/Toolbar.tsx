@@ -8,6 +8,10 @@ import { useFullscreen } from '../../hooks/useFullscreen';
 import { calculatePlayerTime } from '../../utils/global-filter';
 import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
 import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './ToolbarStyle';
+import HighVolume from '../Icons/HighVolume';
+import LowVolume from '../Icons/LowVolume';
+import MuteVolume from '../Icons/MuteVolume';
+import Volume from './Volume';
 
 
 
@@ -17,6 +21,9 @@ type Toolbar = {
     pauseIcon: ReactNode,
     playClicked: (showPlayIcon: boolean) => void,
 }
+type ChangeRangeSelectType = {
+    calcInputVal: (e: number, updateParent: boolean) => void
+};
 
 const Toolbar = ({
     playState,
@@ -25,19 +32,14 @@ const Toolbar = ({
     playClicked,
 }: Toolbar) => {
 
-
-    type ChangeRangeSelectType = {
-        calcInputVal: (e: number, updateParent: boolean) => void
-    };
-
     const controllerRef = useRef<ChangeRangeSelectType>({
         calcInputVal: () => { }
     });
 
+
+
     const { videoRef } = useVideoRefContext()
     const { videoWrapperRef } = useVideoWrapperRef()
-    type testType = undefined | string;
-
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<string>("00:00:00");
     const [time, settime] = useState<string>("00:00:00");
@@ -81,22 +83,22 @@ const Toolbar = ({
         (window.screen.orientation as any)?.lock("landscape-primary");
     }, videoWrapperRef, videoRef);
 
+
     return (
-        < >
+        <>
             <RangeSelect
                 value={videoSlider}
                 min={0}
                 max={100}
                 controllerRef={controllerRef} />
             <SettingItemWrapper>
-                <SettingLeftSection onClick={() => playClicked(false)}>
-                    <span>
+                <SettingLeftSection >
+                    <span onClick={() => playClicked(false)}>
                         {playState ? playIcon : pauseIcon}
                     </span>
                     <TimeCounter className="m-timeLeft">{currentTime}/</TimeCounter>
-
                     {TotalTime}
-
+                    <Volume />
                 </SettingLeftSection>
                 {SettingRight}
             </SettingItemWrapper>
