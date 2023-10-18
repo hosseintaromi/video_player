@@ -7,7 +7,7 @@ import SettingMenu from "../Setting/Setting";
 import { useFullscreen } from '../../hooks/useFullscreen';
 import { calculatePlayerTime } from '../../utils/global-filter';
 import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
-import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './Toolbar';
+import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './ToolbarStyle';
 
 
 
