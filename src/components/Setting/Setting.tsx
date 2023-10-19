@@ -25,7 +25,9 @@ const OverlayContainer = styled.div({
     position: 'absolute',
     bottom: '50px',
     right: '0',
-
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 })
 
 export enum pageName {

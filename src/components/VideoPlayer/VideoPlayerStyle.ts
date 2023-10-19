@@ -100,6 +100,13 @@ export const ToolBarWrapper = styled.div({
   fontSize: "25px",
   padding: "0 15px",
   zIndex: "2",
+
   background:
     "linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(0,0,0,0.6012780112044818) 78%)",
+});
+
+export const ToolBarPlayIcon = styled.div({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 });
