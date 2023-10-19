@@ -10,7 +10,7 @@ const RangeSelect = ({
   max,
   controllerRef,
   onChangeCallback,
-  step,
+  step
 }: RangePropsType) => {
 
 
