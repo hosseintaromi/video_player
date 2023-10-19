@@ -2,15 +2,21 @@ import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, us
 import { RangePropsType } from "./RangeSelectType.model";
 import { GeneralStyleForRange, ProgressBar, Slider, Thumb, TimeLine } from "./RangeSelectStyle";
 import { throttle } from "lodash-es"
-import { useVideoRefContext } from "../../contexts/VideoContext";
 
 
-const RangeSelect = (props: RangePropsType) => {
+const RangeSelect = ({
+  value,
+  min,
+  max,
+  controllerRef,
+  onChangeCallback,
+  step
+}: RangePropsType) => {
 
-  useImperativeHandle(props.controllerRef, () => ({
+
+  useImperativeHandle(controllerRef, () => ({
     calcInputVal
   }));
-  const { videoRef } = useVideoRefContext()
 
   const selectorRef = useRef<HTMLDivElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
@@ -18,10 +24,9 @@ const RangeSelect = (props: RangePropsType) => {
 
 
   const calcInputVal = (e: number, updateParent: boolean) => {
-    if (!videoRef.current) return;
-    if (updateParent)
-      videoRef.current.currentTime =
-        (e * videoRef.current.duration) / 100;
+    // console.log(e);
+    if (updateParent && onChangeCallback)
+      onChangeCallback(e)
     setCurrentValue(+e);
     if (selectorRef.current && progressBarRef.current) {
       selectorRef.current.style.left = `calc(${e}% - 9px)`;
@@ -41,29 +46,13 @@ const RangeSelect = (props: RangePropsType) => {
     <GeneralStyleForRange>
       <Slider
         type="range"
-        step=".01"
-        min={props.min}
-        max={props.max}
+        step={step}
+        min={min}
+        max={max}
         value={currentValue}
         id="slider"
         onChange={(e) => calcThrottle(e)}
-      // onMouseMove={(e) => {
-      //   props.onMouseMove(e);
-      // }}
-      // onTouchMove={(e) => {
-      //   props.onTouchMove(e);
-      // }}
-      // onMouseEnter={() => {
-      //   if (!props.onMouseEnter) return;
-      //   props.onMouseEnter();
-      // }}
-      // onMouseLeave={() => {
-      //   if (!props.onMouseLeave) return;
-      //   props.onMouseLeave();
-      // }}
       />
-
-
       <ProgressBar id="progressBar" ref={progressBarRef} />
       <Thumb id="selector" ref={selectorRef} />
       {TimeLineMemo}

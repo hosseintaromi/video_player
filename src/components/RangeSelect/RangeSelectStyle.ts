@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 
 export const GeneralStyleForRange = styled.div({
   position: "relative",
-  height: "30%",
+  height: "23px",
   width: "100%",
+  marginTop: "6px",
 });
 
 export const ProgressBar = styled.div({
@@ -29,7 +30,6 @@ export const Thumb = styled.div({
   borderRadius: "50%",
   zIndex: "4",
   marginTop: "-6px",
-  marginLeft: "4px",
 });
 
 export const TimeLine = styled.div({

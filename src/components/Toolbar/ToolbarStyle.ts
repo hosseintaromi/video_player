@@ -25,3 +25,10 @@ export const TimeCounter = styled.span({
   fontSize: "15px",
   color: "#ddd",
 });
+
+export const VolumeWrapper = styled.div({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
+});

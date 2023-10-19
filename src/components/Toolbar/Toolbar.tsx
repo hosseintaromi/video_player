@@ -1,17 +1,15 @@
-import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react'
+import React, { ReactNode, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import RangeSelect from '../RangeSelect/RangeSelect'
 import FullScreenIcon from "../Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../Icons/ExitFullScreenIcon";
-import { IconWrapper } from '../General/FlexCenter';
+import { FlexCenter, IconWrapper } from '../General/FlexCenter';
 import SettingMenu from "../Setting/Setting";
 import { useFullscreen } from '../../hooks/useFullscreen';
 import { calculatePlayerTime } from '../../utils/global-filter';
 import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
 import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './ToolbarStyle';
-import HighVolume from '../Icons/HighVolume';
-import LowVolume from '../Icons/LowVolume';
-import MuteVolume from '../Icons/MuteVolume';
 import Volume from './Volume';
+import { ToolBarPlayIcon } from '../VideoPlayer/VideoPlayerStyle';
 
 
 
@@ -32,11 +30,10 @@ const Toolbar = ({
     playClicked,
 }: Toolbar) => {
 
+
     const controllerRef = useRef<ChangeRangeSelectType>({
         calcInputVal: () => { }
     });
-
-
 
     const { videoRef } = useVideoRefContext()
     const { videoWrapperRef } = useVideoWrapperRef()
@@ -83,22 +80,29 @@ const Toolbar = ({
         (window.screen.orientation as any)?.lock("landscape-primary");
     }, videoWrapperRef, videoRef);
 
-
+    const rangeSelectChangeVideoTime = useCallback((e: number) => {
+        if (!videoRef.current) return;
+        videoRef.current.currentTime =
+            (e * videoRef.current.duration) / 100;
+    }, [])
     return (
         <>
             <RangeSelect
                 value={videoSlider}
                 min={0}
                 max={100}
-                controllerRef={controllerRef} />
+                step={1}
+                controllerRef={controllerRef}
+                onChangeCallback={rangeSelectChangeVideoTime}
+            />
             <SettingItemWrapper>
                 <SettingLeftSection >
-                    <span onClick={() => playClicked(false)}>
+                    <ToolBarPlayIcon onClick={() => playClicked(false)}>
                         {playState ? playIcon : pauseIcon}
-                    </span>
+                    </ToolBarPlayIcon>
+                    <Volume />
                     <TimeCounter className="m-timeLeft">{currentTime}/</TimeCounter>
                     {TotalTime}
-                    <Volume />
                 </SettingLeftSection>
                 {SettingRight}
             </SettingItemWrapper>
