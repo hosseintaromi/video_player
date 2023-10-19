@@ -10,7 +10,7 @@ const RangeSelect = ({
   max,
   controllerRef,
   onChangeCallback,
-  step
+  step,
 }: RangePropsType) => {
 
 
@@ -23,8 +23,7 @@ const RangeSelect = ({
   const [currentValue, setCurrentValue] = useState<number>(0);
 
 
-  const calcInputVal = (e: number, updateParent: boolean) => {
-    // console.log(e);
+  const calcInputVal = useCallback((e: number, updateParent: boolean) => {
     if (updateParent && onChangeCallback)
       onChangeCallback(e)
     setCurrentValue(+e);
@@ -32,7 +31,7 @@ const RangeSelect = ({
       selectorRef.current.style.left = `calc(${e}% - 9px)`;
       progressBarRef.current.style.width = `calc(${e}%)`;
     }
-  };
+  }, []);
 
   const calcThrottle = useCallback(throttle((e: React.ChangeEvent<HTMLInputElement>) => {
     calcInputVal(+e.target.value, true)

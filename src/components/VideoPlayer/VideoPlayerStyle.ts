@@ -109,4 +109,5 @@ export const ToolBarPlayIcon = styled.div({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  paddingRight: "10px",
 });

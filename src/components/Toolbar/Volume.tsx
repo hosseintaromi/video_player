@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { IconWrapper } from '../General/FlexCenter';
 import HighVolume from '../Icons/HighVolume';
 import LowVolume from '../Icons/LowVolume';
@@ -7,15 +7,27 @@ import { useVideoRefContext } from '../../contexts/VideoContext';
 import RangeSelect from '../RangeSelect/RangeSelect';
 import { VolumeWrapper } from './ToolbarStyle';
 
+type ChangeRangeSelectType = {
+    calcInputVal: (e: number, updateParent: boolean) => void
+};
+
 const Volume = memo(() => {
-    const [volume, setVolume] = useState<number>(0);
+    const [volume, setVolume] = useState<number>(100);
+    const [volumeVisibility, setVolumeVisibility] = useState<boolean>(false);
     const { videoRef } = useVideoRefContext()
+    const controllerRef2 = useRef<ChangeRangeSelectType>({
+        calcInputVal: () => { }
+    });
+    useEffect(() => {
+        changeVolume(100)
+        controllerRef2.current.calcInputVal(100, false);
+
+    }, [])
 
     const changeVolume = useCallback((e: number) => {
-        e = e / 100;
-        console.log(e)
-        if (!videoRef.current) return
         setVolume(e)
+        e = e / 100;
+        if (!videoRef.current) return
         videoRef.current.volume = e
     }, [])
     const calcVolumeIcon = () => {
@@ -38,12 +50,24 @@ const Volume = memo(() => {
             )
     }
     return (
-        <VolumeWrapper>
+        <VolumeWrapper
+            onMouseEnter={() => setVolumeVisibility(true)}
+            onMouseLeave={() => setVolumeVisibility(false)}>
             {calcVolumeIcon()}
 
-            <div style={{ padding: '0 10px', width: '100px' }}>
-                <RangeSelect step={1} value={volume} min={0} max={100} onChangeCallback={changeVolume} />
+
+            <div style={{ padding: '0 15px', width: volumeVisibility ? '60px' : "0", opacity: volumeVisibility ? '1' : "0", transition: 'all 0.3s ease 0s' }}>
+                <RangeSelect
+                    step={1}
+                    value={volume}
+                    min={0}
+                    max={100}
+                    controllerRef={controllerRef2}
+                    onChangeCallback={changeVolume}
+                />
             </div>
+
+
         </VolumeWrapper>
     )
 })

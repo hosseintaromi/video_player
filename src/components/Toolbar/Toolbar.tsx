@@ -80,6 +80,8 @@ const Toolbar = ({
         (window.screen.orientation as any)?.lock("landscape-primary");
     }, videoWrapperRef, videoRef);
 
+    const VolComp = useMemo(() => <Volume />, [])
+
     const rangeSelectChangeVideoTime = useCallback((e: number) => {
         if (!videoRef.current) return;
         videoRef.current.currentTime =
@@ -100,7 +102,7 @@ const Toolbar = ({
                     <ToolBarPlayIcon onClick={() => playClicked(false)}>
                         {playState ? playIcon : pauseIcon}
                     </ToolBarPlayIcon>
-                    <Volume />
+                    {VolComp}
                     <TimeCounter className="m-timeLeft">{currentTime}/</TimeCounter>
                     {TotalTime}
                 </SettingLeftSection>

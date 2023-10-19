@@ -20,9 +20,9 @@ export const ProgressBar = styled.div({
 });
 
 export const Thumb = styled.div({
-  height: "12px",
-  width: "12px",
-  top: "22%",
+  height: "9px",
+  width: "9px",
+  top: "30%",
   position: "absolute",
   left: "0%",
   backgroundColor: "#f00",
