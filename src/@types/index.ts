@@ -20,7 +20,9 @@ export type VideoPlayerPropsType = {
   playIcon?: ReactNode;
   pauseIcon?: ReactNode;
   showPlayIcon?: boolean;
+  loading?: boolean;
 
+  loadingComp?: ReactNode | null;
   topRightContainer?: ReactNode | null;
   topLeftContainer?: ReactNode | null;
 
