@@ -31,13 +31,13 @@ const Volume = memo(() => {
         videoRef.current.volume = e
     }, [])
     const calcVolumeIcon = () => {
-        if (volume >= 0.66)
+        if (volume >= 66)
             return (
                 <IconWrapper onClick={() => changeVolume(0)} >
                     <HighVolume />
                 </IconWrapper>
             )
-        else if (volume < 0.66 && volume >= 0.1)
+        else if (volume < 66 && volume >= 1)
             return (
                 <IconWrapper onClick={() => changeVolume(0)} >
                     <LowVolume />

@@ -11,7 +11,6 @@ import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounte
 import Volume from './Volume';
 import { ToolBarPlayIcon } from '../VideoPlayer/VideoPlayerStyle';
 import PictureInPicture from '../Icons/PictureInPicture';
-import PictureOutPicture from '../Icons/PictureOutPicture';
 
 
 type Toolbar = {
