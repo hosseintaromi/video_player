@@ -19,6 +19,7 @@ import Toolbar from "../Toolbar/Toolbar";
 import VideoContext from "../../contexts/VideoContext";
 import { Button, PlayIconWrapper, PlayWrapper, ToolBarWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
 import { throttle } from "lodash-es"
+import Loading from "../Loading/Loading";
 
 type TimerType = ReturnType<typeof setTimeout> | null;
 
@@ -35,7 +36,9 @@ const VideoPlayer = memo(({
   muted = false,
   poster,
   onPlay,
-  showPlayIcon = true
+  showPlayIcon = true,
+  loading = true,
+  loadingComp
 }: VideoPlayerPropsType) => {
 
   useImperativeHandle(controllerRef, () => ({
@@ -55,7 +58,7 @@ const VideoPlayer = memo(({
   const videoWrapperRef = useRef<HTMLDivElement>(null)
   const [isFadeOut, setIsFadeOut] = useState<boolean>(true);
   const setTimeOutUiRef = useRef<TimerType>(null)
-
+  const [showLoading, setShowLoading] = useState<boolean>(false)
 
   const {
     videoRef,
@@ -133,7 +136,12 @@ const VideoPlayer = memo(({
     el.onerror = (e: any) => {
       changeHlsLevel(3);
     };
-
+    el.onwaiting = () => {
+      setShowLoading(true)
+    };
+    el.oncanplay = () => {
+      setShowLoading(false)
+    };
     el.onplay = () => {
       if (onPlay) onPlay();
     };
@@ -185,9 +193,9 @@ const VideoPlayer = memo(({
               playClicked={playClicked}
             />
           </ToolBarWrapper>
-
-
-
+          {
+            showLoading && loading && (loadingComp ? loadingComp : <Loading />)
+          }
           {isSupportedPlatform ? (
             <Video
               playsInline
