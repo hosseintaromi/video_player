@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, useCallback, useEffect, useMemo, useRef, u
 import RangeSelect from '../RangeSelect/RangeSelect'
 import FullScreenIcon from "../Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../Icons/ExitFullScreenIcon";
-import { FlexCenter, IconWrapper } from '../General/FlexCenter';
+import { IconWrapper } from '../General/FlexCenter';
 import SettingMenu from "../Setting/Setting";
 import { useFullscreen } from '../../hooks/useFullscreen';
 import { calculatePlayerTime } from '../../utils/global-filter';
@@ -10,7 +10,8 @@ import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoCont
 import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './ToolbarStyle';
 import Volume from './Volume';
 import { ToolBarPlayIcon } from '../VideoPlayer/VideoPlayerStyle';
-
+import PictureInPicture from '../Icons/PictureInPicture';
+import PictureOutPicture from '../Icons/PictureOutPicture';
 
 
 type Toolbar = {
@@ -42,9 +43,21 @@ const Toolbar = ({
     const [time, settime] = useState<string>("00:00:00");
     const [videoSlider, setVideoSlider] = useState<number>(0);
 
+    function togglePictureInPicture() {
+        if (document.pictureInPictureElement) {
+            document.exitPictureInPicture();
+        } else if (document.pictureInPictureEnabled) {
+            //   videoRef.requestPictureInPicture();
+            videoRef.current?.requestPictureInPicture();
+        }
+    }
+
     const SettingRight = useMemo(() => {
         return (
             <SettingRightSection>
+                <IconWrapper onClick={() => togglePictureInPicture()}>
+                    <PictureInPicture />
+                </IconWrapper>
                 <IconWrapper onClick={() => toggleFullscreen()}>
                     {(!isFullscreen ? (
                         <FullScreenIcon />
@@ -106,6 +119,7 @@ const Toolbar = ({
                     <TimeCounter className="m-timeLeft">{currentTime}/</TimeCounter>
                     {TotalTime}
                 </SettingLeftSection>
+
                 {SettingRight}
             </SettingItemWrapper>
         </>
