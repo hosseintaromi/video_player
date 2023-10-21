@@ -58,7 +58,9 @@ const Setting = (props: settingPropsType) => {
     const changePage = (newPageName: pageName, dir: pageDir) => {
         const firstEl = lastSettingRef.current;
         const secondEl = pageObj[newPageName].current;
+
         if (!secondEl) return;
+        secondEl!.style.display = "block";
         if (firstEl) {
             firstEl!.style.position = "absolute";
             firstEl!.style.opacity = "1";
