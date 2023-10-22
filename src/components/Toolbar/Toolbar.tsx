@@ -1,5 +1,4 @@
 import React, { ReactNode, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import RangeSelect from '../RangeSelect/RangeSelect'
 import FullScreenIcon from "../Icons/FullScreenIcon";
 import ExitFullScreenIcon from "../Icons/ExitFullScreenIcon";
 import { IconWrapper } from '../General/FlexCenter';
@@ -11,6 +10,7 @@ import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounte
 import Volume from './Volume';
 import { ToolBarPlayIcon } from '../VideoPlayer/VideoPlayerStyle';
 import PictureInPicture from '../Icons/PictureInPicture';
+import MediaTimeLine from '../MediaTimeLine/MediaTimeLine';
 
 
 type Toolbar = {
@@ -21,6 +21,8 @@ type Toolbar = {
 }
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
+    setVideoSlider: React.Dispatch<React.SetStateAction<number>>,
+    videoSlider: number
 };
 
 const Toolbar = ({
@@ -32,7 +34,9 @@ const Toolbar = ({
 
 
     const controllerRef = useRef<ChangeRangeSelectType>({
-        calcInputVal: () => { }
+        calcInputVal: () => { },
+        setVideoSlider: () => { },
+        videoSlider: 0
     });
 
     const { videoRef } = useVideoRefContext()
@@ -40,7 +44,6 @@ const Toolbar = ({
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<string>("00:00:00");
     const [time, settime] = useState<string>("00:00:00");
-    const [videoSlider, setVideoSlider] = useState<number>(0);
 
     function togglePictureInPicture() {
         if (document.pictureInPictureElement) {
@@ -83,7 +86,7 @@ const Toolbar = ({
             controllerRef.current.calcInputVal(calcVideoPercentage, false);
             settime(calculatePlayerTime(videoEl.duration));
             setCurrentTime(calculatePlayerTime(videoEl.currentTime));
-            setVideoSlider((videoEl.currentTime / videoEl.duration) * 100);
+            controllerRef.current.setVideoSlider((videoEl.currentTime / videoEl.duration) * 100);
         }, 1000);
     }, []);
 
@@ -101,14 +104,7 @@ const Toolbar = ({
     }, [])
     return (
         <>
-            <RangeSelect
-                value={videoSlider}
-                min={0}
-                max={100}
-                step={1}
-                controllerRef={controllerRef}
-                onChangeCallback={rangeSelectChangeVideoTime}
-            />
+            <MediaTimeLine />
             <SettingItemWrapper>
                 <SettingLeftSection >
                     <ToolBarPlayIcon onClick={() => playClicked(false)}>
