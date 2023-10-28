@@ -19,6 +19,7 @@ import VideoContext from "../../contexts/VideoContext";
 import { Button, PlayIconWrapper, PlayWrapper, ToolBarWrapper, TopLeftWrapper, TopRightWrapper, Video, VideoWrapper } from "./VideoPlayerStyle";
 import { throttle } from "lodash-es"
 import Loading from "../Loading/Loading";
+import RightContainer from "../TopContainer/RightContainer";
 
 type TimerType = ReturnType<typeof setTimeout> | null;
 
@@ -28,7 +29,7 @@ const VideoPlayer = memo(({
   src,
   controls = false,
   loop = false,
-  topRightContainer = null,
+  topRightContainer = <RightContainer />,
   topLeftContainer = null,
   playIcon = <PlayIcon />,
   pauseIcon = <PauseIcon />,
@@ -177,7 +178,7 @@ const VideoPlayer = memo(({
 
           <TopLeftWrapper>{topLeftContainer}</TopLeftWrapper>
 
-          <PlayWrapper onClick={() => playClicked(showPlayIcon)} />
+          {/* <PlayWrapper onClick={() => playClicked(showPlayIcon)} /> */}
 
           <PlayIconWrapper>
             <Button animation={showAnimationForPlayButton}>

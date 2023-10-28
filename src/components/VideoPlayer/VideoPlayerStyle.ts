@@ -60,7 +60,7 @@ export const PlayIconWrapper = styled.div({
 });
 
 export const TopRightWrapper = styled.div({
-  zIndex: "1",
+  zIndex: "4",
   top: "0",
   display: "flex",
   position: "absolute",
