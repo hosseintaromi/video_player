@@ -5,6 +5,8 @@ import {
     ModalWrapper
 }
     from './DialogStyle';
+import Setting from '../Setting/Setting';
+import { useVideoRefContext } from '../../contexts/VideoContext';
 
 type DialogPropsType = {
     children: ReactNode,
@@ -13,11 +15,14 @@ type DialogPropsType = {
 }
 
 const Dialog = ({ children, isOpen, onClose }: DialogPropsType) => {
+    const { videoRef } = useVideoRefContext()
+
     return (<>
         {isOpen && <ModalOverlay onClick={onClose}>
             <ModalWrapper onClick={e => e.stopPropagation()}>
                 <ModalContent>
-                    {children}
+                    {/* {children} */}
+                    <Setting speedList={[1]} videoRef={videoRef} />
                     <button type='button' onClick={onClose}>Close</button>
                 </ModalContent>
             </ModalWrapper>
