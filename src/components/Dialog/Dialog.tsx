@@ -7,6 +7,7 @@ import {
     from './DialogStyle';
 import Setting from '../Setting/Setting';
 import { useVideoRefContext } from '../../contexts/VideoContext';
+import { createPortal } from 'react-dom';
 
 type DialogPropsType = {
     children: ReactNode,
@@ -18,16 +19,18 @@ const Dialog = ({ children, isOpen, onClose }: DialogPropsType) => {
     const { videoRef } = useVideoRefContext()
 
     return (<>
-        {isOpen && <ModalOverlay onClick={onClose}>
-            <ModalWrapper onClick={e => e.stopPropagation()}>
-                <ModalContent>
-                    {/* {children} */}
-                    <Setting speedList={[1]} videoRef={videoRef} />
-                    <button type='button' onClick={onClose}>Close</button>
-                </ModalContent>
-            </ModalWrapper>
-        </ModalOverlay>}
-
+        {createPortal(
+            isOpen && <ModalOverlay onClick={onClose}>
+                <ModalWrapper onClick={e => e.stopPropagation()}>
+                    <ModalContent>
+                        {/* {children} */}
+                        <Setting speedList={[1]} videoRef={videoRef} />
+                        <button type='button' onClick={onClose}>Close</button>
+                    </ModalContent>
+                </ModalWrapper>
+            </ModalOverlay>,
+            document.body
+        )}
     </>
     )
 }
