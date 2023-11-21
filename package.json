@@ -1,6 +1,6 @@
 {
   "name": "react_player",
-  "version": "0.1.62",
+  "version": "0.1.63",
   "description": "Easily play any type of video by customizing the appearance",
   "scripts": {
     "rollup": "rollup -c",
