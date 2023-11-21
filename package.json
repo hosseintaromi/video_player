@@ -1,5 +1,5 @@
 {
-  "name": "@hosseintaromi/react-player",
+  "name": "react/video-player",
   "version": "0.1.65",
   "description": "Easily play any type of video by customizing the appearance",
   "scripts": {
