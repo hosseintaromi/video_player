@@ -1,6 +1,6 @@
 {
-  "name": "frontendify/video-player",
-  "version": "0.1.68",
+  "name": "hosseintaromi/video-player",
+  "version": "0.1.67",
   "description": "Easily play any type of video by customizing the appearance",
   "scripts": {
     "rollup": "rollup -c",
