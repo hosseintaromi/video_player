@@ -1,6 +1,6 @@
 {
   "name": "frontendify/video-player",
-  "version": "0.1.66",
+  "version": "0.1.67",
   "description": "Easily play any type of video by customizing the appearance",
   "scripts": {
     "rollup": "rollup -c",
