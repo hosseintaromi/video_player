@@ -1,27 +1,37 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import RangeSelect from '../RangeSelect/RangeSelect'
-import { useVideoRefContext } from '../../contexts/VideoContext';
-import { Bubble, BufferSize, ThumbCursor } from './MediaTimeLineStyle'
+import React, { useCallback, useRef } from "react";
+import RangeSelect from "../RangeSelect"
+import { usePlayerContext } from "../../../hooks/usePlayerContext";
+import { OnUpdateTimeType } from "../../../@types/player";
+import { Bubble, BufferSize, GeneralStyleForRange, ThumbCursor } from "./MediaTimeLineStyle"
+
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
 };
-const MediaTimeLine = () => {
-    let timeOut: ReturnType<typeof setTimeout>;
-    const { videoRef } = useVideoRefContext()
-    const [videoSlider, setVideoSlider] = useState<number>(0);
-    const [hoverPercent, setHoverPercent] = useState<number>();
-    const [hoverValue, setHoverValue] = useState<number | string>();
-    const snapShotBoxCursor = useRef<HTMLDivElement>(null);
-    const snapShotBox = useRef<HTMLOutputElement>(null);
+
+const TimeLine = () => {
     const controllerRef = useRef<ChangeRangeSelectType>({
         calcInputVal: () => { }
     });
 
-    useImperativeHandle(controllerRef, () => ({
-        calcInputVal: controllerRef.current.calcInputVal,
-        setVideoSlider,
-        videoSlider
-    }));
+    const snapShotBoxCursor = useRef<HTMLDivElement>(null);
+    const snapShotBox = useRef<HTMLOutputElement>(null);
+
+    var duration = 0;
+    var percentage = 0
+    var timeOut: ReturnType<typeof setTimeout>;
+
+
+    const { changeTime } = usePlayerContext({
+        onUpdateTime: (e: OnUpdateTimeType) => {
+            duration = e.duration
+            percentage = e.percentage;
+            controllerRef.current.calcInputVal(percentage, false)
+        }
+    })
+
+    const rangeSelectChangeVideoTime = useCallback((e: number) => {
+        changeTime((e * duration) / 100)
+    }, [])
 
     const setBubble = (
         e: React.MouseEvent<HTMLInputElement, MouseEvent>,
@@ -35,13 +45,11 @@ const MediaTimeLine = () => {
         } else {
             offsetX = event.offsetX;
         }
-        if (!event.target || !videoRef.current) return;
+        if (!event.target) return;
 
-        setHoverPercent((offsetX / event.target.clientWidth) * 100);
         const bubbleEl = snapShotBox.current;
         const bubbleCursorEl = snapShotBoxCursor.current;
-        if (!bubbleEl || !bubbleCursorEl || !videoRef.current.duration) return;
-        const val = hoverPercent ? hoverPercent : 0;
+        if (!bubbleEl || !bubbleCursorEl || !duration) return;
         const halfBubbleWidth = bubbleEl.offsetWidth / 2;
         bubbleEl.style.left = `${Math.max(
             halfBubbleWidth,
@@ -52,15 +60,7 @@ const MediaTimeLine = () => {
             13,
             Math.min(offsetX, event.target.clientWidth) + 13,
         )}px `;
-
-        setHoverValue((val * videoRef.current.duration) / 100);
     };
-
-    const rangeSelectChangeVideoTime = useCallback((e: number) => {
-        if (!videoRef.current) return;
-        videoRef.current.currentTime =
-            (e * videoRef.current.duration) / 100;
-    }, [])
 
     const changeShowBubble = (e: boolean) => {
         const bubbleEl = snapShotBox.current;
@@ -76,8 +76,10 @@ const MediaTimeLine = () => {
         }
     };
 
+
+
     return (
-        <div onMouseEnter={() => {
+        <GeneralStyleForRange onMouseEnter={() => {
             changeShowBubble(true);
         }}
             onMouseLeave={() => {
@@ -91,9 +93,8 @@ const MediaTimeLine = () => {
                 }, 2000);
             }}>
             <RangeSelect
-                value={videoSlider}
-                min={0}
                 max={100}
+                min={0}
                 step={1}
                 controllerRef={controllerRef}
                 onChangeCallback={rangeSelectChangeVideoTime}
@@ -112,8 +113,8 @@ const MediaTimeLine = () => {
             </Bubble>
             <ThumbCursor ref={snapShotBoxCursor} />
             <BufferSize id="bufferSize" />
-        </div>
+        </GeneralStyleForRange>
     )
 }
 
-export default MediaTimeLine
+export default TimeLine

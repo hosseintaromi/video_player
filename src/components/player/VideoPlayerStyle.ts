@@ -34,7 +34,8 @@ export const VideoWrapper = styled.div(({ theme }) => ({
 export const Video = styled.video(({ theme }) => ({
   width: "100%",
   height: "100%",
-  backgroundColor: theme.colors.videoBg,
+  // backgroundColor: theme.colors.videoBg,
+  backgroundColor: "#000",
 }));
 
 export const Button = styled.button<ButtonPropsType>((props) => ({
@@ -57,6 +58,7 @@ export const PlayIconWrapper = styled.div({
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
+  zIndex: "300",
 });
 
 export const TopRightWrapper = styled.div({

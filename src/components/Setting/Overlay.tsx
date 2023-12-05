@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { pageDir, pageName } from './Setting';
+import React from 'react';
 
 
 const Wrapper = styled.div({

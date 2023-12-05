@@ -1,45 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SettingItem from './SettingItem';
-import { IconWrapper, SettingMenu } from '../General/FlexCenter';
-import CheckMark from '../Icons/CheckMark';
+import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
-import { useSpeed, useSpeedCurrent, useVideoRefContext } from '../../contexts/VideoContext';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
+import Locale from '../Locale/Locale';
+import Icon from '../Icons/Icon';
 
 type settingPlaybackSpeedPropsType = {
-    changePage: (newPageName: pageName, dir: pageDir) => void, speedList: number[],
+    changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>
 }
 
 const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsType) => {
 
-    const { changeSpeed, speedList } = useSpeed();
-    const { currentSpeed } = useSpeedCurrent();
-    // const changeVideoSpeed = (newSpeed: number) => {
-    //     if (!videoRef?.current?.playbackRate) return
-    //     videoRef.current.playbackRate = newSpeed;
-    //     setCurrentSpeed(newSpeed)
-    // }
-    // const [currentSpeed, setCurrentSpeed] = useState(1)
-    // useEffect(() => {
-    //     setCurrentSpeed(videoRef?.current?.playbackRate ? videoRef?.current?.playbackRate : 1)
-    // }, [])
+    const { getSpeeds, changeSpeed } = usePlayerContext()
+    const [indexSpeed, setIndexSpeed] = useState(1)
+    const setSpeed = (index: number) => {
+        changeSpeed(index)
+        setIndexSpeed(index)
+    }
+
     return (
         <>
             <SettingMenu myRef={myRef}>
                 <>
                     <SettingHeader
-                        title="speed"
+                        title={<Locale localeKey="setting_menu_change_speed_title" />}
                         hasBackButton={true}
                         hasCustomButton={false}
                         changePage={changePage}
                         backRoute={pageName.settingList}
                     />
-                    {speedList && speedList.map((speedItem, index) =>
-                        <div key={index} onClick={() => changeSpeed(speedItem)}>
+                    {getSpeeds().map((speedItem, index) =>
+                        <div key={index} onClick={() => setSpeed(index)}>
                             <SettingItem
                                 key={index}
-                                startIcon={currentSpeed === speedItem ? <CheckMark /> : <IconWrapper><></></IconWrapper>}
+                                startIcon={indexSpeed === index ? <Icon type='checkMark' /> : <></>}
                                 content={speedItem} />
                         </div>
                     )}

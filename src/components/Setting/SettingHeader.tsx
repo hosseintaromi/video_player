@@ -1,11 +1,12 @@
 import styled from '@emotion/styled'
-import React from 'react'
-import ArrowRight from '../Icons/ArrowRight'
+import { ReactNode } from 'react'
 import { pageDir, pageName } from './Setting'
-import { FlexCenter, IconWrapper } from '../General/FlexCenter'
+import { FlexCenter } from '../General/FlexCenter'
+import Icon from '../Icons/Icon'
+import React from 'react'
 
 type settingHeaderPropsType = {
-    title: string,
+    title: ReactNode,
     hasCustomButton: boolean,
     hasBackButton: boolean,
     changePage: (newPageName: pageName, dir: pageDir) => void,
@@ -30,9 +31,7 @@ const SettingHeader = ({ title, hasCustomButton, hasBackButton, changePage }: se
         <SettingHeaderWrapper>
             {hasBackButton && <div onClick={() => changePage(pageName.settingList, pageDir.back)}>
                 <FlexCenter >
-                    <IconWrapper>
-                        <ArrowRight />
-                    </IconWrapper>
+                    <Icon type="arrow" />
                     <span>
                         {title}
                     </span>

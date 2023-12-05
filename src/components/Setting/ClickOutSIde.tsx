@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import styled from '@emotion/styled';
+import React from 'react';
 
 
 const ClickOutWrapper = styled.div({

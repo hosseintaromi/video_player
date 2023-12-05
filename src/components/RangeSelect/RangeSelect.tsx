@@ -5,7 +5,6 @@ import { throttle } from "lodash-es"
 
 
 const RangeSelect = ({
-  value,
   min,
   max,
   controllerRef,
@@ -56,9 +55,11 @@ const RangeSelect = ({
         id="slider"
         onChange={(e) => calcThrottle(e)}
         onMouseMove={(e) => {
+          if (!onMouseMove) return;
           onMouseMove(e);
         }}
         onTouchMove={(e) => {
+          if (!onTouchMove) return;
           onTouchMove(e);
         }}
         onMouseEnter={() => {

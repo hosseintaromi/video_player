@@ -1,5 +1,13 @@
 import styled from "@emotion/styled";
 
+export const ToolbarWrapper = styled.div({
+  position: "absolute",
+  zIndex: "100",
+  bottom: "0",
+  width: "100%",
+  background: "gray",
+});
+
 export const SettingRightSection = styled.div({
   display: "flex",
   gap: "10px",
@@ -13,9 +21,7 @@ export const SettingLeftSection = styled.div({
 });
 
 export const SettingItemWrapper = styled.div({
-  // position: 'relative',
   display: "flex",
-
   justifyContent: "space-between",
   gap: "30px",
   alignItems: "center",

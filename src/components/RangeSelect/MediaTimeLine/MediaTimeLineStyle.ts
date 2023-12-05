@@ -9,6 +9,12 @@ export const ThumbCursor = styled.div({
   zIndex: "3",
   display: "none",
 });
+export const GeneralStyleForRange = styled.div({
+  position: "relative",
+  height: "23px",
+  width: "100%",
+  marginTop: "6px",
+});
 export const BufferSize = styled.div({
   width: "0%",
   height: "8px",

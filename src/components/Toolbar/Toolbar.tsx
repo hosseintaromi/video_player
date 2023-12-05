@@ -1,59 +1,64 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import FullScreenIcon from "../Icons/FullScreenIcon";
-import ExitFullScreenIcon from "../Icons/ExitFullScreenIcon";
-import { IconWrapper } from '../General/FlexCenter';
-import SettingMenu from "../Setting/Setting";
+import { useMemo, useState } from 'react'
 import { useFullscreen } from '../../hooks/useFullscreen';
-import { calculatePlayerTime } from '../../utils/global-filter';
-import { useVideoRefContext, useVideoWrapperRef } from '../../contexts/VideoContext';
-import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from './ToolbarStyle';
+import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter, ToolbarWrapper } from './ToolbarStyle';
 import Volume from './Volume';
-import { ToolBarPlayIcon } from '../VideoPlayer/VideoPlayerStyle';
-import PictureInPicture from '../Icons/PictureInPicture';
-import MediaTimeLine from '../MediaTimeLine/MediaTimeLine';
-import { ChangeRangeSelectType, ToolbarPropsType } from './ToolbarType.model';
-import { useCheckScreenSize } from '../../hooks/useCheckScreenSize';
+import MediaTimeLine from '../RangeSelect/MediaTimeLine/MediaTimeLine';
+import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
+import Icon from '../Icons/Icon';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
+import { OnUpdateTimeType } from '../../@types/player';
+import { calculatePlayerTime } from '../../utils/global-filter';
+import Setting from '../setting/Setting';
+import React from 'react';
 
-const Toolbar = (props: ToolbarPropsType) => {
-    const { videoRef } = useVideoRefContext()
-    const { videoWrapperRef } = useVideoWrapperRef()
+const Toolbar = () => {
+
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+    const [isPlay, setIsPlay] = useState<boolean>(false)
+
     const [currentTime, setCurrentTime] = useState<string>("00:00:00");
-    const [time, settime] = useState<string>("00:00:00");
+    const [time, setTime] = useState<string>("00:00:00");
 
+    const video_player = document.getElementById("video_player");
+    const video_wrapper_id = document.getElementById("video_wrapper_id");
 
-    const controllerRef = useRef<ChangeRangeSelectType>({
-        calcInputVal: () => { },
-        setVideoSlider: () => { },
-        videoSlider: 0
-    });
+    const { toggleFullscreen } = useFullscreen((e) => {
+        setIsFullscreen(e);
+        (window.screen.orientation as any)?.lock("landscape-primary");
+    }, video_wrapper_id, video_player);
 
+    const { changePlayPause } = usePlayerContext({
+        onUpdateTime: (e: OnUpdateTimeType) => {
+            setTime(calculatePlayerTime(e.duration))
+            setCurrentTime(calculatePlayerTime(e.time))
+        },
+        onPlayPause: (e) => {
+            setIsPlay(e)
+        }
+    })
 
     function togglePictureInPicture() {
         if (document.pictureInPictureElement) {
             document.exitPictureInPicture();
         } else if (document.pictureInPictureEnabled) {
-            //   videoRef.requestPictureInPicture();
-            videoRef.current?.requestPictureInPicture();
+            (video_player as HTMLVideoElement).requestPictureInPicture()
         }
+    }
+
+    const togglePlay = () => {
+        changePlayPause(!isPlay)
     }
 
     const SettingRight = useMemo(() => {
         return (
             <SettingRightSection>
-                <IconWrapper onClick={() => togglePictureInPicture()}>
-                    <PictureInPicture />
-                </IconWrapper>
-                <IconWrapper onClick={() => toggleFullscreen()}>
-                    {(!isFullscreen ? (
-                        <FullScreenIcon />
-                    ) : (
-                        <ExitFullScreenIcon />
-                    ))}
-                </IconWrapper>
-                <SettingMenu
-                    speedList={[0.5, 1, 2]}
-                    videoRef={videoRef}
+                <Setting />
+                <Icon type='picInPic' onClick={togglePictureInPicture} />
+                <Icon onClick={() => toggleFullscreen()} type={!isFullscreen ?
+                    "fullScreen"
+                    :
+                    "unFullScreen"
+                }
                 />
             </SettingRightSection>
         )
@@ -61,38 +66,15 @@ const Toolbar = (props: ToolbarPropsType) => {
 
     const TotalTime = useMemo(() => <TimeCounter className="m-timeLeft">{time}</TimeCounter>, [time])
 
-    useEffect(() => {
-        const videoEl = videoRef.current;
-        if (!videoEl) return;
-        setInterval(() => {
-            if (!videoRef.current) return;
-            const calcVideoPercentage = (videoRef.current.currentTime / videoRef.current.duration) * 100
-            controllerRef.current.calcInputVal(calcVideoPercentage, false);
-            settime(calculatePlayerTime(videoEl.duration));
-            setCurrentTime(calculatePlayerTime(videoEl.currentTime));
-            controllerRef.current.setVideoSlider((videoEl.currentTime / videoEl.duration) * 100);
-        }, 1000);
-    }, []);
-
-    const { toggleFullscreen } = useFullscreen((e) => {
-        setIsFullscreen(e);
-        (window.screen.orientation as any)?.lock("landscape-primary");
-    }, videoWrapperRef, videoRef);
-
     const VolComp = useMemo(() => <Volume />, [])
 
-    const rangeSelectChangeVideoTime = useCallback((e: number) => {
-        if (!videoRef.current) return;
-        videoRef.current.currentTime =
-            (e * videoRef.current.duration) / 100;
-    }, [])
     return (
-        <>
+        <ToolbarWrapper>
             <MediaTimeLine />
             <SettingItemWrapper>
                 <SettingLeftSection >
-                    <ToolBarPlayIcon onClick={() => props.playClicked(false)}>
-                        {props.playState ? props.playIcon : props.pauseIcon}
+                    <ToolBarPlayIcon onClick={togglePlay}>
+                        {isPlay === true ? <Icon type='pause' /> : <Icon type='play' />}
                     </ToolBarPlayIcon>
                     {VolComp}
                     <TimeCounter className="m-timeLeft">{currentTime}/</TimeCounter>
@@ -101,7 +83,7 @@ const Toolbar = (props: ToolbarPropsType) => {
 
                 {SettingRight}
             </SettingItemWrapper>
-        </>
+        </ToolbarWrapper>
     )
 }
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import { FlexCenter, IconWrapper } from '../General/FlexCenter'
+import React, { ReactNode } from 'react'
+import { FlexCenter } from '../General/FlexCenter'
 import styled from '@emotion/styled';
 
 const SettingMenuItem = styled.div({
@@ -13,16 +13,14 @@ const SettingMenuItem = styled.div({
 type settingItemProps = {
     children?: JSX.Element[] | JSX.Element,
     startIcon: JSX.Element | null,
-    content: string | number
+    content: ReactNode;
     onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
 }
 const SettingItem = ({ children, startIcon, content, onClick }: settingItemProps) => {
     return (
         <SettingMenuItem onClick={onClick}>
             <FlexCenter>
-                <IconWrapper>
-                    {startIcon ? startIcon : <></>}
-                </IconWrapper>
+                {startIcon ? startIcon : <></>}
                 <span>
                     {content}
                 </span>

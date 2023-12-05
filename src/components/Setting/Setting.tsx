@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import SettingIcon from "../Icons/SettingIcon";
+import { useRef, useState } from 'react';
 import Overlay from './Overlay';
 
 import SettingList from './SettingList';
@@ -8,12 +7,9 @@ import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
 import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
-import { IconWrapper } from '../General/FlexCenter';
+import Icon from '../Icons/Icon';
+import React from 'react';
 
-type settingPropsType = {
-    speedList: number[]
-    videoRef: React.RefObject<HTMLVideoElement>
-}
 
 const OverlayContainer = styled.div({
     backgroundColor: 'rgb(40 40 39 / 60%)',
@@ -39,13 +35,14 @@ export enum pageName {
 }
 export enum pageDir { back = 'back', forward = 'forward' }
 
-const Setting = (props: settingPropsType) => {
+const Setting = () => {
     const settingListRef = useRef<HTMLDivElement>(null)
     const settingPlaybackRef = useRef<HTMLDivElement>(null)
     const settingQualityRef = useRef<HTMLDivElement>(null)
     const settingSubtitleRef = useRef<HTMLDivElement>(null)
     const settingAudioTrackRef = useRef<HTMLDivElement>(null)
     const lastSettingRef = useRef<HTMLDivElement | null>();
+    const [currentPage, setCurrentPage] = useState<HTMLDivElement | null>(null);
 
     const pageObj = {
         [pageName.settingList]: settingListRef,
@@ -58,7 +55,6 @@ const Setting = (props: settingPropsType) => {
     const changePage = (newPageName: pageName, dir: pageDir) => {
         const firstEl = lastSettingRef.current;
         const secondEl = pageObj[newPageName].current;
-
         if (!secondEl) return;
         secondEl!.style.display = "block";
         if (firstEl) {
@@ -91,31 +87,25 @@ const Setting = (props: settingPropsType) => {
         secondEl!.style.transform = `translateX(${dir === pageDir.back ? 0 : 0}%)`;
         secondEl!.parentElement!.style.height = secondEl?.clientHeight + 'px';
         lastSettingRef.current = secondEl;
+        setCurrentPage(lastSettingRef.current)
     }
 
     return (
         <>
             <Overlay openSetting={changePage}>
-
                 <div data-toggler>
-                    <IconWrapper >
-                        <SettingIcon />
-                    </IconWrapper>
+                    <Icon type='setting' />
                 </div>
-
                 <OverlayContainer data-content>
-
                     <SettingList
                         myRef={settingListRef}
                         changePage={changePage}
+                        currentPage={currentPage}
                     />
-
                     <SettingPlaybackSpeed
                         myRef={settingPlaybackRef}
                         changePage={changePage}
-                        speedList={props.speedList}
                     />
-
                     <SettingQuality
                         myRef={settingQualityRef}
                         changePage={changePage}

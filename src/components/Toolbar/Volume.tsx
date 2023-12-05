@@ -1,73 +1,77 @@
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import { IconWrapper } from '../General/FlexCenter';
-import HighVolume from '../Icons/HighVolume';
-import LowVolume from '../Icons/LowVolume';
-import MuteVolume from '../Icons/MuteVolume';
-import { useVideoRefContext } from '../../contexts/VideoContext';
+import { memo, useRef, useState } from 'react'
 import RangeSelect from '../RangeSelect/RangeSelect';
 import { VolumeWrapper } from './ToolbarStyle';
+import Icon from '../Icons/Icon';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
+import React from 'react';
 
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
 };
 
 const Volume = memo(() => {
+    const { changeVolume, changeMute } = usePlayerContext({
+        onChangeVolume: (e) => {
+            setVolume(e * 100)
+        },
+        onChangeMute: (e) => {
+            setIsMuted(e)
+        }
+    })
     const [volume, setVolume] = useState<number>(100);
+    const [isMute, setIsMuted] = useState<boolean>(true)
     const [volumeVisibility, setVolumeVisibility] = useState<boolean>(false);
-    const { videoRef } = useVideoRefContext()
-    const controllerRef2 = useRef<ChangeRangeSelectType>({
+    const controllerRef = useRef<ChangeRangeSelectType>({
         calcInputVal: () => { }
     });
-    useEffect(() => {
-        changeVolume(100)
-        controllerRef2.current.calcInputVal(100, false);
 
-    }, [])
+    const mute = () => {
+        changeMute(!isMute)
+        !isMute ? controllerRef.current.calcInputVal(0, false) : controllerRef.current.calcInputVal(volume, false)
 
-    const changeVolume = useCallback((e: number) => {
-        setVolume(e)
-        e = e / 100;
-        if (!videoRef.current) return
-        videoRef.current.volume = e
-    }, [])
+    }
+
+    const changeVol = (e: number) => {
+        changeVolume(e / 100)
+    }
+
     const calcVolumeIcon = () => {
-        if (volume >= 66)
+        if (volume <= 1 || isMute) {
             return (
-                <IconWrapper onClick={() => changeVolume(0)} >
-                    <HighVolume />
-                </IconWrapper>
+                <Icon type='mute' onClick={() => mute()} />
             )
-        else if (volume < 66 && volume >= 1)
-            return (
-                <IconWrapper onClick={() => changeVolume(0)} >
-                    <LowVolume />
-                </IconWrapper>)
-        else if (volume >= 0)
-            return (
-                <IconWrapper onClick={() => changeVolume(1)} >
-                    <MuteVolume />
-                </IconWrapper>
-            )
+        } else {
+            if (volume >= 66)
+                return (
+                    <Icon type='volumeUp' onClick={() => mute()} />
+                )
+            else if (volume < 66 && volume >= 1)
+                return (
+                    <Icon type='volumeDown' onClick={() => mute()} />
+                )
+        }
+
     }
     return (
         <VolumeWrapper
             onMouseEnter={() => setVolumeVisibility(true)}
             onMouseLeave={() => setVolumeVisibility(false)}>
             {calcVolumeIcon()}
-
-
-            <div style={{ padding: '0 15px', width: volumeVisibility ? '60px' : "0", opacity: volumeVisibility ? '1' : "0", transition: 'all 0.3s ease 0s' }}>
+            <div
+                style={{
+                    padding: '0 15px',
+                    width: volumeVisibility ? '60px' : "0",
+                    opacity: volumeVisibility ? '1' : "0",
+                    transition: 'all 0.3s ease 0s'
+                }}>
                 <RangeSelect
                     step={1}
-                    value={volume}
                     min={0}
                     max={100}
-                    controllerRef={controllerRef2}
-                    onChangeCallback={changeVolume}
+                    controllerRef={controllerRef}
+                    onChangeCallback={changeVol}
                 />
             </div>
-
-
         </VolumeWrapper>
     )
 })

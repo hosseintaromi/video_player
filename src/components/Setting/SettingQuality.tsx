@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
 import { SettingMenu } from '../General/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
-import CheckMark from '../Icons/CheckMark';
-import { useLevel, useLevelCurrent } from '../../contexts/VideoContext';
+import CheckMark from '../Icons/IconList/CheckMark';
+import { useVideoHls } from '../../hooks/useVideoHls';
+import { LevelType } from '../../@types/UseVideoHlsType';
+import Locale from '../Locale/Locale';
 
 type SettingQualityType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
@@ -12,25 +14,38 @@ type SettingQualityType = {
 }
 
 const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
+    const [levels, setLevels] = useState<LevelType>()
+    const [currentLevel, setCurrentLevel] = useState<number>()
+    const loadLevels = () => {
+        setLevels(getLevels())
+        const curlvl = getCurrentLevel().isAuto ? -1 : getCurrentLevel().currentLevel
+        setCurrentLevel(curlvl === undefined ? -1 : curlvl)
+    }
+    const { getLevels, changeLevel, getCurrentLevel } = useVideoHls({ onLoaded: loadLevels })
+    useEffect(() => {
+        loadLevels()
+    }, [])
 
-    const { changeHlsLevel, levels } = useLevel()
-    const { currentLevel } = useLevelCurrent()
+    const setQuality = (index: number) => {
+        changeLevel(index)
+        setCurrentLevel(index)
+    }
 
     const qualityListGenerator = () => {
-        return levels.map((item, index) =>
+        return levels ? levels.map((item, index) =>
             <SettingItem
                 key={index}
-                onClick={() => changeHlsLevel(index)}
+                onClick={() => setQuality(index)}
                 startIcon={currentLevel === index ? < CheckMark /> : null}
                 content={item.height}
             />
-        )
+        ) : <></>
     }
 
     return (
         <SettingMenu myRef={myRef}>
             <SettingHeader
-                title="speed"
+                title={<Locale localeKey="setting_menu_change_quality_title" />}
                 hasBackButton={true}
                 hasCustomButton={false}
                 changePage={changePage}
@@ -38,9 +53,9 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
             />
             <div>
                 <SettingItem
-                    onClick={() => changeHlsLevel(-1)}
+                    onClick={() => setQuality(-1)}
                     startIcon={currentLevel === -1 ? < CheckMark /> : null}
-                    content='auto'
+                    content={<Locale localeKey="setting_menu_quality_list_item_auto" />}
                 />
                 {qualityListGenerator()}
             </div>
