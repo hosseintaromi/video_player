@@ -1,2 +1,2 @@
 export * from "./components";
-export { usePlayer } from "./hooks/usePlayer";
+export * from "./hooks";
