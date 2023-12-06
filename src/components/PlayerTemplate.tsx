@@ -22,8 +22,24 @@ const PlayerTemplate = () => {
     const [isFadeOut, setIsFadeOut] = useState<boolean>(true);
     const [showAnimationForPlayButton, setShowAnimationForPlayButton] = useState(true)
     const setTimeOutUiRef = useRef<TimerType>(null)
+    const [isPlay, setIsPlay] = useState<boolean>(false)
 
+    const { changePlayPause } = usePlayerContext({
+        onPlayPause: (e) => {
+            setIsPlay(e)
+        }
+    })
 
+    const togglePlay = () => {
+        changePlayPause(!isPlay)
+    }
+
+    const changeAnimationForPlay = (value: boolean) => {
+        setShowAnimationForPlayButton(false);
+        setTimeout(() => {
+            setShowAnimationForPlayButton(true);
+        }, 400);
+    }
 
     const setTimeForUi = () => {
         if (isFadeOut)
@@ -43,15 +59,15 @@ const PlayerTemplate = () => {
     }, [])
     return (
         <ThemeProvider theme={style}>
+            <button onClick={togglePlay}> {isPlay === true ? <Icon type='pause' /> : <Icon type='play' />}</button>
             <VideoWrapper id="video_wrapper_id" onMouseMove={calcThrottle}>
                 <PlayIconWrapper>
-
-                    <Button animation={showAnimationForPlayButton}>
-                        <Icon type='play' />
+                    <Button animation={showAnimationForPlayButton} onClick={() => {
+                        togglePlay;
+                        changeAnimationForPlay;
+                    }}>
+                        {isPlay === true ? <Icon type='pause' /> : <Icon type='play' />}
                     </Button>
-                    {/* <Button animation={showAnimationForPlayButton}>
-                        {playState ? playIcon : pauseIcon}
-                    </Button> */}
                 </PlayIconWrapper>
                 <Video />
                 <Toolbar />

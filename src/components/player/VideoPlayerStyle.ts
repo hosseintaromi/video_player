@@ -44,8 +44,8 @@ export const Button = styled.button<ButtonPropsType>((props) => ({
   borderRadius: "50%",
   color: "white",
   padding: "20px",
-  animation: `${!props.animation ? `${bounce} 0.45s ease` : ""}`,
-  transformOrigin: "center",
+  // animation: `${!props.animation ? `${bounce} 0.45s ease` : ""}`,
+  // transformOrigin: "center",
   display: `${props.animation ? "none" : "block"}`,
   "img,svg": {
     width: "50px",
