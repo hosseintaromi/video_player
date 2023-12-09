@@ -5,10 +5,10 @@ export interface PlayerContextType {
   getVideoRef: () => HTMLVideoElement | undefined;
   togglePlay?: () => void;
   listenPlayPause?: (listener: (play: boolean) => void) => void;
-  hls?: Hls;
   loadVideo?: (src: string) => void;
   config?: PlayerObjectType;
   speeds?: number[];
+  hls?: Hls;
   listenOnLoad: (() => void)[];
 }
 
@@ -43,6 +43,8 @@ export interface PlayerConfigType {
   loop?: boolean;
   speeds?: number[];
   style?: StyleType;
+  autoPlay?: boolean;
+  timeForHideEl?: number;
 }
 
 export interface PlayerObjectType {
@@ -53,6 +55,8 @@ export interface PlayerObjectType {
   locale?: PlayerLocaleType;
   icons?: IconsType;
   style?: StyleType;
+  autoPlay?: boolean;
+  timeForHideEl?: number;
 }
 
 export type GenericEvents<T extends Record<string, string>> = {

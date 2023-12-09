@@ -21,13 +21,21 @@ export const bounce = keyframes`
   `;
 
 export const VideoWrapper = styled.div(({ theme }) => ({
-  height: "100%",
   width: "100%",
   position: "relative",
   overflow: "hidden",
   boxSizing: "border-box",
   "> *": {
     boxSizing: "border-box",
+  },
+  ":before": {
+    boxSizing: "border-box",
+  },
+  ":after": {
+    boxSizing: "border-box",
+  },
+  " @media (min-width: 600px) ": {
+    height: "100%",
   },
 }));
 

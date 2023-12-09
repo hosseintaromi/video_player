@@ -10,6 +10,7 @@ export const usePlayer = (playerConfig: PlayerConfigType) => {
     locale: playerConfig.locale,
     icons: playerConfig.icons,
     style: playerConfig.style,
+    autoPlay: playerConfig.autoPlay,
   };
 
   usePlayerContext({

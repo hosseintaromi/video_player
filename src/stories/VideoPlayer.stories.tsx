@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import VideoPlayer from '../components/VideoPlayer';
 import { usePlayer } from '../hooks';
+import './general.css'
 
 type DemoProps = {
   length: number;
@@ -33,7 +34,9 @@ const Demo = ({ length }: DemoProps) => {
       textColor: 'blue',
       toolBarBg: 'blue',
       toolbarFontSize: 'blue',
-    }
+    },
+    autoPlay: true,
+    timeForHideEl: 1000,
     // icons: {
     //   arrow: <p>hello</p>,
     //   audioTrack: <p>hello</p>,

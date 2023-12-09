@@ -34,7 +34,8 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
             togglePlay,
             listenPlayPause,
             config: configRef.current,
-            listenOnLoad: listenOnLoad.current
+            listenOnLoad: listenOnLoad.current,
+
         }}>
             {children ? children : <PlayerTemplate />}
             <PlayerInitializer />

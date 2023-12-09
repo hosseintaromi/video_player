@@ -16,6 +16,18 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     useContextEvents<PlayerEventsType>(VideoPlayerContext);
   const speedIndexRef = useRef<number>(1);
 
+  const getHideTime = () => {
+    return context.config?.timeForHideEl === undefined
+      ? 3000
+      : context.config?.timeForHideEl;
+  };
+
+  const isAutoPlay = () => {
+    return context.config?.autoPlay === undefined
+      ? true
+      : context.config?.autoPlay;
+  };
+
   const getSpeeds = () => {
     return context.config?.speeds || [0.5, 1, 1.25, 1.5, 2];
   };
@@ -98,10 +110,6 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
   const setVideoRef = (el?: HTMLVideoElement) => {
     if (!el) return;
     context.setVideoRef(el);
-    // changeHlsLevel(-1);
-    // el.onerror = (e: any) => {
-    //   changeHlsLevel(3);
-    // };
     el.onwaiting = () => {
       call.onLoading?.(true);
     };
@@ -149,5 +157,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     getVolume,
     changeMute,
     changeVolume,
+    isAutoPlay,
+    getHideTime,
   };
 };
