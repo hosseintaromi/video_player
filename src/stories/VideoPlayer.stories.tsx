@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
-import VideoPlayer from '../components/VideoPlayer';
+import VideoPlayer from '../components/player/VideoPlayer';
 import { usePlayer } from '../hooks';
 import './general.css'
 
@@ -11,7 +11,7 @@ type DemoProps = {
 const Demo = ({ length }: DemoProps) => {
   const playerConfig = usePlayer({
     onUpdateTime: (e) => {
-      console.log('client', e)
+      // console.log('client', e)
     },
     speeds: [0.5, 1, 1.25, 1.5, 2],
     locale: {
@@ -32,9 +32,10 @@ const Demo = ({ length }: DemoProps) => {
       settingBg: 'blue',
       settingFontSize: 'blue',
       textColor: 'blue',
-      toolBarBg: 'blue',
+      toolbarBg: 'blue',
       toolbarFontSize: 'blue',
     },
+
     autoPlay: true,
     timeForHideEl: 1000,
     // icons: {
@@ -58,7 +59,6 @@ const Demo = ({ length }: DemoProps) => {
   })
   return (
     <VideoPlayer config={playerConfig} src="https://cdn.theoplayer.com/video/elephants-dream/playlist.m3u8" />
-
   );
 };
 
