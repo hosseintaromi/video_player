@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Overlay from './Overlay';
+import Overlay from '../general/Overlay';
 
 import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
 import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
-import Icon from '../Icons/Icon';
+import Icon from '../icons/Icon';
 import React from 'react';
 
 

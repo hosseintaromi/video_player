@@ -1,21 +1,21 @@
 import React from "react";
-import { IconsType } from "../@types/player";
-import ArrowRight from "../components/Icons/IconList/ArrowRight";
-import AudioIcon from "../components/Icons/IconList/AudioIcon";
-import ChangeQuality from "../components/Icons/IconList/ChangeQuality";
-import CheckMark from "../components/Icons/IconList/CheckMark";
-import ExitFullScreenIcon from "../components/Icons/IconList/ExitFullScreenIcon";
-import FullScreenIcon from "../components/Icons/IconList/FullScreenIcon";
-import HighVolume from "../components/Icons/IconList/HighVolume";
-import LowVolume from "../components/Icons/IconList/LowVolume";
-import MuteVolume from "../components/Icons/IconList/MuteVolume";
-import PauseIcon from "../components/Icons/IconList/PauseIcon";
-import PictureInPicture from "../components/Icons/IconList/PictureInPicture";
-import PictureOutPicture from "../components/Icons/IconList/PictureOutPicture";
-import PlayIcon from "../components/Icons/IconList/PlayIcon";
-import PlaybackSpeed from "../components/Icons/IconList/PlaybackSpeed";
-import SettingIcon from "../components/Icons/IconList/SettingIcon";
-import Subtitle from "../components/Icons/IconList/Subtitle";
+import { IconsType } from "../@types/player.model";
+import ArrowRight from "../components/icons/icon-list/ArrowRight";
+import AudioIcon from "../components/icons/icon-list/AudioIcon";
+import ChangeQuality from "../components/icons/icon-list/ChangeQuality";
+import CheckMark from "../components/icons/icon-list/CheckMark";
+import ExitFullScreenIcon from "../components/icons/icon-list/ExitFullScreenIcon";
+import FullScreenIcon from "../components/icons/icon-list/FullScreenIcon";
+import HighVolume from "../components/icons/icon-list/HighVolume";
+import LowVolume from "../components/icons/icon-list/LowVolume";
+import MuteVolume from "../components/icons/icon-list/MuteVolume";
+import PauseIcon from "../components/icons/icon-list/PauseIcon";
+import PictureInPicture from "../components/icons/icon-list/PictureInPicture";
+import PictureOutPicture from "../components/icons/icon-list/PictureOutPicture";
+import PlayIcon from "../components/icons/icon-list/PlayIcon";
+import PlaybackSpeed from "../components/icons/icon-list/PlaybackSpeed";
+import SettingIcon from "../components/icons/icon-list/SettingIcon";
+import Subtitle from "../components/icons/icon-list/Subtitle";
 
 export const defaultIcons: IconsType = {
     setting: <SettingIcon />,

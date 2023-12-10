@@ -1,7 +1,7 @@
 import { memo, useRef, useState } from 'react'
-import RangeSelect from '../RangeSelect/RangeSelect';
-import { VolumeWrapper } from './ToolbarStyle';
-import Icon from '../Icons/Icon';
+import RangeSelect from '../general/range-select/RangeSelect';
+import { VolumeWrapper } from '../toolbar/ToolbarStyle';
+import Icon from '../icons/Icon';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import React from 'react';
 

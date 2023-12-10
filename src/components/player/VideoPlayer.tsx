@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
-import PlayerTemplate from './PlayerTemplate';
-import { PlayerObjectType } from '../@types/player';
-import VideoPlayerContext from '../contexts/VideoPlayerContext';
-import PlayerInitializer from './player/PlayerInitializer';
+import PlayerTemplate from '../templates/PlayerTemplate';
+import { PlayerObjectType } from '../../@types/player.model';
+import VideoPlayerContext from '../../contexts/VideoPlayerContext';
+import PlayerInitializer from '../tools/PlayerInitializer';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerObjectType, src?: string }) => {
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
-import { SettingMenu } from '../General/FlexCenter';
+import { SettingMenu } from '../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import { useVideoHls } from '../../hooks/useVideoHls';
-import { MediaPlaylistType } from '../../@types/UseVideoHlsType';
-import Locale from '../Locale/Locale';
-import Icon from '../Icons/Icon';
+import { MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
+import Locale from '../locale/Locale';
+import Icon from '../icons/Icon';
 
 type SettingAudioTrackType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,

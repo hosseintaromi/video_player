@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GenericEvents } from "../@types/player";
+import { GenericEvents } from "../@types/player.model";
 
 export const useContextEvents = <Y extends Record<string, string>, T = any>(
   context: React.Context<T>

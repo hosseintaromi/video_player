@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react'
-import { IconsType } from '../../@types/player'
+import { IconsType } from '../../@types/player.model'
 import { useIcon } from '../../hooks/useIcon'
 import styled from '@emotion/styled'
 import React from 'react'

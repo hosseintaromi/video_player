@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PlayerLocaleType } from '../../@types/player'
+import { PlayerLocaleType } from '../../@types/player.model'
 import { useLocale } from '../../hooks/useLocale'
 
 const Locale = ({ localeKey }: { localeKey: keyof PlayerLocaleType }) => {

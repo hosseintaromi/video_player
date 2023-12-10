@@ -27,6 +27,7 @@ export type PlayerEventsType = {
   onChangeLocale: "onChangeLocale";
   onChangeVolume: "onChangeVolume";
   onChangeMute: "onChangeMute";
+  onReady: "onReady";
 };
 
 export interface PlayerConfigType {
@@ -38,6 +39,7 @@ export interface PlayerConfigType {
   onUpdateBuffer?: (e: OnUpdateTimeType) => void;
   onChangeVolume?: (e: OnUpdateTimeType) => void;
   onChangeMute?: (e: boolean) => void;
+  onReady?: () => void;
   locale?: PlayerLocaleType;
   icons?: IconsType;
   loop?: boolean;
@@ -67,7 +69,7 @@ export type StyleType = {
   dir: "rtl" | "ltr";
   iconColor: string;
   textColor: string;
-  toolBarBg: string;
+  toolbarBg: string;
   settingBg: string;
   rangeFrontBg: string;
   rangeBackBg: string;

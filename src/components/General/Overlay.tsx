@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { pageDir, pageName } from './Setting';
+import { pageDir, pageName } from '../setting/Setting';
 import React from 'react';
 
 

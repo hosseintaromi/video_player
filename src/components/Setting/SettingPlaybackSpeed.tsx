@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import SettingItem from './SettingItem';
-import { SettingMenu } from '../General/FlexCenter';
+import { SettingMenu } from '../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
-import Locale from '../Locale/Locale';
-import Icon from '../Icons/Icon';
+import Locale from '../locale/Locale';
+import Icon from '../icons/Icon';
 
 type settingPlaybackSpeedPropsType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,

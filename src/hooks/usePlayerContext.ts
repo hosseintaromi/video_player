@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
-import { GenericEvents, PlayerEventsType } from "../@types/player";
+import { GenericEvents, PlayerEventsType } from "../@types/player.model";
 import { useContextEvents } from "./useContextEvents";
 import { findBufferIndex } from "../utils/player-utils";
 
@@ -70,6 +70,10 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     if (el) el.currentTime = time;
     checkBuffer(true);
   };
+  const getDuration = () => {
+    const el = getVideoEl();
+    return el?.duration;
+  };
 
   const changePlayPause = (play: boolean) => {
     const videoRef = getVideoEl();
@@ -125,6 +129,9 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     el.onended = () => {
       call.onEnd?.();
     };
+    el.onloadeddata = () => {
+      call.onReady?.();
+    };
     el.ontimeupdate = () => {
       const currentTime = el.currentTime;
 
@@ -159,5 +166,6 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     changeVolume,
     isAutoPlay,
     getHideTime,
+    getDuration,
   };
 };

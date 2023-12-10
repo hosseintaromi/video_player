@@ -1,4 +1,4 @@
-import { PlayerLocaleType } from "../@types/player";
+import { PlayerLocaleType } from "../@types/player.model";
 
 export const defaultLocale: PlayerLocaleType = {
   setting_menu_change_speed_title: "سلام پیش فرض",

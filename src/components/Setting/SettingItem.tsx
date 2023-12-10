@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { FlexCenter } from '../General/FlexCenter'
+import { FlexCenter } from '../general/FlexCenter'
 import styled from '@emotion/styled';
 
 const SettingMenuItem = styled.div({

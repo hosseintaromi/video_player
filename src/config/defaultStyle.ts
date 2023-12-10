@@ -1,4 +1,4 @@
-import { StyleType } from "../@types/player";
+import { StyleType } from "../@types/player.model";
 
 export const defaultStyle: StyleType = {
   bufferBg: "red",
@@ -9,7 +9,7 @@ export const defaultStyle: StyleType = {
   settingBg: "red",
   settingFontSize: "red",
   textColor: "red",
-  toolBarBg: "red",
+  toolbarBg: "red",
   toolbarFontSize: "red",
 };
 

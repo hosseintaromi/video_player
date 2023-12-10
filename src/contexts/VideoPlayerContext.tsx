@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { PlayerContextType } from "../@types/player";
+import { PlayerContextType } from "../@types/player.model";
 
 
 //TODO: how to fix this any

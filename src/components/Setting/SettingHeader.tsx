@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { ReactNode } from 'react'
 import { pageDir, pageName } from './Setting'
-import { FlexCenter } from '../General/FlexCenter'
-import Icon from '../Icons/Icon'
+import { FlexCenter } from '../general/FlexCenter'
+import Icon from '../icons/Icon'
 import React from 'react'
 
 type settingHeaderPropsType = {

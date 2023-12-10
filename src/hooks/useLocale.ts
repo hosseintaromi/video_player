@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
 import { defaultLocale } from "../config/defaultLang";
 import useContextEvents from "./useContextEvents";
-import { PlayerEventsType, PlayerLocaleType } from "../@types/player";
+import { PlayerEventsType, PlayerLocaleType } from "../@types/player.model";
 
 export const useLocale = ({
   onChangeLocale,

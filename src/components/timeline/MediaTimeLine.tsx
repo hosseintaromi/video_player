@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from "react";
-import RangeSelect from "../RangeSelect"
-import { usePlayerContext } from "../../../hooks/usePlayerContext";
-import { OnUpdateTimeType } from "../../../@types/player";
+import RangeSelect from "../general/range-select/RangeSelect"
+import { usePlayerContext } from "../../hooks/usePlayerContext";
+import { OnUpdateTimeType } from "../../@types/player.model";
 import { Bubble, BufferSize, GeneralStyleForRange, ThumbCursor } from "./MediaTimeLineStyle"
 
 type ChangeRangeSelectType = {

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { PlayerConfigType, PlayerObjectType } from "../@types/player";
+import { PlayerConfigType, PlayerObjectType } from "../@types/player.model";
 import { usePlayerContext } from "./usePlayerContext";
 
 export const usePlayer = (playerConfig: PlayerConfigType) => {
