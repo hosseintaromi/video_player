@@ -62,7 +62,7 @@ const Volume = memo(() => {
                     padding: '0 15px',
                     width: volumeVisibility ? '60px' : "0",
                     opacity: volumeVisibility ? '1' : "0",
-                    transition: 'all 0.3s ease 0s'
+                    transition: 'all 0.3s ease 0s',
                 }}>
                 <RangeSelect
                     step={1}

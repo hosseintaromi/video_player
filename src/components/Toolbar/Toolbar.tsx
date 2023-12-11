@@ -9,10 +9,10 @@ import PictureInPicture from '../tools/PictureInPicture';
 import Fullscreen from '../tools/Fullscreen';
 import MediaTimeLine from '../timeline/MediaTimeLine';
 
-const Toolbar = () => {
+const Toolbar = ({ opacity }: { opacity: boolean }) => {
 
     return (
-        <ToolbarWrapper>
+        <ToolbarWrapper opacity={opacity}>
             <MediaTimeLine />
             <SettingItemWrapper>
                 <SettingLeftSection >
