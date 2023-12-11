@@ -22,6 +22,7 @@ export const bounce = keyframes`
 
 export const VideoWrapper = styled.div(({ theme }) => ({
   width: "100%",
+  height: "100%",
   position: "relative",
   overflow: "hidden",
   boxSizing: "border-box",
@@ -33,9 +34,6 @@ export const VideoWrapper = styled.div(({ theme }) => ({
   },
   ":after": {
     boxSizing: "border-box",
-  },
-  " @media (min-width: 600px) ": {
-    height: "100%",
   },
 }));
 
