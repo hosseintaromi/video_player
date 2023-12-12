@@ -8,8 +8,8 @@ export const defaultStyle: StyleType = {
   rangeFrontBg: "#f00",
   settingBg: "red",
   settingFontSize: "red",
-  textColor: "red",
-  toolbarBg: "red",
+  settingTextColor: "red",
+  toolbarBg: "transparent', 'linear-gradient(rgba(0,0,0, .0), rgba(0, 0, 0, .5))",
   toolbarFontSize: "red",
 };
 

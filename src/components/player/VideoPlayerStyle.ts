@@ -138,7 +138,7 @@ export const ToolBarPlayIcon = styled.div({
   height: "100%",
 });
 
-export const Gradient = styled.div({
+export const Gradient = styled.div(({ theme }) => ({
   transition: "opacity .25s cubic-bezier(0,0,.2,1)",
   paddingTop: "37px",
   bottom: 0,
@@ -146,8 +146,8 @@ export const Gradient = styled.div({
   width: "100%",
   position: "absolute",
   pointerEvents: "none",
-  background: ['transparent', 'linear-gradient(rgba(0,0,0, .0), rgba(0, 0, 0, .5))'],
+  background: [`${theme.toolbarBg}`],
   height: '211px',
-},
-  ({ opacity }: { opacity: boolean }) => ({ opacity: opacity ? 0 : 1 })
-)
+}),
+({ opacity }: { opacity: boolean }) => ({ opacity: opacity ? 0 : 1 })
+);

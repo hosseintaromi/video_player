@@ -11,8 +11,8 @@ import Icon from '../icons/Icon';
 import React from 'react';
 
 
-const OverlayContainer = styled.div({
-    backgroundColor: 'rgb(40 40 39 / 60%)',
+export const OverlayContainer = styled.div(({ theme }) => ({
+    backgroundColor: theme.settingBg,
     fontSize: '15px',
     width: '300px',
     borderRadius: '15px',
@@ -24,7 +24,7 @@ const OverlayContainer = styled.div({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-})
+  }));
 
 export enum pageName {
     settingList = 'settingList',
