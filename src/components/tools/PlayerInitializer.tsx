@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import { useVideoHls } from '../../hooks/useVideoHls';
+import { useVideo } from '../../hooks/useVideo';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
 import { useLocale } from '../../hooks/useLocale';
 
 const PlayerInitializer = () => {
-    const { loadHlsVideo } = useVideoHls();
+    const { loadVideo } = useVideo();
     const context = useContext(VideoPlayerContext);
     const { changeLocale } = useLocale({});
 
     useEffect(() => {
-        context.loadVideo = loadHlsVideo;
+        context.loadVideo = loadVideo;
         if (!context.config) {
             return;
         }

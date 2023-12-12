@@ -47,6 +47,7 @@ export interface PlayerConfigType {
   style?: StyleType;
   autoPlay?: boolean;
   timeForHideEl?: number;
+  type: "HLS" | "MP4";
 }
 
 export interface PlayerObjectType {
@@ -59,6 +60,7 @@ export interface PlayerObjectType {
   style?: StyleType;
   autoPlay?: boolean;
   timeForHideEl?: number;
+  type: "HLS" | "MP4";
 }
 
 export type GenericEvents<T extends Record<string, string>> = {

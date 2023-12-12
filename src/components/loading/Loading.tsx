@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 
-const loading = () => {
+const Loading = () => {
     const [showLoading, setShowLoading] = useState<boolean>()
     usePlayerContext({
         onLoading: (isLoading: boolean) => {
-            console.log(isLoading);
             setShowLoading(isLoading)
         }
     })
@@ -14,4 +13,4 @@ const loading = () => {
     )
 }
 
-export default loading
+export default Loading
