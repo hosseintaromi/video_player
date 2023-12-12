@@ -38,6 +38,7 @@ const Demo = ({ length }: DemoProps) => {
 
     autoPlay: true,
     timeForHideEl: 1000,
+    type: 'MP4'
     // icons: {
     //   arrow: <p>hello</p>,
     //   audioTrack: <p>hello</p>,
@@ -58,7 +59,7 @@ const Demo = ({ length }: DemoProps) => {
     // }
   })
   return (
-    <VideoPlayer config={playerConfig} src="https://cdn.theoplayer.com/video/elephants-dream/playlist.m3u8" />
+    <VideoPlayer config={playerConfig} src="https://file-examples.com/storage/fed2530f4765780b09aff74/2017/04/file_example_MP4_1280_10MG.mp4" />
   );
 };
 

@@ -7,15 +7,35 @@ const isSupportedPlatform = Hls.isSupported();
 export interface HlsVideoEventType {
   onLoaded?: () => void;
 }
-export const useVideoHls = (events?: HlsVideoEventType) => {
+export const useVideo = (events?: HlsVideoEventType) => {
   const context = useContext(VideoPlayerContext);
+
+  const loadVideo = useCallback((src: string) => {
+    if (context.config?.type === "HLS") {
+      loadHlsVideo(src);
+    } else {
+      loadMP4Video(src);
+    }
+  }, []);
+
+  const loadMP4Video = useCallback((src: string) => {
+    const videoEl = context.getVideoRef();
+    if (!videoEl) return;
+    videoEl.src = src;
+    videoEl.load();
+    videoEl.onloadeddata = () => {
+      context.listenOnLoad.forEach((listener) => {
+        listener();
+      });
+    };
+  }, []);
 
   const loadHlsVideo = useCallback((src: string) => {
     const videoEl = context.getVideoRef();
     if (!videoEl) return;
-    const hls = context.hls = new Hls({
-      enableWorker: false
-    });
+    const hls = (context.hls = new Hls({
+      enableWorker: false,
+    }));
 
     hls.attachMedia(videoEl);
 
@@ -28,21 +48,24 @@ export const useVideoHls = (events?: HlsVideoEventType) => {
     });
 
     hls.on(Hls.Events.LEVEL_LOADED, () => {
-      context.listenOnLoad.forEach((listener) => { listener() })
+      context.listenOnLoad.forEach((listener) => {
+        listener();
+      });
     });
-
-  }, [])
+  }, []);
 
   const getLevels = () => {
     return context.hls?.levels;
   };
   const getCurrentLevel = () => {
-    return { currentLevel: context.hls?.currentLevel, isAuto: context.hls?.autoLevelEnabled }
-  }
+    return {
+      currentLevel: context.hls?.currentLevel,
+      isAuto: context.hls?.autoLevelEnabled,
+    };
+  };
   const changeLevel = (index: number) => {
-    if (context.hls)
-      context.hls.currentLevel = index;
-  }
+    if (context.hls) context.hls.currentLevel = index;
+  };
 
   const getSubtitle = () => {
     return context.hls?.subtitleTracks;
@@ -51,28 +74,25 @@ export const useVideoHls = (events?: HlsVideoEventType) => {
     return context.hls?.subtitleTrack;
   };
   const changeSubtitle = (index: number) => {
-    if (context.hls)
-      context.hls.subtitleTrack = index;
+    if (context.hls) context.hls.subtitleTrack = index;
   };
 
   const getAudioTracks = () => {
-    return context.hls?.audioTracks
-  }
+    return context.hls?.audioTracks;
+  };
   const getAudioTrack = () => {
-    return context.hls?.audioTrack
-  }
+    return context.hls?.audioTrack;
+  };
   const changeAudioTrack = (index: number) => {
-    if (context.hls)
-      context.hls.audioTrack = index;
+    if (context.hls) context.hls.audioTrack = index;
   };
 
   useEffect(() => {
-    if (events?.onLoaded)
-      context.listenOnLoad.push(events?.onLoaded)
-  }, [])
+    if (events?.onLoaded) context.listenOnLoad.push(events?.onLoaded);
+  }, []);
 
   return {
-    loadHlsVideo,
+    loadVideo,
     getLevels,
     getCurrentLevel,
     changeLevel,
@@ -81,6 +101,6 @@ export const useVideoHls = (events?: HlsVideoEventType) => {
     changeSubtitle,
     getAudioTracks,
     getAudioTrack,
-    changeAudioTrack
+    changeAudioTrack,
   };
 };

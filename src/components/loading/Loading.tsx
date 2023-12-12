@@ -5,7 +5,6 @@ const Loading = () => {
     const [showLoading, setShowLoading] = useState<boolean>()
     usePlayerContext({
         onLoading: (isLoading: boolean) => {
-            console.log(isLoading);
             setShowLoading(isLoading)
         }
     })
