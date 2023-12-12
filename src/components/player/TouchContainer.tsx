@@ -22,19 +22,18 @@ const TouchContainer = ({ children, onShow }: { children: ReactNode, onShow: (sh
     }
 
     const hideWithDelay = () => {
+        const setting_menu = document.getElementById("setting-menu");
         if (!isPlay.current)
             return
-
         if (timeOutRef.current) {
             clearTimeout(timeOutRef.current);
             timeOutRef.current = undefined
         }
-
         showHandler(true)
-
         timeOutRef.current = setTimeout(() => {
-            if (isPlay.current)
+            if (isPlay.current && !setting_menu) {
                 showHandler(false)
+            }
         }, getHideTime())
 
     };
