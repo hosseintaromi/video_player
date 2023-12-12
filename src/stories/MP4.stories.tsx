@@ -64,7 +64,7 @@ const Demo = ({ length }: DemoProps) => {
 };
 
 const meta: Meta = {
-  title: 'useRandomId',
+  title: 'mp4',
   component: Demo,
   argTypes: {
     length: {
