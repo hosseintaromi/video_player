@@ -36,7 +36,7 @@ export interface PlayerConfigType {
   onEnd?: (e: OnUpdateTimeType) => void;
   onLoading?: (e: OnUpdateTimeType) => void;
   onPlayPause?: (e: OnUpdateTimeType) => void;
-  onUpdateBuffer?: (e: OnUpdateTimeType) => void;
+  onUpdateBuffer?: (e: number) => void;
   onChangeVolume?: (e: OnUpdateTimeType) => void;
   onChangeMute?: (e: boolean) => void;
   onReady?: () => void;

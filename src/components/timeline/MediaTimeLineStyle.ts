@@ -17,7 +17,7 @@ export const GeneralStyleForRange = styled.div({
 });
 export const BufferSize = styled.div({
   width: "0%",
-  height: "8px",
+  height: "4px",
   background: "rgba(165, 165, 165, 1)",
   borderRadius: "3px",
   position: "absolute",
