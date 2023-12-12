@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { ThemeProvider } from '@emotion/react'
 import Video from '../player/Video'
 import { useStyle } from '../../hooks/useStyle'
@@ -12,20 +12,28 @@ import Loading from '../loading/Loading'
 const PlayerTemplate = () => {
     const { style } = useStyle()
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
-
+    const [isPlay, setIsPlay] = useState<boolean>(false)
+    usePlayerContext({
+        onPlayPause: (playStatus: boolean) => {
+            setIsPlay(true)
+            setTimeout(() => {
+                setIsPlay(false)
+            }, 450);
+        }
+    })
     return (
         <ThemeProvider theme={style}>
-            <TouchContainer onShow={(show: boolean) => { setIsFadeOut(false) }} >
-                <VideoWrapper id="video_wrapper_id">
-                    <PlayIconWrapper>
-                        <Play />
-                    </PlayIconWrapper>
-                    <Loading />
+            <VideoWrapper id="video_wrapper_id">
+                <PlayIconWrapper isClicked={isPlay}>
+                    <Play />
+                </PlayIconWrapper>
+                <Loading />
+                <TouchContainer onShow={(show: boolean) => { setIsFadeOut(!show) }} >
                     <Video />
-                    <Gradient opacity={isFadeOut} />
-                    <Toolbar opacity={isFadeOut} />
-                </VideoWrapper>
-            </TouchContainer>
+                </TouchContainer>
+                <Gradient isFaded={isFadeOut} />
+                <Toolbar isFaded={isFadeOut} />
+            </VideoWrapper>
         </ThemeProvider>
     )
 }

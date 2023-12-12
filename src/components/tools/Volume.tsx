@@ -12,7 +12,7 @@ type ChangeRangeSelectType = {
 const RangeSelectWrapper = styled.div({
     transition: 'margin .2s cubic-bezier(0,0,.2,1),width .2s cubic-bezier(0,0,.2,1)',
 },
-    ({ opacity, width }: { opacity: boolean, width: boolean }) => ({ opacity: opacity ? 1 : 0, width: width ? '60px' : '0', marginRight: width ? '10px !important' : '0 !important' })
+    ({ visible }: { visible: boolean }) => ({ opacity: visible ? 1 : 0, width: visible ? '60px' : '0', marginRight: visible ? '10px !important' : '0 !important' })
 )
 const Volume = memo(() => {
     const { changeVolume, changeMute } = usePlayerContext({
@@ -62,7 +62,7 @@ const Volume = memo(() => {
             onMouseEnter={() => setVolumeVisibility(true)}
             onMouseLeave={() => setVolumeVisibility(false)}>
             {calcVolumeIcon()}
-            <RangeSelectWrapper opacity={volumeVisibility} width={volumeVisibility}>
+            <RangeSelectWrapper visible={volumeVisibility}>
                 <RangeSelect
                     step={1}
                     min={0}

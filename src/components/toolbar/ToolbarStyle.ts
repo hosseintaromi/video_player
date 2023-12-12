@@ -7,7 +7,7 @@ export const ToolbarWrapper = styled.div({
   left: "0.75rem",
   right: "0.75rem",
 },
-  ({ opacity }: { opacity: boolean }) => ({ opacity: opacity ? 0 : 1 }));
+  ({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 }));
 
 export const SettingRightSection = styled.div({
   display: "flex",

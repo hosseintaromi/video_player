@@ -2,14 +2,19 @@ import React, { ReactNode } from 'react'
 import { FlexCenter } from '../general/FlexCenter'
 import styled from '@emotion/styled';
 
-const SettingMenuItem = styled.div({
+export const SettingMenuItem = styled.div(({ theme }) => ({
     display: 'flex',
     justifyContent: "space-between",
     padding: '10px',
+    cursor: 'pointer',
     '&:hover': {
-        backgroundColor: 'rgb(40 40 39 / 60%)',
+        backgroundColor: theme.settingBgHover,
     }
-});
+}));
+
+const SettingItemSpan = styled.span({
+    paddingLeft: '8px',
+})
 type settingItemProps = {
     children?: JSX.Element[] | JSX.Element,
     startIcon: JSX.Element | null,
@@ -21,9 +26,9 @@ const SettingItem = ({ children, startIcon, content, onClick }: settingItemProps
         <SettingMenuItem onClick={onClick}>
             <FlexCenter>
                 {startIcon ? startIcon : <></>}
-                <span>
+                <SettingItemSpan>
                     {content}
-                </span>
+                </SettingItemSpan>
             </FlexCenter>
             {
                 children &&

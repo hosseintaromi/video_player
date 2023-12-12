@@ -7,11 +7,14 @@ import CheckMark from '../icons/icon-list/CheckMark';
 import { useVideo } from '../../hooks/useVideo';
 import { MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
 import Locale from '../locale/Locale';
+import styled from '@emotion/styled';
 
 type SettingSubtitleType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
 }
+
+const SettingItemWrapper = styled.span({})
 
 const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
     const [currentSubtitle, setCurrentSubtitle] = useState<number | undefined>()
@@ -53,14 +56,14 @@ const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
                 changePage={changePage}
                 backRoute={pageName.settingList}
             />
-            <div>
+            <SettingItemWrapper>
                 <SettingItem
                     onClick={() => setSubtitle(-1)}
                     startIcon={currentSubtitle === -1 ? < CheckMark /> : null}
                     content={<Locale localeKey="setting_menu_subtitle_off" />}
                 />
                 {subtitleListGenerator()}
-            </div>
+            </SettingItemWrapper>
 
         </SettingMenu>
     )

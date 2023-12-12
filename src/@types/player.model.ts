@@ -73,6 +73,7 @@ export type StyleType = {
   settingTextColor: string;
   toolbarBg: string;
   settingBg: string;
+  settingBgHover: string;
   rangeFrontBg: string;
   rangeBackBg: string;
   bufferBg: string;
