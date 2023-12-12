@@ -96,7 +96,7 @@ const Setting = () => {
                 <div style={{ color: "#ffffff", cursor: "pointer" }} data-toggler>
                     <Icon type='setting' />
                 </div>
-                <OverlayContainer data-content>
+                <OverlayContainer data-content id='setting-menu'>
                     <SettingList
                         myRef={settingListRef}
                         changePage={changePage}
