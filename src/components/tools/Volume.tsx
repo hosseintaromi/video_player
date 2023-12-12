@@ -4,11 +4,16 @@ import { VolumeWrapper } from '../toolbar/ToolbarStyle';
 import Icon from '../icons/Icon';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import React from 'react';
+import styled from '@emotion/styled';
 
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
 };
-
+const RangeSelectWrapper = styled.div({
+    transition: 'margin .2s cubic-bezier(0,0,.2,1),width .2s cubic-bezier(0,0,.2,1)',
+},
+    ({ opacity, width }: { opacity: boolean, width: boolean }) => ({ opacity: opacity ? 1 : 0, width: width ? '60px' : '0', marginRight: width ? '10px !important' : '0 !important' })
+)
 const Volume = memo(() => {
     const { changeVolume, changeMute } = usePlayerContext({
         onChangeVolume: (e) => {
@@ -38,32 +43,26 @@ const Volume = memo(() => {
     const calcVolumeIcon = () => {
         if (volume <= 1 || isMute) {
             return (
-                <Icon type='mute' onClick={() => mute()} />
+                <Icon isClickable={true} type='mute' onClick={() => mute()} />
             )
         } else {
             if (volume >= 66)
                 return (
-                    <Icon type='volumeUp' onClick={() => mute()} />
+                    <Icon isClickable={true} type='volumeUp' onClick={() => mute()} />
                 )
             else if (volume < 66 && volume >= 1)
                 return (
-                    <Icon type='volumeDown' onClick={() => mute()} />
+                    <Icon isClickable={true} type='volumeDown' onClick={() => mute()} />
                 )
         }
 
     }
     return (
-        <VolumeWrapper
+        <VolumeWrapper gap={volumeVisibility}
             onMouseEnter={() => setVolumeVisibility(true)}
             onMouseLeave={() => setVolumeVisibility(false)}>
             {calcVolumeIcon()}
-            <div
-                style={{
-                    padding: '0 15px',
-                    width: volumeVisibility ? '60px' : "0",
-                    opacity: volumeVisibility ? '1' : "0",
-                    transition: 'all 0.3s ease 0s',
-                }}>
+            <RangeSelectWrapper opacity={volumeVisibility} width={volumeVisibility}>
                 <RangeSelect
                     step={1}
                     min={0}
@@ -71,7 +70,7 @@ const Volume = memo(() => {
                     controllerRef={controllerRef}
                     onChangeCallback={changeVol}
                 />
-            </div>
+            </RangeSelectWrapper>
         </VolumeWrapper>
     )
 })

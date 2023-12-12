@@ -13,10 +13,7 @@ const PictureInPicture = () => {
     }
 
     return (
-        <div style={{ color: "#ffffff", cursor: "pointer" }}>
-            <Icon type='picInPic' onClick={togglePictureInPicture} />
-        </div>
-
+        <Icon isClickable={true} type='picInPic' onClick={togglePictureInPicture} />
     )
 }
 
