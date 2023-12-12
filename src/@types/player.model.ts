@@ -34,9 +34,9 @@ export interface PlayerConfigType {
   onUpdateTime?: (e: OnUpdateTimeType) => void;
   // FIXME: we should fix this types
   onEnd?: (e: OnUpdateTimeType) => void;
-  onLoading?: (e: OnUpdateTimeType) => void;
+  onLoading?: (e: boolean) => void;
   onPlayPause?: (e: OnUpdateTimeType) => void;
-  onUpdateBuffer?: (e: OnUpdateTimeType) => void;
+  onUpdateBuffer?: (e: number) => void;
   onChangeVolume?: (e: OnUpdateTimeType) => void;
   onChangeMute?: (e: boolean) => void;
   onReady?: () => void;
@@ -47,6 +47,7 @@ export interface PlayerConfigType {
   style?: StyleType;
   autoPlay?: boolean;
   timeForHideEl?: number;
+  type: "HLS" | "MP4";
 }
 
 export interface PlayerObjectType {
@@ -59,6 +60,7 @@ export interface PlayerObjectType {
   style?: StyleType;
   autoPlay?: boolean;
   timeForHideEl?: number;
+  type: "HLS" | "MP4";
 }
 
 export type GenericEvents<T extends Record<string, string>> = {

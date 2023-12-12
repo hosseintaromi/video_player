@@ -7,6 +7,7 @@ import { usePlayerContext } from '../../hooks/usePlayerContext'
 import Toolbar from '../toolbar/Toolbar'
 import TouchContainer from '../player/TouchContainer'
 import Play from '../tools/Play'
+import Loading from '../loading/Loading'
 
 const PlayerTemplate = () => {
     const { style } = useStyle()
@@ -19,6 +20,7 @@ const PlayerTemplate = () => {
                     <PlayIconWrapper>
                         <Play />
                     </PlayIconWrapper>
+                    <Loading />
                     <Video />
                     <Gradient opacity={isFadeOut} />
                     <Toolbar opacity={isFadeOut} />

@@ -11,6 +11,7 @@ export const usePlayer = (playerConfig: PlayerConfigType) => {
     icons: playerConfig.icons,
     style: playerConfig.style,
     autoPlay: playerConfig.autoPlay,
+    type: playerConfig.type,
   };
 
   usePlayerContext({
