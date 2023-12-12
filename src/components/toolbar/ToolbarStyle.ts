@@ -4,9 +4,10 @@ export const ToolbarWrapper = styled.div({
   position: "absolute",
   zIndex: "100",
   bottom: "0",
-  width: "100%",
-  background: "gray",
-});
+  left: "0.75rem",
+  right: "0.75rem",
+},
+({opacity}: {opacity:boolean}) => ({ opacity: opacity ? 0 : 1 }));
 
 export const SettingRightSection = styled.div({
   display: "flex",
@@ -37,4 +38,6 @@ export const VolumeWrapper = styled.div({
   justifyContent: "center",
   alignItems: "center",
   height: "100%",
+  cursor: "pointer",
+  color: "#ffffff"
 });

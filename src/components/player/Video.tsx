@@ -4,7 +4,9 @@ import styled from '@emotion/styled'
 
 const VideoTag = styled.video({
     width: "100%",
-    display: 'block'
+    height: "100%",
+    display: 'block',
+    backgroundColor: '#000'
 });
 const Video = () => {
     const { setVideoRef, isAutoPlay: getAutoPlay } = usePlayerContext()

@@ -29,7 +29,7 @@ export const Thumb = styled.div({
   border: "solid 3px #f00",
   borderRadius: "50%",
   zIndex: "4",
-  marginTop: "-6px",
+  marginTop: "-5px",
 });
 
 export const TimeLine = styled.div({
@@ -45,6 +45,7 @@ export const TimeLine = styled.div({
 });
 
 export const Slider = styled.input({
+  cursor: "pointer",
   width: "100%",
   "-webkit-appearance": "none",
   zIndex: "5",

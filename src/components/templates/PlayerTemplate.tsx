@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ThemeProvider } from '@emotion/react'
 import Video from '../player/Video'
 import { useStyle } from '../../hooks/useStyle'
-import { PlayIconWrapper, VideoWrapper } from '../player/VideoPlayerStyle'
+import { Gradient, PlayIconWrapper, VideoWrapper } from '../player/VideoPlayerStyle'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 import Toolbar from '../toolbar/Toolbar'
 import TouchContainer from '../player/TouchContainer'
@@ -20,9 +20,8 @@ const PlayerTemplate = () => {
                         <Play />
                     </PlayIconWrapper>
                     <Video />
-                    <div style={{ display: isFadeOut ? 'none' : 'block' }}>
-                        <Toolbar />
-                    </div>
+                    <Gradient opacity={isFadeOut} />
+                    <Toolbar opacity={isFadeOut} />
                 </VideoWrapper>
             </TouchContainer>
         </ThemeProvider>

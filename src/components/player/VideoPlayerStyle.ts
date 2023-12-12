@@ -22,6 +22,7 @@ export const bounce = keyframes`
 
 export const VideoWrapper = styled.div(({ theme }) => ({
   width: "100%",
+  height: "100%",
   position: "relative",
   overflow: "hidden",
   boxSizing: "border-box",
@@ -33,9 +34,6 @@ export const VideoWrapper = styled.div(({ theme }) => ({
   },
   ":after": {
     boxSizing: "border-box",
-  },
-  " @media (min-width: 600px) ": {
-    height: "100%",
   },
 }));
 
@@ -67,6 +65,18 @@ export const PlayIconWrapper = styled.div({
   left: "50%",
   transform: "translate(-50%, -50%)",
   zIndex: "300",
+  color: '#ffffff',
+  cursor: 'pointer',
+  background: 'rgba(0,0,0,.5)',
+  borderRadius: '26px',
+  animation: `${bounce} .5s linear 1 normal forwards`,
+  pointerEvents: 'none',
+  width: '52px',
+  height: '52px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: '40px',
 });
 
 export const TopRightWrapper = styled.div({
@@ -110,7 +120,6 @@ export const ToolBarWrapper = styled.div({
   fontSize: "25px",
   padding: "0 15px",
   zIndex: "2",
-
   background:
     "linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(0,0,0,0.6012780112044818) 78%)",
 });
@@ -120,4 +129,20 @@ export const ToolBarPlayIcon = styled.div({
   justifyContent: "center",
   alignItems: "center",
   paddingRight: "10px",
+  color: "#ffffff",
+  cursor: "pointer"
 });
+
+export const Gradient = styled.div({
+  transition: "opacity .25s cubic-bezier(0,0,.2,1)",
+  paddingTop: "37px",
+  bottom: 0,
+  zIndex: 24,
+  width: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  background: ['transparent', 'linear-gradient(rgba(0,0,0, .0), rgba(0, 0, 0, .5))'],
+  height: '211px',
+},
+  ({ opacity }: { opacity: boolean }) => ({ opacity: opacity ? 0 : 1 })
+)

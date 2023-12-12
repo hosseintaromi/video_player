@@ -93,7 +93,7 @@ const Setting = () => {
     return (
         <>
             <Overlay openSetting={changePage}>
-                <div data-toggler>
+                <div style={{ color: "#ffffff", cursor: "pointer" }} data-toggler>
                     <Icon type='setting' />
                 </div>
                 <OverlayContainer data-content id='setting-menu'>
