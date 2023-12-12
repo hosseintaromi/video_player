@@ -13,14 +13,12 @@ const Fullscreen = () => {
     }, video_wrapper_id, video_player);
 
     return (
-        <div style={{ color: "#ffffff", cursor: "pointer" }}>
-            <Icon onClick={() => toggleFullscreen()} type={!isFullscreen ?
-                "fullScreen"
-                :
-                "unFullScreen"
-            }
-            />
-        </div>
+        <Icon isClickable={true} onClick={() => toggleFullscreen()} type={!isFullscreen ?
+            "fullScreen"
+            :
+            "unFullScreen"
+        }
+        />
     )
 }
 
