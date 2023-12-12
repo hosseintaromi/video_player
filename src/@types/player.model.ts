@@ -34,7 +34,7 @@ export interface PlayerConfigType {
   onUpdateTime?: (e: OnUpdateTimeType) => void;
   // FIXME: we should fix this types
   onEnd?: (e: OnUpdateTimeType) => void;
-  onLoading?: (e: OnUpdateTimeType) => void;
+  onLoading?: (e: boolean) => void;
   onPlayPause?: (e: OnUpdateTimeType) => void;
   onUpdateBuffer?: (e: number) => void;
   onChangeVolume?: (e: OnUpdateTimeType) => void;
