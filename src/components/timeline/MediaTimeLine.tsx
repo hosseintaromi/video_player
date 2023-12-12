@@ -26,12 +26,18 @@ const TimeLine = () => {
             duration = e.duration
             percentage = e.percentage;
             controllerRef.current.calcInputVal(percentage, false)
+        },
+        onUpdateBuffer: (e: number) => {
+            const buffer_size = document.getElementById("buffer-size");
+            if (buffer_size)
+                buffer_size.style.width = `${JSON.stringify(Math.round(e))}%`
         }
     })
 
     const rangeSelectChangeVideoTime = useCallback((e: number) => {
         changeTime((e * duration) / 100)
     }, [])
+
 
     const setBubble = (
         e: React.MouseEvent<HTMLInputElement, MouseEvent>,
@@ -97,6 +103,7 @@ const TimeLine = () => {
                 min={0}
                 step={1}
                 controllerRef={controllerRef}
+
                 onChangeCallback={rangeSelectChangeVideoTime}
                 onMouseMove={(e: any) => {
                     setBubble(e, "hover");
@@ -112,7 +119,7 @@ const TimeLine = () => {
                 />
             </Bubble>
             <ThumbCursor ref={snapShotBoxCursor} />
-            <BufferSize id="bufferSize" />
+            <BufferSize id="buffer-size" />
         </GeneralStyleForRange>
     )
 }
