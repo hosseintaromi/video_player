@@ -15,7 +15,7 @@ const PlayerTemplate = () => {
 
     return (
         <ThemeProvider theme={style}>
-            <TouchContainer onShow={(show: boolean) => { setIsFadeOut(!show) }} >
+            <TouchContainer onShow={(show: boolean) => { setIsFadeOut(false) }} >
                 <VideoWrapper id="video_wrapper_id">
                     <PlayIconWrapper>
                         <Play />

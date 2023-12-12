@@ -93,9 +93,7 @@ const Setting = () => {
     return (
         <>
             <Overlay openSetting={changePage}>
-                <div style={{ color: "#ffffff", cursor: "pointer" }} data-toggler>
-                    <Icon type='setting' />
-                </div>
+                <Icon type='setting' isClickable={true} data-toggler/>
                 <OverlayContainer data-content id='setting-menu'>
                     <SettingList
                         myRef={settingListRef}

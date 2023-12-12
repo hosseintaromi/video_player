@@ -15,17 +15,17 @@ export const GeneralStyleForRange = styled.div({
   width: "100%",
   marginTop: "6px",
 });
-export const BufferSize = styled.div({
+export const BufferSize = styled.span(({ theme }) => ({
   width: "0%",
-  height: "4px",
-  background: "rgba(165, 165, 165, 1)",
+  height: "3px",
   borderRadius: "3px",
   position: "absolute",
   top: "50%",
   marginTop: "-4px",
   left: "0",
   zIndex: "2",
-});
+  background: theme.bufferBg,
+}));
 export const Bubble = styled.output({
   color: "white",
   padding: "4px",

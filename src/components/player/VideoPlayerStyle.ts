@@ -65,8 +65,6 @@ export const PlayIconWrapper = styled.div({
   left: "50%",
   transform: "translate(-50%, -50%)",
   zIndex: "300",
-  color: '#ffffff',
-  cursor: 'pointer',
   background: 'rgba(0,0,0,.5)',
   borderRadius: '26px',
   animation: `${bounce} .5s linear 1 normal forwards`,
@@ -116,7 +114,6 @@ export const ToolBarWrapper = styled.div({
   height: "20%",
   width: "100%",
   maxHeight: "70px",
-  color: "#fff",
   fontSize: "25px",
   padding: "0 15px",
   zIndex: "2",
@@ -128,9 +125,7 @@ export const ToolBarPlayIcon = styled.div({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  paddingRight: "10px",
-  color: "#ffffff",
-  cursor: "pointer"
+  height: "100%",
 });
 
 export const Gradient = styled.div({
