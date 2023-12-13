@@ -36,7 +36,7 @@ const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetti
     }, []);
 
     return (
-        <Wrapper ref={overlayContentRef}>
+        <Wrapper className='setting' ref={overlayContentRef}>
             <div onClick={toggle}>
                 {Toggler}
             </div>

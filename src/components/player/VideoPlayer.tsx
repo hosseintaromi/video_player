@@ -3,6 +3,7 @@ import PlayerTemplate from '../templates/PlayerTemplate';
 import { PlayerObjectType } from '../../@types/player.model';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
 import PlayerInitializer from '../tools/PlayerInitializer';
+import MobilePlayerTemplate from '../templates/MobilePlayerTemplate';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerObjectType, src?: string }) => {
 
@@ -37,7 +38,7 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
             listenOnLoad: listenOnLoad.current,
 
         }}>
-            {children ? children : <PlayerTemplate />}
+            {children ? children : <MobilePlayerTemplate />}
             <PlayerInitializer />
         </VideoPlayerContext.Provider>
     )
