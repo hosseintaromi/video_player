@@ -31,7 +31,7 @@ const SettingHeader = ({ title, hasCustomButton, hasBackButton, changePage }: se
         <SettingHeaderWrapper>
             {hasBackButton && <div onClick={() => changePage(pageName.settingList, pageDir.back)}>
                 <FlexCenter >
-                    <Icon type="arrow" />
+                    <Icon isClickable={true} type="arrow" />
                     <span>
                         {title}
                     </span>

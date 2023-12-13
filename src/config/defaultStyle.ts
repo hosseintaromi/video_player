@@ -6,10 +6,11 @@ export const defaultStyle: StyleType = {
   iconColor: "#ffffff",
   rangeBackBg: "rgba(255,255,255,.2)",
   rangeFrontBg: "#f00",
-  settingBg: "red",
+  settingBg: "rgba(28,28,28,.9)",
+  settingBgHover: "rgb(40 40 39 / 60%)",
   settingFontSize: "red",
-  textColor: "red",
-  toolbarBg: "red",
+  settingTextColor: "#eee",
+  toolbarBg: "linear-gradient(rgba(0,0,0, .0), rgba(0, 0, 0, .5))",
   toolbarFontSize: "red",
 };
 

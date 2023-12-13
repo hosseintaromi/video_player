@@ -36,14 +36,12 @@ const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetti
     }, []);
 
     return (
-        <div ref={overlayContentRef}>
-            <Wrapper>
-                <div onClick={toggle}>
-                    {Toggler}
-                </div>
-                {overlayVisible && <>{Content}</>}
-            </Wrapper>
-        </div>
+        <Wrapper ref={overlayContentRef}>
+            <div onClick={toggle}>
+                {Toggler}
+            </div>
+            {overlayVisible && <>{Content}</>}
+        </Wrapper>
     )
 }
 

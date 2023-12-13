@@ -70,9 +70,10 @@ export type GenericEvents<T extends Record<string, string>> = {
 export type StyleType = {
   dir: "rtl" | "ltr";
   iconColor: string;
-  textColor: string;
+  settingTextColor: string;
   toolbarBg: string;
   settingBg: string;
+  settingBgHover: string;
   rangeFrontBg: string;
   rangeBackBg: string;
   bufferBg: string;

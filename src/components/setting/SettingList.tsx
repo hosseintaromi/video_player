@@ -7,12 +7,17 @@ import Locale from '../locale/Locale';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import { LevelType, MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
 import Icon from '../icons/Icon';
+import styled from '@emotion/styled';
 
 type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>
     currentPage?: HTMLDivElement | null | undefined
 }
+
+const SettingItemArrowSpan = styled.span({
+    paddingRight: '6px'
+})
 
 const SettingList = ({
     changePage,
@@ -64,37 +69,37 @@ const SettingList = ({
     return (
         <SettingMenu myRef={myRef}>
             <div onClick={() => { loadLevels(); changePage(pageName.playbackSpeed, pageDir.forward) }}>
-                <SettingItem startIcon={<Icon type='speed' />} content={<Locale localeKey="setting_menu_change_speed_title" />} >
-                    <span>
+                <SettingItem startIcon={<Icon isClickable={true} type='speed' />} content={<Locale localeKey="setting_menu_change_speed_title" />} >
+                    <SettingItemArrowSpan>
                         {currentPlayBackSpeed}
-                    </span>
-                    <Icon type="arrow" />
+                    </SettingItemArrowSpan>
+                    <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
             <div onClick={() => { loadLevels(); changePage(pageName.quality, pageDir.forward) }}>
-                <SettingItem startIcon={<Icon type='quality' />} content={<Locale localeKey="setting_menu_change_quality_title" />}>
-                    <span>
+                <SettingItem startIcon={<Icon isClickable={true} type='quality' />} content={<Locale localeKey="setting_menu_change_quality_title" />}>
+                    <SettingItemArrowSpan>
                         {
                             currentLevel === -1 ? <Locale localeKey="setting_menu_quality_active_list" /> : currentLevels?.[currentLevel]?.height
                         }
-                    </span>
-                    <Icon type="arrow" />
+                    </SettingItemArrowSpan>
+                    <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
             <div onClick={() => { loadLevels(); changePage(pageName.subtitle, pageDir.forward) }}>
-                <SettingItem startIcon={<Icon type='subtitle' />} content={<Locale localeKey="setting_menu_change_subtitle" />}>
-                    <span>
+                <SettingItem startIcon={<Icon isClickable={true} type='subtitle' />} content={<Locale localeKey="setting_menu_change_subtitle" />}>
+                    <SettingItemArrowSpan>
                         {currentSubtitle}
-                    </span>
-                    <Icon type="arrow" />
+                    </SettingItemArrowSpan>
+                    <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
             <div onClick={() => { loadLevels(); changePage(pageName.audioTrack, pageDir.forward) }}>
-                <SettingItem startIcon={<Icon type='audioTrack' />} content={<Locale localeKey="setting_menu_change_audio_track_title" />}>
-                    <span>
+                <SettingItem startIcon={<Icon isClickable={true} type='audioTrack' />} content={<Locale localeKey="setting_menu_change_audio_track_title" />}>
+                    <SettingItemArrowSpan>
                         {currentAudioTrack}
-                    </span>
-                    <Icon type="arrow" />
+                    </SettingItemArrowSpan>
+                    <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
         </SettingMenu>

@@ -14,11 +14,21 @@ export const bounce = keyframes`
   
   to {
     opacity: 0;
-    -webkit-transform: scale(2);
-    -o-transform: scale(2);
-    transform: scale(2)
+    -webkit-transform: translate(-50%, -50%) scale(2);
+    -o-transform: translate(-50%, -50%) scale(2);
+    transform: translate(-50%, -50%) scale(2)
   }
   `;
+
+export const ring = keyframes`
+
+from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}`
 
 export const VideoWrapper = styled.div(({ theme }) => ({
   width: "100%",
@@ -50,8 +60,6 @@ export const Button = styled.button<ButtonPropsType>((props) => ({
   borderRadius: "50%",
   color: "white",
   padding: "20px",
-  // animation: `${!props.animation ? `${bounce} 0.45s ease` : ""}`,
-  // transformOrigin: "center",
   display: `${props.animation ? "none" : "block"}`,
   "img,svg": {
     width: "50px",
@@ -67,7 +75,6 @@ export const PlayIconWrapper = styled.div({
   zIndex: "300",
   background: 'rgba(0,0,0,.5)',
   borderRadius: '26px',
-  animation: `${bounce} .5s linear 1 normal forwards`,
   pointerEvents: 'none',
   width: '52px',
   height: '52px',
@@ -75,7 +82,8 @@ export const PlayIconWrapper = styled.div({
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: '40px',
-});
+},
+({ isClicked }: { isClicked: boolean }) => ({ animation: isClicked ? `${bounce} .5s linear 1 normal forwards` : 'none',  opacity: isClicked ? 1 : 0 }));
 
 export const TopRightWrapper = styled.div({
   zIndex: "4",
@@ -128,7 +136,7 @@ export const ToolBarPlayIcon = styled.div({
   height: "100%",
 });
 
-export const Gradient = styled.div({
+export const Gradient = styled.div(({ theme }) => ({
   transition: "opacity .25s cubic-bezier(0,0,.2,1)",
   paddingTop: "37px",
   bottom: 0,
@@ -136,8 +144,8 @@ export const Gradient = styled.div({
   width: "100%",
   position: "absolute",
   pointerEvents: "none",
-  background: ['transparent', 'linear-gradient(rgba(0,0,0, .0), rgba(0, 0, 0, .5))'],
+  background: `${theme.toolbarBg}`,
   height: '211px',
-},
-  ({ opacity }: { opacity: boolean }) => ({ opacity: opacity ? 0 : 1 })
-)
+}),
+({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
+);
