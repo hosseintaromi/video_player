@@ -2,7 +2,9 @@ import React from 'react'
 
 const PlayIcon = () => {
     return (
-        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path></svg>
+        <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.55134 13.822L10.6073 7.69969C11.1309 7.34984 11.1309 6.65016 10.6073 6.30031L1.55134 0.178032C0.911415 -0.259274 0 0.160539 0 0.87772V13.1223C0 13.8395 0.911415 14.2593 1.55134 13.822Z" fill="white" />
+        </svg>
     )
 }
 
