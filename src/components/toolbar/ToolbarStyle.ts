@@ -44,4 +44,42 @@ export const VolumeWrapper = styled.div({
   alignItems: "center",
   height: "100%",
 },
-  ({ gap }: { gap: boolean }) => ({ gap: gap ? "10px" : "0" }));
+  ({ gap }: { gap: boolean }) => ({ gap: gap ? "10px" : "0" })
+);
+
+export const MobileToolbarWrapper = styled.div({
+  position: "absolute",
+  zIndex: "100",
+  top: "0",
+  bottom: "0",
+  left: "0",
+  right: "0",
+
+  ".setting": {
+    position: "absolute",
+    right: "16px",
+    top: "16px",
+  },
+  ".media-timeLine": {
+    position: "absolute",
+    bottom: "16px",
+    left: "32px",
+    right: "32px",
+    width: "auto",
+  },
+  ".setting-item-wrapper": {
+    position: "absolute",
+    bottom: "45px",
+    left: "32px",
+    right: "32px",
+    width: "auto",
+  }
+},
+  ({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
+);
+export const MobileSettingPlay = styled.div({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+})

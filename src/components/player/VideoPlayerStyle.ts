@@ -83,7 +83,7 @@ export const PlayIconWrapper = styled.div({
   justifyContent: 'center',
   fontSize: '40px',
 },
-({ isClicked }: { isClicked: boolean }) => ({ animation: isClicked ? `${bounce} .5s linear 1 normal forwards` : 'none',  opacity: isClicked ? 1 : 0 }));
+  ({ isClicked }: { isClicked: boolean }) => ({ animation: isClicked ? `${bounce} .5s linear 1 normal forwards` : 'none', opacity: isClicked ? 1 : 0 }));
 
 export const TopRightWrapper = styled.div({
   zIndex: "4",
@@ -147,5 +147,34 @@ export const Gradient = styled.div(({ theme }) => ({
   background: `${theme.toolbarBg}`,
   height: '211px',
 }),
-({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
+  ({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
+);
+
+export const MobileVideoWrapper = styled.div({
+  width: "100%",
+  position: "relative",
+  overflow: "hidden",
+  boxSizing: "border-box",
+  "> *": {
+    boxSizing: "border-box",
+  },
+  ":before": {
+    boxSizing: "border-box",
+  },
+  ":after": {
+    boxSizing: "border-box",
+  },
+});
+
+export const MobileGradient = styled.div(({ theme }) => ({
+  transition: "opacity .25s cubic-bezier(0,0,.2,1)",
+  top: 0,
+  bottom: 0,
+  zIndex: 24,
+  width: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  background: `${theme.toolbarBg}`,
+}),
+  ({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
 );
