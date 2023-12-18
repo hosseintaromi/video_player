@@ -9,10 +9,12 @@ type ChangeRangeSelectType = {
 };
 
 const TimeLine = () => {
+
     const controllerRef = useRef<ChangeRangeSelectType>({
         calcInputVal: () => { }
     });
 
+    const playStateRef = useRef<boolean>();
     const snapShotBoxCursor = useRef<HTMLDivElement>(null);
     const snapShotBox = useRef<HTMLOutputElement>(null);
 
@@ -21,7 +23,7 @@ const TimeLine = () => {
     var timeOut: ReturnType<typeof setTimeout>;
 
 
-    const { changeTime } = usePlayerContext({
+    const { changeTime, getIsPlay, changePlayPause } = usePlayerContext({
         onUpdateTime: (e: OnUpdateTimeType) => {
             duration = e.duration
             percentage = e.percentage;
@@ -41,16 +43,9 @@ const TimeLine = () => {
 
     const setBubble = (
         e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-        type: "touch" | "hover",
     ) => {
         const event: any = e.nativeEvent;
-        var offsetX: number;
-        if (type === "touch") {
-            const rect = event.target.getBoundingClientRect();
-            offsetX = event.touches[0].clientX - window.pageXOffset - rect.left;
-        } else {
-            offsetX = event.offsetX;
-        }
+        const offsetX = event.offsetX;
         if (!event.target) return;
 
         const bubbleEl = snapShotBox.current;
@@ -101,15 +96,20 @@ const TimeLine = () => {
             <RangeSelect
                 max={100}
                 min={0}
-                step={1}
+                step={0.1}
                 controllerRef={controllerRef}
-
                 onChangeCallback={rangeSelectChangeVideoTime}
-                onMouseMove={(e: any) => {
-                    setBubble(e, "hover");
+                onRangeMove={(e: any) => {
+                    setBubble(e);
                 }}
-                onTouchMove={(e: any) => {
-                    setBubble(e, "touch");
+                onRangeStart={() => {
+                    const isPlay = playStateRef.current = getIsPlay()
+                    if (isPlay)
+                        changePlayPause(false)
+                }}
+                onRangeEnd={() => {
+                    if (playStateRef.current)
+                        changePlayPause(true)
                 }}
             />
             <Bubble ref={snapShotBox} className="bubble">
