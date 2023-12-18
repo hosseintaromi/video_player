@@ -35,9 +35,9 @@ const RangeSelect = ({
     }
   }, []);
 
-  const calcThrottle = useCallback(throttle((e: React.ChangeEvent<HTMLInputElement>) => {
+  const calcThrottle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     calcInputVal(+e.target.value, true)
-  }, 20), [])
+  }, [])
 
   const TimeLineMemo = useMemo(() => {
     return <TimeLine className="timeline" />

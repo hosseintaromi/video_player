@@ -48,7 +48,7 @@ const TouchContainer = ({ children, onShow }: { children: ReactNode, onShow: (sh
             if (isPlay.current && !setting_menu) {
                 showHandler(false)
             }
-        }, getHideTime())
+        }, 1000000)
 
     };
 
