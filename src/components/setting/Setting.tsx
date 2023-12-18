@@ -14,8 +14,7 @@ import { createPortal } from 'react-dom';
 
 export const FadeBackDrop = styled.div(({ theme }) => ({
     position: 'fixed',
-    // background: '#ff000000',
-    background: 'red',
+    background: '#ff000000',
     inset: 0,
     width: '100vw',
     height: '100vh',
