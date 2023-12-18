@@ -9,8 +9,16 @@ import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
 import Icon from '../icons/Icon';
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 
+export const FadeBackDrop = styled.div(({ theme }) => ({
+    position: 'fixed',
+    background: '#ff000000',
+    inset: 0,
+    width: '100vw',
+    height: '100vh',
+}));
 export const OverlayContainer = styled.div(({ theme }) => ({
     backgroundColor: theme.settingBg,
     color: theme.settingTextColor,
@@ -93,8 +101,13 @@ const Setting = () => {
     return (
         <>
             <Overlay openSetting={changePage}>
-                <Icon type='setting' isClickable={true} data-toggler/>
+                <Icon type='setting' isClickable={true} data-toggler />
+                {/* <FadeBackDrop > */}
                 <OverlayContainer data-content id='setting-menu'>
+                    {createPortal(
+                        <FadeBackDrop />,
+                        document.body
+                    )}
                     <SettingList
                         myRef={settingListRef}
                         changePage={changePage}
@@ -120,6 +133,7 @@ const Setting = () => {
                     />
 
                 </OverlayContainer>
+                {/* </FadeBackDrop> */}
 
             </Overlay>
         </>
