@@ -1,5 +1,5 @@
 import React from 'react';
-import { MobileSettingPlay, MobileToolbarWrapper, SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from '../toolbar/ToolbarStyle';
+import { MobileSettingPlay, MobileToolbarWrapper, MobileTopToolbar, SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
 import Setting from '../setting/Setting';
 import Play from '../tools/Play';
@@ -8,12 +8,16 @@ import Time from '../tools/Time';
 import PictureInPicture from '../tools/PictureInPicture';
 import Fullscreen from '../tools/Fullscreen';
 import MediaTimeLine from '../timeline/MediaTimeLine';
+import Switch from '../general/Switch';
 
 const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
 
     return (
         <MobileToolbarWrapper isFaded={isFaded}>
-            <Setting />
+            <MobileTopToolbar>
+                <Switch />
+                <Setting />
+            </MobileTopToolbar>
             <MobileSettingPlay>
                 <ToolBarPlayIcon>
                     <Play />

@@ -14,7 +14,6 @@ import React from 'react';
 export const OverlayContainer = styled.div(({ theme }) => ({
     backgroundColor: theme.settingBg,
     color: theme.settingTextColor,
-    fontSize: '15px',
     width: '300px',
     borderRadius: '15px',
     transition: 'all 0.3s ease',

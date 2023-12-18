@@ -16,6 +16,8 @@ import PlayIcon from "../components/icons/icon-list/PlayIcon";
 import PlaybackSpeed from "../components/icons/icon-list/PlaybackSpeed";
 import SettingIcon from "../components/icons/icon-list/SettingIcon";
 import Subtitle from "../components/icons/icon-list/Subtitle";
+import AutoPlayOne from "../components/icons/icon-list/AutoPlayOne";
+import AutoPlayOff from "../components/icons/icon-list/AutoPlayOff";
 export const defaultIcons: IconsType = {
     setting: <SettingIcon />,
     checkMark: <CheckMark />,
@@ -33,4 +35,6 @@ export const defaultIcons: IconsType = {
     quality: <ChangeQuality />,
     subtitle: <Subtitle />,
     audioTrack: <AudioIcon />,
+    autoPlayOn: <AutoPlayOne />,
+    autoPlayOff: <AutoPlayOff />,
 };

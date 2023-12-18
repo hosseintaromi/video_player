@@ -97,6 +97,8 @@ export type IconsType = {
   quality: ReactNode;
   subtitle: ReactNode;
   audioTrack: ReactNode;
+  autoPlayOn: ReactNode;
+  autoPlayOff: ReactNode;
 };
 
 export type PlayerLocaleType = {
