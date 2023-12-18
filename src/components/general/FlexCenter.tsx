@@ -24,7 +24,6 @@ const SettingMenuWrapper = styled.div({
     width: '100%',
     bottom: '0',
     display: 'none',
-    padding: "8px 0"
 });
 export const SettingMenu = ({ children, myRef }: { children: JSX.Element[] | JSX.Element, myRef: React.RefObject<HTMLDivElement> }) => {
     return (

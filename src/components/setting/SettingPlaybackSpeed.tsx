@@ -33,12 +33,12 @@ const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsTy
                         backRoute={pageName.settingList}
                     />
                     {getSpeeds().map((speedItem, index) =>
-                        <div key={index} onClick={() => setSpeed(index)}>
+                        <>
                             <SettingItem
-                                key={index}
+                                key={index} onClick={() => setSpeed(index)}
                                 startIcon={indexSpeed === index ? <Icon isClickable={true} type='checkMark' /> : <></>}
                                 content={speedItem} />
-                        </div>
+                        </>
                     )}
                 </>
             </SettingMenu>
