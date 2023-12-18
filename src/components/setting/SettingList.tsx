@@ -16,7 +16,7 @@ type SettingListType = {
 }
 
 const SettingItemArrowSpan = styled.span({
-    paddingRight: '6px'
+    paddingRight: '10px'
 })
 
 const SettingList = ({

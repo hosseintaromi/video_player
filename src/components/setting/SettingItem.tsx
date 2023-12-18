@@ -5,15 +5,23 @@ import styled from '@emotion/styled';
 export const SettingMenuItem = styled.div(({ theme }) => ({
     display: 'flex',
     justifyContent: "space-between",
-    padding: '10px',
+    alignItems: "center",
     cursor: 'pointer',
+    height: "40px",
     '&:hover': {
         backgroundColor: theme.settingBgHover,
     }
 }));
 
 const SettingItemSpan = styled.span({
-    paddingLeft: '8px',
+})
+const SettingItemIcon = styled.span({
+    paddingRight: "15px",
+    paddingLeft: "10px",
+})
+const SettingItemMore = styled.span({
+    paddingRight: "10px",
+    paddingLeft: "15px",
 })
 type settingItemProps = {
     children?: JSX.Element[] | JSX.Element,
@@ -25,16 +33,21 @@ const SettingItem = ({ children, startIcon, content, onClick }: settingItemProps
     return (
         <SettingMenuItem onClick={onClick}>
             <FlexCenter>
-                {startIcon ? startIcon : <></>}
+                <SettingItemIcon>
+                    {startIcon ? startIcon : <></>}
+                </SettingItemIcon>
                 <SettingItemSpan>
                     {content}
                 </SettingItemSpan>
             </FlexCenter>
             {
                 children &&
-                <FlexCenter>
-                    {children}
-                </FlexCenter>
+                <SettingItemMore>
+                    <FlexCenter>
+                        {children}
+                    </FlexCenter>
+
+                </SettingItemMore>
             }
         </SettingMenuItem>
     )
