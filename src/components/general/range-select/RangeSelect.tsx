@@ -10,10 +10,9 @@ const RangeSelect = ({
   controllerRef,
   onChangeCallback,
   step,
-  onMouseMove,
-  onMouseEnter,
-  onMouseLeave,
-  onTouchMove,
+  onRangeMove,
+  onRangeEnd,
+  onRangeStart
 }: RangePropsType) => {
 
 
@@ -55,21 +54,18 @@ const RangeSelect = ({
         id="slider"
         onChange={(e) => calcThrottle(e)}
         onMouseMove={(e) => {
-          if (!onMouseMove) return;
-          onMouseMove(e);
+          onRangeMove?.(e);
         }}
         onTouchMove={(e) => {
-          if (!onTouchMove) return;
-          onTouchMove(e);
+          if (!onRangeMove) return;
+          const rect = (e.target as any).getBoundingClientRect();
+          (e as any).offsetX = e.touches[0].clientX - window.pageXOffset - rect.left;
+          onRangeMove(e);
         }}
-        onMouseEnter={() => {
-          if (!onMouseEnter) return;
-          onMouseEnter();
-        }}
-        onMouseLeave={() => {
-          if (!onMouseLeave) return;
-          onMouseLeave();
-        }}
+        onTouchStart={onRangeStart}
+        onTouchEnd={onRangeEnd}
+        onMouseDown={onRangeStart}
+        onMouseUp={onRangeEnd}
       />
       <ProgressBar id="progressBar" ref={progressBarRef} />
       <Thumb id="selector" ref={selectorRef} />
