@@ -55,11 +55,6 @@ export const MobileToolbarWrapper = styled.div({
   left: "0",
   right: "0",
 
-  ".setting": {
-    position: "absolute",
-    right: "16px",
-    top: "16px",
-  },
   ".media-timeLine": {
     position: "absolute",
     bottom: "16px",
@@ -83,3 +78,14 @@ export const MobileSettingPlay = styled.div({
   left: "50%",
   transform: "translate(-50%, -50%)",
 })
+export const MobileTopToolbar = styled.div(({ theme }) => ({
+  color: `${theme.iconColor}`,
+  position: "absolute",
+  right: "16px",
+  top: "16px",
+  display: "flex",
+  alignItems: "center",
+  ".setting": {
+    marginLeft: "8px"
+  }
+}));
