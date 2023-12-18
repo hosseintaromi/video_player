@@ -13,34 +13,40 @@ type settingHeaderPropsType = {
     backRoute: pageName
 }
 
-const SettingHeaderWrapper = styled.div({
-    backgroundColor: 'rgb(40 40 39 / 60%)',
-    display: 'flex',
-    fontSize: '18px',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: '40px',
-    padding: '0 10px',
+const SettingHeaderWrapper = styled.div(({ theme }) => ({
     'svg': {
-        transform: 'rotate(180deg)'
+        transform: 'rotate(180deg)',
+        marginRight: "10px",
+        marginLeft: "15px",
     }
-})
+}));
+
+const SettingHeaderTitle = styled.div(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    borderBottom: `1px solid ${theme.iconColor}33`,
+    lineHeight: "inherit",
+    fontSize: "14px",
+    color: theme.iconColor,
+    paddingRight: "15px",
+    height: "40px",
+    whiteSpace: "nowrap",
+}));
 
 const SettingHeader = ({ title, hasCustomButton, hasBackButton, changePage }: settingHeaderPropsType) => {
     return (
         <SettingHeaderWrapper>
-            {hasBackButton && <div onClick={() => changePage(pageName.settingList, pageDir.back)}>
-                <FlexCenter >
-                    <Icon isClickable={true} type="arrow" />
-                    <span>
-                        {title}
-                    </span>
-                </FlexCenter>
-            </div>
+            {hasBackButton && <SettingHeaderTitle onClick={() => changePage(pageName.settingList, pageDir.back)}>
+                <Icon isClickable={true} type="arrow" />
+                {title}
+            </SettingHeaderTitle>
             }
-            <FlexCenter>
-                {hasCustomButton ? <span>custom</span> : <></>}
-            </FlexCenter>
+            {hasCustomButton ?
+                <FlexCenter>
+                    <span>custom</span>
+                </FlexCenter>
+                : <></>
+            }
         </SettingHeaderWrapper>
     )
 }

@@ -51,14 +51,14 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
                 changePage={changePage}
                 backRoute={pageName.settingList}
             />
-            <div>
+            <>
                 <SettingItem
                     onClick={() => setQuality(-1)}
                     startIcon={currentLevel === -1 ? < CheckMark /> : null}
                     content={<Locale localeKey="setting_menu_quality_list_item_auto" />}
                 />
                 {qualityListGenerator()}
-            </div>
+            </>
 
         </SettingMenu>
     )
