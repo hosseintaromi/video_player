@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import VideoPlayer from '../components/player/VideoPlayer';
 import { usePlayer } from '../hooks';
