@@ -47,7 +47,7 @@ const Switch = () => {
         <SwitchButton onClick={togglePlay}>
             <Spanner>
                 <svg width="36" height="14" viewBox="0 0 36 14" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
-                    <rect x="1" width="34" height="14" rx="7" fill="white" fill-opacity="0.5"></rect>
+                    <rect x="1" width="34" height="14" rx="7" fill="white" fillOpacity="0.5"></rect>
                 </svg>
             </Spanner>
             {
