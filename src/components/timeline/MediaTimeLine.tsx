@@ -6,12 +6,14 @@ import { Bubble, BufferSize, GeneralStyleForRange, ThumbCursor } from "./MediaTi
 
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
+    toggleThumb: (isShow: boolean) => void
 };
 
 const TimeLine = () => {
 
     const controllerRef = useRef<ChangeRangeSelectType>({
-        calcInputVal: () => { }
+        calcInputVal: () => { },
+        toggleThumb: () => { }
     });
 
     const playStateRef = useRef<boolean>();
@@ -69,9 +71,11 @@ const TimeLine = () => {
 
         if (!bubbleEl || !bubbleCursorEl) return;
         if (e) {
+            controllerRef.current.toggleThumb(true)
             bubbleEl.style.display = "flex";
             bubbleCursorEl.style.display = "flex";
         } else {
+            controllerRef.current.toggleThumb(false)
             bubbleCursorEl.style.display = "none";
             bubbleEl.style.display = "none";
         }
