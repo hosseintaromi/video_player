@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react'
 
 
-const CenterBox = styled.div({
+export const CenterBox = styled.div({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

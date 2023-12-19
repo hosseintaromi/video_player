@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { FlexCenter } from '../general/FlexCenter'
+import { CenterBox, FlexCenter } from '../general/FlexCenter'
 import styled from '@emotion/styled';
 
 export const SettingMenuItem = styled.div(({ theme }) => ({
@@ -15,17 +15,31 @@ export const SettingMenuItem = styled.div(({ theme }) => ({
     }
 }));
 const SettingItemSpan = styled.div(({ theme }) => ({
-    fontSize: theme.settingFontSize
+    fontSize: theme.settingFontSize,
+    paddingLeft: "41px",
 }));
 const SettingItemIcon = styled.div({
     paddingRight: "15px",
     paddingLeft: "10px",
+    width: "16px",
+    position: "absolute",
+    left: "0",
+    top: "50%",
+    transform: "translateY(-50%)",
 })
 const SettingItemMore = styled.div(({ theme }) => ({
     paddingRight: "10px",
     paddingLeft: "15px",
     fontSize: theme.settingFontSize
 }));
+const SettingCenter = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
+    return (
+        <CenterBox style={{position: "relative"}}>
+            {children}
+        </CenterBox>
+    )
+}
+
 type settingItemProps = {
     children?: JSX.Element[] | JSX.Element,
     startIcon: JSX.Element | null,
@@ -35,14 +49,14 @@ type settingItemProps = {
 const SettingItem = ({ children, startIcon, content, onClick }: settingItemProps) => {
     return (
         <SettingMenuItem onClick={onClick}>
-            <FlexCenter>
+            <SettingCenter>
                 <SettingItemIcon>
                     {startIcon ? startIcon : <></>}
                 </SettingItemIcon>
                 <SettingItemSpan>
                     {content}
                 </SettingItemSpan>
-            </FlexCenter>
+            </SettingCenter>
             {
                 children &&
                 <SettingItemMore>
