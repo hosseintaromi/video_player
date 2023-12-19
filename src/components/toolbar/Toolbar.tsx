@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter, ToolbarWrapper } from '../toolbar/ToolbarStyle';
+import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter, TimeDivider, ToolbarWrapper } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
 import Setting from '../setting/Setting';
 import Play from '../tools/Play';
@@ -22,9 +22,11 @@ const Toolbar = ({ isFaded }: { isFaded: boolean }) => {
                     <Volume />
                     <TimeCounter>
                         <Time type='Current' />
-                        /
+                        <TimeDivider>
+                            /
+                        </TimeDivider>
+                        <Time type='Total' />
                     </TimeCounter>
-                    <Time type='Total' />
                 </SettingLeftSection>
                 <SettingRightSection>
                     <Setting />
