@@ -29,6 +29,7 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
     const setQuality = (index: number) => {
         changeLevel(index)
         setCurrentLevel(index)
+        changePage(pageName.settingList, pageDir.back)
     }
 
     const qualityListGenerator = () => {
