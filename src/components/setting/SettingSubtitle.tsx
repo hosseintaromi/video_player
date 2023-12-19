@@ -23,6 +23,7 @@ const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
     const setSubtitle = (index: number) => {
         changeSubtitle(index)
         setCurrentSubtitle(index)
+        changePage(pageName.settingList, pageDir.back)
     }
 
     const loadLevels = () => {
