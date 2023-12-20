@@ -4,20 +4,11 @@ import { PlayerObjectType } from '../../@types/player.model';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
 import PlayerInitializer from '../tools/PlayerInitializer';
 import MobilePlayerTemplate from '../templates/MobilePlayerTemplate';
-import { useCheckScreenSize } from '../../hooks/useCheckScreenSize';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerObjectType, src?: string }) => {
-    const { screenSize } = useCheckScreenSize()
-    const [isMobile, setIsMobile] = useState<boolean | undefined>(true)
-    const calcIsMobile = (val: number) => {
-        return val < 768
-    }
-    // useEffect(() => {
-    //     if (!isMobile || calcIsMobile(screenSize.width) !== isMobile)
-    //         setIsMobile(calcIsMobile(screenSize.width))
-    // }, [])
+
     const chosePlayerSize = () => {
-        return calcIsMobile(screenSize.width) ? <MobilePlayerTemplate /> : <PlayerTemplate />
+        return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
     }
     const videoRef = useRef<HTMLVideoElement>();
     if (config && src) {

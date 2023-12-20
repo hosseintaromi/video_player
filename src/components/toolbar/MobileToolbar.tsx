@@ -16,12 +16,12 @@ const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
     return (
         <MobileToolbarWrapper isFaded={isFaded}>
             <MobileTopToolbar>
-                {/* <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
+                <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
                     hello
                 </Dialog>
                 <button onClick={() => {
                     setIsOpen(true)
-                }}>open hello</button> */}
+                }}>open hello</button>
                 <Switch />
                 <Setting />
             </MobileTopToolbar>
