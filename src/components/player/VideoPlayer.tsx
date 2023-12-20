@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PlayerTemplate from '../templates/PlayerTemplate';
 import { PlayerObjectType } from '../../@types/player.model';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
@@ -7,6 +7,9 @@ import MobilePlayerTemplate from '../templates/MobilePlayerTemplate';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerObjectType, src?: string }) => {
 
+    const chosePlayerSize = () => {
+        return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
+    }
     const videoRef = useRef<HTMLVideoElement>();
     if (config && src) {
         config.src = src;
@@ -39,7 +42,7 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
 
         }}>
             {/* {children ? children : <MobilePlayerTemplate />} */}
-            {children ? children : <PlayerTemplate />}
+            {children ? children : chosePlayerSize()}
             <PlayerInitializer />
         </VideoPlayerContext.Provider>
     )
