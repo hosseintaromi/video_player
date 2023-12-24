@@ -21,6 +21,23 @@ const DropdownInput = styled.div(({ theme }) => ({
     cursor: "pointer",
     border: `1px solid ${theme.iconColor}33`,
     padding: "4px 8px",
+    height: "36px",
+}));
+
+const DropdownList = styled.ul(({ theme })=>({
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    position: "absolute",
+    zIndex: 10,
+    left: "16px",
+    right: "16px",
+    bottom: "62px",
+    background: theme.settingBg
+}));
+
+const DropdownListItem = styled.li(({ theme })=>({
+    padding: "4px 8px"
 }));
 
 const Dropdown = ({ options, value, onSelect }: DropdownType) => {
@@ -50,11 +67,11 @@ const Dropdown = ({ options, value, onSelect }: DropdownType) => {
             <DropdownInput onClick={toggleOpen}>{val.text}</DropdownInput>
             {
                 open &&
-                <ul>
+                <DropdownList>
                     {options.map(option =>
-                        (<li key={option.value} onClick={() => selectOption(option)}>{option.text}</li>)
+                        (<DropdownListItem key={option.value} onClick={() => selectOption(option)}>{option.text}</DropdownListItem>)
                     )}
-                </ul>
+                </DropdownList>
             }
         </DropdownWrapper>
     )
