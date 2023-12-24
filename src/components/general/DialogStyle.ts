@@ -24,4 +24,6 @@ export const ModalContent = styled.div({
 export const ModalWrapper = styled.div({
   maxWidth: "500px",
   margin: "2rem auto",
+  zIndex: 20,
+  position: 'relative'
 });
