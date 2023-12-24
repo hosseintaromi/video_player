@@ -17,13 +17,17 @@ const RangeSelect = ({
 
 
   useImperativeHandle(controllerRef, () => ({
-    calcInputVal
+    calcInputVal,
+    toggleThumb
   }));
 
   const selectorRef = useRef<HTMLDivElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
   const [currentValue, setCurrentValue] = useState<number>(0);
-
+  const [showThumb, setShowThumb] = useState<boolean>(false)
+  const toggleThumb = (isShow: boolean) => {
+    setShowThumb(pre => !pre)
+  }
 
   const calcInputVal = useCallback((e: number, updateParent: boolean) => {
     if (updateParent && onChangeCallback)
@@ -68,7 +72,9 @@ const RangeSelect = ({
         onMouseUp={onRangeEnd}
       />
       <ProgressBar id="progressBar" ref={progressBarRef} />
-      <Thumb id="selector" ref={selectorRef} />
+
+      <Thumb id="selector" ref={selectorRef} style={{ display: showThumb ? 'block' : 'none' }} />
+
       {TimeLineMemo}
     </GeneralStyleForRange>
   );

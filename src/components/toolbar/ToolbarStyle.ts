@@ -58,7 +58,7 @@ export const VolumeWrapper = styled.div(
 export const MobileToolbarWrapper = styled.div(
   {
     position: "absolute",
-    zIndex: "100",
+    zIndex: "10",
     top: "0",
     bottom: "0",
     left: "0",

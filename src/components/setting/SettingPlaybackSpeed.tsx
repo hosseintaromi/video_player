@@ -19,6 +19,7 @@ const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsTy
     const setSpeed = (index: number) => {
         changeSpeed(index)
         setIndexSpeed(index)
+        changePage(pageName.settingList, pageDir.back)
     }
 
     return (
