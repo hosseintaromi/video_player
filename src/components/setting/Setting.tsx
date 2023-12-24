@@ -10,6 +10,7 @@ import SettingAudioTrack from './SettingAudioTrack';
 import Icon from '../icons/Icon';
 import React from 'react';
 import { createPortal } from 'react-dom';
+import Dropdown from '../general/Dropdown';
 
 
 export const FadeBackDrop = styled.div(({ theme }) => ({
@@ -60,6 +61,25 @@ const Setting = () => {
         [pageName.audioTrack]: settingAudioTrackRef,
     }
 
+    const DropdownList = [
+        {
+            value: '1',
+            text: 'سلام'
+        },
+        {
+            value: '2',
+            text: 'یک'
+        },
+        {
+            value: '3',
+            text: 'دو'
+        },
+        {
+            value: '4',
+            text: 'سوال'
+        }
+    ]
+
     const changePage = (newPageName: pageName, dir: pageDir) => {
         const firstEl = lastSettingRef.current;
         const secondEl = pageObj[newPageName].current;
@@ -108,7 +128,7 @@ const Setting = () => {
                         <FadeBackDrop />,
                         document.body
                     )}
-                    <SettingList
+                    {/* <SettingList
                         myRef={settingListRef}
                         changePage={changePage}
                         currentPage={currentPage}
@@ -130,7 +150,8 @@ const Setting = () => {
                     <SettingAudioTrack
                         myRef={settingAudioTrackRef}
                         changePage={changePage}
-                    />
+                    /> */}
+                    <Dropdown options={DropdownList} />
 
                 </OverlayContainer>
                 {/* </FadeBackDrop> */}

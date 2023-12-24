@@ -15,14 +15,14 @@ export const SettingRightSection = styled.div({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  gap: "18px",
+  gap: "22px",
 });
 
 export const SettingLeftSection = styled.div({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  gap: "18px",
+  gap: "22px",
 });
 
 export const SettingItemWrapper = styled.div({
@@ -30,6 +30,11 @@ export const SettingItemWrapper = styled.div({
   justifyContent: "space-between",
   alignItems: "center",
   paddingBottom: "10px",
+  
+  "&.blue-setting-wrapper": {
+    paddingBottom: "18px",
+    paddingTop: "8px",
+  }
 });
 
 export const TimeDivider = styled.span(() => ({
@@ -41,8 +46,13 @@ export const TimeCounter = styled.span(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   height: "100%",
-  color: `${theme.iconColor}99`,
+  color: `${theme.iconColor}`,
   fontSize: theme.settingFontSize,
+  "&.blue-counter": {
+    height: "auto",
+    width: "100%",
+    justifyContent: "space-between"
+  }
 }));
 
 export const VolumeWrapper = styled.div(
@@ -52,7 +62,7 @@ export const VolumeWrapper = styled.div(
     alignItems: "center",
     height: "100%",
   },
-  ({ gap }: { gap: boolean }) => ({ gap: gap ? "18px" : "0" })
+  ({ gap }: { gap: boolean }) => ({ gap: gap ? "10px" : "0" })
 );
 
 export const MobileToolbarWrapper = styled.div(

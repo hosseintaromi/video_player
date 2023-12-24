@@ -99,6 +99,9 @@ export type IconsType = {
   audioTrack: ReactNode;
   autoPlayOn: ReactNode;
   autoPlayOff: ReactNode;
+  jumpBack: ReactNode;
+  jumpForward: ReactNode;
+  mic: ReactNode;
 };
 
 export type PlayerLocaleType = {
