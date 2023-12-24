@@ -18,6 +18,10 @@ import SettingIcon from "../components/icons/icon-list/SettingIcon";
 import Subtitle from "../components/icons/icon-list/Subtitle";
 import AutoPlayOne from "../components/icons/icon-list/AutoPlayOne";
 import AutoPlayOff from "../components/icons/icon-list/AutoPlayOff";
+import JumpBack from "../components/icons/icon-list/JumpBack";
+import JumpForward from "../components/icons/icon-list/JumpForward";
+import Mic from "../components/icons/icon-list/Mic";
+
 export const defaultIcons: IconsType = {
     setting: <SettingIcon />,
     checkMark: <CheckMark />,
@@ -37,4 +41,7 @@ export const defaultIcons: IconsType = {
     audioTrack: <AudioIcon />,
     autoPlayOn: <AutoPlayOne />,
     autoPlayOff: <AutoPlayOff />,
+    jumpBack: <JumpBack />,
+    jumpForward: <JumpForward />,
+    mic: <Mic />,
 };

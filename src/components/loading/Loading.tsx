@@ -6,8 +6,8 @@ import { ring } from '../player/VideoPlayerStyle';
 export const RingWrapper = styled.div(({ theme }) => ({
 
     display: 'inline-block',
-    width: '80px',
-    height: '80px',
+    width: '72px',
+    height: '72px',
     position: 'absolute',
     top: "50%",
     left: "50%",
