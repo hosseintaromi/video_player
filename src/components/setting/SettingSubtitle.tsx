@@ -7,14 +7,12 @@ import CheckMark from '../icons/icon-list/CheckMark';
 import { useVideo } from '../../hooks/useVideo';
 import { MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
 import Locale from '../locale/Locale';
-import styled from '@emotion/styled';
+import { SettingItemWrapper } from './SettingStyle';
 
 type SettingSubtitleType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>,
 }
-
-const SettingItemWrapper = styled.span({})
 
 const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
     const [currentSubtitle, setCurrentSubtitle] = useState<number | undefined>()

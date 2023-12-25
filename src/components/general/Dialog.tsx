@@ -20,7 +20,6 @@ const Dialog = ({ children, isOpen, onClose }: DialogPropsType) => {
             isOpen && <ModalOverlay onClick={onClose}>
                 <ModalWrapper onClick={e => e.stopPropagation()}>
                     <ModalContent>
-                        <button type='button' onClick={onClose}>Close</button>
                         {children}
                     </ModalContent>
                 </ModalWrapper>

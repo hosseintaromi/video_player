@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
 type DropdownOption = {
     value: string,
     text: string
@@ -13,8 +13,25 @@ type DropdownType = {
 const DropdownWrapper = styled.div(({ theme }) => ({
     position: "relative",
     width: "100%",
-    padding: "16px",
-    direction: theme.dir
+    direction: theme.dir,
+    fontSize: theme.settingFontSize,
+
+    "&.dialog-dropdown": {
+        marginBottom: "10px",
+
+        "&:last-child": {
+            marginBottom: 0,
+        }
+    },
+
+    "&.dialog-dropdown > div": {
+        borderColor: "rgba(0,0,0,0.1)",
+        background: "#f1f1f1",
+    },
+    "&.dialog-dropdown > ul": {
+        borderColor: "rgba(0,0,0,0.1)",
+        backgroundColor: "#fff",
+    }
 }));
 
 const DropdownInput = styled.div(({ theme }) => ({
@@ -22,25 +39,28 @@ const DropdownInput = styled.div(({ theme }) => ({
     border: `1px solid ${theme.iconColor}33`,
     padding: "4px 8px",
     height: "36px",
+    borderRadius: "8px",
 }));
 
-const DropdownList = styled.ul(({ theme })=>({
+const DropdownList = styled.ul(({ theme }) => ({
     listStyle: "none",
     margin: 0,
     padding: 0,
     position: "absolute",
     zIndex: 10,
-    left: "16px",
-    right: "16px",
-    bottom: "62px",
-    background: theme.settingBg
+    right: 0,
+    left: 0,
+    top: "40px",
+    border: `1px solid ${theme.iconColor}33`,
+    borderRadius: "8px",
 }));
 
-const DropdownListItem = styled.li(({ theme })=>({
+const DropdownListItem = styled.li(({ theme }) => ({
     padding: "4px 8px"
 }));
 
-const Dropdown = ({ options, value, onSelect }: DropdownType) => {
+const Dropdown = ({ options, value, onSelect, className }: DropdownType & HTMLAttributes<HTMLElement>
+) => {
     const defaultOption: DropdownOption = {
         value: "",
         text: "انتخاب کنید"
@@ -63,7 +83,7 @@ const Dropdown = ({ options, value, onSelect }: DropdownType) => {
     }
 
     return (
-        <DropdownWrapper>
+        <DropdownWrapper className={className}>
             <DropdownInput onClick={toggleOpen}>{val.text}</DropdownInput>
             {
                 open &&

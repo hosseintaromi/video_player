@@ -50,3 +50,8 @@ body {
   font-family: IRANSans,-apple-system,apple color emoji,BlinkMacSystemFont,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif
 
 }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

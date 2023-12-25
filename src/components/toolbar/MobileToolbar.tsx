@@ -1,29 +1,74 @@
 import React, { useState } from 'react';
 import { MobileSettingPlay, MobileToolbarWrapper, MobileTopToolbar, SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
-import Setting from '../setting/Setting';
 import Play from '../tools/Play';
-import Volume from '../tools/Volume';
 import Time from '../tools/Time';
-import PictureInPicture from '../tools/PictureInPicture';
 import Fullscreen from '../tools/Fullscreen';
 import MediaTimeLine from '../timeline/MediaTimeLine';
 import Switch from '../general/Switch';
 import Dialog from '../general/Dialog';
+import Icon from '../icons/Icon';
+import Dropdown from '../general/Dropdown';
+import styled from '@emotion/styled';
+import { DialogLabel, DialogTitle } from '../general/DialogStyle';
+import SettingItem from '../setting/SettingItem';
+import Locale from '../locale/Locale';
 
 const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const SettingButton = styled.button((theme) => ({
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        width: "48px",
+        height: "48px",
+        padding: 0,
+        border: "none",
+        outline: "none",
+        font: "inherit",
+        textTransform: "inherit",
+        color: "inherit",
+        background: "transparent",
+    }));
+
+    const DropdownList = [
+        {
+            value: '1',
+            text: 'سلام'
+        },
+        {
+            value: '2',
+            text: 'یک'
+        },
+        {
+            value: '3',
+            text: 'دو'
+        },
+        {
+            value: '4',
+            text: 'سوال'
+        }
+    ]
     return (
         <MobileToolbarWrapper isFaded={isFaded}>
             <MobileTopToolbar>
                 <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                    hello
+                    <DialogTitle>تنظیمات</DialogTitle>
+                    <SettingItem className='dialog-item' startIcon={<Icon isClickable={true} type='speed' />} text={<Locale localeKey="setting_menu_change_speed_title" />} >
+                        <Switch />
+                    </SettingItem>
+                    <DialogLabel>کیفیت</DialogLabel>
+                    <Dropdown className='dialog-dropdown' options={DropdownList} />
+                    <DialogLabel>سرعت</DialogLabel>
+                    <Dropdown className='dialog-dropdown' options={DropdownList} />
                 </Dialog>
-                <button onClick={() => {
+                <Switch hasIcon={true} />
+                <SettingButton onClick={() => {
                     setIsOpen(true)
-                }}>open hello</button>
-                <Switch />
-                <Setting />
+                }}>
+                    <Icon isClickable type='setting' />
+                </SettingButton>
             </MobileTopToolbar>
             <MobileSettingPlay>
                 <ToolBarPlayIcon>
