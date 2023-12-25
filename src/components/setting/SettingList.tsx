@@ -7,17 +7,13 @@ import Locale from '../locale/Locale';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import { LevelType, MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
 import Icon from '../icons/Icon';
-import styled from '@emotion/styled';
+import { SettingItemArrowSpan } from './SettingStyle';
 
 type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
     myRef: React.RefObject<HTMLDivElement>
     currentPage?: HTMLDivElement | null | undefined
 }
-
-const SettingItemArrowSpan = styled.span({
-    paddingRight: '10px'
-})
 
 const SettingList = ({
     changePage,

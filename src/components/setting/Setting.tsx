@@ -3,37 +3,14 @@ import Overlay from '../general/Overlay';
 
 import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
-import styled from '@emotion/styled';
 import SettingQuality from './SettingQuality';
 import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
 import Icon from '../icons/Icon';
 import React from 'react';
 import { createPortal } from 'react-dom';
-import Dropdown from '../general/Dropdown';
+import { FadeBackDrop, OverlayContainer } from './SettingStyle';
 
-
-export const FadeBackDrop = styled.div(({ theme }) => ({
-    position: 'fixed',
-    background: '#ff000000',
-    inset: 0,
-    width: '100vw',
-    height: '100vh',
-}));
-export const OverlayContainer = styled.div(({ theme }) => ({
-    backgroundColor: theme.settingBg,
-    color: theme.settingTextColor,
-    width: '300px',
-    borderRadius: '15px',
-    transition: 'all 0.3s ease',
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: '50px',
-    right: '0',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}));
 
 export enum pageName {
     settingList = 'settingList',
@@ -60,25 +37,6 @@ const Setting = () => {
         [pageName.subtitle]: settingSubtitleRef,
         [pageName.audioTrack]: settingAudioTrackRef,
     }
-
-    const DropdownList = [
-        {
-            value: '1',
-            text: 'سلام'
-        },
-        {
-            value: '2',
-            text: 'یک'
-        },
-        {
-            value: '3',
-            text: 'دو'
-        },
-        {
-            value: '4',
-            text: 'سوال'
-        }
-    ]
 
     const changePage = (newPageName: pageName, dir: pageDir) => {
         const firstEl = lastSettingRef.current;
@@ -128,7 +86,7 @@ const Setting = () => {
                         <FadeBackDrop />,
                         document.body
                     )}
-                    {/* <SettingList
+                    <SettingList
                         myRef={settingListRef}
                         changePage={changePage}
                         currentPage={currentPage}
@@ -150,8 +108,7 @@ const Setting = () => {
                     <SettingAudioTrack
                         myRef={settingAudioTrackRef}
                         changePage={changePage}
-                    /> */}
-                    <Dropdown options={DropdownList} />
+                    />
 
                 </OverlayContainer>
                 {/* </FadeBackDrop> */}

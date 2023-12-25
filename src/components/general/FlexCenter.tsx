@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 
 
 export const CenterBox = styled.div({
@@ -8,7 +8,7 @@ export const CenterBox = styled.div({
     alignItems: 'center',
 });
 
-export const FlexCenter = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
+export const FlexCenter = ({ children }: HTMLAttributes<HTMLElement> ) => {
     return (
         <CenterBox>
             {children}
