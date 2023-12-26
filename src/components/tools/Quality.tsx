@@ -5,6 +5,8 @@ import { LevelType } from '../../@types/UseVideoHlsType.model'
 import Dialog from '../general/Dialog'
 import { DialogTitle } from '../general/DialogStyle'
 import Locale from '../locale/Locale'
+import { SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle'
+import { CenterBox } from '../general/FlexCenter'
 
 const Quality = () => {
     const [levels, setLevels] = useState<LevelType>()
@@ -29,11 +31,18 @@ const Quality = () => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>تنظیمات</DialogTitle>
+                <DialogTitle>کیفیت پخش</DialogTitle>
                 {levels?.map((item, index) => (
-                    <button onClick={() => setQuality(index)} style={{ backgroundColor: currentLevel === index ? 'red' : 'blue' }} key={index + 'speedDialog'} >
-                        {item.name}
-                    </button>
+                    // <button onClick={() => setQuality(index)} style={{ backgroundColor: currentLevel === index ? 'red' : 'blue' }} key={index + 'speedDialog'} >
+                    //     {item.name}
+                    // </button>
+                    <SettingMenuItem  onClick={() => setQuality(index)} style={{ backgroundColor: currentLevel === index ? 'red' : 'blue' }} key={index + 'speedDialog'}>
+                        <CenterBox>
+                            <SettingItemSpan>
+                            {item.name}
+                            </SettingItemSpan>
+                        </CenterBox>
+                    </SettingMenuItem>
                 ))}
                 <button onClick={() => setQuality(-1)}>
                     <Locale localeKey="setting_menu_quality_list_item_auto" />

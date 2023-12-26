@@ -29,7 +29,7 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>تنظیمات</DialogTitle>
+                <DialogTitle>زیرنویس</DialogTitle>
                 {subtitles?.map((item, index) => (
                     <button onClick={() => setSubtitle(index)} style={{ backgroundColor: currentSubtitle === index ? 'red' : 'blue' }} key={index + 'speedDialog'} >
                         {item.name}

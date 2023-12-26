@@ -1,11 +1,12 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 import Icon from '../icons/Icon'
 import { useVideo } from '../../hooks/useVideo'
-import { pageName, pageDir } from '../setting/Setting'
 import { MediaPlaylistType } from '../../@types/UseVideoHlsType.model'
 import Dialog from '../general/Dialog'
 import { DialogTitle } from '../general/DialogStyle'
 import Locale from '../locale/Locale'
+import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle'
+import { CenterBox } from '../general/FlexCenter'
 
 const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     const [currentAudioTrack, setCurrentAudioTrack] = useState<number | undefined>()
@@ -28,15 +29,32 @@ const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>تنظیمات</DialogTitle>
+                <DialogTitle>زبان پخش</DialogTitle>
                 {audioTracks?.map((item, index) => (
-                    <button onClick={() => setAudioTrack(index)} style={{ backgroundColor: currentAudioTrack === index ? 'red' : 'blue' }} key={index + 'speedDialog'} >
-                        {item.name}
-                    </button>
+                    <SettingMenuItem
+                        onClick={() => setAudioTrack(index)}
+                        className={`is-reversed ${currentAudioTrack === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                    >
+                        <CenterBox>
+                            <SettingItemIcon className='reversed-icon' style={{ display: currentAudioTrack === index ? 'flex' : 'none' }}>
+                                <Icon isClickable={true} type='checkMark' />
+                            </SettingItemIcon>
+                            <SettingItemSpan className='reserved-span'>
+                                {item.name}
+                            </SettingItemSpan>
+                        </CenterBox>
+                    </SettingMenuItem>
                 ))}
-                <button onClick={() => setAudioTrack(-1)}>
-                    <Locale localeKey="setting_menu_subtitle_off" />
-                </button>
+                <SettingMenuItem
+                    onClick={() => setAudioTrack(-1)}
+                    className='is-reversed'
+                >
+                    <CenterBox>
+                        <SettingItemSpan className='reserved-span'>
+                            <Locale localeKey="setting_menu_subtitle_off" />
+                        </SettingItemSpan>
+                    </CenterBox>
+                </SettingMenuItem>
             </Dialog>
             <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="mic" />
         </>

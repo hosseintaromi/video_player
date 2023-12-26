@@ -79,6 +79,7 @@ export type StyleType = {
   bufferBg: string;
   settingFontSize: string;
   toolbarFontSize: string;
+  settingTitleTextColor: string;
 };
 export type IconsType = {
   setting: ReactNode;
