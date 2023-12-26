@@ -7,6 +7,8 @@ import { DialogTitle } from '../general/DialogStyle'
 import Locale from '../locale/Locale'
 import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle'
 import { CenterBox } from '../general/FlexCenter'
+import { IconButton } from '../toolbar/ToolbarStyle'
+import Badge from '../general/Badge'
 
 const Quality = () => {
     const [levels, setLevels] = useState<LevelType>()
@@ -61,7 +63,12 @@ const Quality = () => {
                     </CenterBox>
                 </SettingMenuItem>
             </Dialog>
-            <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="setting" />
+            <IconButton onClick={() => setIsOpen(pre => !pre)}>
+                <Icon isClickable={true} type="setting" />
+                <Badge colors='danger' isFixed>
+                    12.2
+                </Badge>
+            </IconButton>
 
         </>
     )
