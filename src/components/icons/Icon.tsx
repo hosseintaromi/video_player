@@ -16,10 +16,10 @@ type IconType = {
   type: keyof IconsType
   isClickable: boolean,
 } & HTMLAttributes<HTMLElement>
-const Icon = ({ type, ...other }: IconType) => {
+const Icon = ({ type, onClick, ...other }: IconType) => {
   const { icons } = useIcon()
   return (
-    <IconWrapperStyle {...other}>{icons[type]}</IconWrapperStyle>
+    <IconWrapperStyle onClick={onClick} {...other}>{icons[type]}</IconWrapperStyle>
   )
 }
 

@@ -37,7 +37,7 @@ const SettingAudioTrack = ({ changePage, myRef }: SettingAudioTrackType) => {
                 key={index}
                 onClick={() => setAudioTrack(index)}
                 startIcon={currentAudioTrack === index ? <Icon type='checkMark' isClickable={true} /> : null}
-                content={item.name}
+                text={item.name}
             />
         ) : <></>
     }

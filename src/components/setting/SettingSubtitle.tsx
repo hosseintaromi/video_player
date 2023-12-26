@@ -42,7 +42,7 @@ const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
                 key={index}
                 onClick={() => setSubtitle(index)}
                 startIcon={currentSubtitle === index ? < CheckMark /> : null}
-                content={item.name}
+                text={item.name}
             />
         ) : <></>
     }
@@ -59,7 +59,7 @@ const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
                 <SettingItem
                     onClick={() => setSubtitle(-1)}
                     startIcon={currentSubtitle === -1 ? < CheckMark /> : null}
-                    content={<Locale localeKey="setting_menu_subtitle_off" />}
+                    text={<Locale localeKey="setting_menu_subtitle_off" />}
                 />
                 {subtitleListGenerator()}
             </SettingItemWrapper>

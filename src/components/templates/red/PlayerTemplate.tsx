@@ -28,7 +28,7 @@ const PlayerTemplate = () => {
                     <Play />
                 </PlayIconWrapper>
                 <Loading />
-                <TouchContainer onShow={(show: boolean) => { setIsFadeOut(!show) }} >
+                <TouchContainer canPlayOnClick onShow={(show: boolean) => { setIsFadeOut(!show) }} >
                     <Video />
                 </TouchContainer>
                 <Gradient isFaded={isFadeOut} />

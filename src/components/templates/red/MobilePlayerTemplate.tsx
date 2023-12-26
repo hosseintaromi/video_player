@@ -24,7 +24,7 @@ const MobilePlayerTemplate = () => {
         <ThemeProvider theme={style}>
             <MobileVideoWrapper id="video_wrapper_id">
                 <Loading />
-                <TouchContainer onShow={(show: boolean) => { setIsFadeOut(!show) }} >
+                <TouchContainer canPlayOnClick onShow={(show: boolean) => { setIsFadeOut(!show) }} >
                     <Video />
                     <MobileGradient isFaded={isFadeOut} />
                     <MobileToolbar isFaded={isFadeOut} />

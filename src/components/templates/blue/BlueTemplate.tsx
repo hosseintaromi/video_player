@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@emotion/react'
-import { Gradient, PlayJumpIcon, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
+import { Gradient, PlayJumpIcon, PlayJumpIconFix, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
 import Loading from '../../loading/Loading';
 import TouchContainer from '../../player/TouchContainer';
 import Video from '../../player/Video';
@@ -10,6 +10,7 @@ import { usePlayerContext } from '../../../hooks/usePlayerContext';
 import JumpBack from '../../tools/JumpBack';
 import JumpForward from '../../tools/JumpForward';
 import BlueToolbar from '../../toolbar/BlueToolbar';
+import Icon from '../../icons/Icon';
 
 const BlueTemeplate = () => {
     const { style } = useStyle();
@@ -28,13 +29,13 @@ const BlueTemeplate = () => {
             <VideoWrapperBlue id="video_wrapper_id">
                 <PlayJumpIconWrapper>
                     <JumpBack />
-                    <PlayJumpIcon isClicked={isPlay}>
+                    <PlayJumpIconFix>
                         <Play />
-                    </PlayJumpIcon>
+                    </PlayJumpIconFix>
                     <JumpForward />
                 </PlayJumpIconWrapper>
                 <Loading />
-                <TouchContainer onShow={(show: boolean) => { setIsFadeOut(!show) }} >
+                <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => { setIsFadeOut(!show) }} >
                     <Video />
                 </TouchContainer>
                 <Gradient isFaded={isFadeOut} />

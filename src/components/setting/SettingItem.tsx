@@ -4,7 +4,7 @@ import { SettingItemIcon, SettingItemMore, SettingItemSpan, SettingMenuItem } fr
 
 const SettingCenter = ({ children }: HTMLAttributes<HTMLElement>) => {
     return (
-        <CenterBox style={{position: "relative"}}>
+        <CenterBox style={{ position: "relative" }}>
             {children}
         </CenterBox>
     )
@@ -12,10 +12,10 @@ const SettingCenter = ({ children }: HTMLAttributes<HTMLElement>) => {
 
 type settingItemProps = {
     startIcon: JSX.Element | null,
-    text: ReactNode,
-}& HTMLAttributes<HTMLElement>
+    text?: ReactNode,
+} & HTMLAttributes<HTMLElement>
 const SettingItem = ({ children, startIcon, text, onClick, className }: settingItemProps
-    ) => {
+) => {
     return (
         <SettingMenuItem className={className} onClick={onClick}>
             <SettingCenter>

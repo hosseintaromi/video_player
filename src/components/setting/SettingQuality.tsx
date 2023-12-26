@@ -38,7 +38,7 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
                 key={index}
                 onClick={() => setQuality(index)}
                 startIcon={currentLevel === index ? < CheckMark /> : null}
-                content={item.height}
+                text={item.height}
             />
         ) : <></>
     }
@@ -56,7 +56,7 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
                 <SettingItem
                     onClick={() => setQuality(-1)}
                     startIcon={currentLevel === -1 ? < CheckMark /> : null}
-                    content={<Locale localeKey="setting_menu_quality_list_item_auto" />}
+                    text={<Locale localeKey="setting_menu_quality_list_item_auto" />}
                 />
                 {qualityListGenerator()}
             </>

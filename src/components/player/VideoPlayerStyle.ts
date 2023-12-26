@@ -75,7 +75,6 @@ export const PlayIconWrapper = styled.div({
   zIndex: "300",
   background: 'rgba(0,0,0,.5)',
   borderRadius: '26px',
-  pointerEvents: 'none',
   width: '52px',
   height: '52px',
   display: 'flex',
@@ -202,7 +201,24 @@ export const PlayJumpIconWrapper = styled.div({
   left: "50%",
   transform: "translate(-50%, -50%)",
   zIndex: "300",
-  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  transition: "all .25s cubic-bezier(0,0,.2,1)",
+  width: '100%',
+  maxWidth: '350px',
+
+  "svg": {
+    width: '40px',
+    height: 'auto'
+  }
+});
+export const PlayJumpIconWrapperFix = styled.div({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  zIndex: "300",
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -219,7 +235,6 @@ export const PlayJumpIconWrapper = styled.div({
 export const PlayJumpIcon = styled.div({
   background: 'rgba(0,0,0,.5)',
   borderRadius: '50%',
-  pointerEvents: 'none',
   width: '72px',
   height: '72px',
   display: 'flex',
@@ -231,3 +246,17 @@ export const PlayJumpIcon = styled.div({
   }
 },
   ({ isClicked }: { isClicked: boolean }) => ({ opacity: isClicked ? 1 : 0 }));
+
+export const PlayJumpIconFix = styled.div({
+  background: 'rgba(0,0,0,.5)',
+  borderRadius: '50%',
+  width: '72px',
+  height: '72px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  "svg": {
+    width: '58px'
+  }
+})

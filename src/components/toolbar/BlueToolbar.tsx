@@ -11,6 +11,7 @@ import MediaTimeLine from '../timeline/MediaTimeLine';
 import Speed from '../tools/Speed';
 import Subtitle from '../tools/SubTitle';
 import Mic from '../tools/Mic';
+import Quality from '../tools/Quality';
 
 const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
 
@@ -32,7 +33,7 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
                     <Mic />
                     <Subtitle />
                     <Speed />
-                    <Setting />
+                    <Quality />
                     <PictureInPicture />
                     <Fullscreen />
                 </SettingRightSection>

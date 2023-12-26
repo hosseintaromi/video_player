@@ -3,7 +3,7 @@ import { usePlayerContext } from '../../hooks/usePlayerContext'
 import { throttle } from "lodash-es"
 import { useFullscreen } from '../../hooks/useFullscreen'
 
-const TouchContainer = ({ children, onShow }: { children: ReactNode, onShow: (show: boolean) => void }) => {
+const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactNode, canPlayOnClick: boolean, onShow: (show: boolean) => void }) => {
     const isPlay = useRef<boolean>()
     const isShow = useRef<boolean>()
     const timeOutRef = useRef<NodeJS.Timeout | undefined>()
@@ -56,7 +56,7 @@ const TouchContainer = ({ children, onShow }: { children: ReactNode, onShow: (sh
     return (
         <div
             onDoubleClick={toggleFullscreen}
-            onClick={togglePlay}
+            onClick={canPlayOnClick ? togglePlay : () => { }}
             onMouseMove={calcThrottle}
             onTouchEnd={calcThrottle}
             onTouchMove={calcThrottle}
