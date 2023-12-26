@@ -7,7 +7,7 @@ import Locale from '../locale/Locale';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import { LevelType, MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
 import Icon from '../icons/Icon';
-import { SettingItemArrowSpan } from './SettingStyle';
+import { SettingBadge, SettingItemArrowSpan } from './SettingStyle';
 
 type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
@@ -69,6 +69,7 @@ const SettingList = ({
                     <SettingItemArrowSpan>
                         {currentPlayBackSpeed}
                     </SettingItemArrowSpan>
+                    <SettingBadge>1057</SettingBadge>
                     <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>

@@ -86,3 +86,6 @@ export const SettingItemMore = styled.div(({ theme }) => ({
 }));
 
 export const SettingItemWrapper = styled.span({});
+
+export const SettingBadge = styled.span(({ theme }) => ({
+}));
