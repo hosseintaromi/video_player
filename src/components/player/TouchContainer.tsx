@@ -17,12 +17,14 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     }, video_wrapper_id, video_player);
 
     const togglePlay = () => {
-        changePlayPause(!isPlay.current)
+        if (canPlayOnClick)
+            changePlayPause(!isPlay.current)
+        else
+            hideWithDelay()
     }
 
     const { getHideTime, changePlayPause } = usePlayerContext({
         onPlayPause: (playStatus: boolean) => {
-            console.log('first', playStatus)
             isPlay.current = playStatus
             hideWithDelay()
         }
@@ -45,18 +47,20 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
         }
         showHandler(true)
         timeOutRef.current = setTimeout(() => {
+            console.log('shartt', isPlay.current && !setting_menu)
             if (isPlay.current && !setting_menu) {
                 showHandler(false)
             }
-        }, 1000000)
+        }, 4000)
 
     };
 
     const calcThrottle = useCallback(throttle(hideWithDelay, 200), [])
     return (
         <div
+            id='slm'
             onDoubleClick={toggleFullscreen}
-            onClick={canPlayOnClick ? togglePlay : () => { }}
+            onClick={togglePlay}
             onMouseMove={calcThrottle}
             onTouchEnd={calcThrottle}
             onTouchMove={calcThrottle}

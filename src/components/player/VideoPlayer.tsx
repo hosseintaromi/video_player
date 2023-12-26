@@ -46,6 +46,10 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
         }}>
             {/* {children ? children : <MobilePlayerTemplate />} */}
             {children ? children : chosePlayerSize()}
+            <MobilePlayerTemplate />
+            <BlueMobileTemeplate />
+            <PlayerTemplate />
+
             <PlayerInitializer />
         </VideoPlayerContext.Provider>
     )
