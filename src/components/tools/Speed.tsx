@@ -2,10 +2,9 @@ import React, { HTMLAttributes, useState } from 'react'
 import Icon from '../icons/Icon'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 import Dialog from '../general/Dialog'
-import { DialogTitle, DialogLabel } from '../general/DialogStyle'
-import Switch from '../general/Switch'
-import Locale from '../locale/Locale'
-import SettingItem from '../setting/SettingItem'
+import { DialogTitle } from '../general/DialogStyle'
+import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle'
+import { CenterBox } from '../general/FlexCenter'
 
 const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     const { getSpeeds, changeSpeed } = usePlayerContext()
@@ -23,9 +22,19 @@ const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
                 <DialogTitle>سرعت پخش</DialogTitle>
                 {getSpeeds().map((item, index) => (
-                    <button style={{ backgroundColor: indexSpeed === index ? 'red' : 'blue' }} key={index + 'speedDialog'} onClick={() => setSpeed(index)}>
-                        {item}
-                    </button>
+                    <SettingMenuItem
+                        onClick={() => setSpeed(index)}
+                        className={`is-reversed ${indexSpeed === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                    >
+                        <CenterBox>
+                            <SettingItemIcon className='reversed-icon' style={{ display: indexSpeed === index ? 'flex' : 'none' }}>
+                                <Icon isClickable={true} type='checkMark' />
+                            </SettingItemIcon>
+                            <SettingItemSpan className='reserved-span'>
+                                {item}
+                            </SettingItemSpan>
+                        </CenterBox>
+                    </SettingMenuItem>
                 ))}
             </Dialog>
             <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="speed" />

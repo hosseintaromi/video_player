@@ -5,7 +5,7 @@ import { LevelType } from '../../@types/UseVideoHlsType.model'
 import Dialog from '../general/Dialog'
 import { DialogTitle } from '../general/DialogStyle'
 import Locale from '../locale/Locale'
-import { SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle'
+import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle'
 import { CenterBox } from '../general/FlexCenter'
 
 const Quality = () => {
@@ -33,22 +33,35 @@ const Quality = () => {
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
                 <DialogTitle>کیفیت پخش</DialogTitle>
                 {levels?.map((item, index) => (
-                    // <button onClick={() => setQuality(index)} style={{ backgroundColor: currentLevel === index ? 'red' : 'blue' }} key={index + 'speedDialog'} >
-                    //     {item.name}
-                    // </button>
-                    <SettingMenuItem  onClick={() => setQuality(index)} style={{ backgroundColor: currentLevel === index ? 'red' : 'blue' }} key={index + 'speedDialog'}>
+                    <SettingMenuItem
+                        onClick={() => setQuality(index)}
+                        className={`is-reversed ${currentLevel === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                    >
                         <CenterBox>
-                            <SettingItemSpan>
-                            {item.name}
+                            <SettingItemIcon className='reversed-icon' style={{ display: currentLevel === index ? 'flex' : 'none' }}>
+                                <Icon isClickable={true} type='checkMark' />
+                            </SettingItemIcon>
+                            <SettingItemSpan className='reserved-span'>
+                                {item.name}
                             </SettingItemSpan>
                         </CenterBox>
                     </SettingMenuItem>
                 ))}
-                <button onClick={() => setQuality(-1)}>
-                    <Locale localeKey="setting_menu_quality_list_item_auto" />
-                </button>
+                <SettingMenuItem
+                    onClick={() => setQuality(-1)}
+                    className={`is-reversed ${currentLevel === -1 ? 'active' : ''}`} key={-1 + 'speedDialog'}
+                >
+                    <CenterBox>
+                        <SettingItemIcon className='reversed-icon' style={{ display: currentLevel === -1 ? 'flex' : 'none' }}>
+                            <Icon isClickable={true} type='checkMark' />
+                        </SettingItemIcon>
+                        <SettingItemSpan className='reserved-span'>
+                            <Locale localeKey="setting_menu_quality_list_item_auto" />
+                        </SettingItemSpan>
+                    </CenterBox>
+                </SettingMenuItem>
             </Dialog>
-            <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="quality" />
+            <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="setting" />
 
         </>
     )

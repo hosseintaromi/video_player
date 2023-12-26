@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@emotion/react'
-import { Gradient, PlayJumpIcon, PlayJumpIconFix, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
+import { Gradient, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
 import Loading from '../../loading/Loading';
 import TouchContainer from '../../player/TouchContainer';
 import Video from '../../player/Video';
 import { useStyle } from '../../../hooks/useStyle';
 import Play from '../../tools/Play';
-import { usePlayerContext } from '../../../hooks/usePlayerContext';
 import JumpBack from '../../tools/JumpBack';
 import JumpForward from '../../tools/JumpForward';
 import BlueToolbar from '../../toolbar/BlueToolbar';
@@ -22,11 +21,9 @@ const BlueTemeplate = () => {
     return (
         <ThemeProvider theme={style}>
             <VideoWrapperBlue id="video_wrapper_id">
-                <PlayJumpIconWrapper>
+                <PlayJumpIconWrapper isFaded={isFadeOut}>
                     <JumpBack />
-                    <PlayJumpIconFix>
-                        <Play />
-                    </PlayJumpIconFix>
+                    <Play />
                     <JumpForward />
                 </PlayJumpIconWrapper>
                 <Loading />
