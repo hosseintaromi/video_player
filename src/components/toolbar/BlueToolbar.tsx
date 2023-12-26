@@ -12,6 +12,7 @@ import Speed from '../tools/Speed';
 import Subtitle from '../tools/SubTitle';
 import Mic from '../tools/Mic';
 import Quality from '../tools/Quality';
+import Mute from '../tools/Mute';
 
 const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
 
@@ -27,7 +28,7 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
                     <ToolBarPlayIcon>
                         <Play />
                     </ToolBarPlayIcon>
-                    <Volume />
+                    <Mute />
                 </SettingLeftSection>
                 <SettingRightSection>
                     <Mic />
