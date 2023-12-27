@@ -195,7 +195,7 @@ export const VideoWrapperBlue = styled.div({
   },
 });
 
-export const PlayJumpIconWrapper = styled.div({
+export const PlayJumpIconWrapper = styled.div(({ theme }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -204,7 +204,7 @@ export const PlayJumpIconWrapper = styled.div({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  transition: "all .25s cubic-bezier(0,0,.2,1)",
+  transition: "opacity .25s cubic-bezier(0,0,.2,1)",
   width: '100%',
   maxWidth: '350px',
 
@@ -212,25 +212,9 @@ export const PlayJumpIconWrapper = styled.div({
     width: '40px',
     height: 'auto'
   }
-});
-export const PlayJumpIconWrapperFix = styled.div({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  zIndex: "300",
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  transition: "all .25s cubic-bezier(0,0,.2,1)",
-  width: '100%',
-  maxWidth: '350px',
-
-  "svg": {
-    width: '40px',
-    height: 'auto'
-  }
-});
+}),
+  ({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
+);
 
 export const PlayJumpIcon = styled.div({
   background: 'rgba(0,0,0,.5)',

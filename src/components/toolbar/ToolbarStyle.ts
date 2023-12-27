@@ -108,3 +108,18 @@ export const MobileTopToolbar = styled.div(({ theme }) => ({
     marginLeft: "8px",
   },
 }));
+export const IconButton = styled.button(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "relative",
+  width: "48px",
+  height: "48px",
+  padding: 0,
+  border: "none",
+  outline: "none",
+  font: "inherit",
+  textTransform: "inherit",
+  color: "inherit",
+  background: "transparent",
+}));

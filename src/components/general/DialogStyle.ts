@@ -15,36 +15,40 @@ export const ModalOverlay = styled.div({
   justifyContent: "center",
 });
 
-export const ModalContent = styled.div({
-});
+export const ModalContent = styled.div(({ theme }) => ({
+  color: theme.settingTextColor,
+}));
 
 export const ModalWrapper = styled.div(({ theme }) => ({
-  boxShadow: "0 0 24px 12px rgba(0,0,0,0.25)",
+  border: `1px solid rgba(35, 35, 35, 1)`,
   borderRadius: "12px",
   position: "relative",
   zIndex: 2,
   display: "flex",
   flexDirection: "column",
-  padding: "16px",
   margin: "0 auto",
   overflowX: "hidden",
   overflowY: "auto",
   color: "#0f0f0f",
-  backgroundColor: "#fff",
-  border:" none",
+  backgroundColor: theme.settingBg,
   minWidth: "250px",
   maxWidth: "356px",
   maxHeight: "100%",
-  direction: theme.dir
+  direction: theme.dir,
 }));
 
 export const DialogTitle = styled.div(({ theme }) => ({
-  marginBottom: "14px",
   fontSize: "1.25rem",
   overflow: "hidden",
-  lineHeight: "1.25",
   textOverflow: "ellipsis",
   fontWeight: "normal",
+  height: "49px",
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "center",
+  borderBottom: "1px solid #333",
+  color: theme.settingTitleTextColor,
 }));
 
 export const DialogLabel = styled.label(({ theme }) => ({

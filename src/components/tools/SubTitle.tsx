@@ -5,6 +5,8 @@ import { MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
 import Dialog from '../general/Dialog';
 import { DialogTitle } from '../general/DialogStyle';
 import Locale from '../locale/Locale';
+import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../setting/SettingStyle';
+import { CenterBox } from '../general/FlexCenter';
 
 const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     const [currentSubtitle, setCurrentSubtitle] = useState<number | undefined>()
@@ -29,15 +31,32 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>تنظیمات</DialogTitle>
+                <DialogTitle>زیرنویس</DialogTitle>
                 {subtitles?.map((item, index) => (
-                    <button onClick={() => setSubtitle(index)} style={{ backgroundColor: currentSubtitle === index ? 'red' : 'blue' }} key={index + 'speedDialog'} >
-                        {item.name}
-                    </button>
+                    <SettingMenuItem
+                        onClick={() => setSubtitle(index)}
+                        className={`is-reversed ${currentSubtitle === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                    >
+                        <CenterBox>
+                            <SettingItemIcon className='reversed-icon' style={{ display: currentSubtitle === index ? 'flex' : 'none' }}>
+                                <Icon isClickable={true} type='checkMark' />
+                            </SettingItemIcon>
+                            <SettingItemSpan className='reserved-span'>
+                                {item.name}
+                            </SettingItemSpan>
+                        </CenterBox>
+                    </SettingMenuItem>
                 ))}
-                <button onClick={() => setSubtitle(-1)}>
-                    <Locale localeKey="setting_menu_subtitle_off" />
-                </button>
+                <SettingMenuItem
+                    onClick={() => setSubtitle(-1)}
+                    className='is-reversed'
+                >
+                    <CenterBox>
+                        <SettingItemSpan className='reserved-span'>
+                            <Locale localeKey="setting_menu_subtitle_off" />
+                        </SettingItemSpan>
+                    </CenterBox>
+                </SettingMenuItem>
             </Dialog>
             <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="subtitle" />
         </>

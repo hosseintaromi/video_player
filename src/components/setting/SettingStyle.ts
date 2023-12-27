@@ -57,6 +57,21 @@ export const SettingMenuItem = styled.div(({ theme }) => ({
     },
     '&.dialog-item:hover': {
         backgroundColor: "transparent"
+    },
+    '&.active': {
+        color: theme.settingTitleTextColor
+    },
+    '&.is-reversed': {
+        justifyContent: 'flex-start',
+        '.reserved-span': {
+            paddingLeft: 0,
+            paddingRight: "60px",
+        },
+        '.reversed-icon': {
+            right: '1rem',
+            left: 'auto',
+            padding: 0,
+        }
     }
 }));
 
@@ -74,7 +89,7 @@ export const SettingItemIcon = styled.div({
     paddingLeft: "10px",
     width: "16px",
     position: "absolute",
-    left: "0",
+    left: 0,
     top: "50%",
     transform: "translateY(-50%)",
 });

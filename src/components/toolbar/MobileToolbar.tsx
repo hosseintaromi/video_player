@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MobileSettingPlay, MobileToolbarWrapper, MobileTopToolbar, SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from '../toolbar/ToolbarStyle';
+import { IconButton, MobileSettingPlay, MobileToolbarWrapper, MobileTopToolbar, SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
 import Play from '../tools/Play';
 import Time from '../tools/Time';
@@ -16,21 +16,6 @@ import Locale from '../locale/Locale';
 
 const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const SettingButton = styled.button((theme) => ({
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "relative",
-        width: "48px",
-        height: "48px",
-        padding: 0,
-        border: "none",
-        outline: "none",
-        font: "inherit",
-        textTransform: "inherit",
-        color: "inherit",
-        background: "transparent",
-    }));
 
     const DropdownList = [
         {
@@ -64,11 +49,11 @@ const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
                     <Dropdown className='dialog-dropdown' options={DropdownList} />
                 </Dialog>
                 <Switch hasIcon={true} />
-                <SettingButton onClick={() => {
+                <IconButton onClick={() => {
                     setIsOpen(true)
                 }}>
                     <Icon isClickable type='setting' />
-                </SettingButton>
+                </IconButton>
             </MobileTopToolbar>
             <MobileSettingPlay>
                 <ToolBarPlayIcon>
