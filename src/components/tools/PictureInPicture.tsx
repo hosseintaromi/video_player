@@ -3,7 +3,6 @@ import Icon from '../icons/Icon';
 
 const PictureInPicture = () => {
     const video_player = document.getElementById("video_player");
-
     function togglePictureInPicture() {
         if (document.pictureInPictureElement) {
             document.exitPictureInPicture();

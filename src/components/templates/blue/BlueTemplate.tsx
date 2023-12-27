@@ -14,10 +14,6 @@ const BlueTemeplate = () => {
     const { style } = useStyle();
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
 
-
-    useEffect(() => {
-        console.log('firstdddd', isFadeOut)
-    }, [isFadeOut])
     return (
         <ThemeProvider theme={style}>
             <VideoWrapperBlue id="video_wrapper_id">

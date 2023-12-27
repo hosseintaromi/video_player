@@ -35,7 +35,6 @@ const Demo = ({ length }: DemoProps) => {
     //   toolbarBg: 'blue',
     //   toolbarFontSize: 'blue',
     // },
-
     autoPlay: true,
     timeForHideEl: 1000,
     type: 'HLS'
