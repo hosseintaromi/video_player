@@ -45,16 +45,7 @@ const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                         </CenterBox>
                     </SettingMenuItem>
                 ))}
-                <SettingMenuItem
-                    onClick={() => setAudioTrack(-1)}
-                    className='is-reversed'
-                >
-                    <CenterBox>
-                        <SettingItemSpan className='reserved-span'>
-                            <Locale localeKey="setting_menu_subtitle_off" />
-                        </SettingItemSpan>
-                    </CenterBox>
-                </SettingMenuItem>
+
             </Dialog>
             <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="mic" />
         </>

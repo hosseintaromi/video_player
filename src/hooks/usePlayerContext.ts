@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
 import { GenericEvents, PlayerEventsType } from "../@types/player.model";
 import { useContextEvents } from "./useContextEvents";
@@ -8,6 +8,9 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
   const context = useContext(VideoPlayerContext);
   const timeRef = useRef<number>(0);
   const currentBuffer = useRef<{ index: number; length: number }>();
+  const [isSettingOpen, setIsSettingOpen] = useState(false)
+
+
 
   const getVideoEl = () => {
     return context.getVideoRef();

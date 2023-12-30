@@ -49,9 +49,12 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                 ))}
                 <SettingMenuItem
                     onClick={() => setSubtitle(-1)}
-                    className='is-reversed'
+                    className={`is-reversed ${currentSubtitle === -1 ? 'active' : ''}`} key={-1 + 'speedDialog'}
                 >
                     <CenterBox>
+                        <SettingItemIcon className='reversed-icon' style={{ display: currentSubtitle === -1 ? 'flex' : 'none' }}>
+                            <Icon isClickable={true} type='checkMark' />
+                        </SettingItemIcon>
                         <SettingItemSpan className='reserved-span'>
                             <Locale localeKey="setting_menu_subtitle_off" />
                         </SettingItemSpan>

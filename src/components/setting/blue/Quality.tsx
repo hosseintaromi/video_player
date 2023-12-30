@@ -44,7 +44,7 @@ const Quality = () => {
                                 <Icon isClickable={true} type='checkMark' />
                             </SettingItemIcon>
                             <SettingItemSpan className='reserved-span'>
-                                {item.name}
+                                {item.height}
                             </SettingItemSpan>
                         </CenterBox>
                     </SettingMenuItem>
