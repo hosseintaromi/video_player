@@ -65,13 +65,9 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
 
     };
     useEffect(() => {
-        if (!hasKeyControl) return
+        console.log(!hasKeyControl())
+        if (!hasKeyControl()) return
         const handelKeyDown = (e: KeyboardEvent) => {
-            console.log(e.keyCode, isPlay.current)
-            // 39 arrow right
-            // 37 arrow left
-            //32 space
-            //
             if (e.keyCode === 39) increaseTime(10)
             if (e.keyCode === 37) decreaseTime(10)
             if (e.keyCode === 32 && isPlay.current !== undefined) changePlayPause(!isPlay.current)
