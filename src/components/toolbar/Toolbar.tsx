@@ -1,7 +1,7 @@
 import React from 'react';
 import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter, TimeDivider, ToolbarWrapper } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
-import Setting from '../setting/Setting';
+import Setting from '../setting/red/Setting';
 import Play from '../tools/Play';
 import Volume from '../tools/Volume';
 import Time from '../tools/Time';

@@ -14,6 +14,9 @@ const Demo = ({ length }: DemoProps) => {
       // console.log('client', e)
     },
     speeds: [0.5, 1, 1.25, 1.5, 2],
+    qualities: [],
+    audioTracks: [],
+    subTitle: [],
     locale: {
       setting_menu_change_speed_title: 'انتخاب سرعت پخش',
       setting_menu_change_quality_title: 'انتخاب کیفیت',
@@ -37,6 +40,7 @@ const Demo = ({ length }: DemoProps) => {
     // },
     autoPlay: true,
     timeForHideEl: 1000,
+
     type: 'HLS'
     // icons: {
     //   arrow: <p>hello</p>,

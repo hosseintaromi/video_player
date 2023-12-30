@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { pageDir, pageName } from './Setting'
-import { FlexCenter } from '../general/FlexCenter'
-import Icon from '../icons/Icon'
+import { FlexCenter } from '../../general/FlexCenter'
+import Icon from '../../icons/Icon'
 import React from 'react'
 import { SettingHeaderTitle, SettingHeaderWrapper } from './SettingStyle'
 

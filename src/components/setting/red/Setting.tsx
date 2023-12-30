@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
-import Overlay from '../general/Overlay';
+import Overlay from '../../general/Overlay';
 
 import SettingList from './SettingList';
 import SettingPlaybackSpeed from './SettingPlaybackSpeed';
 import SettingQuality from './SettingQuality';
 import SettingSubtitle from './SettingSubtitle';
 import SettingAudioTrack from './SettingAudioTrack';
-import Icon from '../icons/Icon';
+import Icon from '../../icons/Icon';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { FadeBackDrop, OverlayContainer } from './SettingStyle';

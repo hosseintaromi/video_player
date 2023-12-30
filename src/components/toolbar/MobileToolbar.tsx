@@ -11,7 +11,7 @@ import Icon from '../icons/Icon';
 import Dropdown from '../general/Dropdown';
 import styled from '@emotion/styled';
 import { DialogLabel, DialogTitle } from '../general/DialogStyle';
-import SettingItem from '../setting/SettingItem';
+import SettingItem from '../setting/red/SettingItem';
 import Locale from '../locale/Locale';
 
 const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {

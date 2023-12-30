@@ -1,12 +1,12 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
-import { SettingMenu } from '../general/FlexCenter';
+import { SettingMenu } from '../../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
-import { useVideo } from '../../hooks/useVideo';
-import Locale from '../locale/Locale';
-import { usePlayerContext } from '../../hooks/usePlayerContext';
-import { LevelType, MediaPlaylistType } from '../../@types/UseVideoHlsType.model';
-import Icon from '../icons/Icon';
+import { useVideo } from '../../../hooks/useVideo';
+import Locale from '../../locale/Locale';
+import { usePlayerContext } from '../../../hooks/usePlayerContext';
+import { LevelType, MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
+import Icon from '../../icons/Icon';
 import { SettingItemArrowSpan } from './SettingStyle';
 
 type SettingListType = {

@@ -4,14 +4,17 @@ import { usePlayerContext } from "./usePlayerContext";
 
 export const usePlayer = (playerConfig: PlayerConfigType) => {
   const playerObject: PlayerObjectType = {
-    loadVideo: () => {},
-    changeLocale: () => {},
+    loadVideo: () => { },
+    changeLocale: () => { },
     speeds: playerConfig.speeds,
     locale: playerConfig.locale,
     icons: playerConfig.icons,
     style: playerConfig.style,
     autoPlay: playerConfig.autoPlay,
     type: playerConfig.type,
+    qualities: playerConfig.qualities,
+    audioTracks: playerConfig.audioTracks,
+    subTitle: playerConfig.subTitle,
   };
 
   usePlayerContext({

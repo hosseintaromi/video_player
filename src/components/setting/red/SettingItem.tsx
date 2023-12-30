@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react'
-import { CenterBox, FlexCenter } from '../general/FlexCenter'
+import { CenterBox, FlexCenter } from '../../general/FlexCenter'
 import { SettingItemIcon, SettingItemMore, SettingItemSpan, SettingMenuItem } from './SettingStyle'
 
 const SettingCenter = ({ children }: HTMLAttributes<HTMLElement>) => {

@@ -6,8 +6,7 @@ import TouchContainer from '../../player/TouchContainer';
 import Video from '../../player/Video';
 import { useStyle } from '../../../hooks/useStyle';
 import Play from '../../tools/Play';
-import JumpBack from '../../tools/JumpBack';
-import JumpForward from '../../tools/JumpForward';
+import Jump from '../../tools/Jump';
 import BlueToolbar from '../../toolbar/BlueToolbar';
 
 const BlueTemeplate = () => {
@@ -18,9 +17,9 @@ const BlueTemeplate = () => {
         <ThemeProvider theme={style}>
             <VideoWrapperBlue id="video_wrapper_id">
                 <PlayJumpIconWrapper isFaded={isFadeOut}>
-                    <JumpBack />
+                    <Jump type='back' />
                     <Play />
-                    <JumpForward />
+                    <Jump type='forward' />
                 </PlayJumpIconWrapper>
                 <Loading />
                 <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => { console.log('show', show); setIsFadeOut(!show) }} >

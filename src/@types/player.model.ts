@@ -48,12 +48,18 @@ export interface PlayerConfigType {
   autoPlay?: boolean;
   timeForHideEl?: number;
   type: "HLS" | "MP4";
+  qualities: number[],
+  audioTracks: string[],
+  subTitle: string[],
 }
 
 export interface PlayerObjectType {
   loadVideo: (src: string) => void;
   changeLocale: (locale: PlayerLocaleType) => void;
   speeds?: number[];
+  qualities: number[],
+  audioTracks: string[],
+  subTitle: string[],
   src?: string;
   locale?: PlayerLocaleType;
   icons?: IconsType;

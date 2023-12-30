@@ -70,6 +70,20 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     if (el) el.currentTime = time;
     checkBuffer(true);
   };
+
+  const increaseTime = (time: number) => {
+    const el = getVideoEl();
+    if (el) el.currentTime = (el.currentTime + time);
+    checkBuffer(true);
+  };
+  const decreaseTime = (time: number) => {
+    const el = getVideoEl();
+    if (el) el.currentTime = (el.currentTime - time);
+    checkBuffer(true);
+  };
+
+
+
   const getDuration = () => {
     const el = getVideoEl();
     return el?.duration;
@@ -161,6 +175,8 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     changePlayPause,
     getIsPlay,
     changeTime,
+    increaseTime,
+    decreaseTime,
     getVolume,
     changeMute,
     changeVolume,

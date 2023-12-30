@@ -18,7 +18,7 @@ const Dialog = ({ children, isOpen, onClose }: DialogPropsType) => {
     return (<>
         {createPortal(
             isOpen && <ModalOverlay onClick={onClose}>
-                <ModalWrapper onClick={e => e.stopPropagation()}>
+                <ModalWrapper onClick={e => e.stopPropagation()} id='setting-menu'>
                     <ModalContent>
                         {children}
                     </ModalContent>
