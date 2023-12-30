@@ -32,7 +32,7 @@ export const Bubble = styled.output({
   position: "absolute",
   background: "rgba(33, 33, 33, 0.6)",
   borderRadius: "8px",
-  left: "0%",
+  left: "300px",
   zIndex: "5",
   flexDirection: "column",
   justifyContent: "center",

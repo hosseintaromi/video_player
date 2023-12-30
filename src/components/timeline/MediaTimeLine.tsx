@@ -52,12 +52,13 @@ const TimeLine = () => {
 
         const bubbleEl = snapShotBox.current;
         const bubbleCursorEl = snapShotBoxCursor.current;
-        if (!bubbleEl || !bubbleCursorEl || !duration) return;
+
+        if (!bubbleEl || !bubbleCursorEl) return;
         const halfBubbleWidth = bubbleEl.offsetWidth / 2;
         bubbleEl.style.left = `${Math.max(
             halfBubbleWidth,
             Math.min(offsetX, event.target.clientWidth - halfBubbleWidth),
-        )}px `;
+        )}px`;
         bubbleEl.style.marginLeft = `-${65}px `;
         bubbleCursorEl.style.left = `${Math.max(
             13,
