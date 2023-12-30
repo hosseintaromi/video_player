@@ -32,9 +32,11 @@ export const useVideo = (events?: HlsVideoEventType) => {
 
   const loadHlsVideo = useCallback((src: string) => {
     const videoEl = context.getVideoRef();
+    console.log(context.config?.qualities)
     if (!videoEl) return;
     const hls = (context.hls = new Hls({
       enableWorker: false,
+
     }));
 
     hls.attachMedia(videoEl);
@@ -55,7 +57,8 @@ export const useVideo = (events?: HlsVideoEventType) => {
   }, []);
 
   const getLevels = () => {
-    return context.hls?.levels;
+    const qualities = context.config?.qualities
+    return context.hls?.levels.filter((item) => qualities?.length ? qualities.includes(item.height) : item)
   };
   const getCurrentLevel = () => {
     return {
@@ -68,7 +71,8 @@ export const useVideo = (events?: HlsVideoEventType) => {
   };
 
   const getSubtitle = () => {
-    return context.hls?.subtitleTracks;
+    const subTitle = context.config?.subTitle
+    return context.hls?.subtitleTracks.filter((item) => subTitle?.length ? subTitle.includes(item.name) : item)
   };
   const getCurrentSubtitle = () => {
     return context.hls?.subtitleTrack;
@@ -78,7 +82,8 @@ export const useVideo = (events?: HlsVideoEventType) => {
   };
 
   const getAudioTracks = () => {
-    return context.hls?.audioTracks;
+    const audioTracks = context.config?.audioTracks
+    return context.hls?.audioTracks.filter((item) => audioTracks?.length ? audioTracks.includes(item.name) : item)
   };
   const getAudioTrack = () => {
     return context.hls?.audioTrack;

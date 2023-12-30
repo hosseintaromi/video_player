@@ -14,9 +14,9 @@ const Demo = ({ length }: DemoProps) => {
       // console.log('client', e)
     },
     speeds: [0.5, 1, 1.25, 1.5, 2],
-    qualities: [],
-    audioTracks: [],
-    subTitle: [],
+    qualities: [252, 432],
+    audioTracks: ['English'],
+    subTitle: ['Chinese'],
     locale: {
       setting_menu_change_speed_title: 'انتخاب سرعت پخش',
       setting_menu_change_quality_title: 'انتخاب کیفیت',
