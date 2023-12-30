@@ -22,7 +22,7 @@ const BlueTemeplate = () => {
                     <Jump type='forward' />
                 </PlayJumpIconWrapper>
                 <Loading />
-                <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => { console.log('show', show); setIsFadeOut(!show) }} >
+                <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
                     <Video />
                 </TouchContainer>
                 <Gradient isFaded={isFadeOut} />
