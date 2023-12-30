@@ -1,8 +1,9 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import RangeSelect from "../general/range-select/RangeSelect"
 import { usePlayerContext } from "../../hooks/usePlayerContext";
 import { OnUpdateTimeType } from "../../@types/player.model";
 import { Bubble, BufferSize, GeneralStyleForRange, ThumbCursor } from "./MediaTimeLineStyle"
+import Snapshot from "../tools/Snapshot";
 
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
@@ -15,19 +16,20 @@ const TimeLine = () => {
         calcInputVal: () => { },
         toggleThumb: () => { }
     });
+    const [hoverTime, setHoverTime] = useState<number | string>();
 
     const playStateRef = useRef<boolean>();
     const snapShotBoxCursor = useRef<HTMLDivElement>(null);
     const snapShotBox = useRef<HTMLOutputElement>(null);
 
-    var duration = 0;
+    const duration = useRef(0);
     var percentage = 0
     var timeOut: ReturnType<typeof setTimeout>;
 
 
     const { changeTime, getIsPlay, changePlayPause } = usePlayerContext({
         onUpdateTime: (e: OnUpdateTimeType) => {
-            duration = e.duration
+            duration.current = e.duration
             percentage = e.percentage;
             controllerRef.current.calcInputVal(percentage, false)
         },
@@ -39,7 +41,7 @@ const TimeLine = () => {
     })
 
     const rangeSelectChangeVideoTime = useCallback((e: number) => {
-        changeTime((e * duration) / 100)
+        changeTime((e * duration.current) / 100)
     }, [])
 
 
@@ -64,6 +66,7 @@ const TimeLine = () => {
             13,
             Math.min(offsetX, event.target.clientWidth) + 13,
         )}px `;
+        setHoverTime(((offsetX / event.target.clientWidth * 100) * duration.current) / 100)
     };
 
     const changeShowBubble = (e: boolean) => {
@@ -118,10 +121,11 @@ const TimeLine = () => {
                 }}
             />
             <Bubble ref={snapShotBox} className="bubble">
-                <img
+                {/* <img
                     src="https://static.namava.ir/Content/Upload/Images/a72becc0-c77b-4110-9b04-9206bc76858f.jpg"
                     alt=""
-                />
+                /> */}
+                {/* <Snapshot time={hoverTime} snapshots={url} /> */}
             </Bubble>
             <ThumbCursor ref={snapShotBoxCursor} />
             <BufferSize id="buffer-size" />
