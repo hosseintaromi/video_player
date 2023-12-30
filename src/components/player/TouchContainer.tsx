@@ -35,7 +35,7 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
             hideWithDelay()
     }
 
-    const { getHideTime, changePlayPause } = usePlayerContext({
+    const { getHideTime, changePlayPause, increaseTime, decreaseTime, hasKeyControl } = usePlayerContext({
         onPlayPause: (playStatus: boolean) => {
             isPlay.current = playStatus
             hideWithDelay()
@@ -65,10 +65,16 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
 
     };
     useEffect(() => {
-        console.log('afarin ?')
+        if (!hasKeyControl) return
         const handelKeyDown = (e: KeyboardEvent) => {
-            console.log(e.keyCode)
-
+            console.log(e.keyCode, isPlay.current)
+            // 39 arrow right
+            // 37 arrow left
+            //32 space
+            //
+            if (e.keyCode === 39) increaseTime(10)
+            if (e.keyCode === 37) decreaseTime(10)
+            if (e.keyCode === 32 && isPlay.current !== undefined) changePlayPause(!isPlay.current)
         };
 
         window.addEventListener("keydown", handelKeyDown);

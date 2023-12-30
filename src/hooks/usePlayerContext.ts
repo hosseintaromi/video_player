@@ -192,5 +192,6 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     isAutoPlay,
     getHideTime,
     getDuration,
+    hasKeyControl,
   };
 };
