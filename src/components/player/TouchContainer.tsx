@@ -1,13 +1,25 @@
-import React, { ReactNode, useCallback, useRef, useState } from 'react'
+import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 import { throttle } from "lodash-es"
 import { useFullscreen } from '../../hooks/useFullscreen'
+import VideoPlayerContext from '../../contexts/VideoPlayerContext'
+import { PlayerEventsType } from '../../@types/player.model'
+import useContextEvents from '../../hooks/useContextEvents'
 
 const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactNode, canPlayOnClick: boolean, onShow: (show: boolean) => void }) => {
     const isPlay = useRef<boolean>()
     const isShow = useRef<boolean>()
+    const isSettingOpen = useRef<boolean>()
     const timeOutRef = useRef<NodeJS.Timeout | undefined>()
-
+    const { listen } =
+        useContextEvents<PlayerEventsType>(VideoPlayerContext);
+    useEffect(() => {
+        listen({
+            onChangeSetting: (e) => {
+                isSettingOpen.current = e
+            }
+        })
+    }, [])
 
     const video_wrapper_id = document.getElementById("video_wrapper_id");
     const video_player = document.getElementById("video_player");
@@ -38,7 +50,6 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     }
 
     const hideWithDelay = () => {
-        const setting_menu = document.getElementById("setting-menu");
         if (!isPlay.current)
             return
         if (timeOutRef.current) {
@@ -47,8 +58,7 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
         }
         showHandler(true)
         timeOutRef.current = setTimeout(() => {
-            console.log('shartt', isPlay.current && !setting_menu)
-            if (isPlay.current && !setting_menu) {
+            if (isPlay.current && !isSettingOpen.current) {
                 showHandler(false)
             }
         }, getHideTime())

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import {
     ModalContent,
     ModalOverlay,
@@ -6,6 +6,9 @@ import {
 }
     from './DialogStyle';
 import { createPortal } from 'react-dom';
+import useContextEvents from '../../hooks/useContextEvents';
+import { PlayerEventsType } from '../../@types/player.model';
+import VideoPlayerContext from '../../contexts/VideoPlayerContext';
 
 type DialogPropsType = {
     children: ReactNode,
@@ -14,7 +17,11 @@ type DialogPropsType = {
 }
 
 const Dialog = ({ children, isOpen, onClose }: DialogPropsType) => {
-
+    const { call } =
+        useContextEvents<PlayerEventsType>(VideoPlayerContext);
+    useEffect(() => {
+        call.onChangeSetting?.(isOpen)
+    }, [isOpen])
     return (<>
         {createPortal(
             isOpen && <ModalOverlay onClick={onClose}>

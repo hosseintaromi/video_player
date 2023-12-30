@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter, TimeDivider, ToolbarWrapper } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
 import Setting from '../setting/red/Setting';
@@ -13,8 +13,18 @@ import Subtitle from '../setting/blue/SubTitle';
 import Mic from '../setting/blue/Mic';
 import Quality from '../setting/blue/Quality';
 import Mute from '../tools/Mute';
+import { useVideo } from '../../hooks/useVideo';
 
 const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
+    const [isShowQ, setIsShowQ] = useState<any>()
+    const [isShowS, setIsShowS] = useState<any>()
+    const [isShowA, setIsShowA] = useState<any>()
+    const loadLevels = () => {
+        setIsShowQ(getLevels() !== undefined)
+        setIsShowS(getSubtitle() !== undefined)
+        setIsShowA(getAudioTracks() !== undefined)
+    }
+    const { getAudioTracks, getLevels, getSubtitle } = useVideo({ onLoaded: loadLevels })
 
     return (
         <ToolbarWrapper isFaded={isFaded}>
@@ -31,10 +41,11 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
                     <Mute />
                 </SettingLeftSection>
                 <SettingRightSection>
-                    <Mic />
-                    <Subtitle />
+                    {isShowA && <Mic />}
+                    {isShowS && <Subtitle />}
                     <Speed />
-                    <Quality />
+                    {isShowQ && <Quality />}
+
                     <PictureInPicture />
                     <Fullscreen />
                 </SettingRightSection>

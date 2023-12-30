@@ -23,13 +23,13 @@ export const RingWrapper = styled.div(({ theme }) => ({
         animation: `${ring} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite`,
         borderColor: `${theme.iconColor} transparent transparent transparent`,
     },
-    'div:nth-child(1)': {
+    'div:nthChild(1)': {
         animationDelay: '-0.45s',
     },
-    'div:nth-child(2)': {
+    'div:nthChild(2)': {
         animationDelay: '-0.3s',
     },
-    'div:nth-child(3)': {
+    'div:nthChild(3)': {
         animationDelay: '-0.15s',
     }
 }));
