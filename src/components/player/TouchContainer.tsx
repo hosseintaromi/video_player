@@ -64,6 +64,20 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
         }, getHideTime())
 
     };
+    useEffect(() => {
+        console.log('afarin ?')
+        const handelKeyDown = (e: KeyboardEvent) => {
+            console.log(e.keyCode)
+
+        };
+
+        window.addEventListener("keydown", handelKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handelKeyDown);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const calcThrottle = useCallback(throttle(hideWithDelay, 200), [])
     return (

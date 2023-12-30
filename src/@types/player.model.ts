@@ -52,6 +52,7 @@ export interface PlayerConfigType {
   qualities: number[],
   audioTracks: string[],
   subTitle: string[],
+  keyControl: boolean
 }
 
 export interface PlayerObjectType {
@@ -68,6 +69,7 @@ export interface PlayerObjectType {
   autoPlay?: boolean;
   timeForHideEl?: number;
   type: "HLS" | "MP4";
+  keyControl: boolean
 }
 
 export type GenericEvents<T extends Record<string, string>> = {

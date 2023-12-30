@@ -31,6 +31,12 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
       : context.config?.autoPlay;
   };
 
+  const hasKeyControl = () => {
+    return context.config?.keyControl === undefined
+      ? false
+      : context.config?.keyControl;
+  }
+
   const getSpeeds = () => {
     return context.config?.speeds || [0.5, 1, 1.25, 1.5, 2];
   };

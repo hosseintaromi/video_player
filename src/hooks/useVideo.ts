@@ -32,7 +32,6 @@ export const useVideo = (events?: HlsVideoEventType) => {
 
   const loadHlsVideo = useCallback((src: string) => {
     const videoEl = context.getVideoRef();
-    console.log(context.config?.qualities)
     if (!videoEl) return;
     const hls = (context.hls = new Hls({
       enableWorker: false,
