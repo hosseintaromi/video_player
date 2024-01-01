@@ -1,13 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
-import styled from '@emotion/styled'
 
-const VideoTag = styled.video({
-    width: "100%",
-    height: "100%",
-    display: 'block',
-    backgroundColor: '#000'
-});
 const Video = () => {
     const { setVideoRef, isAutoPlay: getAutoPlay } = usePlayerContext()
     const videoRef = useRef<HTMLVideoElement>(null)
@@ -17,7 +10,7 @@ const Video = () => {
     }, [])
 
     return (
-        <VideoTag ref={videoRef} autoPlay={getAutoPlay()} muted id='video_player' />
+        <video className='video-tag' ref={videoRef} autoPlay={getAutoPlay()} muted id='video_player' />
     )
 }
 

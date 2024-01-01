@@ -26,7 +26,7 @@ const Time = ({ type }: { type: 'Current' | 'Total' | 'Remain' }) => {
     })
 
     return (
-        <TimeCounter>{time}</TimeCounter>
+        <div className='time-counter'>{time}</div>
     )
 }
 

@@ -27,20 +27,20 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
     const { getAudioTracks, getLevels, getSubtitle } = useVideo({ onLoaded: loadLevels })
 
     return (
-        <ToolbarWrapper isFaded={isFaded}>
-            <TimeCounter className='blue-counter'>
+        <div className='toolbar-wrapper' style={{opacity: isFaded ? 0 : 1}}>
+            <div className='time-counter blue-counter'>
                 <Time type='Current' />
                 <Time type='Total' />
-            </TimeCounter>
+            </div>
             <MediaTimeLine />
-            <SettingItemWrapper className='blue-setting-wrapper'>
-                <SettingLeftSection >
-                    <ToolBarPlayIcon>
+            <div className='setting-item-wrapper blue-setting-wrapper'>
+                <div className='setting-left-section'>
+                    <div className='toolbar-play-icon'>
                         <Play />
-                    </ToolBarPlayIcon>
+                    </div>
                     <Mute />
-                </SettingLeftSection>
-                <SettingRightSection>
+                </div>
+                <div className='setting-right-section'>
                     {isShowA && <Mic />}
                     {isShowS && <Subtitle />}
                     <Speed />
@@ -48,9 +48,9 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
 
                     <PictureInPicture />
                     <Fullscreen />
-                </SettingRightSection>
-            </SettingItemWrapper>
-        </ToolbarWrapper>
+                </div>
+            </div>
+        </div>
     )
 }
 

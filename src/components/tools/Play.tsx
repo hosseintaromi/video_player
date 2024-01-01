@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
-import { Button } from '../player/VideoPlayerStyle'
 import Icon from '../icons/Icon'
 
 const Play = ({ children }: { children?: ReactNode }) => {

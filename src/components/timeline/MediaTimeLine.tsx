@@ -88,7 +88,7 @@ const TimeLine = () => {
 
 
     return (
-        <GeneralStyleForRange className="media-timeLine" onMouseEnter={() => {
+        <div className="range-wrapper media-timeLine" onMouseEnter={() => {
             changeShowBubble(true);
         }}
             onMouseLeave={() => {
@@ -120,16 +120,16 @@ const TimeLine = () => {
                         changePlayPause(true)
                 }}
             />
-            <Bubble ref={snapShotBox} className="bubble">
+            <output ref={snapShotBox} className="bubble">
                 {/* <img
                     src="https://static.namava.ir/Content/Upload/Images/a72becc0-c77b-4110-9b04-9206bc76858f.jpg"
                     alt=""
                 /> */}
                 {/* <Snapshot time={hoverTime} snapshots={url} /> */}
-            </Bubble>
-            <ThumbCursor ref={snapShotBoxCursor} />
-            <BufferSize id="buffer-size" />
-        </GeneralStyleForRange>
+            </output>
+            <div className="thumb-cursor" ref={snapShotBoxCursor}></div>
+            <div className="buffer-size" id="buffer-size"></div>
+        </div>
     )
 }
 

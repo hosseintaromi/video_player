@@ -44,12 +44,12 @@ const RangeSelect = ({
   }, [])
 
   const TimeLineMemo = useMemo(() => {
-    return <TimeLine className="timeline" />
+    return <div  className="time-line-wrapper timeline"></div>
   }, [])
 
   return (
-    <GeneralStyleForRange>
-      <Slider
+    <div className="range-wrapper">
+      <input className="slider"
         type="range"
         step={step}
         min={min}
@@ -71,12 +71,12 @@ const RangeSelect = ({
         onMouseDown={onRangeStart}
         onMouseUp={onRangeEnd}
       />
-      <ProgressBar id="progressBar" ref={progressBarRef} />
+      <div className="progress-bar" id="progressBar" ref={progressBarRef}></div>
 
-      <Thumb id="selector" ref={selectorRef} style={{ display: showThumb ? 'block' : 'none' }} />
+      <div className="thumb" id="selector" ref={selectorRef} style={{ display: showThumb ? 'block' : 'none' }}></div>
 
       {TimeLineMemo}
-    </GeneralStyleForRange>
+    </div>
   );
 };
 

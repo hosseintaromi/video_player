@@ -1,25 +1,16 @@
 import { HTMLAttributes } from 'react'
 import { IconsType } from '../../@types/player.model'
 import { useIcon } from '../../hooks/useIcon'
-import styled from '@emotion/styled'
 import React from 'react'
 
-const IconWrapperStyle = styled.div(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: theme.iconColor
-}),
-  ({ isClickable }: { isClickable: boolean }) => ({ cursor: isClickable ? 'pointer' : 'default' })
-);
 type IconType = {
   type: keyof IconsType
   isClickable: boolean,
 } & HTMLAttributes<HTMLElement>
-const Icon = ({ type, onClick, ...other }: IconType) => {
+const Icon = ({ type, onClick, isClickable, ...other }: IconType) => {
   const { icons } = useIcon()
   return (
-    <IconWrapperStyle onClick={onClick} {...other}>{icons[type]}</IconWrapperStyle>
+    <div style={{ cursor: isClickable ? 'pointer' : 'default' }} className='icon-wrapper' onClick={onClick} {...other}>{icons[type]}</div>
   )
 }
 
