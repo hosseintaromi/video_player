@@ -11,7 +11,7 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
 
     const chosePlayerSize = () => {
         // return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
-        return window.innerWidth < 768 ? <BlueMobileTemeplate /> : <BlueTemeplate />
+        // return window.innerWidth < 768 ? <BlueMobileTemeplate /> : 
     }
     const videoRef = useRef<HTMLVideoElement>();
     if (config && src) {
@@ -45,8 +45,8 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
 
         }}>
             {/* {children ? children : <MobilePlayerTemplate />} */}
-            {children ? children : chosePlayerSize()}
-
+            {/* {children ? children : chosePlayerSize()} */}
+            <BlueTemeplate />
             <PlayerInitializer />
         </VideoPlayerContext.Provider>
     )
