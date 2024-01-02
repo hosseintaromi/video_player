@@ -2,9 +2,6 @@ import React, { HTMLAttributes, useState } from 'react'
 import Icon from '../../icons/Icon'
 import { usePlayerContext } from '../../../hooks/usePlayerContext'
 import Dialog from '../../general/Dialog'
-import { DialogTitle } from '../../general/DialogStyle'
-import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../red/SettingStyle'
-import { CenterBox } from '../../general/FlexCenter'
 
 const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     const { getSpeeds, changeSpeed } = usePlayerContext()

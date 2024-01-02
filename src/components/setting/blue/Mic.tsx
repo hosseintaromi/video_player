@@ -3,10 +3,6 @@ import Icon from '../../icons/Icon'
 import { useVideo } from '../../../hooks/useVideo'
 import { MediaPlaylistType } from '../../../@types/UseVideoHlsType.model'
 import Dialog from '../../general/Dialog'
-import { DialogTitle } from '../../general/DialogStyle'
-import Locale from '../../locale/Locale'
-import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../red/SettingStyle'
-import { CenterBox } from '../../general/FlexCenter'
 
 const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     const [currentAudioTrack, setCurrentAudioTrack] = useState<number | undefined>()

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { IconButton, MobileSettingPlay, MobileToolbarWrapper, MobileTopToolbar, SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter } from '../toolbar/ToolbarStyle';
-import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
 import Play from '../tools/Play';
 import Time from '../tools/Time';
 import Fullscreen from '../tools/Fullscreen';
@@ -47,11 +45,11 @@ const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
                     <Dropdown className='dialog-dropdown' options={DropdownList} />
                 </Dialog>
                 <Switch hasIcon={true} />
-                <IconButton onClick={() => {
+                <button className='icon-button' onClick={() => {
                     setIsOpen(true)
                 }}>
                     <Icon isClickable type='setting' />
-                </IconButton>
+                </button>
             </div>
             <div className='mobile-setting-play'>
                 <div className='toolbar-play-icon'>

@@ -1,10 +1,4 @@
 import React, { ReactNode, useEffect } from 'react'
-import {
-    ModalContent,
-    ModalOverlay,
-    ModalWrapper
-}
-    from './DialogStyle';
 import { createPortal } from 'react-dom';
 import useContextEvents from '../../hooks/useContextEvents';
 import { PlayerEventsType } from '../../@types/player.model';
