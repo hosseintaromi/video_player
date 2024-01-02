@@ -31,35 +31,35 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>زیرنویس</DialogTitle>
+                <div className='dialog-title'>زیرنویس</div>
                 {subtitles?.map((item, index) => (
-                    <SettingMenuItem
+                    <div
                         onClick={() => setSubtitle(index)}
-                        className={`is-reversed ${currentSubtitle === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                        className={`setting-menu-item is-reversed ${currentSubtitle === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
-                        <CenterBox>
-                            <SettingItemIcon className='reversed-icon' style={{ display: currentSubtitle === index ? 'flex' : 'none' }}>
+                        <div className='center-box'>
+                            <div className='setting-item-icon reversed-icon' style={{ display: currentSubtitle === index ? 'flex' : 'none' }}>
                                 <Icon isClickable={true} type='checkMark' />
-                            </SettingItemIcon>
-                            <SettingItemSpan className='reserved-span'>
+                            </div>
+                            <div className='setting-item-span reserved-span'>
                                 {item.name}
-                            </SettingItemSpan>
-                        </CenterBox>
-                    </SettingMenuItem>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-                <SettingMenuItem
+                <div
                     onClick={() => setSubtitle(-1)}
-                    className={`is-reversed ${currentSubtitle === -1 ? 'active' : ''}`} key={-1 + 'speedDialog'}
+                    className={`setting-menu-item is-reversed ${currentSubtitle === -1 ? 'active' : ''}`} key={-1 + 'speedDialog'}
                 >
-                    <CenterBox>
-                        <SettingItemIcon className='reversed-icon' style={{ display: currentSubtitle === -1 ? 'flex' : 'none' }}>
+                    <div className='center-box'>
+                        <div className='setting-item-icon reversed-icon' style={{ display: currentSubtitle === -1 ? 'flex' : 'none' }}>
                             <Icon isClickable={true} type='checkMark' />
-                        </SettingItemIcon>
-                        <SettingItemSpan className='reserved-span'>
+                        </div>
+                        <div className='setting-item-span reserved-span'>
                             <Locale localeKey="setting_menu_subtitle_off" />
-                        </SettingItemSpan>
-                    </CenterBox>
-                </SettingMenuItem>
+                        </div>
+                    </div>
+                </div>
             </Dialog>
             <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="subtitle" />
         </>

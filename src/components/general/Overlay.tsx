@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
 import { pageDir, pageName } from '../setting/red/Setting';
 import React from 'react';
@@ -6,11 +5,6 @@ import { PlayerEventsType } from '../../@types/player.model';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
 import useContextEvents from '../../hooks/useContextEvents';
 
-
-const Wrapper = styled.div({
-    position: 'relative',
-
-})
 
 const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetting: any }) => {
     const overlayContentRef = useRef<HTMLDivElement>(null)
@@ -42,12 +36,12 @@ const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetti
     }, []);
 
     return (
-        <Wrapper className='setting' ref={overlayContentRef}>
+        <div className='setting-wrapper setting' ref={overlayContentRef}>
             <div onClick={toggle}>
                 {Toggler}
             </div>
             {overlayVisible && <>{Content}</>}
-        </Wrapper>
+        </div>
     )
 }
 

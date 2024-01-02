@@ -9,8 +9,6 @@ import Switch from '../general/Switch';
 import Dialog from '../general/Dialog';
 import Icon from '../icons/Icon';
 import Dropdown from '../general/Dropdown';
-import styled from '@emotion/styled';
-import { DialogLabel, DialogTitle } from '../general/DialogStyle';
 import SettingItem from '../setting/red/SettingItem';
 import Locale from '../locale/Locale';
 
@@ -36,16 +34,16 @@ const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
         }
     ]
     return (
-        <MobileToolbarWrapper isFaded={isFaded}>
-            <MobileTopToolbar>
+        <div className='mobile-toolbar-wrapper' style={{ opacity: isFaded ? 0 : 1 }}>
+            <div className='mobile-top-toolbar'>
                 <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                    <DialogTitle>تنظیمات</DialogTitle>
+                    <div className='dialog-title'>تنظیمات</div>
                     <SettingItem className='dialog-item' startIcon={<Icon isClickable={true} type='speed' />} text={<Locale localeKey="setting_menu_change_speed_title" />} >
                         <Switch />
                     </SettingItem>
-                    <DialogLabel>کیفیت</DialogLabel>
+                    <div className='dialog-label'>کیفیت</div>
                     <Dropdown className='dialog-dropdown' options={DropdownList} />
-                    <DialogLabel>سرعت</DialogLabel>
+                    <div className='dialog-label'>سرعت</div>
                     <Dropdown className='dialog-dropdown' options={DropdownList} />
                 </Dialog>
                 <Switch hasIcon={true} />
@@ -54,26 +52,26 @@ const MobileToolbar = ({ isFaded }: { isFaded: boolean }) => {
                 }}>
                     <Icon isClickable type='setting' />
                 </IconButton>
-            </MobileTopToolbar>
-            <MobileSettingPlay>
-                <ToolBarPlayIcon>
+            </div>
+            <div className='mobile-setting-play'>
+                <div className='toolbar-play-icon'>
                     <Play />
-                </ToolBarPlayIcon>
-            </MobileSettingPlay>
+                </div>
+            </div>
             <MediaTimeLine />
-            <SettingItemWrapper className='setting-item-wrapper'>
-                <SettingLeftSection >
-                    <TimeCounter>
+            <div className='setting-item-wrapper'>
+                <div className='setting-left-section'>
+                    <div className='time-counter'>
                         <Time type='Current' />
                         /
-                    </TimeCounter>
+                    </div>
                     <Time type='Total' />
-                </SettingLeftSection>
-                <SettingRightSection>
+                </div>
+                <div className='setting-right-section'>
                     <Fullscreen />
-                </SettingRightSection>
-            </SettingItemWrapper>
-        </MobileToolbarWrapper>
+                </div>
+            </div>
+        </div>
     )
 }
 

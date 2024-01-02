@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Icon from '../icons/Icon';
-import { ButtonCircle, ButtonTrack, PauseSpanner, PlaySpanner, Spanner, SwitchButton, ToggleButton } from './SwitchStyle';
 
 const Switch = ({ hasIcon }: { hasIcon?: boolean }) => {
     const [autoPlay, setAutoPlay] = useState<boolean>(true);
@@ -17,29 +16,29 @@ const Switch = ({ hasIcon }: { hasIcon?: boolean }) => {
     return (
         <>
             {
-                hasIcon ? <SwitchButton onClick={togglePlay}>
-                    <Spanner>
+                hasIcon ? <button className='switch-button' onClick={togglePlay}>
+                    <div className='spanner'>
                         <svg width="36" height="14" viewBox="0 0 36 14" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
                             <rect x="1" width="34" height="14" rx="7" fill="white" fillOpacity="0.5"></rect>
                         </svg>
-                    </Spanner>
+                    </div>
                     {
                         autoPlay === true ?
-                            <PauseSpanner>
+                            <div className='pause-spanner'>
                                 <Icon isClickable={true} type='autoPlayOn' />
-                            </PauseSpanner>
+                            </div>
                             :
-                            <PlaySpanner>
+                            <div className='play-spanner'>
                                 <Icon isClickable={true} onClick={togglePlay} type='autoPlayOff' />
-                            </PlaySpanner>
+                            </div>
                     }
-                </SwitchButton> : <ToggleButton onClick={toggleButton}>
-                    <ButtonTrack></ButtonTrack>
-                    <ButtonCircle style={active ? {
+                </button> : <button className='toggle-button' onClick={toggleButton}>
+                    <div className='button-track'></div>
+                    <div className='button-circle' style={active ? {
                         transform: "translateX(20px)",
                         backgroundColor: "#065fd4"
-                    } : {}}></ButtonCircle>
-                </ToggleButton>
+                    } : {}}></div>
+                </button>
             }
         </>
 

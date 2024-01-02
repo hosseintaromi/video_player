@@ -1,5 +1,4 @@
 import React from 'react';
-import { SettingItemWrapper, SettingLeftSection, SettingRightSection, TimeCounter, TimeDivider, ToolbarWrapper } from '../toolbar/ToolbarStyle';
 import { ToolBarPlayIcon } from '../player/VideoPlayerStyle';
 import Setting from '../setting/red/Setting';
 import Play from '../tools/Play';
@@ -12,29 +11,29 @@ import MediaTimeLine from '../timeline/MediaTimeLine';
 const Toolbar = ({ isFaded }: { isFaded: boolean }) => {
 
     return (
-        <ToolbarWrapper isFaded={isFaded}>
+        <div className='Toolbar-Wrapper' style={{ opacity: isFaded ? 0 : 1 }}>
             <MediaTimeLine />
-            <SettingItemWrapper>
-                <SettingLeftSection >
+            <div className='Setting-Item-Wrapper'>
+                <div className='setting-left-section'>
                     <ToolBarPlayIcon>
                         <Play />
                     </ToolBarPlayIcon>
                     <Volume />
-                    <TimeCounter>
+                    <div className='time-counter'>
                         <Time type='Current' />
-                        <TimeDivider>
+                        <div className='time-divider'>
                             /
-                        </TimeDivider>
+                        </div>
                         <Time type='Total' />
-                    </TimeCounter>
-                </SettingLeftSection>
-                <SettingRightSection>
+                    </div>
+                </div>
+                <div className='setting-left-section'>
                     <Setting />
                     <PictureInPicture />
                     <Fullscreen />
-                </SettingRightSection>
-            </SettingItemWrapper>
-        </ToolbarWrapper>
+                </div>
+            </div>
+        </div>
     )
 }
 

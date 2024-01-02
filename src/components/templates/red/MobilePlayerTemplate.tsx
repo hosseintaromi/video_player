@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { ThemeProvider } from '@emotion/react'
 import Video from '../../player/Video'
-import { useStyle } from '../../../hooks/useStyle'
 import { MobileGradient, MobileVideoWrapper } from '../../player/VideoPlayerStyle'
 import { usePlayerContext } from '../../../hooks/usePlayerContext'
 import TouchContainer from '../../player/TouchContainer'
@@ -9,7 +7,6 @@ import Loading from '../../loading/Loading'
 import MobileToolbar from '../../toolbar/MobileToolbar'
 
 const MobilePlayerTemplate = () => {
-    const { style } = useStyle()
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
     const [isPlay, setIsPlay] = useState<boolean>(false)
     usePlayerContext({
@@ -21,16 +18,14 @@ const MobilePlayerTemplate = () => {
         }
     })
     return (
-        <ThemeProvider theme={style}>
-            <MobileVideoWrapper id="video_wrapper_id">
-                <Loading />
-                <TouchContainer canPlayOnClick onShow={(show: boolean) => { setIsFadeOut(!show) }} >
-                    <Video />
-                    <MobileGradient isFaded={isFadeOut} />
-                    <MobileToolbar isFaded={isFadeOut} />
-                </TouchContainer>
-            </MobileVideoWrapper>
-        </ThemeProvider>
+        <div className='video-wrapper mobile-video-wrapper ' id="video_wrapper_id">
+            <Loading />
+            <TouchContainer canPlayOnClick onShow={(show: boolean) => { setIsFadeOut(!show) }} >
+                <Video />
+                <div className='gradient mobile-gradient' style={{ opacity: isFadeOut ? 0 : 1 }}></div>
+                <MobileToolbar isFaded={isFadeOut} />
+            </TouchContainer>
+        </div>
     )
 }
 

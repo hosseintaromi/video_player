@@ -33,7 +33,7 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
                 <Time type='Total' />
             </div>
             <MediaTimeLine />
-            <div className='setting-item-wrapper blue-setting-wrapper'>
+            <div className='setting-item-wrapper blue-setting-item-wrapper'>
                 <div className='setting-left-section'>
                     <div className='toolbar-play-icon'>
                         <Play />

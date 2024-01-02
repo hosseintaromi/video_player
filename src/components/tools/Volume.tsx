@@ -1,19 +1,13 @@
 import { memo, useRef, useState } from 'react'
 import RangeSelect from '../general/range-select/RangeSelect';
-import { VolumeWrapper } from '../toolbar/ToolbarStyle';
 import Icon from '../icons/Icon';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import React from 'react';
-import styled from '@emotion/styled';
 
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
 };
-const RangeSelectWrapper = styled.div({
-    transition: 'margin .2s cubic-bezier(0,0,.2,1),width .2s cubic-bezier(0,0,.2,1)',
-},
-    ({ visible }: { visible: boolean }) => ({ opacity: visible ? 1 : 0, width: visible ? '80px' : '0', marginRight: visible ? '22px !important' : '0 !important' })
-)
+
 const Volume = memo(() => {
     const { changeVolume, changeMute } = usePlayerContext({
         onChangeVolume: (e) => {
@@ -57,12 +51,17 @@ const Volume = memo(() => {
         }
 
     }
+    ({ gap }: { gap: boolean }) => ({ gap: gap ? "10px" : "0" })
     return (
-        <VolumeWrapper gap={volumeVisibility}
+        <div className='volume-wrapper' style={{ gap: volumeVisibility ? "10px" : "0" }}
             onMouseEnter={() => setVolumeVisibility(true)}
             onMouseLeave={() => setVolumeVisibility(false)}>
             {calcVolumeIcon()}
-            <RangeSelectWrapper visible={volumeVisibility}>
+            <div style={{
+                opacity: volumeVisibility ? 1 : 0,
+                width: volumeVisibility ? '80px' : '0',
+                marginRight: volumeVisibility ? '22px !important' : '0 !important'
+            }}>
                 <RangeSelect
                     step={1}
                     min={0}
@@ -70,8 +69,8 @@ const Volume = memo(() => {
                     controllerRef={controllerRef}
                     onChangeCallback={changeVol}
                 />
-            </RangeSelectWrapper>
-        </VolumeWrapper>
+            </div>
+        </div>
     )
 })
 

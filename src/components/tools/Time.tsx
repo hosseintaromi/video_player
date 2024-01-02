@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import { OnUpdateTimeType } from '../../@types/player.model';
 import { calculatePlayerTime } from '../../utils/global-filter';
-import { TimeCounter } from '../toolbar/ToolbarStyle';
 
 const Time = ({ type }: { type: 'Current' | 'Total' | 'Remain' }) => {
 

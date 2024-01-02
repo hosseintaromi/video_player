@@ -29,21 +29,21 @@ const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>زبان پخش</DialogTitle>
+                <div className='dialog-title'>زبان پخش</div>
                 {audioTracks?.map((item, index) => (
-                    <SettingMenuItem
+                    <div
                         onClick={() => setAudioTrack(index)}
-                        className={`is-reversed ${currentAudioTrack === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                        className={`setting-menu-item is-reversed ${currentAudioTrack === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
-                        <CenterBox>
-                            <SettingItemIcon className='reversed-icon' style={{ display: currentAudioTrack === index ? 'flex' : 'none' }}>
+                        <div className='center-box'>
+                            <div className='setting-item-icon reversed-icon' style={{ display: currentAudioTrack === index ? 'flex' : 'none' }}>
                                 <Icon isClickable={true} type='checkMark' />
-                            </SettingItemIcon>
-                            <SettingItemSpan className='reserved-span'>
+                            </div>
+                            <div className='setting-item-span reserved-span'>
                                 {item.name}
-                            </SettingItemSpan>
-                        </CenterBox>
-                    </SettingMenuItem>
+                            </div>
+                        </div>
+                    </div>
                 ))}
 
             </Dialog>

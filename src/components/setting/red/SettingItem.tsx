@@ -1,12 +1,11 @@
 import React, { HTMLAttributes, ReactNode } from 'react'
-import { CenterBox, FlexCenter } from '../../general/FlexCenter'
-import { SettingItemIcon, SettingItemMore, SettingItemSpan, SettingMenuItem } from './SettingStyle'
+import { FlexCenter } from '../../general/FlexCenter'
 
 const SettingCenter = ({ children }: HTMLAttributes<HTMLElement>) => {
     return (
-        <CenterBox style={{ position: "relative" }}>
+        <div className='center-box' style={{ position: "relative" }}>
             {children}
-        </CenterBox>
+        </div>
     )
 }
 
@@ -17,24 +16,24 @@ type settingItemProps = {
 const SettingItem = ({ children, startIcon, text, onClick, className }: settingItemProps
 ) => {
     return (
-        <SettingMenuItem className={className} onClick={onClick}>
+        <div className={className} onClick={onClick}>
             <SettingCenter>
-                <SettingItemIcon>
+                <div className='setting-item-icon'>
                     {startIcon ? startIcon : <></>}
-                </SettingItemIcon>
-                <SettingItemSpan>
+                </div>
+                <div className='setting-item-span'>
                     {text}
-                </SettingItemSpan>
+                </div>
             </SettingCenter>
             {
                 children &&
-                <SettingItemMore>
+                <div className='setting-item-more'>
                     <FlexCenter>
                         {children}
                     </FlexCenter>
-                </SettingItemMore>
+                </div>
             }
-        </SettingMenuItem>
+        </div>
     )
 }
 
