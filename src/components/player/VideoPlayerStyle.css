@@ -2,6 +2,7 @@
   --buffer-bg: rgba(255,255,255,.4);
   --dir: rtl;
   --icon-color: #ffffff;
+  --icon-color-rgb: 255,255,255;
   --range-back-bg: rgba(255,255,255,.2);
   --range-front-bg: #f00;
   --setting-bg: rgba(0, 0, 0, 0.5);
@@ -621,4 +622,48 @@ input.slider::-webkit-slider-thumb {
 }
 .time-divider {
   margin: 0 5px;
+}
+.overlay-container {
+  background-color: var(--setting-bg);
+  color: var(--setting-text-color);
+  width: 300px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fade-backdrop {
+  position: fixed;
+  background: #ff000000;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.setting-item-arrow-span {
+  padding-right: 10px;
+}
+.setting-header-wrapper {
+  cursor: "pointer";
+
+  svg {
+      transform: rotate(180deg);
+      margin-right: 10px;
+      margin-left: 15px;
+  }
+}
+.setting-header-title {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(var(--icon-color-rgb), .2);
+  line-height: inherit;
+  font-size: 14px;
+  color: var(--icon-color);
+  padding-right: 15px;
+  height: 40px;
+  white-space: nowrap;
 }

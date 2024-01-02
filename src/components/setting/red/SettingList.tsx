@@ -7,7 +7,6 @@ import Locale from '../../locale/Locale';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
 import { LevelType, MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
 import Icon from '../../icons/Icon';
-import { SettingItemArrowSpan } from './SettingStyle';
 
 type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,
@@ -66,35 +65,35 @@ const SettingList = ({
         <SettingMenu myRef={myRef}>
             <div onClick={() => { loadLevels(); changePage(pageName.playbackSpeed, pageDir.forward) }}>
                 <SettingItem startIcon={<Icon isClickable={true} type='speed' />} text={<Locale localeKey="setting_menu_change_speed_title" />} >
-                    <SettingItemArrowSpan>
+                    <div className='setting-item-arrow-span'>
                         {currentPlayBackSpeed}
-                    </SettingItemArrowSpan>
+                    </div>
                     <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
             <div onClick={() => { loadLevels(); changePage(pageName.quality, pageDir.forward) }}>
                 <SettingItem startIcon={<Icon isClickable={true} type='quality' />} text={<Locale localeKey="setting_menu_change_quality_title" />}>
-                    <SettingItemArrowSpan>
+                    <div className='setting-item-arrow-span'>
                         {
                             currentLevel === -1 ? <Locale localeKey="setting_menu_quality_active_list" /> : currentLevels?.[currentLevel]?.height
                         }
-                    </SettingItemArrowSpan>
+                    </div>
                     <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
             <div onClick={() => { loadLevels(); changePage(pageName.subtitle, pageDir.forward) }}>
                 <SettingItem startIcon={<Icon isClickable={true} type='subtitle' />} text={<Locale localeKey="setting_menu_change_subtitle" />}>
-                    <SettingItemArrowSpan>
+                    <div className='setting-item-arrow-span'>
                         {currentSubtitle}
-                    </SettingItemArrowSpan>
+                    </div>
                     <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>
             <div onClick={() => { loadLevels(); changePage(pageName.audioTrack, pageDir.forward) }}>
                 <SettingItem startIcon={<Icon isClickable={true} type='audioTrack' />} text={<Locale localeKey="setting_menu_change_audio_track_title" />}>
-                    <SettingItemArrowSpan>
+                    <div className='setting-item-arrow-span'>
                         {currentAudioTrack}
-                    </SettingItemArrowSpan>
+                    </div>
                     <Icon isClickable={true} type="arrow" />
                 </SettingItem>
             </div>

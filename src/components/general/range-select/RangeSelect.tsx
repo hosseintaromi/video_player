@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { GeneralStyleForRange, ProgressBar, Slider, Thumb, TimeLine } from "./RangeSelectStyle";
-import { throttle } from "lodash-es"
 import { RangePropsType } from "../../../@types/RangeSelectType.model";
 
 

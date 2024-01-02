@@ -9,7 +9,6 @@ import SettingAudioTrack from './SettingAudioTrack';
 import Icon from '../../icons/Icon';
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { FadeBackDrop, OverlayContainer } from './SettingStyle';
 
 
 export enum pageName {
@@ -81,9 +80,9 @@ const Setting = () => {
             <Overlay openSetting={changePage}>
                 <Icon type='setting' isClickable={true} data-toggler />
                 {/* <FadeBackDrop > */}
-                <OverlayContainer data-content id='setting-menu'>
+                <div className='overlay-container' data-content id='setting-menu'>
                     {createPortal(
-                        <FadeBackDrop />,
+                        <div className='fade-backdrop'></div>,
                         document.body
                     )}
                     <SettingList
@@ -110,7 +109,7 @@ const Setting = () => {
                         changePage={changePage}
                     />
 
-                </OverlayContainer>
+                </div>
                 {/* </FadeBackDrop> */}
 
             </Overlay>

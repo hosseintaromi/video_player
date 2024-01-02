@@ -3,7 +3,6 @@ import { pageDir, pageName } from './Setting'
 import { FlexCenter } from '../../general/FlexCenter'
 import Icon from '../../icons/Icon'
 import React from 'react'
-import { SettingHeaderTitle, SettingHeaderWrapper } from './SettingStyle'
 
 type settingHeaderPropsType = {
     title: ReactNode,
@@ -15,11 +14,11 @@ type settingHeaderPropsType = {
 
 const SettingHeader = ({ title, hasCustomButton, hasBackButton, changePage }: settingHeaderPropsType) => {
     return (
-        <SettingHeaderWrapper>
-            {hasBackButton && <SettingHeaderTitle onClick={() => changePage(pageName.settingList, pageDir.back)}>
+        <div className='setting-header-wrapper'>
+            {hasBackButton && <div className='setting-header-title' onClick={() => changePage(pageName.settingList, pageDir.back)}>
                 <Icon isClickable={true} type="arrow" />
                 {title}
-            </SettingHeaderTitle>
+            </div>
             }
             {hasCustomButton ?
                 <FlexCenter>
@@ -27,7 +26,7 @@ const SettingHeader = ({ title, hasCustomButton, hasBackButton, changePage }: se
                 </FlexCenter>
                 : <></>
             }
-        </SettingHeaderWrapper>
+        </div>
     )
 }
 
