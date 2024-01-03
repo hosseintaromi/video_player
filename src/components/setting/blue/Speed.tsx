@@ -23,7 +23,7 @@ const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                 <DialogTitle>سرعت پخش</DialogTitle>
                 {getSpeeds().map((item, index) => (
                     <SettingMenuItem
-                        onClick={() => setSpeed(index)}
+                        onClick={() => { setSpeed(index); setIsOpen(pre => !pre) }}
                         className={`is-reversed ${indexSpeed === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
                         <CenterBox>

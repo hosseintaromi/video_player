@@ -32,7 +32,7 @@ const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                 <DialogTitle>زبان پخش</DialogTitle>
                 {audioTracks?.map((item, index) => (
                     <SettingMenuItem
-                        onClick={() => setAudioTrack(index)}
+                        onClick={() => { setAudioTrack(index); setIsOpen(pre => !pre) }}
                         className={`is-reversed ${currentAudioTrack === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
                         <CenterBox>

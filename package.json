@@ -19,6 +19,7 @@
     "@babel/preset-typescript": "^7.22.15",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "^3.0.2",
     "@rollup/plugin-node-resolve": "^13.0.6",

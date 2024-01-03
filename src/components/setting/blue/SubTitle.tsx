@@ -34,7 +34,7 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                 <DialogTitle>زیرنویس</DialogTitle>
                 {subtitles?.map((item, index) => (
                     <SettingMenuItem
-                        onClick={() => setSubtitle(index)}
+                        onClick={() => { setSubtitle(index); setIsOpen(pre => !pre) }}
                         className={`is-reversed ${currentSubtitle === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
                         <CenterBox>
@@ -48,7 +48,7 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                     </SettingMenuItem>
                 ))}
                 <SettingMenuItem
-                    onClick={() => setSubtitle(-1)}
+                    onClick={() => { setSubtitle(-1); setIsOpen(pre => !pre) }}
                     className={`is-reversed ${currentSubtitle === -1 ? 'active' : ''}`} key={-1 + 'speedDialog'}
                 >
                     <CenterBox>

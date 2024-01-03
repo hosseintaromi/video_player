@@ -36,7 +36,7 @@ const Quality = () => {
                 <DialogTitle>کیفیت پخش</DialogTitle>
                 {levels?.map((item, index) => (
                     <SettingMenuItem
-                        onClick={() => setQuality(index)}
+                        onClick={() => { setQuality(index); setIsOpen(pre => !pre) }}
                         className={`is-reversed ${currentLevel === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
                         <CenterBox>
@@ -50,7 +50,7 @@ const Quality = () => {
                     </SettingMenuItem>
                 ))}
                 <SettingMenuItem
-                    onClick={() => setQuality(-1)}
+                    onClick={() => { setQuality(-1); setIsOpen(pre => !pre) }}
                     className={`is-reversed ${currentLevel === -1 ? 'active' : ''}`} key={-1 + 'speedDialog'}
                 >
                     <CenterBox>
