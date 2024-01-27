@@ -7,7 +7,7 @@ const isSupportedPlatform = Hls.isSupported();
 export interface HlsVideoEventType {
   onLoaded?: () => void;
 }
-export const useVideo = (events?: HlsVideoEventType) => {
+export const usePlayerEvents = (events?: HlsVideoEventType) => {
   const context = useContext(VideoPlayerContext);
 
   const loadVideo = useCallback((src: string) => {

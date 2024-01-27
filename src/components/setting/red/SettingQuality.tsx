@@ -4,7 +4,7 @@ import { SettingMenu } from '../../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../../icons/icon-list/CheckMark';
-import { useVideo } from '../../../hooks/useVideo';
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents';
 import { LevelType } from '../../../@types/UseVideoHlsType.model';
 import Locale from '../../locale/Locale';
 
@@ -21,7 +21,7 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
         const curlvl = getCurrentLevel().isAuto ? -1 : getCurrentLevel().currentLevel
         setCurrentLevel(curlvl === undefined ? -1 : curlvl)
     }
-    const { getLevels, changeLevel, getCurrentLevel } = useVideo({ onLoaded: loadLevels })
+    const { getLevels, changeLevel, getCurrentLevel } = usePlayerEvents({ onLoaded: loadLevels })
     useEffect(() => {
         loadLevels()
     }, [])

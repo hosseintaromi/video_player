@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
 import { SettingMenu } from '../../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
-import { useVideo } from '../../../hooks/useVideo';
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents';
 import Locale from '../../locale/Locale';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
 import { LevelType, MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
@@ -56,7 +56,7 @@ const SettingList = ({
         getLevels,
         getSubtitle,
         getAudioTracks
-    } = useVideo({ onLoaded: loadLevels })
+    } = usePlayerEvents({ onLoaded: loadLevels })
 
     useEffect(() => {
         loadLevels()

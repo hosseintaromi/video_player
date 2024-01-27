@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Icon from '../../icons/Icon'
-import { useVideo } from '../../../hooks/useVideo'
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents'
 import { LevelType } from '../../../@types/UseVideoHlsType.model'
 import Dialog from '../../general/Dialog'
 import { DialogTitle } from '../../general/DialogStyle'
@@ -18,7 +18,7 @@ const Quality = () => {
         const curlvl = getCurrentLevel().isAuto ? -1 : getCurrentLevel().currentLevel
         setCurrentLevel(curlvl === undefined ? -1 : curlvl)
     }
-    const { getLevels, changeLevel, getCurrentLevel } = useVideo({ onLoaded: loadLevels })
+    const { getLevels, changeLevel, getCurrentLevel } = usePlayerEvents({ onLoaded: loadLevels })
     useEffect(() => {
         loadLevels()
     }, [])

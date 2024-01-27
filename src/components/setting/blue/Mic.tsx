@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 import Icon from '../../icons/Icon'
-import { useVideo } from '../../../hooks/useVideo'
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents'
 import { MediaPlaylistType } from '../../../@types/UseVideoHlsType.model'
 import Dialog from '../../general/Dialog'
 import { DialogTitle } from '../../general/DialogStyle'
@@ -17,7 +17,7 @@ const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
         setCurrentAudioTrack(getAudioTrack())
         setAudioTracks(getAudioTracks() || [])
     }
-    const { getAudioTrack, getAudioTracks, changeAudioTrack } = useVideo({ onLoaded: loadLevels })
+    const { getAudioTrack, getAudioTracks, changeAudioTrack } = usePlayerEvents({ onLoaded: loadLevels })
     useEffect(() => {
         loadLevels()
     }, [])

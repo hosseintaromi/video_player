@@ -13,7 +13,7 @@ import Subtitle from '../setting/blue/SubTitle';
 import Mic from '../setting/blue/Mic';
 import Quality from '../setting/blue/Quality';
 import Mute from '../tools/Mute';
-import { useVideo } from '../../hooks/useVideo';
+import { usePlayerEvents } from '../../hooks/usePlayerEvents';
 
 const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
     const [isShowQ, setIsShowQ] = useState<any>()
@@ -24,7 +24,7 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
         setIsShowS(getSubtitle() !== undefined)
         setIsShowA(getAudioTracks() !== undefined)
     }
-    const { getAudioTracks, getLevels, getSubtitle } = useVideo({ onLoaded: loadLevels })
+    const { getAudioTracks, getLevels, getSubtitle } = usePlayerEvents({ onLoaded: loadLevels })
 
     return (
         <ToolbarWrapper isFaded={isFaded}>

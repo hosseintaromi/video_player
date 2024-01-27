@@ -9,10 +9,7 @@ import BlueTemeplate from '../templates/blue/BlueTemplate';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerObjectType, src?: string }) => {
 
-    const chosePlayerSize = () => {
-        // return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
-        // return window.innerWidth < 768 ? <BlueMobileTemeplate /> : 
-    }
+
     const videoRef = useRef<HTMLVideoElement>();
     if (config && src) {
         config.src = src;

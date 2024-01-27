@@ -4,7 +4,7 @@ import { SettingMenu } from '../../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../../icons/icon-list/CheckMark';
-import { useVideo } from '../../../hooks/useVideo';
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents';
 import { MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
 import Locale from '../../locale/Locale';
 import { SettingItemWrapper } from './SettingStyle';
@@ -29,7 +29,7 @@ const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
         setSubtitles(getSubtitle() || [])
     }
 
-    const { getSubtitle, getCurrentSubtitle, changeSubtitle } = useVideo({ onLoaded: loadLevels })
+    const { getSubtitle, getCurrentSubtitle, changeSubtitle } = usePlayerEvents({ onLoaded: loadLevels })
 
     useEffect(() => {
         loadLevels()

@@ -15,6 +15,7 @@ export const usePlayer = (playerConfig: PlayerConfigType) => {
     qualities: playerConfig.qualities,
     audioTracks: playerConfig.audioTracks,
     subTitle: playerConfig.subTitle,
+    keyControl: false
   };
 
   usePlayerContext({

@@ -3,7 +3,7 @@ import SettingItem from './SettingItem';
 import { SettingMenu } from '../../general/FlexCenter';
 import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
-import { useVideo } from '../../../hooks/useVideo';
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents';
 import { MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
 import Locale from '../../locale/Locale';
 import Icon from '../../icons/Icon';
@@ -20,7 +20,7 @@ const SettingAudioTrack = ({ changePage, myRef }: SettingAudioTrackType) => {
         setCurrentAudioTrack(getAudioTrack())
         setAudioTracks(getAudioTracks() || [])
     }
-    const { getAudioTrack, getAudioTracks, changeAudioTrack } = useVideo({ onLoaded: loadLevels })
+    const { getAudioTrack, getAudioTracks, changeAudioTrack } = usePlayerEvents({ onLoaded: loadLevels })
     useEffect(() => {
         loadLevels()
     }, [])

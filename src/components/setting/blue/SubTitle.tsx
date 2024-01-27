@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 import Icon from '../../icons/Icon'
-import { useVideo } from '../../../hooks/useVideo'
+import { usePlayerEvents } from '../../../hooks/usePlayerEvents'
 import { MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
 import Dialog from '../../general/Dialog';
 import { DialogTitle } from '../../general/DialogStyle';
@@ -22,7 +22,7 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
         setCurrentSubtitle(getCurrentSubtitle())
         setSubtitles(getSubtitle() || [])
     }
-    const { getSubtitle, getCurrentSubtitle, changeSubtitle } = useVideo({ onLoaded: loadLevels })
+    const { getSubtitle, getCurrentSubtitle, changeSubtitle } = usePlayerEvents({ onLoaded: loadLevels })
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
