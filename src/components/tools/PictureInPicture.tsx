@@ -12,10 +12,7 @@ const PictureInPicture = () => {
     }
 
     return (
-        <>
-            <button onClick={togglePictureInPicture} >fullScreen</button>
-            <Icon isClickable={true} type='picInPic' onClick={togglePictureInPicture} />
-        </>
+        <Icon isClickable={true} type='picInPic' onClick={togglePictureInPicture} />
     )
 }
 
