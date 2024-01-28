@@ -51,7 +51,8 @@ export interface PlayerConfigType {
   qualities: number[],
   audioTracks: string[],
   subTitle: string[],
-  keyControl: boolean
+  keyControl: boolean,
+  theme: 'Red' | 'Blue'
 }
 
 export interface PlayerInstance extends PlayerConfigType {

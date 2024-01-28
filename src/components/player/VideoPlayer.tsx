@@ -6,9 +6,21 @@ import PlayerInitializer from '../tools/PlayerInitializer';
 import MobilePlayerTemplate from '../templates/red/MobilePlayerTemplate';
 import BlueMobileTemeplate from '../templates/blue/BlueMobileTemeplate';
 import BlueTemeplate from '../templates/blue/BlueTemplate';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerInstance, src?: string }) => {
+    const { theme } = usePlayerContext()
 
+    const choosePlayerSize = () => {
+        console.log(config?.theme || theme === 'Blue')
+        if ((config?.theme || theme) === 'Blue') {
+            console.log('blue')
+            return <BlueTemeplate />
+        } else {
+            console.log('red')
+            return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
+        }
+    }
 
     const videoRef = useRef<HTMLVideoElement>();
     if (config && src) {
@@ -41,9 +53,7 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
             listenOnLoad: listenOnLoad.current,
 
         }}>
-            {/* {children ? children : <MobilePlayerTemplate />} */}
-            {/* {children ? children : chosePlayerSize()} */}
-            <BlueTemeplate />
+            {children ? children : choosePlayerSize()}
             <PlayerInitializer />
         </VideoPlayerContext.Provider>
     )

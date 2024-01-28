@@ -18,6 +18,7 @@ const Demo = ({ length }: DemoProps) => {
     audioTracks: ['English'],
     subTitle: ['Chinese'],
     keyControl: true,
+    theme: 'Blue',
     locale: {
       setting_menu_change_speed_title: 'انتخاب سرعت پخش',
       setting_menu_change_quality_title: 'انتخاب کیفیت',

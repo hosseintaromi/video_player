@@ -12,6 +12,7 @@ export const defaultConfig: PlayerInstance = {
     autoPlay: true,
     timeForHideEl: 1000,
     type: "HLS",
+    theme: 'Red',
     qualities: [],
     audioTracks: [],
     subTitle: [],
