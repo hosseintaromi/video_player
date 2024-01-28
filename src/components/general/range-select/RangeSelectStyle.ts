@@ -45,7 +45,7 @@ export const TimeLine = styled.div(({ theme }) => ({
 export const Slider = styled.input({
   cursor: "pointer",
   width: "100%",
-  "-webkit-appearance": "none",
+  WebkitAppearance: "none",
   zIndex: "5",
   position: "absolute",
   inset: "0",
@@ -54,7 +54,7 @@ export const Slider = styled.input({
   margin: '0',
 
   "::-webkit-slider-thumb": {
-    "-webkit-appearance": "none",
+    WebkitAppearance: "none",
     appearance: "none",
     width: "6px",
     height: "17px",

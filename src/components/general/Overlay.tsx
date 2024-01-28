@@ -31,7 +31,6 @@ const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetti
 
     useEffect(() => {
         openSetting(pageName.settingList, pageDir.forward)
-        console.log(overlayVisible)
         call.onChangeSetting?.(overlayVisible)
     }, [overlayVisible])
     useEffect(() => {
