@@ -39,7 +39,8 @@ const SettingList = ({
 
         const curSub = getCurrentSubtitle()
         setSubtitles(getSubtitle())
-        setCurrentSubtitle(curSub === -1 ? <Locale localeKey="setting_menu_subtitle_off" /> : subtitles?.[curSub!].name)
+        if (curSub)
+            setCurrentSubtitle(curSub === -1 ? <Locale localeKey="setting_menu_subtitle_off" /> : subtitles?.[curSub].name)
 
         setAudioTracks(getAudioTracks())
         setCurrentAudioTrack(audioTracks?.[getAudioTrack()!].name)
