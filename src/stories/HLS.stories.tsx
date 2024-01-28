@@ -18,7 +18,7 @@ const Demo = ({ length }: DemoProps) => {
     audioTracks: ['English'],
     subTitle: ['Chinese'],
     keyControl: true,
-    theme: 'Blue',
+    theme: 'Red',
     locale: {
       setting_menu_change_speed_title: 'انتخاب سرعت پخش',
       setting_menu_change_quality_title: 'انتخاب کیفیت',
@@ -42,7 +42,6 @@ const Demo = ({ length }: DemoProps) => {
     // },
     autoPlay: true,
     timeForHideEl: 1000,
-
     type: 'HLS'
     // icons: {
     //   arrow: <p>hello</p>,

@@ -12,12 +12,9 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
     const { theme } = usePlayerContext()
 
     const choosePlayerSize = () => {
-        console.log(config?.theme || theme === 'Blue')
         if ((config?.theme || theme) === 'Blue') {
-            console.log('blue')
             return <BlueTemeplate />
         } else {
-            console.log('red')
             return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
         }
     }
