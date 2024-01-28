@@ -35,7 +35,7 @@ const Subtitle = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                 {subtitles?.map((item, index) => (
                     <SettingMenuItem
                         onClick={() => { setSubtitle(index); setIsOpen(pre => !pre) }}
-                        className={`is-reversed ${currentSubtitle === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                        className={`is-reversed ${currentSubtitle === index ? 'active' : ''}`} key={index + 'subDialog'}
                     >
                         <CenterBox>
                             <SettingItemIcon className='reversed-icon' style={{ display: currentSubtitle === index ? 'flex' : 'none' }}>

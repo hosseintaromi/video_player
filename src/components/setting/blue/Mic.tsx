@@ -33,7 +33,7 @@ const Mic = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                 {audioTracks?.map((item, index) => (
                     <SettingMenuItem
                         onClick={() => { setAudioTrack(index); setIsOpen(pre => !pre) }}
-                        className={`is-reversed ${currentAudioTrack === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                        className={`is-reversed ${currentAudioTrack === index ? 'active' : ''}`} key={index + 'MicDialog'}
                     >
                         <CenterBox>
                             <SettingItemIcon className='reversed-icon' style={{ display: currentAudioTrack === index ? 'flex' : 'none' }}>

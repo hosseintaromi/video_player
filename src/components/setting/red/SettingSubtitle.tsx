@@ -39,7 +39,7 @@ const SettingSubtitle = ({ changePage, myRef }: SettingSubtitleType) => {
     const subtitleListGenerator = () => {
         return subtitles ? subtitles.map((item, index) =>
             <SettingItem
-                key={index}
+                key={`subtitleListGenerator${index}`}
                 onClick={() => setSubtitle(index)}
                 startIcon={currentSubtitle === index ? < CheckMark /> : null}
                 text={item.name}

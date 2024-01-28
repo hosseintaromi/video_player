@@ -36,7 +36,7 @@ const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsTy
                     {speeds.map((speedItem, index) =>
                         <>
                             <SettingItem
-                                key={index} onClick={() => setSpeed(index)}
+                                key={`speedItem${index}`} onClick={() => setSpeed(index)}
                                 startIcon={indexSpeed === index ? <Icon isClickable={true} type='checkMark' /> : <></>}
                                 text={speedItem} />
                         </>

@@ -37,7 +37,7 @@ const Quality = () => {
                 {levels?.map((item, index) => (
                     <SettingMenuItem
                         onClick={() => { setQuality(index); setIsOpen(pre => !pre) }}
-                        className={`is-reversed ${currentLevel === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                        className={`is-reversed ${currentLevel === index ? 'active' : ''}`} key={index + 'qualityDialog'}
                     >
                         <CenterBox>
                             <SettingItemIcon className='reversed-icon' style={{ display: currentLevel === index ? 'flex' : 'none' }}>

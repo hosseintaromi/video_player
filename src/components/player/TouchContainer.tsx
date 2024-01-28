@@ -84,7 +84,7 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     const calcThrottle = useCallback(throttle(hideWithDelay, 200), [])
     return (
         <div
-            onDoubleClick={toggleFullscreen}
+            // onDoubleClick={toggleFullscreen}
             onClick={togglePlay}
             onMouseMove={calcThrottle}
             onTouchEnd={calcThrottle}

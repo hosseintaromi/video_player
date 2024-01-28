@@ -35,7 +35,7 @@ const SettingQuality = ({ changePage, myRef }: SettingQualityType) => {
     const qualityListGenerator = () => {
         return levels ? levels.map((item, index) =>
             <SettingItem
-                key={index}
+                key={`qualityListGenerator${index}`}
                 onClick={() => setQuality(index)}
                 startIcon={currentLevel === index ? < CheckMark /> : null}
                 text={item.height}
