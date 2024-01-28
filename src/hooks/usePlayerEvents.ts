@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect } from "react";
 import Hls from "hls.js";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
+import { usePlayerContext } from "./usePlayerContext";
 
 const isSupportedPlatform = Hls.isSupported();
 
@@ -8,10 +9,12 @@ export interface HlsVideoEventType {
   onLoaded?: () => void;
 }
 export const usePlayerEvents = (events?: HlsVideoEventType) => {
+  const { type, getVideoRef, listenOnLoad, hls, qualities, subTitle, audioTracks } = usePlayerContext();
   const context = useContext(VideoPlayerContext);
 
+
   const loadVideo = useCallback((src: string) => {
-    if (context.config?.type === "HLS") {
+    if (type === "HLS") {
       loadHlsVideo(src);
     } else {
       loadMP4Video(src);
@@ -19,24 +22,25 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   }, []);
 
   const loadMP4Video = useCallback((src: string) => {
-    const videoEl = context.getVideoRef();
+    const videoEl = getVideoRef();
     if (!videoEl) return;
     videoEl.src = src;
     videoEl.load();
     videoEl.onloadeddata = () => {
-      context.listenOnLoad.forEach((listener) => {
+      listenOnLoad.forEach((listener) => {
         listener();
       });
     };
   }, []);
 
   const loadHlsVideo = useCallback((src: string) => {
-    const videoEl = context.getVideoRef();
+    const videoEl = getVideoRef();
     if (!videoEl) return;
-    const hls = (context.hls = new Hls({
+    // inja boodim. bayad setter'e hls ro bezarim tooye khode conte
+    const hls = context.hls = new Hls({
       enableWorker: false,
 
-    }));
+    });
 
     hls.attachMedia(videoEl);
 
@@ -49,50 +53,47 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
     });
 
     hls.on(Hls.Events.LEVEL_LOADED, () => {
-      context.listenOnLoad.forEach((listener) => {
+      listenOnLoad.forEach((listener) => {
         listener();
       });
     });
   }, []);
 
   const getLevels = () => {
-    const qualities = context.config?.qualities
-    return context.hls?.levels.filter((item) => qualities?.length ? qualities.includes(item.height) : item)
+    return hls?.levels.filter((item) => qualities.includes(item.height))
   };
   const getCurrentLevel = () => {
     return {
-      currentLevel: context.hls?.currentLevel,
-      isAuto: context.hls?.autoLevelEnabled,
+      currentLevel: hls?.currentLevel,
+      isAuto: hls?.autoLevelEnabled,
     };
   };
   const changeLevel = (index: number) => {
-    if (context.hls) context.hls.currentLevel = index;
+    if (hls) hls.currentLevel = index;
   };
 
   const getSubtitle = () => {
-    const subTitle = context.config?.subTitle
-    return context.hls?.subtitleTracks.filter((item) => subTitle?.length ? subTitle.includes(item.name) : item)
+    return hls?.subtitleTracks.filter((item) => subTitle.includes(item.name))
   };
   const getCurrentSubtitle = () => {
-    return context.hls?.subtitleTrack;
+    return hls?.subtitleTrack;
   };
   const changeSubtitle = (index: number) => {
-    if (context.hls) context.hls.subtitleTrack = index;
+    if (hls) hls.subtitleTrack = index;
   };
 
   const getAudioTracks = () => {
-    const audioTracks = context.config?.audioTracks
-    return context.hls?.audioTracks.filter((item) => audioTracks?.length ? audioTracks.includes(item.name) : item)
+    return hls?.audioTracks.filter((item) => audioTracks.includes(item.name))
   };
   const getAudioTrack = () => {
-    return context.hls?.audioTrack;
+    return hls?.audioTrack;
   };
   const changeAudioTrack = (index: number) => {
-    if (context.hls) context.hls.audioTrack = index;
+    if (hls) hls.audioTrack = index;
   };
 
   useEffect(() => {
-    if (events?.onLoaded) context.listenOnLoad.push(events?.onLoaded);
+    if (events?.onLoaded) listenOnLoad.push(events?.onLoaded);
   }, []);
 
   return {

@@ -1,22 +1,13 @@
 import { useRef } from "react";
-import { PlayerConfigType, PlayerObjectType } from "../@types/player.model";
+import { PlayerConfigType, PlayerInstance, PlayerLocaleType } from "../@types/player.model";
 import { usePlayerContext } from "./usePlayerContext";
+import { defaultConfig } from "../config/defaultConfig";
 
-export const usePlayer = (playerConfig: PlayerConfigType) => {
-  const playerObject: PlayerObjectType = {
-    loadVideo: () => { },
-    changeLocale: () => { },
-    speeds: playerConfig.speeds,
-    locale: playerConfig.locale,
-    icons: playerConfig.icons,
-    style: playerConfig.style,
-    autoPlay: playerConfig.autoPlay,
-    type: playerConfig.type,
-    qualities: playerConfig.qualities,
-    audioTracks: playerConfig.audioTracks,
-    subTitle: playerConfig.subTitle,
-    keyControl: false
-  };
+export const usePlayer = (playerConfig: { [key in keyof PlayerConfigType]?: PlayerConfigType[key] }) => {
+  const playerDefaults: PlayerInstance = {
+    ...defaultConfig,
+    ...playerConfig,
+  }
 
   usePlayerContext({
     onUpdateTime: playerConfig.onUpdateTime,
@@ -27,7 +18,7 @@ export const usePlayer = (playerConfig: PlayerConfigType) => {
     onChangeVolume: playerConfig.onChangeVolume,
   });
 
-  const configRef = useRef<PlayerObjectType>(playerObject);
+  const configRef = useRef<PlayerInstance>(playerDefaults);
 
   return configRef.current;
 };

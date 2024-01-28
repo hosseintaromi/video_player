@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { ThemeProvider } from '@emotion/react'
 import Video from '../../player/Video'
-import { useStyle } from '../../../hooks/useStyle'
 import { Gradient, PlayIconWrapper, VideoWrapper } from '../../player/VideoPlayerStyle'
 import { usePlayerContext } from '../../../hooks/usePlayerContext'
 import Toolbar from '../../toolbar/Toolbar'
@@ -10,10 +9,9 @@ import Play from '../../tools/Play'
 import Loading from '../../loading/Loading'
 
 const PlayerTemplate = () => {
-    const { style } = useStyle()
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
     const [isPlay, setIsPlay] = useState<boolean>(false)
-    usePlayerContext({
+    const { style } = usePlayerContext({
         onPlayPause: (playStatus: boolean) => {
             setIsPlay(true)
             setTimeout(() => {

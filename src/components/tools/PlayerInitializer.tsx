@@ -10,10 +10,7 @@ const PlayerInitializer = () => {
 
     useEffect(() => {
         context.loadVideo = loadVideo;
-        if (!context.config) {
-            return;
-        }
-        context.config.loadVideo = context.loadVideo;
+        context.config.loadVideo = loadVideo;
         if (context.config.src) {
             context.loadVideo(context.config.src)
         }

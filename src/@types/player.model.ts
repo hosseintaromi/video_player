@@ -6,8 +6,7 @@ export interface PlayerContextType {
   togglePlay?: () => void;
   listenPlayPause?: (listener: (play: boolean) => void) => void;
   loadVideo?: (src: string) => void;
-  config?: PlayerObjectType;
-  speeds?: number[];
+  config: PlayerInstance;
   hls?: Hls;
   listenOnLoad: (() => void)[];
 }
@@ -41,13 +40,13 @@ export interface PlayerConfigType {
   onChangeVolume?: (e: OnUpdateTimeType) => void;
   onChangeMute?: (e: boolean) => void;
   onReady?: () => void;
-  locale?: PlayerLocaleType;
-  icons?: IconsType;
-  loop?: boolean;
-  speeds?: number[];
-  style?: StyleType;
-  autoPlay?: boolean;
-  timeForHideEl?: number;
+  locale: PlayerLocaleType;
+  icons: IconsType;
+  loop: boolean;
+  speeds: number[];
+  style: StyleType;
+  autoPlay: boolean;
+  timeForHideEl: number;
   type: "HLS" | "MP4";
   qualities: number[],
   audioTracks: string[],
@@ -55,21 +54,10 @@ export interface PlayerConfigType {
   keyControl: boolean
 }
 
-export interface PlayerObjectType {
+export interface PlayerInstance extends PlayerConfigType {
   loadVideo: (src: string) => void;
   changeLocale: (locale: PlayerLocaleType) => void;
-  speeds?: number[];
-  qualities: number[],
-  audioTracks: string[],
-  subTitle: string[],
   src?: string;
-  locale?: PlayerLocaleType;
-  icons?: IconsType;
-  style?: StyleType;
-  autoPlay?: boolean;
-  timeForHideEl?: number;
-  type: "HLS" | "MP4";
-  keyControl: boolean
 }
 
 export type GenericEvents<T extends Record<string, string>> = {

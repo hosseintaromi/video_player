@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
-import { defaultLocale } from "../config/defaultLang";
 import useContextEvents from "./useContextEvents";
 import { PlayerEventsType, PlayerLocaleType } from "../@types/player.model";
+import { usePlayerContext } from "./usePlayerContext";
 
 export const useLocale = ({
   onChangeLocale,
 }: {
   onChangeLocale?: (locale: PlayerLocaleType) => void;
 }) => {
-  const context = useContext(VideoPlayerContext);
+  const { locale } = usePlayerContext();
 
   const changeLocale = (locale: PlayerLocaleType) => {
     call.onChangeLocale?.(locale);
@@ -23,7 +23,7 @@ export const useLocale = ({
   }, []);
 
   return {
-    locale: context.config?.locale || defaultLocale,
+    locale,
     changeLocale,
   };
 };

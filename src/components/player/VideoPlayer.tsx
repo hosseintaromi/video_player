@@ -1,20 +1,20 @@
 import React, { useRef } from 'react'
 import PlayerTemplate from '../templates/red/PlayerTemplate';
-import { PlayerObjectType } from '../../@types/player.model';
+import { PlayerInstance } from '../../@types/player.model';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
 import PlayerInitializer from '../tools/PlayerInitializer';
 import MobilePlayerTemplate from '../templates/red/MobilePlayerTemplate';
 import BlueMobileTemeplate from '../templates/blue/BlueMobileTemeplate';
 import BlueTemeplate from '../templates/blue/BlueTemplate';
 
-const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerObjectType, src?: string }) => {
+const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerInstance, src?: string }) => {
 
 
     const videoRef = useRef<HTMLVideoElement>();
     if (config && src) {
         config.src = src;
     }
-    const configRef = useRef<PlayerObjectType>(config || { src } as any);
+    const configRef = useRef<PlayerInstance>(config || { src } as any);
 
     const listenOnLoad = useRef<(() => void)[]>([])
     const playListeners = useRef<((play: boolean) => void)[]>([])

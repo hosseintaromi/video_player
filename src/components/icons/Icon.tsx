@@ -1,8 +1,8 @@
 import { HTMLAttributes } from 'react'
 import { IconsType } from '../../@types/player.model'
-import { useIcon } from '../../hooks/useIcon'
 import styled from '@emotion/styled'
 import React from 'react'
+import { usePlayerContext } from '../../hooks/usePlayerContext'
 
 const IconWrapperStyle = styled.div(({ theme }) => ({
   display: 'flex',
@@ -17,7 +17,7 @@ type IconType = {
   isClickable: boolean,
 } & HTMLAttributes<HTMLElement>
 const Icon = ({ type, onClick, ...other }: IconType) => {
-  const { icons } = useIcon()
+  const { icons } = usePlayerContext()
   return (
     <IconWrapperStyle onClick={onClick} {...other}>{icons[type]}</IconWrapperStyle>
   )

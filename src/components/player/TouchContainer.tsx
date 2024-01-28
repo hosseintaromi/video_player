@@ -35,7 +35,7 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
             hideWithDelay()
     }
 
-    const { getHideTime, changePlayPause, increaseTime, decreaseTime, hasKeyControl } = usePlayerContext({
+    const { timeForHideEl, changePlayPause, increaseTime, decreaseTime, keyControl } = usePlayerContext({
         onPlayPause: (playStatus: boolean) => {
             isPlay.current = playStatus
             hideWithDelay()
@@ -61,12 +61,12 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
             if (isPlay.current && !isSettingOpen.current) {
                 showHandler(false)
             }
-        }, getHideTime())
+        }, timeForHideEl)
 
     };
     useEffect(() => {
-        console.log(!hasKeyControl())
-        if (!hasKeyControl()) return
+
+        if (!keyControl) return
         const handelKeyDown = (e: KeyboardEvent) => {
             if (e.keyCode === 39) increaseTime(10)
             if (e.keyCode === 37) decreaseTime(10)
@@ -84,7 +84,6 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     const calcThrottle = useCallback(throttle(hideWithDelay, 200), [])
     return (
         <div
-            id='slm'
             onDoubleClick={toggleFullscreen}
             onClick={togglePlay}
             onMouseMove={calcThrottle}

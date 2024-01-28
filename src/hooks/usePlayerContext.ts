@@ -1,69 +1,42 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
 import { GenericEvents, PlayerEventsType } from "../@types/player.model";
 import { useContextEvents } from "./useContextEvents";
 import { findBufferIndex } from "../utils/player-utils";
 
 export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
-  const context = useContext(VideoPlayerContext);
+  const { config, setVideoRef: videoRefSetter, getVideoRef, listenOnLoad, hls } = useContext(VideoPlayerContext);
   const timeRef = useRef<number>(0);
   const currentBuffer = useRef<{ index: number; length: number }>();
-  const [isSettingOpen, setIsSettingOpen] = useState(false)
 
-
-
-  const getVideoEl = () => {
-    return context.getVideoRef();
-  };
   const { listen, call } =
     useContextEvents<PlayerEventsType>(VideoPlayerContext);
   const speedIndexRef = useRef<number>(1);
 
-  const getHideTime = () => {
-    return context.config?.timeForHideEl === undefined
-      ? 3000
-      : context.config?.timeForHideEl;
-  };
-
-  const isAutoPlay = () => {
-    return context.config?.autoPlay === undefined
-      ? true
-      : context.config?.autoPlay;
-  };
-
-  const hasKeyControl = () => {
-    return context.config?.keyControl === undefined
-      ? false
-      : context.config?.keyControl;
-  }
-
-  const getSpeeds = () => {
-    return context.config?.speeds || [0.5, 1, 1.25, 1.5, 2];
-  };
   const getSpeed = () => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) return videoRef.playbackRate;
   };
   const changeSpeed = (index: number) => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) {
-      const speeds = getSpeeds();
+      const speeds = config.speeds!;
       videoRef.playbackRate = speeds[index];
       speedIndexRef.current = index;
     }
   };
 
   const getVolume = () => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) return { volume: videoRef.volume, isMuted: videoRef.muted };
   };
   const changeMute = (e: boolean) => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) videoRef.muted = e;
     call.onChangeMute?.(e);
   };
   const changeVolume = (newVolume: number) => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) {
       call.onChangeVolume?.(newVolume);
       if (videoRef.muted) {
@@ -75,44 +48,42 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
   };
 
   const changeTime = (time: number) => {
-    const el = getVideoEl();
+    const el = getVideoRef();
     if (el) el.currentTime = time;
     checkBuffer(true);
   };
 
   const increaseTime = (time: number) => {
-    const el = getVideoEl();
+    const el = getVideoRef();
     if (el) el.currentTime = (el.currentTime + time);
     checkBuffer(true);
   };
   const decreaseTime = (time: number) => {
-    const el = getVideoEl();
+    const el = getVideoRef();
     if (el) el.currentTime = (el.currentTime - time);
     checkBuffer(true);
   };
 
-
-
   const getDuration = () => {
-    const el = getVideoEl();
+    const el = getVideoRef();
     return el?.duration;
   };
 
   const changePlayPause = (play: boolean) => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) {
       play ? videoRef.play() : videoRef.pause();
     }
   };
   const getIsPlay = () => {
-    const videoRef = getVideoEl();
+    const videoRef = getVideoRef();
     if (videoRef) {
       return !videoRef.paused;
     }
   };
 
   const checkBuffer = (forceUpdate?: boolean) => {
-    const videoEl = getVideoEl();
+    const videoEl = getVideoRef();
     if (!videoEl) return;
     const buffer = getCurrentBuffer(videoEl, forceUpdate);
     if (!buffer) debugger;
@@ -136,7 +107,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   const setVideoRef = (el?: HTMLVideoElement) => {
     if (!el) return;
-    context.setVideoRef(el);
+    videoRefSetter(el);
     el.onwaiting = () => {
       call.onLoading?.(true);
     };
@@ -176,9 +147,9 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
   }, []);
 
   return {
+    hls,
     setVideoRef,
-    config: context.config,
-    getSpeeds,
+    getVideoRef,
     getSpeed,
     changeSpeed,
     changePlayPause,
@@ -189,9 +160,8 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     getVolume,
     changeMute,
     changeVolume,
-    isAutoPlay,
-    getHideTime,
     getDuration,
-    hasKeyControl,
+    listenOnLoad,
+    ...config,
   };
 };

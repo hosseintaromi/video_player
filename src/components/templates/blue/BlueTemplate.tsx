@@ -5,10 +5,10 @@ import { Gradient, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/Vi
 import Loading from '../../loading/Loading';
 import TouchContainer from '../../player/TouchContainer';
 import Video from '../../player/Video';
-import { useStyle } from '../../../hooks/useStyle';
 import Play from '../../tools/Play';
 import Jump from '../../tools/Jump';
 import BlueToolbar from '../../toolbar/BlueToolbar';
+import { usePlayerContext } from '../../../hooks/usePlayerContext';
 
 
 export const cache = createCache({
@@ -17,7 +17,7 @@ export const cache = createCache({
 })
 
 const BlueTemeplate = () => {
-    const { style } = useStyle();
+    const { style } = usePlayerContext();
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
 
     return (

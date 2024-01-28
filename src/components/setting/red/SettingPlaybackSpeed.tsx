@@ -14,7 +14,7 @@ type settingPlaybackSpeedPropsType = {
 
 const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsType) => {
 
-    const { getSpeeds, changeSpeed } = usePlayerContext()
+    const { speeds, changeSpeed } = usePlayerContext()
     const [indexSpeed, setIndexSpeed] = useState(1)
     const setSpeed = (index: number) => {
         changeSpeed(index)
@@ -33,7 +33,7 @@ const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsTy
                         changePage={changePage}
                         backRoute={pageName.settingList}
                     />
-                    {getSpeeds().map((speedItem, index) =>
+                    {speeds.map((speedItem, index) =>
                         <>
                             <SettingItem
                                 key={index} onClick={() => setSpeed(index)}

@@ -1,8 +1,13 @@
 import { createContext } from "react";
 import { PlayerContextType } from "../@types/player.model";
+import { defaultConfig } from "../config/defaultConfig";
 
 
-//TODO: how to fix this any
-const VideoPlayerContext = createContext<PlayerContextType>({} as any)
+const VideoPlayerContext = createContext<PlayerContextType>({
+    config: defaultConfig,
+    setVideoRef: (ref) => { },
+    getVideoRef: () => undefined,
+    listenOnLoad: []
+})
 
 export default VideoPlayerContext;
