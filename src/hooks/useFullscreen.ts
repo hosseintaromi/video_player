@@ -40,9 +40,6 @@ export const useFullscreen = (
     if (!el) return;
     if (el.requestFullscreen) {
       el.requestFullscreen();
-    }
-    if (el.requestFullscreen) {
-      el.requestFullscreen();
     } else if (el.webkitEnterFullScreen) {
       el.webkitEnterFullScreen();
     } else if (el.webkitRequestFullscreen) {
@@ -61,6 +58,8 @@ export const useFullscreen = (
       doc.webkitExitFullscreen();
     } else if (doc.msExitFullscreen) {
       doc.msExitFullscreen();
+    } else if (doc.exitFullscreen) {
+      doc.exitFullscreen();
     }
   };
 
