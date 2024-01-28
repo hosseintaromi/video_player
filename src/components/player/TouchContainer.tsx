@@ -25,7 +25,6 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     const video_player = document.getElementById("video_player");
 
     const { toggleFullscreen } = useFullscreen((e) => {
-        (window.screen.orientation as any)?.lock("landscape-primary");
     }, video_wrapper_id, video_player);
 
     const togglePlay = () => {

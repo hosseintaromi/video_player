@@ -9,7 +9,6 @@ const Fullscreen = () => {
 
     const { toggleFullscreen } = useFullscreen((e) => {
         setIsFullscreen(e);
-        (window.screen.orientation as any)?.lock("landscape-primary");
     }, video_wrapper_id, video_player);
 
     return (
