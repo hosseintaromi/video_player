@@ -65,9 +65,9 @@ const Quality = () => {
             </Dialog>
             <IconButton onClick={() => setIsOpen(pre => !pre)}>
                 <Icon isClickable={true} type="setting" />
-                <Badge colors='danger' isFixed>
+                {/* <Badge colors='danger' isFixed>
                     12.2
-                </Badge>
+                </Badge> */}
             </IconButton>
 
         </>

@@ -36,12 +36,10 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   const loadHlsVideo = useCallback((src: string) => {
     const videoEl = getVideoRef();
     if (!videoEl) return;
-    // inja boodim. bayad setter'e hls ro bezarim tooye khode conte
+
     const hls = context.hls = new Hls({
       enableWorker: false,
-
     });
-
     hls.attachMedia(videoEl);
 
     hls.on(Hls.Events.MEDIA_ATTACHED, () => {
@@ -60,36 +58,37 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   }, []);
 
   const getLevels = () => {
-    return hls?.levels.filter((item) => qualities.includes(item.height))
+    return context.hls?.levels.filter((item) => qualities.includes(item.height))
   };
   const getCurrentLevel = () => {
     return {
-      currentLevel: hls?.currentLevel,
-      isAuto: hls?.autoLevelEnabled,
+      currentLevel: context.hls?.currentLevel,
+      isAuto: context.hls?.autoLevelEnabled,
     };
   };
   const changeLevel = (index: number) => {
-    if (hls) hls.currentLevel = index;
+    if (context.hls) context.hls.currentLevel = index;
   };
 
   const getSubtitle = () => {
-    return hls?.subtitleTracks.filter((item) => subTitle.includes(item.name))
+    return context.hls?.subtitleTracks.filter((item) => subTitle.includes(item.name))
   };
   const getCurrentSubtitle = () => {
-    return hls?.subtitleTrack;
+    return context.hls?.subtitleTrack;
   };
   const changeSubtitle = (index: number) => {
-    if (hls) hls.subtitleTrack = index;
+    if (context.hls) context.hls.subtitleTrack = index;
   };
 
   const getAudioTracks = () => {
-    return hls?.audioTracks.filter((item) => audioTracks.includes(item.name))
+    console.log(context.hls)
+    return context.hls?.audioTracks.filter((item) => audioTracks.includes(item.name))
   };
   const getAudioTrack = () => {
-    return hls?.audioTrack;
+    return context.hls?.audioTrack;
   };
   const changeAudioTrack = (index: number) => {
-    if (hls) hls.audioTrack = index;
+    if (context.hls) context.hls.audioTrack = index;
   };
 
   useEffect(() => {
