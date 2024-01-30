@@ -27,12 +27,12 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     const { toggleFullscreen } = useFullscreen((e) => {
     }, video_wrapper_id, video_player);
 
-    const togglePlay = () => {
-        if (canPlayOnClick)
-            changePlayPause(!isPlay.current)
-        else
-            hideWithDelay()
-    }
+    // const togglePlay = () => {
+    //     if (canPlayOnClick)
+    //         changePlayPause(!isPlay.current)
+    //     else
+    //         hideWithDelay()
+    // }
 
     const { timeForHideEl, changePlayPause, increaseTime, decreaseTime, keyControl } = usePlayerContext({
         onPlayPause: (playStatus: boolean) => {
@@ -49,18 +49,17 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
     }
 
     const hideWithDelay = () => {
+        showHandler(true)
         if (!isPlay.current)
             return
         if (timeOutRef.current) {
             clearTimeout(timeOutRef.current);
-            timeOutRef.current = undefined
         }
-        showHandler(true)
         timeOutRef.current = setTimeout(() => {
             if (isPlay.current && !isSettingOpen.current) {
                 showHandler(false)
             }
-        }, timeForHideEl)
+        }, 5000)
 
     };
     useEffect(() => {
@@ -73,20 +72,26 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
         };
 
         window.addEventListener("keydown", handelKeyDown);
+        window.addEventListener("mousedown", hideWithDelay);
+        window.addEventListener("touchstart ", hideWithDelay);
 
         return () => {
             window.removeEventListener("keydown", handelKeyDown);
+            window.removeEventListener("mousedown", hideWithDelay);
+            window.removeEventListener("touchstart", hideWithDelay);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const calcThrottle = useCallback(throttle(hideWithDelay, 200), [])
+    const calcThrottle = hideWithDelay
     return (
         <div
+            id='touchkontanier'
             // onDoubleClick={toggleFullscreen}
-            onClick={togglePlay}
+            // onClick={togglePlay}
             onMouseMove={calcThrottle}
-            onTouchEnd={calcThrottle}
+            onTouchStart={calcThrottle}
+            onMouseDown={calcThrottle}
             onTouchMove={calcThrottle}
             style={{ width: '100%', height: '100%' }}>
             {children}
