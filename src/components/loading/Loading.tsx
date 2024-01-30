@@ -42,7 +42,7 @@ const Loading = () => {
         }
     })
     return (
-        showLoading && <RingWrapper><div></div><div></div><div></div><div></div></RingWrapper>
+        showLoading ? <RingWrapper><div></div><div></div><div></div><div></div></RingWrapper> : <></>
     )
 }
 

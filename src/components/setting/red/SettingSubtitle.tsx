@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
 import { SettingMenu } from '../../general/FlexCenter';
-import { pageDir, pageName } from './Setting';
 import SettingHeader from './SettingHeader';
 import CheckMark from '../../icons/icon-list/CheckMark';
 import { usePlayerEvents } from '../../../hooks/usePlayerEvents';
 import { MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
 import Locale from '../../locale/Locale';
 import { SettingItemWrapper } from './SettingStyle';
+import { pageName, pageDir } from '../../../@types/setting.model';
 
 type SettingSubtitleType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,

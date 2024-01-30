@@ -12,14 +12,14 @@ import { createPortal } from 'react-dom';
 import { FadeBackDrop, OverlayContainer } from './SettingStyle';
 
 
-export enum pageName {
+enum pageName {
     settingList = 'settingList',
     playbackSpeed = 'playbackSpeed',
     quality = 'quality',
     subtitle = 'subtitle',
     audioTrack = 'audioTrack'
 }
-export enum pageDir { back = 'back', forward = 'forward' }
+enum pageDir { back = 'back', forward = 'forward' }
 
 const Setting = () => {
     const settingListRef = useRef<HTMLDivElement>(null)

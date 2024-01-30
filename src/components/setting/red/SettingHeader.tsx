@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
-import { pageDir, pageName } from './Setting'
 import { FlexCenter } from '../../general/FlexCenter'
 import Icon from '../../icons/Icon'
 import React from 'react'
 import { SettingHeaderTitle, SettingHeaderWrapper } from './SettingStyle'
+import { pageName, pageDir } from '../../../@types/setting.model'
 
 type settingHeaderPropsType = {
     title: ReactNode,

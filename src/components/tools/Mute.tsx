@@ -15,7 +15,7 @@ const Mute = () => {
                 return (
                     <Icon isClickable={true} type='volumeUp' onClick={() => mute()} />
                 )
-            else if (volume < 66 && volume >= 1)
+            else
                 return (
                     <Icon isClickable={true} type='volumeDown' onClick={() => mute()} />
                 )

@@ -1,13 +1,15 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import SettingItem from './SettingItem';
 import { SettingMenu } from '../../general/FlexCenter';
-import { pageDir, pageName } from './Setting';
 import { usePlayerEvents } from '../../../hooks/usePlayerEvents';
 import Locale from '../../locale/Locale';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
 import { LevelType, MediaPlaylistType } from '../../../@types/UseVideoHlsType.model';
 import Icon from '../../icons/Icon';
 import { SettingItemArrowSpan } from './SettingStyle';
+import { pageName, pageDir } from '../../../@types/setting.model';
+
+
 
 type SettingListType = {
     changePage: (newPageName: pageName, dir: pageDir) => void,

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { pageDir, pageName } from '../setting/red/Setting';
 import React from 'react';
 import { PlayerEventsType } from '../../@types/player.model';
 import VideoPlayerContext from '../../contexts/VideoPlayerContext';
@@ -30,7 +29,7 @@ const Overlay = ({ children, openSetting }: { children: JSX.Element[], openSetti
         useContextEvents<PlayerEventsType>(VideoPlayerContext);
 
     useEffect(() => {
-        openSetting(pageName.settingList, pageDir.forward)
+        // openSetting(pageName.settingList, pageDir.forward)
         call.onChangeSetting?.(overlayVisible)
     }, [overlayVisible])
     useEffect(() => {
