@@ -8,15 +8,15 @@ import { defaultLocale } from "./defaultLang";
 import { defaultStyle } from "./defaultStyle";
 
 export const defaultConfig: PlayerInstance = {
+  type: "HLS",
+  loop: false,
+  autoPlay: true,
+  speeds: [0.5, 0.75, 1, 1.5, 2],
+  theme: "Blue",
   locale: defaultLocale,
   icons: defaultIcons,
-  loop: false,
-  speeds: [0.5, 0.75, 1, 1.5, 2],
   style: defaultStyle,
-  autoPlay: true,
-  timeForHideEl: 1000,
-  type: "HLS",
-  theme: "Red",
+  timeForHideEl: 3000,
   qualities: [],
   audioTracks: [],
   subTitle: [],

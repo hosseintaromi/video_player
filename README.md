@@ -7,38 +7,33 @@ In terms of appearance, we tried to be entirely similar to YouTube because it is
 
 ### Key Features
 
-- Ability to stream video or play simple video
-- The default appearance is quite similar to YouTube, but you can fully customize it in the simplest way
-- All facilities are ready for you, such as control of subtitles, dubbing, playback speed and quality by default, and access to control all of these in your application.
+- Ability to stream videos or play simple videos.
+- Fully customizable appearance, inspired by YouTube.
+- Control over subtitles, dubbing, playback speed, and quality.g, playback speed and quality by default, and access to control all of these in your application.
 
 <!-- You can play a video with all cool features -->
 
-## Table of Content
+## Table of Contents
 
-&nbsp;&middot;&nbsp;
-[Install](#Install) <br/>
-&nbsp;&middot;&nbsp;
-[Usage](#Usage)<br/>
-&nbsp;&middot;&nbsp;
-[Contributing](#Contributing)<br/>
-&nbsp;&middot;&nbsp;
-[License](#license)<br/>
-&nbsp;&middot;&nbsp;
-[Credits](#Credits)<br/>
-&nbsp;&middot;&nbsp;
-[Author](#Author)<br/>
-&nbsp;&middot;&nbsp;
-[License](#License)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Key Features](#key-features)
+- [Config Object Fields](#config-object-fields)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [Author](#author)
+- [License](#license)
 
-## Install
+## Installation
 
-Install with [npm](https://www.npmjs.com/):
+Install with [npm](https://www.npmjs.com/@hosseintaromi/video_player):
 
 ```sh
 $ npm i @hosseintaromi/video_player
 ```
 
-Install with [yarn](https://yarnpkg.com):
+Install with [yarn](https://yarnpkg.com/package?q=%40hosseintaromi&name=%40hosseintaromi%2Fvideo_player):
 
 ```sh
 $ yarn add @hosseintaromi/video_player
@@ -52,7 +47,7 @@ import { VideoPlayer } from "@hosseintaromi/video_player";
 const App = () => {
   const playerConfig = usePlayer({
     onUpdateTime: (e) => {
-      // console.log('client', e)
+      console.log("client", e);
     },
     speeds: [0.5, 1, 1.25, 1.5, 2],
     qualities: [252, 432],
@@ -69,39 +64,9 @@ const App = () => {
       setting_menu_change_subtitle: "انتخاب زیرنویس",
       setting_menu_subtitle_off: "خاموش",
     },
-    // style: {
-    //   bufferBg: 'blue',
-    //   dir: 'rtl',
-    //   iconColor: 'blue',
-    //   rangeBackBg: 'blue',
-    //   rangeFrontBg: 'blue',
-    //   settingBg: 'blue',
-    //   settingFontSize: 'blue',
-    //   textColor: 'blue',
-    //   toolbarBg: 'blue',
-    //   toolbarFontSize: 'blue',
-    // },
     autoPlay: true,
     timeForHideEl: 1000,
     type: "HLS",
-    // icons: {
-    //   arrow: <p>hello</p>,
-    //   audioTrack: <p>hello</p>,
-    //   checkMark: <p>hello</p>,
-    //   fullScreen: <p>hello</p>,
-    //   mute: <p>hello</p>,
-    //   pause: <p>hello</p>,
-    //   picInPic: <p>hello</p>,
-    //   picOutPic: <p>hello</p>,
-    //   play: <p>hello</p>,
-    //   quality: <p>hello</p>,
-    //   setting: <p>hello</p>,
-    //   speed: <p>hello</p>,
-    //   subtitle: <p>hello</p>,
-    //   unFullScreen: <p>hello</p>,
-    //   volumeDown: <p>hello</p>,
-    //   volumeUp: <p>hello</p>,
-    // }
   });
   return (
     <VideoPlayer
@@ -113,6 +78,85 @@ const App = () => {
 
 export default App;
 ```
+
+## Config Object Fields
+
+| Field            | Type                                 | Default                  | Description                                                                               |
+| ---------------- | ------------------------------------ | ------------------------ | ----------------------------------------------------------------------------------------- |
+| `type`           | `"HLS"` or `"MP4"`                   | `"HLS"`                  | Specifies the type of video stream. Use 'HLS' for streaming and 'MP4' for normal videos.  |
+| `loop`           | `boolean`                            | `false`                  | Enables video looping after it reaches the end if set to `true`.                          |
+| `autoPlay`       | `boolean`                            | `false`                  | Starts playing the video automatically when the player is created.                        |
+| `locale`         | `PlayerLocaleType`                   | `{}`                     | Object containing locale strings.                                                         |
+| `speeds`         | `number[]`                           | `[0.5, 0.75, 1, 1.5, 2]` | Array of play speeds for the video.                                                       |
+| `theme`          | `"Red"` or `"Blue"`                  | `"Blue"`                 | Sets the color theme for the player. Choose between 'Red' and 'Blue'.                     |
+| `timeForHideEl`  | `number`                             | `3000`                   | Time in milliseconds to automatically hide page elements.                                 |
+| `icons`          | `IconsType`                          | `{}`                     | Object containing ReactNode for various icons.                                            |
+| `style`          | `StyleType`                          | `{}`                     | Object containing styles for various player elements.                                     |
+| `qualities`      | `number[]`                           | `[]`                     | Specify the qualities to display. If not provided, all available qualities will be shown. |
+| `audioTracks`    | `string[]`                           | `[]`                     | Specify the audio tracks to display. If not provided, all available tracks will be shown. |
+| `subTitle`       | `string[]`                           | `[]`                     | Specify the subtitles to display. If not provided, all available subtitles will be shown. |
+| `keyControl`     | `boolean`                            | `true`                   | Enables key listeners for actions like play/pause (space key) or mute (M key).            |
+| `thumbnail`      | `string`                             | `""`                     | Link to the thumbnail image in TTF format.                                                |
+| `onUpdateTime`   | `(e: OnUpdateTimeType) => void`      | -                        | Callback function triggered on video time update.                                         |
+| `onEnd`          | `(e: OnUpdateTimeType) => void`      | -                        | Callback function triggered when the video reaches the end.                               |
+| `onLoading`      | `(e: boolean) => void`               | -                        | Callback function triggered when the video is loading.                                    |
+| `onPlayPause`    | `(e: OnUpdateTimeType) => void`      | -                        | Callback function triggered on play/pause events.                                         |
+| `onUpdateBuffer` | `(e: number) => void`                | -                        | Callback function triggered on buffer update.                                             |
+| `onChangeVolume` | `(e: OnUpdateTimeType) => void`      | -                        | Callback function triggered on volume change.                                             |
+| `onChangeMute`   | `(e: boolean) => void`               | -                        | Callback function triggered on mute/unmute events.                                        |
+| `onReady`        | `() => void`                         | -                        | Callback function triggered when the player is ready.                                     |
+| `src`            | `string`                             | `""`                     | Source URL of the video.                                                                  |
+| `loadVideo`      | `(src: string) => void`              | -                        | Function to load a new video source.                                                      |
+| `changeLocale`   | `(locale: PlayerLocaleType) => void` | -                        | Function to change the player's locale.                                                   |
+
+| Field                   | Type               | Default | Description                                      |
+| ----------------------- | ------------------ | ------- | ------------------------------------------------ |
+| `dir`                   | `"rtl"` or `"ltr"` | `"ltr"` | Text direction (right-to-left or left-to-right). |
+| `iconColor`             | `string`           | `""`    | Color of icons.                                  |
+| `settingTextColor`      | `string`           | `""`    | Color of text in settings menu.                  |
+| `toolbarBg`             | `string`           | `""`    | Background color of the toolbar.                 |
+| `settingBg`             | `string`           | `""`    | Background color of the settings menu.           |
+| `settingBgHover`        | `string`           | `""`    | Background color of the settings menu on hover.  |
+| `rangeFrontBg`          | `string`           | `""`    | Background color of the progress bar.            |
+| `rangeBackBg`           | `string`           | `""`    | Background color of the progress bar track.      |
+| `bufferBg`              | `string`           | `""`    | Background color of the buffer bar.              |
+| `settingFontSize`       | `string`           | `""`    | Font size of text in settings menu.              |
+| `toolbarFontSize`       | `string`           | `""`    | Font size of text in the toolbar.                |
+| `settingTitleTextColor` | `string`           | `""`    | Color of the title text in settings menu.        |
+
+| Field          | Type        |
+| -------------- | ----------- |
+| `setting`      | `ReactNode` |
+| `checkMark`    | `ReactNode` |
+| `arrow`        | `ReactNode` |
+| `play`         | `ReactNode` |
+| `pause`        | `ReactNode` |
+| `volumeUp`     | `ReactNode` |
+| `volumeDown`   | `ReactNode` |
+| `mute`         | `ReactNode` |
+| `picInPic`     | `ReactNode` |
+| `picOutPic`    | `ReactNode` |
+| `fullScreen`   | `ReactNode` |
+| `unFullScreen` | `ReactNode` |
+| `speed`        | `ReactNode` |
+| `quality`      | `ReactNode` |
+| `subtitle`     | `ReactNode` |
+| `audioTrack`   | `ReactNode` |
+| `autoPlayOn`   | `ReactNode` |
+| `autoPlayOff`  | `ReactNode` |
+| `jumpBack`     | `ReactNode` |
+| `jumpForward`  | `ReactNode` |
+| `mic`          | `ReactNode` |
+
+| Field                                   | Type     | Default | Description                                               |
+| --------------------------------------- | -------- | ------- | --------------------------------------------------------- |
+| `setting_menu_change_speed_title`       | `string` | -       | Title for changing speed in the settings menu.            |
+| `setting_menu_change_quality_title`     | `string` | -       | Title for changing quality in the settings menu.          |
+| `setting_menu_quality_list_item_auto`   | `string` | -       | Label for the auto quality option in the settings menu.   |
+| `setting_menu_quality_active_list`      | `string` | -       | Label for the active quality option in the settings menu. |
+| `setting_menu_change_audio_track_title` | `string` | -       | Title for changing audio track in the settings menu.      |
+| `setting_menu_change_subtitle`          | `string` | -       | Title for changing subtitle in the settings menu.         |
+| `setting_menu_subtitle_off`             | `string` | -       | Label for turning off subtitles in the settings menu.     |
 
 ## Contributing
 
