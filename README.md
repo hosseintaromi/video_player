@@ -79,7 +79,13 @@ const App = () => {
 export default App;
 ```
 
-## Config Object Fields
+## Config
+
+###
+
+### config object type and default value
+
+###
 
 | Field            | Type                                 | Default                  | Description                                                                               |
 | ---------------- | ------------------------------------ | ------------------------ | ----------------------------------------------------------------------------------------- |
@@ -109,6 +115,12 @@ export default App;
 | `loadVideo`      | `(src: string) => void`              | -                        | Function to load a new video source.                                                      |
 | `changeLocale`   | `(locale: PlayerLocaleType) => void` | -                        | Function to change the player's locale.                                                   |
 
+###
+
+### style object type and default value
+
+###
+
 | Field                   | Type               | Default | Description                                      |
 | ----------------------- | ------------------ | ------- | ------------------------------------------------ |
 | `dir`                   | `"rtl"` or `"ltr"` | `"ltr"` | Text direction (right-to-left or left-to-right). |
@@ -123,6 +135,12 @@ export default App;
 | `settingFontSize`       | `string`           | `""`    | Font size of text in settings menu.              |
 | `toolbarFontSize`       | `string`           | `""`    | Font size of text in the toolbar.                |
 | `settingTitleTextColor` | `string`           | `""`    | Color of the title text in settings menu.        |
+
+###
+
+### icon object type
+
+###
 
 | Field          | Type        |
 | -------------- | ----------- |
@@ -148,15 +166,21 @@ export default App;
 | `jumpForward`  | `ReactNode` |
 | `mic`          | `ReactNode` |
 
-| Field                                   | Type     | Default | Description                                               |
-| --------------------------------------- | -------- | ------- | --------------------------------------------------------- |
-| `setting_menu_change_speed_title`       | `string` | -       | Title for changing speed in the settings menu.            |
-| `setting_menu_change_quality_title`     | `string` | -       | Title for changing quality in the settings menu.          |
-| `setting_menu_quality_list_item_auto`   | `string` | -       | Label for the auto quality option in the settings menu.   |
-| `setting_menu_quality_active_list`      | `string` | -       | Label for the active quality option in the settings menu. |
-| `setting_menu_change_audio_track_title` | `string` | -       | Title for changing audio track in the settings menu.      |
-| `setting_menu_change_subtitle`          | `string` | -       | Title for changing subtitle in the settings menu.         |
-| `setting_menu_subtitle_off`             | `string` | -       | Label for turning off subtitles in the settings menu.     |
+###
+
+### locale object type
+
+###
+
+| Field                                   | Type     | Description                                               |
+| --------------------------------------- | -------- | --------------------------------------------------------- |
+| `setting_menu_change_speed_title`       | `string` | Title for changing speed in the settings menu.            |
+| `setting_menu_change_quality_title`     | `string` | Title for changing quality in the settings menu.          |
+| `setting_menu_quality_list_item_auto`   | `string` | Label for the auto quality option in the settings menu.   |
+| `setting_menu_quality_active_list`      | `string` | Label for the active quality option in the settings menu. |
+| `setting_menu_change_audio_track_title` | `string` | Title for changing audio track in the settings menu.      |
+| `setting_menu_change_subtitle`          | `string` | Title for changing subtitle in the settings menu.         |
+| `setting_menu_subtitle_off`             | `string` | Label for turning off subtitles in the settings menu.     |
 
 ## Contributing
 
