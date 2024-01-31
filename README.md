@@ -50,52 +50,64 @@ $ yarn add @hosseintaromi/video_player
 import { VideoPlayer } from "@hosseintaromi/video_player";
 
 const App = () => {
-  //you can control everything with this ref
-  const controllerRef = useRef<ControllerRefType>({
-    changeSpeed: () => {},
-    play: () => {},
-  });
-
-  // you can create components for
-  // right and left sections on
-  // the top of the player
-  const right = () => <p>hello</p>;
-  const left = () => <p>bye</p>;
-
-  // you can do something when user play the video
-  const onPlay = () => {
-    console.log("onplay");
-  };
-  // you can pass custom theme to player
-  const theme = {
-    colors: {
-      primary: "yellow",
-      videoBg: "#000",
+  const playerConfig = usePlayer({
+    onUpdateTime: (e) => {
+      // console.log('client', e)
     },
-  };
-
+    speeds: [0.5, 1, 1.25, 1.5, 2],
+    qualities: [252, 432],
+    audioTracks: ["English"],
+    subTitle: ["Chinese"],
+    keyControl: true,
+    theme: "Blue",
+    locale: {
+      setting_menu_change_speed_title: "انتخاب سرعت پخش",
+      setting_menu_change_quality_title: "انتخاب کیفیت",
+      setting_menu_quality_list_item_auto: "خودکار (بر اساس اینترنت شما)",
+      setting_menu_quality_active_list: "خودکار",
+      setting_menu_change_audio_track_title: "انتخاب صدا",
+      setting_menu_change_subtitle: "انتخاب زیرنویس",
+      setting_menu_subtitle_off: "خاموش",
+    },
+    // style: {
+    //   bufferBg: 'blue',
+    //   dir: 'rtl',
+    //   iconColor: 'blue',
+    //   rangeBackBg: 'blue',
+    //   rangeFrontBg: 'blue',
+    //   settingBg: 'blue',
+    //   settingFontSize: 'blue',
+    //   textColor: 'blue',
+    //   toolbarBg: 'blue',
+    //   toolbarFontSize: 'blue',
+    // },
+    autoPlay: true,
+    timeForHideEl: 1000,
+    type: "HLS",
+    // icons: {
+    //   arrow: <p>hello</p>,
+    //   audioTrack: <p>hello</p>,
+    //   checkMark: <p>hello</p>,
+    //   fullScreen: <p>hello</p>,
+    //   mute: <p>hello</p>,
+    //   pause: <p>hello</p>,
+    //   picInPic: <p>hello</p>,
+    //   picOutPic: <p>hello</p>,
+    //   play: <p>hello</p>,
+    //   quality: <p>hello</p>,
+    //   setting: <p>hello</p>,
+    //   speed: <p>hello</p>,
+    //   subtitle: <p>hello</p>,
+    //   unFullScreen: <p>hello</p>,
+    //   volumeDown: <p>hello</p>,
+    //   volumeUp: <p>hello</p>,
+    // }
+  });
   return (
-    <>
-      <VideoPlayer
-        src="https://videoUrl.m3u8"
-        controls={false}
-        loop={true}
-        muted={false}
-        controllerRef={controllerRef}
-        topRightContainer={right()}
-        topLeftContainer={left()}
-        onPlay={onPlay}
-        customTheme={theme}
-        poster="http://posterUrl.jpg"
-      />
-      <button
-        onClick={() => {
-          controllerRef.current.changeSpeed(4);
-        }}
-      >
-        speed X 4
-      </button>
-    </>
+    <VideoPlayer
+      config={playerConfig}
+      src="https://cdn.bitmovin.com/content/assets/art-of-motion-dash-hls-progressive/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
+    />
   );
 };
 
