@@ -18,5 +18,6 @@ export const defaultConfig: PlayerInstance = {
     subTitle: [],
     keyControl: true,
     loadVideo: function (src: string): void { },
-    changeLocale: function (locale: PlayerLocaleType): void { }
+    changeLocale: function (locale: PlayerLocaleType): void { },
+    thumbnail: ""
 }

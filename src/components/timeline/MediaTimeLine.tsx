@@ -1,9 +1,9 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import RangeSelect from "../general/range-select/RangeSelect"
 import { usePlayerContext } from "../../hooks/usePlayerContext";
 import { OnUpdateTimeType } from "../../@types/player.model";
 import { Bubble, BufferSize, GeneralStyleForRange, ThumbCursor } from "./MediaTimeLineStyle"
-import Snapshot from "../tools/Snapshot";
+import Snapshot, { SnapshotModel } from "../tools/Snapshot";
 
 type ChangeRangeSelectType = {
     calcInputVal: (e: number, updateParent: boolean) => void
@@ -17,6 +17,10 @@ const TimeLine = () => {
         toggleThumb: () => { }
     });
     const [hoverTime, setHoverTime] = useState<number | string>();
+    const [hoverValue, setHoverValue] = useState<number | string>();
+    const [hoverPercent, setHoverPercent] = useState<number>();
+
+    const snapshots = useRef<SnapshotModel[]>([]);
 
     const playStateRef = useRef<boolean>();
     const snapShotBoxCursor = useRef<HTMLDivElement>(null);
@@ -27,7 +31,8 @@ const TimeLine = () => {
     var timeOut: ReturnType<typeof setTimeout>;
 
 
-    const { changeTime, getIsPlay, changePlayPause } = usePlayerContext({
+
+    const { changeTime, getIsPlay, changePlayPause, thumbnail } = usePlayerContext({
         onUpdateTime: (e: OnUpdateTimeType) => {
             duration.current = e.duration
             percentage = e.percentage;
@@ -63,10 +68,17 @@ const TimeLine = () => {
         )}px`;
         bubbleEl.style.marginLeft = `-${65}px `;
         bubbleCursorEl.style.left = `${Math.max(
-            13,
-            Math.min(offsetX, event.target.clientWidth) + 13,
+            -1,
+            Math.min(offsetX, event.target.clientWidth) + -1,
         )}px `;
         setHoverTime(((offsetX / event.target.clientWidth * 100) * duration.current) / 100)
+
+        setHoverPercent((offsetX / event.target.clientWidth) * 100);
+
+        const val = hoverPercent ? hoverPercent : 0;
+
+        setHoverValue((val * duration.current) / 100);
+
     };
 
     const changeShowBubble = (e: boolean) => {
@@ -84,8 +96,47 @@ const TimeLine = () => {
             bubbleEl.style.display = "none";
         }
     };
-
-
+    const toInt = (value: string) => Number(value);
+    const toSecond = (time: string) => {
+        const timeArr = time.trim().split(":");
+        return (
+            toInt(timeArr[0]) * 3600 + toInt(timeArr[1]) * 60 + toInt(timeArr[2])
+        );
+    };
+    useEffect(() => {
+        if (thumbnail)
+            fetch(thumbnail)
+                .then((res) => res.text())
+                .then((text) => {
+                    if (thumbnail === "") return;
+                    let node: SnapshotModel | undefined;
+                    text.split("\n").forEach((line: string) => {
+                        if (node) {
+                            node.img =
+                                thumbnail.split("/").slice(0, -1).join("/") +
+                                "/" +
+                                line.split("#xywh=")[0];
+                            const noArr = line.split("#xywh=")[1].split(",");
+                            node.location = [
+                                toInt(noArr[0]),
+                                toInt(noArr[1]),
+                                toInt(noArr[2]),
+                                toInt(noArr[3]),
+                            ];
+                            node = undefined;
+                        } else if (line.indexOf("-->") > 0) {
+                            node = {} as any;
+                            if (node) {
+                                snapshots.current.push(node);
+                                const times = line.split("-->");
+                                node.startTime = toSecond(times[0]);
+                                node.endTime = toSecond(times[1]);
+                            }
+                        }
+                    });
+                })
+                .catch((e) => console.error(e));
+    }, [thumbnail]);
 
     return (
         <GeneralStyleForRange className="media-timeLine" onMouseEnter={() => {
@@ -121,11 +172,7 @@ const TimeLine = () => {
                 }}
             />
             <Bubble ref={snapShotBox} className="bubble">
-                {/* <img
-                    src="https://static.namava.ir/Content/Upload/Images/a72becc0-c77b-4110-9b04-9206bc76858f.jpg"
-                    alt=""
-                /> */}
-                {/* <Snapshot time={hoverTime} snapshots={url} /> */}
+                <Snapshot snapshots={snapshots.current} time={hoverValue} />
             </Bubble>
             <ThumbCursor ref={snapShotBoxCursor} />
             <BufferSize id="buffer-size" />

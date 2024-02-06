@@ -28,6 +28,7 @@ const Demo = ({ length }: DemoProps) => {
       setting_menu_change_subtitle: 'انتخاب زیرنویس',
       setting_menu_subtitle_off: 'خاموش'
     },
+    thumbnail: 'https://cdn.bitmovin.com/content/assets/art-of-motion-dash-hls-progressive/thumbnails/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.vtt',
     // style: {
     //   bufferBg: 'blue',
     //   dir: 'rtl',

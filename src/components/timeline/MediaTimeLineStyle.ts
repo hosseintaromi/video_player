@@ -5,9 +5,10 @@ export const ThumbCursor = styled.div({
   width: "4px",
   height: "4px",
   background: "rgba(33, 33, 33, 0.6)",
-  bottom: "53px",
+  bottom: "12px",
   zIndex: "3",
   display: "none",
+
 });
 export const GeneralStyleForRange = styled.div({
   position: "relative",
@@ -37,17 +38,15 @@ export const Bubble = styled.output({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  bottom: "70px;",
+  bottom: "30px;",
   display: "none",
+
 
   span: {
     marginTop: "3px",
   },
 
-  img: {
-    width: "158px",
-    height: "88px",
-  },
+
 
   ":after": {
     content: '""',
