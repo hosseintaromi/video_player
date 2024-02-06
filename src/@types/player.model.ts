@@ -27,10 +27,24 @@ export type PlayerEventsType = {
   onChangeVolume: "onChangeVolume";
   onChangeMute: "onChangeMute";
   onReady: "onReady";
-  onChangeSetting: 'onChangeSetting'
+  onChangeSetting: "onChangeSetting";
 };
 
 export interface PlayerConfigType {
+  type: "HLS" | "MP4";
+  loop: boolean;
+  autoPlay: boolean;
+  locale: PlayerLocaleType;
+  speeds: number[];
+  theme: "Red" | "Blue";
+  timeForHideEl: number;
+  icons: IconsType;
+  style: StyleType;
+  qualities: number[];
+  audioTracks: string[];
+  subTitle: string[];
+  keyControl: boolean;
+  thumbnail: string;
   onUpdateTime?: (e: OnUpdateTimeType) => void;
   // FIXME: we should fix this types
   onEnd?: (e: OnUpdateTimeType) => void;
@@ -40,20 +54,6 @@ export interface PlayerConfigType {
   onChangeVolume?: (e: OnUpdateTimeType) => void;
   onChangeMute?: (e: boolean) => void;
   onReady?: () => void;
-  locale: PlayerLocaleType;
-  icons: IconsType;
-  loop: boolean;
-  speeds: number[];
-  style: StyleType;
-  autoPlay: boolean;
-  timeForHideEl: number;
-  type: "HLS" | "MP4";
-  qualities: number[],
-  audioTracks: string[],
-  subTitle: string[],
-  keyControl: boolean,
-  theme: 'Red' | 'Blue',
-  thumbnail: string,
 }
 
 export interface PlayerInstance extends PlayerConfigType {
