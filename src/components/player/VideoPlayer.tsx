@@ -7,6 +7,7 @@ import MobilePlayerTemplate from '../templates/red/MobilePlayerTemplate';
 import BlueMobileTemeplate from '../templates/blue/BlueMobileTemeplate';
 import BlueTemeplate from '../templates/blue/BlueTemplate';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
+import CustomPlayer from '../templates/custom/CustomPlayer';
 
 const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerInstance, src?: string }) => {
     const { theme } = usePlayerContext()
@@ -14,6 +15,8 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
     const choosePlayerSize = () => {
         if ((config?.theme || theme) === 'Blue') {
             return <BlueTemeplate />
+        } else if ((config?.theme || theme) === 'Custom') {
+            return <CustomPlayer />
         } else {
             return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
         }

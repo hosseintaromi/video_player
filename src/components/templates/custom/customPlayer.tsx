@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider, CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
-import { Gradient, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
+import { CustomPlayWrapper, Gradient, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
 import Loading from '../../loading/Loading';
 import TouchContainer from '../../player/TouchContainer';
 import Video from '../../player/Video';
@@ -16,7 +16,7 @@ export const cache = createCache({
     stylisPlugins: []
 })
 
-const BlueTemeplate = () => {
+const CustomPlayer = () => {
     const { style } = usePlayerContext();
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
 
@@ -24,7 +24,6 @@ const BlueTemeplate = () => {
         <CacheProvider value={cache}>
             <ThemeProvider theme={style}>
                 <VideoWrapperBlue id="video_wrapper_id">
-                    <Loading />
                     <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
                         <Video />
                     </TouchContainer>
@@ -35,4 +34,4 @@ const BlueTemeplate = () => {
         </CacheProvider>
     )
 }
-export default BlueTemeplate;
+export default CustomPlayer;

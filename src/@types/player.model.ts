@@ -36,7 +36,7 @@ export interface PlayerConfigType {
   autoPlay: boolean;
   locale: PlayerLocaleType;
   speeds: number[];
-  theme: "Red" | "Blue";
+  theme: "Red" | "Blue" | "Custom";
   timeForHideEl: number;
   icons: IconsType;
   style: StyleType;
