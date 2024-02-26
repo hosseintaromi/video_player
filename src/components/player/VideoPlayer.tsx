@@ -15,9 +15,8 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
     const choosePlayerSize = () => {
         if ((config?.theme || theme) === 'Blue') {
             return <BlueTemeplate />
-        } else if ((config?.theme || theme) === 'Custom') {
-            return <CustomPlayer />
-        } else {
+        }
+        else {
             return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
         }
     }
@@ -53,7 +52,7 @@ const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, co
             listenOnLoad: listenOnLoad.current,
 
         }}>
-            {children ? children : choosePlayerSize()}
+            {children ? <CustomPlayer> {children}</CustomPlayer> : choosePlayerSize()}
             <PlayerInitializer />
         </VideoPlayerContext.Provider>
     )
