@@ -195,6 +195,26 @@ export const VideoWrapperBlue = styled.div({
   },
 });
 
+export const CustomPlayWrapper = styled.div(({ theme }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  zIndex: "300",
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  transition: "opacity .25s cubic-bezier(0,0,.2,1)",
+  width: '100%',
+  maxWidth: '350px',
+
+  "svg": {
+    width: '40px',
+    height: 'auto'
+  }
+}),
+  ({ isFaded }: { isFaded: boolean }) => ({ opacity: isFaded ? 0 : 1 })
+);
 export const PlayJumpIconWrapper = styled.div(({ theme }) => ({
   position: "absolute",
   top: "50%",
