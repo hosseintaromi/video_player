@@ -16,9 +16,6 @@ const Play = ({ children }: { children?: ReactNode }) => {
         onPlayPause: (play: boolean) => {
             setIsPlay(play)
         },
-        // onLoading: (isLoading: boolean) => {
-        //     console.log("isLoading: ", isLoading);
-        // }
     })
 
     return (
