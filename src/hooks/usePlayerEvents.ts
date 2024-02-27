@@ -58,7 +58,7 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   }, []);
 
   const getLevels = () => {
-    return context.hls?.levels.filter((item) => qualities.includes(item.height))
+    return context.hls?.levels.filter((item) => qualities.length ? qualities.includes(item.height) : true)
   };
   const getCurrentLevel = () => {
     return {
@@ -81,7 +81,7 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   };
 
   const getAudioTracks = () => {
-    return context.hls?.audioTracks.filter((item) => audioTracks.includes(item.name))
+    return context.hls?.audioTracks.filter((item) => audioTracks.length ? audioTracks.includes(item.name) : true)
   };
   const getAudioTrack = () => {
     return context.hls?.audioTrack;
