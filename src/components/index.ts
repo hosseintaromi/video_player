@@ -7,7 +7,7 @@ export { default as Video } from "./player/Video";
 export { default as TimeLine } from "./timeline/MediaTimeLine";
 export { default as Fullscreen } from "./tools/Fullscreen";
 export { default as Jump } from "./tools/Jump";
-export { default as volume } from "./tools/Volume";
+export { default as Volume } from "./tools/Volume";
 
 
 export { CustomPlayWrapper, CustomVideoWrapper } from "./player/VideoPlayerStyle";
