@@ -71,7 +71,7 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   };
 
   const getSubtitle = () => {
-    return context.hls?.subtitleTracks.filter((item) => subTitle.includes(item.name))
+    return context.hls?.subtitleTracks.filter((item) => subTitle.length ? subTitle.includes(item.name) : true)
   };
   const getCurrentSubtitle = () => {
     return context.hls?.subtitleTrack;
@@ -81,7 +81,6 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   };
 
   const getAudioTracks = () => {
-    console.log(context.hls)
     return context.hls?.audioTracks.filter((item) => audioTracks.includes(item.name))
   };
   const getAudioTrack = () => {
