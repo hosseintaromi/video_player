@@ -14,6 +14,7 @@ const Quality = () => {
     const [levels, setLevels] = useState<LevelType>()
     const [currentLevel, setCurrentLevel] = useState<number>()
     const loadLevels = () => {
+        console.log('first')
         setLevels(getLevels())
         const curlvl = getCurrentLevel().isAuto ? -1 : getCurrentLevel().currentLevel
         setCurrentLevel(curlvl === undefined ? -1 : curlvl)

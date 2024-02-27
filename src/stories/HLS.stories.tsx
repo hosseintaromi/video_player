@@ -14,7 +14,7 @@ const Demo = ({ length }: DemoProps) => {
       // console.log('client', e)
     },
     speeds: [0.5, 1, 1.25, 1.5, 2],
-    qualities: [252, 432],
+    // qualities: [252, 432],
     audioTracks: ['English'],
     subTitle: ['Chinese'],
     keyControl: true,
