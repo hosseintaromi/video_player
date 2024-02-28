@@ -9,6 +9,8 @@ export { default as Fullscreen } from "./tools/Fullscreen";
 export { default as Time } from "./tools/Time";
 export { default as Jump } from "./tools/Jump";
 export { default as Volume } from "./tools/Volume";
+export { default as Mute } from "./tools/Mute";
+
 
 
 export { CustomPlayWrapper, CustomVideoWrapper } from "./player/VideoPlayerStyle";
