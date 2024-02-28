@@ -26,7 +26,7 @@ const Demo = ({ length }: DemoProps) => {
       setting_menu_quality_active_list: 'خودکار',
       setting_menu_change_audio_track_title: 'انتخاب صدا',
       setting_menu_change_subtitle: 'انتخاب زیرنویس',
-      setting_menu_subtitle_off: 'خاموش'
+      setting_menu_subtitle_off: 'خاموش',
     },
     thumbnail: 'https://cdn.bitmovin.com/content/assets/art-of-motion-dash-hls-progressive/thumbnails/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.vtt',
     // style: {
@@ -36,10 +36,12 @@ const Demo = ({ length }: DemoProps) => {
     //   rangeBackBg: 'blue',
     //   rangeFrontBg: 'blue',
     //   settingBg: 'blue',
-    //   settingFontSize: 'blue',
-    //   textColor: 'blue',
+    //   settingFontSize: '15px',
     //   toolbarBg: 'blue',
-    //   toolbarFontSize: 'blue',
+    //   toolbarFontSize: '60px',
+    //   settingBgHover: '',
+    //   settingTextColor: "",
+    //   settingTitleTextColor: ''
     // },
     autoPlay: true,
     timeForHideEl: 1000,

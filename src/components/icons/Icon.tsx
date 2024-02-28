@@ -8,7 +8,11 @@ const IconWrapperStyle = styled.div(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: theme.iconColor
+  color: theme.iconColor,
+  '& svg': {
+    height: theme.toolbarFontSize,
+    width: theme.toolbarFontSize
+  },
 }),
   ({ isClickable }: { isClickable: boolean }) => ({ cursor: isClickable ? 'pointer' : 'default' })
 );
