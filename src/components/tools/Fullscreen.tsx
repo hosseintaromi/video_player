@@ -12,7 +12,7 @@ const Fullscreen = () => {
     }, video_wrapper_id, video_player);
 
     return (
-        <Icon isClickable={true} onClick={() => toggleFullscreen()} type={!isFullscreen ?
+        <Icon className='vp-icon-fullscreen' isClickable={true} onClick={() => toggleFullscreen()} type={!isFullscreen ?
             "fullScreen"
             :
             "unFullScreen"

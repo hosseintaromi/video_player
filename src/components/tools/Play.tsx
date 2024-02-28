@@ -22,9 +22,9 @@ const Play = ({ children }: { children?: ReactNode }) => {
         <>
             {
                 isPlay === true ?
-                    <Icon isClickable={true} onClick={togglePlay} type='pause' />
+                    <Icon isClickable={true} onClick={togglePlay} type='pause' className='vp-icon-pause' />
                     :
-                    <Icon isClickable={true} onClick={togglePlay} type='play' />
+                    <Icon isClickable={true} onClick={togglePlay} type='play' className='vp-icon-play' />
             }
         </>
     )

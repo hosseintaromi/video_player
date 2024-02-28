@@ -16,8 +16,8 @@ const JumpBack = ({ children, type }: { children?: ReactNode, type: 'back' | 'fo
     return (
         <>
             {type === 'back' ?
-                <Icon isClickable={true} onClick={jumpBack} type='jumpBack' /> :
-                <Icon isClickable={true} onClick={JumpForward} type='jumpForward' />
+                <Icon isClickable={true} onClick={jumpBack} type='jumpBack' className='vp-icon-jump-back' /> :
+                <Icon isClickable={true} onClick={JumpForward} type='jumpForward' className='vp-icon-jump-forward' />
             }
         </>
     )
