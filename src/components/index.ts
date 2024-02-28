@@ -6,6 +6,7 @@ export { default as TouchContainer } from "./player/TouchContainer";
 export { default as Video } from "./player/Video";
 export { default as TimeLine } from "./timeline/MediaTimeLine";
 export { default as Fullscreen } from "./tools/Fullscreen";
+export { default as Time } from "./tools/Time";
 export { default as Jump } from "./tools/Jump";
 export { default as Volume } from "./tools/Volume";
 
