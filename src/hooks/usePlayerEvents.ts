@@ -50,7 +50,7 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
       }
     });
     hls.on(Hls.Events.ERROR, (c) => {
-      console.log(c)
+      console.log(JSON.stringify(c as any))
     })
     hls.on(Hls.Events.LEVEL_LOADED, () => {
       listenOnLoad.forEach((listener) => {
