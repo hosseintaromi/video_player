@@ -71,9 +71,9 @@ const RangeSelect = ({
         onMouseDown={onRangeStart}
         onMouseUp={onRangeEnd}
       />
-      <ProgressBar id="progressBar" ref={progressBarRef} />
+      <ProgressBar id="progressBar" className="vp-progress" ref={progressBarRef} />
 
-      <Thumb id="selector" ref={selectorRef} style={{ display: showThumb ? 'block' : 'none' }} />
+      <Thumb id="selector" className="vp-thumb" ref={selectorRef} style={{ display: showThumb ? 'block' : 'none' }} />
 
       {TimeLineMemo}
     </GeneralStyleForRange>

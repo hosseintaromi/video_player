@@ -11,7 +11,7 @@ export const ProgressBar = styled.div(({ theme }) => ({
   height: "3px",
   position: "absolute",
   top: "50%",
-  marginTop: "-4px",
+  transform: "translateY(-50%)",
   left: "0",
   zIndex: "3",
   backgroundColor: theme.rangeFrontBg
@@ -20,13 +20,13 @@ export const ProgressBar = styled.div(({ theme }) => ({
 export const Thumb = styled.div(({ theme }) => ({
   height: "9px",
   width: "9px",
-  top: "30%",
+  top: "50%",
+  transform: "translateY(-50%)",
   position: "absolute",
   left: "0%",
   border: `solid 3px ${theme.rangeFrontBg}`,
   borderRadius: "50%",
   zIndex: "4",
-  marginTop: "-5px",
   backgroundColor: theme.rangeFrontBg
 }));
 
@@ -36,7 +36,7 @@ export const TimeLine = styled.div(({ theme }) => ({
   borderRadius: "3px",
   position: "absolute",
   top: "50%",
-  marginTop: "-4px",
+  transform: "translateY(-50%)",
   left: "0",
   zIndex: "1",
   backgroundColor: theme.rangeBackBg

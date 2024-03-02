@@ -22,7 +22,7 @@ export const BufferSize = styled.span(({ theme }) => ({
   borderRadius: "3px",
   position: "absolute",
   top: "50%",
-  marginTop: "-4px",
+  transform: "translateY(-50%)",
   left: "0",
   zIndex: "2",
   background: theme.bufferBg,
