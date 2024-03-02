@@ -49,9 +49,27 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
         videoEl.src = src;
       }
     });
-    hls.on(Hls.Events.ERROR, (c) => {
-      console.log(JSON.stringify(c as any))
-    })
+    hls.on(Hls.Events.ERROR, function (event, data) {
+      if (data.fatal) {
+        switch (data.type) {
+          case Hls.ErrorTypes.MEDIA_ERROR:
+            console.log('fatal media error encountered, try to recover');
+            hls.recoverMediaError();
+            break;
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            console.error('fatal network error encountered', data);
+            // All retries and media options have been exhausted.
+            // Immediately trying to restart loading could cause loop loading.
+            // Consider modifying loading policies to best fit your asset and network
+            // conditions (manifestLoadPolicy, playlistLoadPolicy, fragLoadPolicy).
+            break;
+          default:
+            // cannot recover
+            hls.destroy();
+            break;
+        }
+      }
+    });
     hls.on(Hls.Events.LEVEL_LOADED, () => {
       listenOnLoad.forEach((listener) => {
         listener();
