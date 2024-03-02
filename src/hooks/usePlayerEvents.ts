@@ -49,7 +49,9 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
         videoEl.src = src;
       }
     });
-
+    hls.on(Hls.Events.ERROR, (c) => {
+      console.log(c)
+    })
     hls.on(Hls.Events.LEVEL_LOADED, () => {
       listenOnLoad.forEach((listener) => {
         listener();
