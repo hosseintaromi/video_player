@@ -73,7 +73,7 @@ const RangeSelect = ({
       />
       <ProgressBar id="progressBar" className="vp-progress" ref={progressBarRef} />
 
-      <Thumb id="selector" className="vp-thumb" ref={selectorRef} style={{ display: showThumb ? 'block' : 'none' }} />
+      <Thumb id="selector" className="vp-thumb" ref={selectorRef} />
 
       {TimeLineMemo}
     </GeneralStyleForRange>
