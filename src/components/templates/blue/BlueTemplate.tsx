@@ -9,11 +9,12 @@ import Play from '../../tools/Play';
 import Jump from '../../tools/Jump';
 import BlueToolbar from '../../toolbar/BlueToolbar';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
+import stylisRTLPlugin from "stylis-plugin-rtl";
 
 
 export const cache = createCache({
     key: 'rtl',
-    stylisPlugins: []
+    stylisPlugins: [stylisRTLPlugin]
 })
 
 const BlueTemeplate = () => {
