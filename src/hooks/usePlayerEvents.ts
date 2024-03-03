@@ -84,6 +84,7 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
     return {
       currentLevel: context.hls?.currentLevel,
       isAuto: context.hls?.autoLevelEnabled,
+      defaultQuality: context?.config?.defaultQuality || null
     };
   };
   const changeLevel = (index: number) => {
