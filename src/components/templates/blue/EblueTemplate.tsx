@@ -9,7 +9,6 @@ import Play from '../../tools/Play';
 import Jump from '../../tools/Jump';
 import BlueToolbar from '../../toolbar/BlueToolbar';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
-import './BlueTemeplate.css';
 
 
 export const cache = createCache({
@@ -17,14 +16,14 @@ export const cache = createCache({
     stylisPlugins: []
 })
 
-const BlueTemeplate = () => {
+const EblueTemplate = () => {
     const { style } = usePlayerContext();
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
 
     return (
         <CacheProvider value={cache}>
             <ThemeProvider theme={style}>
-                <div className='video-wrapper' id="video_wrapper_id">
+                <VideoWrapperBlue id="video_wrapper_id">
                     <PlayJumpIconWrapper isFaded={isFadeOut}>
                         <Jump type='back' />
                         <Play />
@@ -36,12 +35,12 @@ const BlueTemeplate = () => {
                     </TouchContainer>
                     <Gradient isFaded={isFadeOut} />
                     <BlueToolbar isFaded={isFadeOut} />
-                </div>
+                </VideoWrapperBlue>
             </ThemeProvider>
         </CacheProvider>
     )
 }
-export default BlueTemeplate;
+export default EblueTemplate;
 
 
 
