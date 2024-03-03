@@ -69,6 +69,7 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
             if (e.keyCode === 39) increaseTime(10)
             if (e.keyCode === 37) decreaseTime(10)
             if (e.keyCode === 32 && isPlay.current !== undefined) changePlayPause(!isPlay.current)
+            hideWithDelay()
         };
 
         window.addEventListener("keydown", handelKeyDown);
