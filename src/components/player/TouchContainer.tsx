@@ -59,7 +59,7 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
             if (isPlay.current && !isSettingOpen.current) {
                 showHandler(false)
             }
-        }, 5000)
+        }, timeForHideEl)
 
     };
     useEffect(() => {
