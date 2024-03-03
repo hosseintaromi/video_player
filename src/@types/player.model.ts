@@ -44,6 +44,7 @@ export interface PlayerConfigType {
   audioTracks: string[];
   subTitle: string[];
   keyControl: boolean;
+  defaultQuality?: string,
   thumbnail: string;
   onUpdateTime?: (e: OnUpdateTimeType) => void;
   // FIXME: we should fix this types
