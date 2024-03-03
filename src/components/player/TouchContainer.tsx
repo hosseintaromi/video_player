@@ -71,12 +71,12 @@ const TouchContainer = ({ children, onShow, canPlayOnClick }: { children: ReactN
             if (e.keyCode === 32 && isPlay.current !== undefined) changePlayPause(!isPlay.current)
         };
 
-        window.addEventListener("keydown", handelKeyDown);
+        window.addEventListener("keydown", hideWithDelay);
         window.addEventListener("mousedown", hideWithDelay);
         window.addEventListener("touchstart ", hideWithDelay);
 
         return () => {
-            window.removeEventListener("keydown", handelKeyDown);
+            window.removeEventListener("keydown", hideWithDelay);
             window.removeEventListener("mousedown", hideWithDelay);
             window.removeEventListener("touchstart", hideWithDelay);
         };

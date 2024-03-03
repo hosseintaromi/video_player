@@ -11,33 +11,33 @@ import BlueToolbar from '../../toolbar/BlueToolbar';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
 
 
-// export const cache = createCache({
-//     key: 'rtl',
-//     stylisPlugins: []
-// })
+export const cache = createCache({
+    key: 'rtl',
+    stylisPlugins: []
+})
 
 const BlueTemeplate = () => {
     const { style } = usePlayerContext();
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
 
     return (
-        // <CacheProvider value={cache}>
-        <ThemeProvider theme={style}>
-            <VideoWrapperBlue id="video_wrapper_id">
-                <PlayJumpIconWrapper isFaded={isFadeOut}>
-                    <Jump type='back' />
-                    <Play />
-                    <Jump type='forward' />
-                </PlayJumpIconWrapper>
-                <Loading />
-                <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
-                    <Video />
-                </TouchContainer>
-                <Gradient isFaded={isFadeOut} />
-                <BlueToolbar isFaded={isFadeOut} />
-            </VideoWrapperBlue>
-        </ThemeProvider>
-        // </CacheProvider>
+        <CacheProvider value={cache}>
+            <ThemeProvider theme={style}>
+                <VideoWrapperBlue id="video_wrapper_id">
+                    <PlayJumpIconWrapper isFaded={isFadeOut}>
+                        <Jump type='back' />
+                        <Play />
+                        <Jump type='forward' />
+                    </PlayJumpIconWrapper>
+                    <Loading />
+                    <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
+                        <Video />
+                    </TouchContainer>
+                    <Gradient isFaded={isFadeOut} />
+                    <BlueToolbar isFaded={isFadeOut} />
+                </VideoWrapperBlue>
+            </ThemeProvider>
+        </CacheProvider>
     )
 }
 export default BlueTemeplate;
