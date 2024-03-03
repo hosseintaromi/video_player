@@ -5,26 +5,26 @@ import { usePlayerContext } from '../../../hooks/usePlayerContext';
 import { CustomVideoWrapper } from '../../player/VideoPlayerStyle';
 
 
-export const cache = createCache({
-    key: 'rtl',
-    stylisPlugins: []
-})
+// export const cache = createCache({
+//     key: 'rtl',
+//     stylisPlugins: []
+// })
 
 const CustomPlayer = ({ children }: { children: ReactNode }) => {
     const { style } = usePlayerContext();
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
 
     return (
-        <CacheProvider value={cache}>
-            <ThemeProvider theme={style}>
-                <CustomVideoWrapper id="video_wrapper_id">
-                    {/* <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
+        // <CacheProvider value={cache}>
+        <ThemeProvider theme={style}>
+            <CustomVideoWrapper id="video_wrapper_id">
+                {/* <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
                         <Video />
                     </TouchContainer> */}
-                    {children}
-                </CustomVideoWrapper>
-            </ThemeProvider>
-        </CacheProvider>
+                {children}
+            </CustomVideoWrapper>
+        </ThemeProvider>
+        // </CacheProvider>
     )
 }
 export default CustomPlayer;
