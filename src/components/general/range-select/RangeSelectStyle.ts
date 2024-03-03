@@ -23,7 +23,7 @@ export const Thumb = styled.div(({ theme }) => ({
   top: "50%",
   transform: "translateY(-50%)",
   position: "absolute",
-  left: "0%",
+  left: "-9px",
   border: `solid 3px ${theme.rangeFrontBg}`,
   borderRadius: "50%",
   zIndex: "4",
