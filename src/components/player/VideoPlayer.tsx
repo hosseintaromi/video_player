@@ -1,61 +1,118 @@
-import React, { useRef } from 'react'
-import PlayerTemplate from '../templates/red/PlayerTemplate';
-import { PlayerInstance } from '../../@types/player.model';
-import VideoPlayerContext from '../../contexts/VideoPlayerContext';
-import PlayerInitializer from '../tools/PlayerInitializer';
-import MobilePlayerTemplate from '../templates/red/MobilePlayerTemplate';
-import BlueMobileTemeplate from '../templates/blue/BlueMobileTemeplate';
-import BlueTemeplate from '../templates/blue/BlueTemplate';
-import { usePlayerContext } from '../../hooks/usePlayerContext';
-import CustomPlayer from '../templates/custom/CustomPlayer';
+import React, { useEffect, useRef } from "react";
+import PlayerTemplate from "../templates/red/PlayerTemplate";
+import {
+  KeyValue,
+  PlayerInstance,
+  PlayerState,
+} from "../../@types/player.model";
+import VideoPlayerContext from "../../contexts/VideoPlayerContext";
+import PlayerInitializer from "../tools/PlayerInitializer";
+import MobilePlayerTemplate from "../templates/red/MobilePlayerTemplate";
+import BlueTemeplate from "../templates/blue/BlueTemplate";
+import CustomPlayer from "../templates/custom/CustomPlayer";
 
-const VideoPlayer = ({ children, config, src }: { children?: React.ReactNode, config?: PlayerInstance, src?: string }) => {
-    const { theme } = usePlayerContext()
+const PlayerTemplateSelector = ({
+  config,
+}: {
+  config: PlayerInstance | undefined;
+}) => {
+  if (config?.theme === "Blue") {
+    return <BlueTemeplate />;
+  }
 
-    const choosePlayerSize = () => {
-        if ((config?.theme || theme) === 'Blue') {
-            return <BlueTemeplate />
-        }
-        else {
-            return window.innerWidth < 768 ? <MobilePlayerTemplate /> : <PlayerTemplate />
-        }
+  return window.innerWidth < 768 ? (
+    <MobilePlayerTemplate />
+  ) : (
+    <PlayerTemplate />
+  );
+};
+
+const VideoPlayer = ({
+  children,
+  config,
+  src,
+}: {
+  children?: React.ReactNode;
+  config?: PlayerInstance;
+  src?: string;
+}) => {
+  const playerStateRef = useRef<PlayerState>({});
+  const configRef = useRef<PlayerInstance>(config || ({ src } as any));
+  const listenOnLoad = useRef<(() => void)[]>([]);
+  const playListeners = useRef<((play: boolean) => void)[]>([]);
+  const videoRef = useRef<HTMLVideoElement>();
+
+  const initSpeeds = () => {
+    if (!config || !config.speeds) {
+      return;
     }
+    const state = playerStateRef.current;
+    let speeds: any = config.speeds;
 
-    const videoRef = useRef<HTMLVideoElement>();
-    if (config && src) {
-        config.src = src;
+    if (Array.isArray(speeds)) {
+      speeds = speeds.map((speed) => ({ key: speed + "", value: speed }));
+    } else {
+      const speedsArr = [];
+      for (let key in speeds as any) {
+        speedsArr.push({ key, value: speeds[key] });
+      }
+      speeds = speedsArr;
     }
-    const configRef = useRef<PlayerInstance>(config || { src } as any);
+    if (speeds) {
+      state.speeds = speeds;
+      state.currentSpeed = speeds.find(
+        (x: KeyValue) => x.value === videoRef.current?.playbackRate
+      );
+    }
+  };
 
-    const listenOnLoad = useRef<(() => void)[]>([])
-    const playListeners = useRef<((play: boolean) => void)[]>([])
-    const setVideoRef = (ref: HTMLVideoElement) => {
-        videoRef.current = ref
+  const setVideoRef = (ref: HTMLVideoElement) => {
+    videoRef.current = ref;
+    const state = playerStateRef.current;
+    if (state.speeds) {
+      state.currentSpeed = state.speeds.find(
+        (x) => x.value === ref.playbackRate
+      );
     }
-    const getVideoRef = () => {
-        return videoRef.current;
-    }
-    const togglePlay = () => {
-        playListeners.current.forEach(listener => listener?.(true))
-    }
-    const listenPlayPause = (listener: (play: boolean) => void) => {
-        playListeners.current.push(listener)
-    }
+  };
+  const getVideoRef = () => {
+    return videoRef.current;
+  };
+  const togglePlay = () => {
+    playListeners.current.forEach((listener) => listener?.(true));
+  };
+  const listenPlayPause = (listener: (play: boolean) => void) => {
+    playListeners.current.push(listener);
+  };
 
-    return (
-        <VideoPlayerContext.Provider value={{
-            getVideoRef,
-            setVideoRef,
-            togglePlay,
-            listenPlayPause,
-            config: configRef.current,
-            listenOnLoad: listenOnLoad.current,
+  if (config && src) {
+    config.src = src;
+  }
 
-        }}>
-            {children ? <CustomPlayer> {children}</CustomPlayer> : choosePlayerSize()}
-            <PlayerInitializer />
-        </VideoPlayerContext.Provider>
-    )
-}
+  useEffect(() => {
+    initSpeeds();
+  }, []);
 
-export default VideoPlayer
+  return (
+    <VideoPlayerContext.Provider
+      value={{
+        getVideoRef,
+        setVideoRef,
+        togglePlay,
+        listenPlayPause,
+        config: configRef.current,
+        listenOnLoad: listenOnLoad.current,
+        state: playerStateRef.current,
+      }}
+    >
+      {children ? (
+        <CustomPlayer>{children}</CustomPlayer>
+      ) : (
+        <PlayerTemplateSelector config={config} />
+      )}
+      <PlayerInitializer />
+    </VideoPlayerContext.Provider>
+  );
+};
+
+export default VideoPlayer;

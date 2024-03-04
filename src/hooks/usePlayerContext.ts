@@ -14,6 +14,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     setVideoRef: videoRefSetter,
     getVideoRef,
     listenOnLoad,
+    state,
     hls,
   } = useContext(VideoPlayerContext);
   const timeRef = useRef<number>(0);
@@ -21,27 +22,20 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   const { listen, call } =
     useContextEvents<PlayerEventsType>(VideoPlayerContext);
-  const [speed, setSpeed] = useState<KeyValue>();
+  const [speed, setSpeed] = useState<KeyValue | undefined>();
 
   const getSpeeds = () => {
-    const speeds = config.speeds;
-    if (Array.isArray(speeds)) {
-      return speeds.map((speed) => ({ key: speed + "", value: speed }));
-    } else {
-      const speedsArr = [];
-      for (let key in speeds as any) {
-        speedsArr.push({ key, value: speeds[key] });
-      }
-      return speedsArr;
-    }
+    return state.speeds;
   };
 
   const changeSpeed = (index: number) => {
     const videoRef = getVideoRef();
     if (videoRef) {
       const speeds = getSpeeds();
-      videoRef.playbackRate = speeds[index].value;
-      setSpeed(speeds[index]);
+      if (speeds) {
+        videoRef.playbackRate = speeds[index].value;
+        setSpeed((state.currentSpeed = speeds[index]));
+      }
     }
   };
 
@@ -163,10 +157,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   useEffect(() => {
     listen(events);
-    if (!speed) {
-      const speeds = getSpeeds();
-      setSpeed(speeds.find((x) => x.value == 1));
-    }
+    setSpeed(state.currentSpeed);
   }, []);
 
   return {

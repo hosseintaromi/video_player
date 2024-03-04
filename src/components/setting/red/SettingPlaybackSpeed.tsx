@@ -33,7 +33,7 @@ const SettingPlaybackSpeed = ({
             changePage={changePage}
             backRoute={pageName.settingList}
           />
-          {getSpeeds().map((speedItem, index) => (
+          {getSpeeds()?.map((speedItem, index) => (
             <SettingItem
               key={`speedItemdd${index}`}
               onClick={() => setSpeed(index)}

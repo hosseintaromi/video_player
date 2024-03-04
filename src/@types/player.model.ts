@@ -9,6 +9,7 @@ export interface PlayerContextType {
   config: PlayerInstance;
   hls?: Hls;
   listenOnLoad: (() => void)[];
+  state: PlayerState;
 }
 
 export type OnUpdateTimeType = {
@@ -118,4 +119,9 @@ export type PlayerLocaleType = {
 export type KeyValue = {
   key: string;
   value: number;
+};
+
+export type PlayerState = {
+  speeds?: KeyValue[];
+  currentSpeed?: KeyValue;
 };
