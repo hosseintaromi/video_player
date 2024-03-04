@@ -4,18 +4,6 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 
-const IconWrapperStyle = styled.div(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: theme.iconColor,
-  '& svg': {
-    height: theme.toolbarFontSize,
-    width: theme.toolbarFontSize
-  },
-}),
-  ({ isClickable }: { isClickable: boolean }) => ({ cursor: isClickable ? 'pointer' : 'default' })
-);
 type IconType = {
   type: keyof IconsType
   isClickable: boolean,
@@ -23,7 +11,7 @@ type IconType = {
 const Icon = ({ type, onClick, ...other }: IconType) => {
   const { icons } = usePlayerContext()
   return (
-    <IconWrapperStyle onClick={onClick} {...other}>{icons[type]}</IconWrapperStyle>
+    <div className='icon-wrapper' onClick={onClick} {...other} style={{ cursor: other.isClickable ? 'pointer' : 'default' }}>{icons[type]}</div>
   )
 }
 

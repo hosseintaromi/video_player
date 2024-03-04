@@ -315,3 +315,6 @@
     color: inherit;
     background: none;
 }
+.icon-wrapper {
+    color: var(--icon-color);
+}
