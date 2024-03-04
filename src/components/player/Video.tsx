@@ -21,7 +21,7 @@ const Video = () => {
     }, [])
 
     return (
-        <VideoTag ref={videoRef} autoPlay={autoPlay} muted={true} data-aa="aaaa" id='video_player' />
+        <VideoTag ref={videoRef} autoPlay={autoPlay} playsInline muted id='video_player' />
     )
 }
 

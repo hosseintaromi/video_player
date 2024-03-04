@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 
 export const GeneralStyleForRange = styled.div({
+  /* @noflip */
   position: "relative",
   height: "23px",
   width: "100%",
 });
 
 export const ProgressBar = styled.div(({ theme }) => ({
+  /* @noflip */
   width: "0%",
   height: "3px",
   position: "absolute",
@@ -18,12 +20,13 @@ export const ProgressBar = styled.div(({ theme }) => ({
 }));
 
 export const Thumb = styled.div(({ theme }) => ({
+  /* @noflip */
   height: "9px",
   width: "9px",
   top: "50%",
   transform: "translateY(-50%)",
   position: "absolute",
-  left: "0%",
+  left: "-9px",
   border: `solid 3px ${theme.rangeFrontBg}`,
   borderRadius: "50%",
   zIndex: "4",
@@ -31,6 +34,7 @@ export const Thumb = styled.div(({ theme }) => ({
 }));
 
 export const TimeLine = styled.div(({ theme }) => ({
+  /* @noflip */
   width: "100%",
   height: "3px",
   borderRadius: "3px",
@@ -43,6 +47,7 @@ export const TimeLine = styled.div(({ theme }) => ({
 }));
 
 export const Slider = styled.input({
+  /* @noflip */
   cursor: "pointer",
   width: "100%",
   WebkitAppearance: "none",
