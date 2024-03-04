@@ -163,8 +163,10 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   useEffect(() => {
     listen(events);
-    const speeds = getSpeeds();
-    setSpeed(speeds.find((x) => x.value == 1));
+    if (!speed) {
+      const speeds = getSpeeds();
+      setSpeed(speeds.find((x) => x.value == 1));
+    }
   }, []);
 
   return {
