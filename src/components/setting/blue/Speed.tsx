@@ -7,7 +7,7 @@ import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../red/Settin
 import { CenterBox } from '../../general/FlexCenter'
 
 const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
-    const { speeds, changeSpeed } = usePlayerContext()
+    const { getSpeeds, changeSpeed } = usePlayerContext()
 
     const [indexSpeed, setIndexSpeed] = useState(1)
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,7 +21,7 @@ const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
                 <DialogTitle>سرعت پخش</DialogTitle>
-                {speeds.map((item, index) => (
+                {getSpeeds().map((speed, index) => (
                     <SettingMenuItem
                         onClick={() => { setSpeed(index); setIsOpen(pre => !pre) }}
                         className={`is-reversed ${indexSpeed === index ? 'active' : ''}`} key={index + 'speedDialog'}
@@ -31,7 +31,7 @@ const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
                                 <Icon isClickable={true} type='checkMark' />
                             </SettingItemIcon>
                             <SettingItemSpan className='reserved-span'>
-                                {item}
+                                {speed.key}
                             </SettingItemSpan>
                         </CenterBox>
                     </SettingMenuItem>

@@ -35,7 +35,7 @@ export interface PlayerConfigType {
   loop: boolean;
   autoPlay: boolean;
   locale: PlayerLocaleType;
-  speeds: number[];
+  speeds: number[] | Record<string, number>;
   theme: "Red" | "Blue" | "Custom";
   timeForHideEl: number;
   icons: IconsType;
@@ -44,7 +44,7 @@ export interface PlayerConfigType {
   audioTracks: string[];
   subTitle: string[];
   keyControl: boolean;
-  defaultQuality?: string,
+  defaultQuality?: string;
   thumbnail: string;
   onUpdateTime?: (e: OnUpdateTimeType) => void;
   // FIXME: we should fix this types

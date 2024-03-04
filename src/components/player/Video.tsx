@@ -9,15 +9,19 @@ const VideoTag = styled.video({
     backgroundColor: '#000'
 });
 const Video = () => {
-    const { setVideoRef, autoPlay } = usePlayerContext()
+    const { setVideoRef, autoPlay,changeMute } = usePlayerContext()
     const videoRef = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
         setVideoRef?.(videoRef.current!)
+
+        setTimeout(() => {
+            //changeMute(false)
+        }, 2000);
     }, [])
 
     return (
-        <VideoTag ref={videoRef} autoPlay={autoPlay} id='video_player' />
+        <VideoTag ref={videoRef} autoPlay={autoPlay} muted={true} data-aa="aaaa" id='video_player' />
     )
 }
 

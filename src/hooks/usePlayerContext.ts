@@ -5,7 +5,13 @@ import { useContextEvents } from "./useContextEvents";
 import { findBufferIndex } from "../utils/player-utils";
 
 export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
-  const { config, setVideoRef: videoRefSetter, getVideoRef, listenOnLoad, hls } = useContext(VideoPlayerContext);
+  const {
+    config,
+    setVideoRef: videoRefSetter,
+    getVideoRef,
+    listenOnLoad,
+    hls,
+  } = useContext(VideoPlayerContext);
   const timeRef = useRef<number>(0);
   const currentBuffer = useRef<{ index: number; length: number }>();
 
@@ -17,11 +23,25 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     const videoRef = getVideoRef();
     if (videoRef) return videoRef.playbackRate;
   };
+
+  const getSpeeds = () => {
+    const speeds = config.speeds;
+    if (Array.isArray(speeds)) {
+      return speeds.map((speed) => ({ key: speed + "", value: speed }));
+    } else {
+      const speedsArr = [];
+      for (let key in speeds as any) {
+        speedsArr.push({ key, value: speeds[key] });
+      }
+      return speedsArr;
+    }
+  };
+
   const changeSpeed = (index: number) => {
     const videoRef = getVideoRef();
     if (videoRef) {
-      const speeds = config.speeds!;
-      videoRef.playbackRate = speeds[index];
+      const speeds = getSpeeds();
+      videoRef.playbackRate = speeds[index].value;
       speedIndexRef.current = index;
     }
   };
@@ -55,12 +75,12 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   const increaseTime = (time: number) => {
     const el = getVideoRef();
-    if (el) el.currentTime = (el.currentTime + time);
+    if (el) el.currentTime = el.currentTime + time;
     checkBuffer(true);
   };
   const decreaseTime = (time: number) => {
     const el = getVideoRef();
-    if (el) el.currentTime = (el.currentTime - time);
+    if (el) el.currentTime = el.currentTime - time;
     checkBuffer(true);
   };
 
@@ -163,5 +183,6 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     getDuration,
     listenOnLoad,
     ...config,
+    getSpeeds: getSpeeds,
   };
 };
