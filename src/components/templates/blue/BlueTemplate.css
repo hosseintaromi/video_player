@@ -44,6 +44,11 @@
     max-width: 350px;
     justify-content: space-between;
 }
+.play-jump-wrapper > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .play-jump-wrapper svg {
     width: 40px;
     height: auto;
@@ -261,7 +266,7 @@
 }
 .setting-left,
 .setting-right {
-    gap: 22px;
+    gap: 21px;
 }
 .setting-play-icon {
     height: 100%;
@@ -317,4 +322,14 @@
 }
 .icon-wrapper {
     color: var(--icon-color);
+}
+@media (max-width: 599.98px) {
+    .play-jump-wrapper {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    .setting-icon-button {
+        width: auto;
+        height: auto;
+    }
 }
