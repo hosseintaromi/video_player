@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider, CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
-import { Gradient, PlayJumpIconWrapper, VideoWrapperBlue } from '../../player/VideoPlayerStyle';
 import Loading from '../../loading/Loading';
 import TouchContainer from '../../player/TouchContainer';
 import Video from '../../player/Video';

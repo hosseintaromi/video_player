@@ -3,12 +3,7 @@ import Icon from '../../icons/Icon'
 import { usePlayerEvents } from '../../../hooks/usePlayerEvents'
 import { LevelType } from '../../../@types/UseVideoHlsType.model'
 import Dialog from '../../general/Dialog'
-import { DialogTitle } from '../../general/DialogStyle'
 import Locale from '../../locale/Locale'
-import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../red/SettingStyle'
-import { CenterBox } from '../../general/FlexCenter'
-import { IconButton } from '../../toolbar/ToolbarStyle'
-import Badge from '../../general/Badge'
 
 const Quality = () => {
     const [levels, setLevels] = useState<LevelType>()
