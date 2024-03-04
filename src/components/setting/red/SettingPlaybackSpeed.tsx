@@ -1,48 +1,56 @@
-import React, { useState } from 'react'
-import SettingItem from './SettingItem';
-import { SettingMenu } from '../../general/FlexCenter';
-import SettingHeader from './SettingHeader';
-import { usePlayerContext } from '../../../hooks/usePlayerContext';
-import Locale from '../../locale/Locale';
-import Icon from '../../icons/Icon';
-import { pageName, pageDir } from '../../../@types/setting.model';
+import React, { useState } from "react";
+import SettingItem from "./SettingItem";
+import { SettingMenu } from "../../general/FlexCenter";
+import SettingHeader from "./SettingHeader";
+import { usePlayerContext } from "../../../hooks/usePlayerContext";
+import Locale from "../../locale/Locale";
+import Icon from "../../icons/Icon";
+import { pageName, pageDir } from "../../../@types/setting.model";
 
 type settingPlaybackSpeedPropsType = {
-    changePage: (newPageName: pageName, dir: pageDir) => void,
-    myRef: React.RefObject<HTMLDivElement>
-}
+  changePage: (newPageName: pageName, dir: pageDir) => void;
+  myRef: React.RefObject<HTMLDivElement>;
+};
 
-const SettingPlaybackSpeed = ({ changePage, myRef }: settingPlaybackSpeedPropsType) => {
+const SettingPlaybackSpeed = ({
+  changePage,
+  myRef,
+}: settingPlaybackSpeedPropsType) => {
+  const { getSpeeds, changeSpeed, speed } = usePlayerContext();
+  const setSpeed = (index: number) => {
+    changeSpeed(index);
+    changePage(pageName.settingList, pageDir.back);
+  };
 
-    const { speeds, changeSpeed } = usePlayerContext()
-    const [indexSpeed, setIndexSpeed] = useState(1)
-    const setSpeed = (index: number) => {
-        changeSpeed(index)
-        setIndexSpeed(index)
-        changePage(pageName.settingList, pageDir.back)
-    }
-
-    return (
+  return (
+    <>
+      <SettingMenu myRef={myRef}>
         <>
-            <SettingMenu myRef={myRef}>
-                <>
-                    <SettingHeader
-                        title={<Locale localeKey="setting_menu_change_speed_title" />}
-                        hasBackButton={true}
-                        hasCustomButton={false}
-                        changePage={changePage}
-                        backRoute={pageName.settingList}
-                    />
-                    {speeds.map((speedItem, index) =>
-                        <SettingItem
-                            key={`speedItemdd${index}`} onClick={() => setSpeed(index)}
-                            startIcon={indexSpeed === index ? <Icon isClickable={true} type='checkMark' /> : <></>}
-                            text={speedItem} />
-                    )}
-                </>
-            </SettingMenu>
+          <SettingHeader
+            title={<Locale localeKey="setting_menu_change_speed_title" />}
+            hasBackButton={true}
+            hasCustomButton={false}
+            changePage={changePage}
+            backRoute={pageName.settingList}
+          />
+          {getSpeeds().map((speedItem, index) => (
+            <SettingItem
+              key={`speedItemdd${index}`}
+              onClick={() => setSpeed(index)}
+              startIcon={
+                speedItem.value === speed?.value ? (
+                  <Icon isClickable={true} type="checkMark" />
+                ) : (
+                  <></>
+                )
+              }
+              text={speedItem.key}
+            />
+          ))}
         </>
-    )
-}
+      </SettingMenu>
+    </>
+  );
+};
 
-export default SettingPlaybackSpeed
+export default SettingPlaybackSpeed;

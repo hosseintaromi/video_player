@@ -1,45 +1,68 @@
-import React, { HTMLAttributes, useState } from 'react'
-import Icon from '../../icons/Icon'
-import { usePlayerContext } from '../../../hooks/usePlayerContext'
-import Dialog from '../../general/Dialog'
-import { DialogTitle } from '../../general/DialogStyle'
-import { SettingItemIcon, SettingItemSpan, SettingMenuItem } from '../red/SettingStyle'
-import { CenterBox } from '../../general/FlexCenter'
+import React, { HTMLAttributes, useState } from "react";
+import Icon from "../../icons/Icon";
+import { usePlayerContext } from "../../../hooks/usePlayerContext";
+import Dialog from "../../general/Dialog";
+import { DialogTitle } from "../../general/DialogStyle";
+import {
+  SettingItemIcon,
+  SettingItemSpan,
+  SettingMenuItem,
+} from "../red/SettingStyle";
+import { CenterBox } from "../../general/FlexCenter";
 
 const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
-    const { speeds, changeSpeed } = usePlayerContext()
+  const { getSpeeds, changeSpeed, speed } = usePlayerContext();
 
-    const [indexSpeed, setIndexSpeed] = useState(1)
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const setSpeed = (index: number) => {
-        changeSpeed(index)
-        setIndexSpeed(index)
-    }
+  const setSpeed = (index: number) => {
+    changeSpeed(index);
+  };
 
-    return (
-        <>
-            <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>سرعت پخش</DialogTitle>
-                {speeds.map((item, index) => (
-                    <SettingMenuItem
-                        onClick={() => { setSpeed(index); setIsOpen(pre => !pre) }}
-                        className={`is-reversed ${indexSpeed === index ? 'active' : ''}`} key={index + 'speedDialog'}
-                    >
-                        <CenterBox>
-                            <SettingItemIcon className='reversed-icon' style={{ display: indexSpeed === index ? 'flex' : 'none' }}>
-                                <Icon isClickable={true} type='checkMark' />
-                            </SettingItemIcon>
-                            <SettingItemSpan className='reserved-span'>
-                                {item}
-                            </SettingItemSpan>
-                        </CenterBox>
-                    </SettingMenuItem>
-                ))}
-            </Dialog>
-            <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="speed" />
-        </>
-    )
-}
+  return (
+    <>
+      <Dialog
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        isOpen={isOpen}
+      >
+        <DialogTitle>سرعت پخش</DialogTitle>
+        {getSpeeds().map((speedItem, index) => (
+          <SettingMenuItem
+            onClick={() => {
+              setSpeed(index);
+              setIsOpen((pre) => !pre);
+            }}
+            className={`is-reversed ${
+              speedItem.value === speed?.value ? "active" : ""
+            }`}
+            key={index + "speedDialog"}
+          >
+            <CenterBox>
+              <SettingItemIcon
+                className="reversed-icon"
+                style={{
+                  display: speedItem.value === speed?.value ? "flex" : "none",
+                }}
+              >
+                <Icon isClickable={true} type="checkMark" />
+              </SettingItemIcon>
+              <SettingItemSpan className="reserved-span">
+                {speedItem.key}
+              </SettingItemSpan>
+            </CenterBox>
+          </SettingMenuItem>
+        ))}
+      </Dialog>
+      <Icon
+        title={speed?.key + ""}
+        onClick={() => setIsOpen((pre) => !pre)}
+        isClickable={true}
+        type="speed"
+      />
+    </>
+  );
+};
 
-export default Speed
+export default Speed;

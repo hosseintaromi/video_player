@@ -1,28 +1,47 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
-import { GenericEvents, PlayerEventsType } from "../@types/player.model";
+import {
+  GenericEvents,
+  KeyValue,
+  PlayerEventsType,
+} from "../@types/player.model";
 import { useContextEvents } from "./useContextEvents";
 import { findBufferIndex } from "../utils/player-utils";
 
 export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
-  const { config, setVideoRef: videoRefSetter, getVideoRef, listenOnLoad, hls } = useContext(VideoPlayerContext);
+  const {
+    config,
+    setVideoRef: videoRefSetter,
+    getVideoRef,
+    listenOnLoad,
+    hls,
+  } = useContext(VideoPlayerContext);
   const timeRef = useRef<number>(0);
   const currentBuffer = useRef<{ index: number; length: number }>();
 
   const { listen, call } =
     useContextEvents<PlayerEventsType>(VideoPlayerContext);
-  const speedIndexRef = useRef<number>(1);
+  const [speed, setSpeed] = useState<KeyValue>();
 
-  const getSpeed = () => {
-    const videoRef = getVideoRef();
-    if (videoRef) return videoRef.playbackRate;
+  const getSpeeds = () => {
+    const speeds = config.speeds;
+    if (Array.isArray(speeds)) {
+      return speeds.map((speed) => ({ key: speed + "", value: speed }));
+    } else {
+      const speedsArr = [];
+      for (let key in speeds as any) {
+        speedsArr.push({ key, value: speeds[key] });
+      }
+      return speedsArr;
+    }
   };
+
   const changeSpeed = (index: number) => {
     const videoRef = getVideoRef();
     if (videoRef) {
-      const speeds = config.speeds!;
-      videoRef.playbackRate = speeds[index];
-      speedIndexRef.current = index;
+      const speeds = getSpeeds();
+      videoRef.playbackRate = speeds[index].value;
+      setSpeed(speeds[index]);
     }
   };
 
@@ -55,12 +74,12 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   const increaseTime = (time: number) => {
     const el = getVideoRef();
-    if (el) el.currentTime = (el.currentTime + time);
+    if (el) el.currentTime = el.currentTime + time;
     checkBuffer(true);
   };
   const decreaseTime = (time: number) => {
     const el = getVideoRef();
-    if (el) el.currentTime = (el.currentTime - time);
+    if (el) el.currentTime = el.currentTime - time;
     checkBuffer(true);
   };
 
@@ -144,13 +163,15 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   useEffect(() => {
     listen(events);
+    const speeds = getSpeeds();
+    setSpeed(speeds.find((x) => x.value == 1));
   }, []);
 
   return {
     hls,
     setVideoRef,
     getVideoRef,
-    getSpeed,
+    speed,
     changeSpeed,
     changePlayPause,
     getIsPlay,
@@ -163,5 +184,6 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     getDuration,
     listenOnLoad,
     ...config,
+    getSpeeds: getSpeeds,
   };
 };
