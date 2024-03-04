@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
+import styled from '@emotion/styled'
 
-const Video = () => {
+const VideoTag = styled.video({
+    width: "100%",
+    height: "100%",
+    display: 'block',
+    backgroundColor: '#000'
+});
+const Evideo = () => {
     const { setVideoRef, autoPlay } = usePlayerContext()
     const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -10,8 +17,8 @@ const Video = () => {
     }, [])
 
     return (
-        <video className='video-tag' ref={videoRef} autoPlay={autoPlay} id='video_player' />
+        <VideoTag ref={videoRef} autoPlay={autoPlay} id='video_player' />
     )
 }
 
-export default Video
+export default Evideo

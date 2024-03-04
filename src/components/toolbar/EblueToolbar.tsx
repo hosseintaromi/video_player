@@ -15,7 +15,7 @@ import Quality from '../setting/blue/Quality';
 import Mute from '../tools/Mute';
 import { usePlayerEvents } from '../../hooks/usePlayerEvents';
 
-const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
+const EblueToolbar = ({ isFaded }: { isFaded: boolean }) => {
     const [isShowQ, setIsShowQ] = useState<any>()
     const [isShowS, setIsShowS] = useState<any>()
     const [isShowA, setIsShowA] = useState<any>()
@@ -27,20 +27,20 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
     const { getAudioTracks, getLevels, getSubtitle } = usePlayerEvents({ onLoaded: loadLevels })
 
     return (
-        <div className='toolbar-wrapper'>
-            <span className='center-box time-counter default-counter'>
+        <ToolbarWrapper isFaded={isFaded}>
+            <TimeCounter className='blue-counter'>
                 <Time type='Current' />
                 <Time type='Total' />
-            </span>
+            </TimeCounter>
             <MediaTimeLine />
-            <div className='center-box setting-wrapper default-setting-wrapper'>
-                <div className='center-box setting-left'>
-                    <div className='center-box setting-play-icon'>
+            <SettingItemWrapper className='blue-setting-wrapper'>
+                <SettingLeftSection >
+                    <ToolBarPlayIcon>
                         <Play />
-                    </div>
+                    </ToolBarPlayIcon>
                     <Mute />
-                </div>
-                <div className='center-box setting-right'>
+                </SettingLeftSection>
+                <SettingRightSection>
                     {isShowA && <Mic />}
                     {isShowS && <Subtitle />}
                     <Speed />
@@ -48,10 +48,10 @@ const BlueToolbar = ({ isFaded }: { isFaded: boolean }) => {
 
                     <PictureInPicture />
                     <Fullscreen />
-                </div>
-            </div>
-        </div>
+                </SettingRightSection>
+            </SettingItemWrapper>
+        </ToolbarWrapper>
     )
 }
 
-export default BlueToolbar
+export default EblueToolbar

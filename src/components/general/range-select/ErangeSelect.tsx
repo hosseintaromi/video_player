@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { GeneralStyleForRange, ProgressBar, Slider, Thumb, TimeLine } from "./RangeSelectStyle";
+import { throttle } from "lodash-es"
 import { RangePropsType } from "../../../@types/RangeSelectType.model";
 
 
-const RangeSelect = ({
+const ErangeSelect = ({
   min,
   max,
   controllerRef,
@@ -42,12 +44,12 @@ const RangeSelect = ({
   }, [])
 
   const TimeLineMemo = useMemo(() => {
-    return <div className="timeline" />
+    return <TimeLine className="timeline" />
   }, [])
 
   return (
-    <div className="timeline-range">
-      <input className="slider"
+    <GeneralStyleForRange>
+      <Slider
         type="range"
         step={step}
         min={min}
@@ -69,13 +71,13 @@ const RangeSelect = ({
         onMouseDown={onRangeStart}
         onMouseUp={onRangeEnd}
       />
-      <div id="progressBar" className="progress-bar" ref={progressBarRef} />
+      <ProgressBar id="progressBar" className="vp-progress" ref={progressBarRef} />
 
-      <div id="selector" className="thumb-bar" ref={selectorRef} />
+      <Thumb id="selector" className="vp-thumb" ref={selectorRef} />
 
       {TimeLineMemo}
-    </div>
+    </GeneralStyleForRange>
   );
 };
 
-export default RangeSelect;
+export default ErangeSelect;

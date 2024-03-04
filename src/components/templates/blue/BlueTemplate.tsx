@@ -9,7 +9,7 @@ import Play from '../../tools/Play';
 import Jump from '../../tools/Jump';
 import BlueToolbar from '../../toolbar/BlueToolbar';
 import { usePlayerContext } from '../../../hooks/usePlayerContext';
-import './BlueTemeplate.css';
+import './BlueTemplate.css';
 
 
 export const cache = createCache({
@@ -24,17 +24,17 @@ const BlueTemeplate = () => {
     return (
         <CacheProvider value={cache}>
             <ThemeProvider theme={style}>
-                <div className='video-wrapper' id="video_wrapper_id">
-                    <PlayJumpIconWrapper isFaded={isFadeOut}>
+                <div className={`video-wrapper ${isFadeOut ? 'is-faded' : ''}`} id="video_wrapper_id">
+                    <div className="center-box play-jump-wrapper">
                         <Jump type='back' />
                         <Play />
                         <Jump type='forward' />
-                    </PlayJumpIconWrapper>
+                    </div>
                     <Loading />
                     <TouchContainer canPlayOnClick={false} onShow={(show: boolean) => setIsFadeOut(!show)} >
                         <Video />
                     </TouchContainer>
-                    <Gradient isFaded={isFadeOut} />
+                    <div className="gradient" />
                     <BlueToolbar isFaded={isFadeOut} />
                 </div>
             </ThemeProvider>

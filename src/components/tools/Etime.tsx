@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 import { OnUpdateTimeType } from '../../@types/player.model';
 import { calculatePlayerTime } from '../../utils/global-filter';
+import { TimeCounter } from '../toolbar/ToolbarStyle';
 
-const Time = ({ type }: { type: 'Current' | 'Total' | 'Remain' }) => {
+const Etime = ({ type }: { type: 'Current' | 'Total' | 'Remain' }) => {
 
     const [time, setTime] = useState<string>("00:00:00");
 
@@ -25,8 +26,8 @@ const Time = ({ type }: { type: 'Current' | 'Total' | 'Remain' }) => {
     })
 
     return (
-        <span className='timer-counter'>{time}</span>
+        <TimeCounter>{time}</TimeCounter>
     )
 }
 
-export default Time
+export default Etime

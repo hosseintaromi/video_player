@@ -20,21 +20,21 @@ const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
     return (
         <>
             <Dialog onClose={() => { setIsOpen(false) }} isOpen={isOpen} >
-                <DialogTitle>سرعت پخش</DialogTitle>
+                <div className='center-box dialog-title'>سرعت پخش</div>
                 {speeds.map((item, index) => (
-                    <SettingMenuItem
+                    <div
                         onClick={() => { setSpeed(index); setIsOpen(pre => !pre) }}
-                        className={`is-reversed ${indexSpeed === index ? 'active' : ''}`} key={index + 'speedDialog'}
+                        className={`center-box setting-menu-item is-reversed ${indexSpeed === index ? 'active' : ''}`} key={index + 'speedDialog'}
                     >
-                        <CenterBox>
-                            <SettingItemIcon className='reversed-icon' style={{ display: indexSpeed === index ? 'flex' : 'none' }}>
+                        <div className='center-box'>
+                            <div className='setting-item-icon' style={{ display: indexSpeed === index ? 'flex' : 'none' }}>
                                 <Icon isClickable={true} type='checkMark' />
-                            </SettingItemIcon>
-                            <SettingItemSpan className='reserved-span'>
+                            </div>
+                            <span className='setting-item-span'>
                                 {item}
-                            </SettingItemSpan>
-                        </CenterBox>
-                    </SettingMenuItem>
+                            </span>
+                        </div>
+                    </div>
                 ))}
             </Dialog>
             <Icon onClick={() => setIsOpen(pre => !pre)} isClickable={true} type="speed" />

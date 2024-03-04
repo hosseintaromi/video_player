@@ -1,0 +1,317 @@
+:root {
+    --icon-color: #fff;
+    --toolbar-bg: linear-gradient(rgba(0,0,0, .0), rgba(0, 0, 0, .5));
+    --setting-font-size: 14px;
+    --range-front-bg: #f00;
+    --range-back-bg: rgba(255,255,255,.2);
+    --buffer-bg: rgba(255,255,255,.4);
+    --setting-title-text-color: #fff;
+    --setting-bg: rgba(0, 0, 0, 0.5);
+    --setting-bg-hover: rgb(40 40 39 / 60%);
+    --dir: rtl;
+    --setting-text-color: #7b7b7b;
+}
+.center-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.video-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.video-wrapper,
+.video-wrapper > *
+.video-wrapper::before,
+.video-wrapper::after {
+    box-sizing: border-box;
+}
+.video-wrapper.is-faded .play-jump-wrapper,
+.video-wrapper.is-faded .gradient,
+.video-wrapper.is-faded .toolbar-wrapper {
+    opacity: 0;
+}
+.play-jump-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 300;
+    transition: opacity .25s cubic-bezier(0,0,.2,1);
+    width: 100%;
+    max-width: 350px;
+    justify-content: space-between;
+}
+.play-jump-wrapper svg {
+    width: 40px;
+    height: auto;
+}
+.ring-wrapper {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.ring-wrapper div {
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--icon-color);
+    border-radius: 50%;
+    animation: ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: var(--icon-color) transparent transparent transparent;
+}
+.ring-wrapper div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.ring-wrapper div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.ring-wrapper div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes ring {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.video-tag {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #000;
+}
+.gradient {
+    transition: opacity .25s cubic-bezier(0,0,.2,1);
+    padding-top: 37px;
+    bottom: 0;
+    z-index: 24;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+    background: var(--toolbar-bg);
+    height: 211px;
+}
+.toolbar-wrapper {
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    left: .75rem;
+    right: .75rem;
+}
+.time-counter {
+    height: 100%;
+}
+.time-counter.default-counter {
+    height: auto;
+    width: 100%;
+    justify-content: space-between;
+}
+.timer-counter {
+    color: var(--icon-color);
+    font-size: var(--setting-font-size);
+}
+.timeline-wrapper,
+.timeline-range {
+    position: relative;
+    height: 23px;
+    width: 100%;
+}
+.slider,
+.progress-bar,
+.thumb-bar,
+.timeline,
+.buffer-size,
+.setting-item-icon {
+    position: absolute;
+    left: 0;
+}
+.slider {
+    cursor: pointer;
+    width: 100%;
+    appearance: none;
+    z-index: 5;
+    top: 0;
+    height: 100%;
+    opacity: 0;
+    border: none;
+    margin: 0;
+}
+.slider ::-webkit-slider-thumb {
+    appearance: none;
+    width: 60px;
+    height: 17px;
+    background: rgba(0, 188, 212, 1);
+}
+.progress-bar,
+.thumb-bar,
+.timeline,
+.buffer-size,
+.setting-item-icon {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.progress-bar {
+    width: 0;
+    height: 3px;
+    z-index: 3;
+    background-color: var(--range-front-bg);
+}
+.thumb-bar {
+    height: 9px;
+    width: 9px;
+    border: 3px solid var(--range-front-bg);
+    border-radius: 50%;
+    z-index: 4;
+    background-color: var(--range-front-bg);
+}
+.timeline {
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    z-index: 1;
+    background-color: var(--range-back-bg);
+}
+.bubble {
+    color: #fff;
+    padding: 4px;
+    position: absolute;
+    background-color: rgba(33, 33, 33, 0.6);
+    border-radius: .5rem;
+    left: 300px;
+    bottom: 30px;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+}
+.bubble span {
+    margin-top: 3px;
+}
+.thumb-cursor {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(33, 33, 33, 0.6);
+    bottom: 12px;
+    z-index: 3;
+    display: none;
+}
+.buffer-size {
+    width: 0;
+    height: 3px;
+    border-radius: 3px;
+    z-index: 2;
+    background-color: var(--buffer-bg);
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 301;
+}
+.modal-wrapper {
+    border: 1px solid rgba(35, 35, 35, 1);
+    border-radius: 12px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    overflow: hidden;
+    color: #0f0f0f;
+    background-color: var(--setting-bg);
+    min-width: 250px;
+    max-width: 356px;
+    max-height: 100%;
+    direction: var(--dir);
+}
+.modal-content {
+    color: var(--setting-text-color);
+}
+.dialog-title {
+    font-size: 1.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    height: 49px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+    color: var(--setting-title-text-color);
+}
+.setting-wrapper {
+    justify-content: space-between;
+    padding-bottom: .625rem;
+}
+.setting-wrapper.default-setting-wrapper {
+    padding-bottom: 1.125rem;
+    padding-top: .5rem;
+}
+.setting-left,
+.setting-right {
+    gap: 22px;
+}
+.setting-play-icon {
+    height: 100%;
+}
+.setting-menu-item {
+    justify-content: space-between;
+    cursor: pointer;
+    height: 40px;
+    position: relative;
+    line-height: 1;
+}
+.setting-menu-item:hover {
+    background-color: var(--setting-bg-hover);
+}
+.setting-menu-item.dialog-item:hover {
+    background-color: transparent;
+}
+.setting-menu-item.active {
+    color: var(--setting-title-text-color);
+}
+.setting-menu-item.is-reversed {
+    justify-content: flex-start;
+}
+.setting-menu-item.is-reversed .setting-item-span {
+    padding-left: 0;
+    padding-right: 60px;
+}
+.setting-menu-item.is-reversed .setting-item-icon {
+    right: 1rem;
+    left: auto;
+    padding: 0;
+}
+.setting-item-icon {
+    padding-right: 1rem;
+    padding-left: .625rem;
+    width: 1rem;
+}
+.setting-item-span {
+    font-size: var(--setting-font-size);
+    padding-left: 41px;
+}
+.setting-icon-button {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    text-transform: inherit;
+    color: inherit;
+    background: none;
+}

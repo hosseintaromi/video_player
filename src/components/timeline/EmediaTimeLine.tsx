@@ -10,7 +10,7 @@ type ChangeRangeSelectType = {
     toggleThumb: (isShow: boolean) => void
 };
 
-const TimeLine = () => {
+const EtimeLine = () => {
 
     const controllerRef = useRef<ChangeRangeSelectType>({
         calcInputVal: () => { },
@@ -139,7 +139,7 @@ const TimeLine = () => {
     }, [thumbnail]);
 
     return (
-        <div className="timeline-wrapper" onMouseEnter={() => {
+        <GeneralStyleForRange className="media-timeLine" onMouseEnter={() => {
             changeShowBubble(true);
         }}
             onMouseLeave={() => {
@@ -171,13 +171,13 @@ const TimeLine = () => {
                         changePlayPause(true)
                 }}
             />
-            <output ref={snapShotBox} className="center-box bubble">
+            <Bubble ref={snapShotBox} className="bubble">
                 <Snapshot snapshots={snapshots.current} time={hoverValue} />
-            </output>
-            <div className="thumb-cursor" ref={snapShotBoxCursor} />
-            <div className="buffer-size" id="buffer-size" />
-        </div>
+            </Bubble>
+            <ThumbCursor ref={snapShotBoxCursor} />
+            <BufferSize id="buffer-size" />
+        </GeneralStyleForRange>
     )
 }
 
-export default TimeLine
+export default EtimeLine

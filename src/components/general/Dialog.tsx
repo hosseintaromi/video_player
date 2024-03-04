@@ -24,13 +24,13 @@ const Dialog = ({ children, isOpen, onClose }: DialogPropsType) => {
     }, [isOpen])
     return (<>
         {createPortal(
-            isOpen && <ModalOverlay onClick={onClose}>
-                <ModalWrapper onClick={(e: any) => e.stopPropagation()} id='setting-menu'>
-                    <ModalContent>
+            isOpen && <div className='center-box modal-overlay' onClick={onClose}>
+                <div className='modal-wrapper' onClick={(e: any) => e.stopPropagation()} id='setting-menu'>
+                    <div className='modal-content'>
                         {children}
-                    </ModalContent>
-                </ModalWrapper>
-            </ModalOverlay>,
+                    </div>
+                </div>
+            </div>,
             document.body
         )}
     </>
