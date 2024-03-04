@@ -1,6 +1,10 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
-import { GenericEvents, PlayerEventsType } from "../@types/player.model";
+import {
+  GenericEvents,
+  KeyValue,
+  PlayerEventsType,
+} from "../@types/player.model";
 import { useContextEvents } from "./useContextEvents";
 import { findBufferIndex } from "../utils/player-utils";
 
@@ -17,12 +21,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   const { listen, call } =
     useContextEvents<PlayerEventsType>(VideoPlayerContext);
-  const speedIndexRef = useRef<number>(1);
-
-  const getSpeed = () => {
-    const videoRef = getVideoRef();
-    if (videoRef) return videoRef.playbackRate;
-  };
+  const [speed, setSpeed] = useState<KeyValue>();
 
   const getSpeeds = () => {
     const speeds = config.speeds;
@@ -42,7 +41,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     if (videoRef) {
       const speeds = getSpeeds();
       videoRef.playbackRate = speeds[index].value;
-      speedIndexRef.current = index;
+      setSpeed(speeds[index]);
     }
   };
 
@@ -164,13 +163,15 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
 
   useEffect(() => {
     listen(events);
+    const speeds = getSpeeds();
+    setSpeed(speeds.find((x) => x.value == 1));
   }, []);
 
   return {
     hls,
     setVideoRef,
     getVideoRef,
-    getSpeed,
+    speed,
     changeSpeed,
     changePlayPause,
     getIsPlay,

@@ -114,3 +114,8 @@ export type PlayerLocaleType = {
   setting_menu_change_subtitle?: string;
   setting_menu_subtitle_off?: string;
 };
+
+export type KeyValue = {
+  key: string;
+  value: number;
+};
