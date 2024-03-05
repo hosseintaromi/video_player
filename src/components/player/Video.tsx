@@ -32,7 +32,7 @@ const Video = () => {
 
             <video id='reza' width="600" height="400" controls crossOrigin='anonymous'>
                 <source src="https://brenopolanski.github.io/html5-video-webvtt-example/MIB2.mp4" type="video/mp4" />
-                <track label="pt" kind="subtitles" srcLang="en" src={'https://gotranscript.com/samples/captions-example.srt'} default />
+                {/* <track label="pt" kind="subtitles" srcLang="en" src={'https://gotranscript.com/samples/captions-example.srt'} default /> */}
 
                 <track label="pt" kind="subtitles" srcLang="en" src="https://brenopolanski.github.io/html5-video-webvtt-example/MIB2-subtitles-pt-BR.vtt" default />
             </video>
