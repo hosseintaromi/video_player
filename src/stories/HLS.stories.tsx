@@ -45,7 +45,7 @@ const Demo = ({ length }: DemoProps) => {
     //   settingTitleTextColor: ''
     // },
     autoPlay: true,
-    timeForHideEl: 10000,
+    timeForHideEl: 5000,
     type: 'HLS'
     // icons: {
     //   arrow: <p>hello</p>,
