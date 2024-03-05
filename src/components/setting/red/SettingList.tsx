@@ -33,7 +33,6 @@ const SettingList = ({
     const [audioTracks, setAudioTracks] = useState<MediaPlaylistType | undefined>()
     const [currentAudioTrack, setCurrentAudioTrack] = useState<number | ReactNode>()
 
-    const [currentPlayBackSpeed, setCurrentPlayBackSpeed] = useState<number | undefined>()
 
     const loadLevels = () => {
         const curlvl = getCurrentLevel().isAuto ? -1 : getCurrentLevel().currentLevel
@@ -50,10 +49,9 @@ const SettingList = ({
         if (track)
             setCurrentAudioTrack(audioTracks?.[track].name)
 
-        setCurrentPlayBackSpeed(getSpeed())
         setCurrentLevels(getLevels())
     }
-    const { getSpeed } = usePlayerContext()
+    const { speed } = usePlayerContext()
 
     const {
         getCurrentLevel,
@@ -73,7 +71,7 @@ const SettingList = ({
             <div onClick={() => { loadLevels(); changePage(pageName.playbackSpeed, pageDir.forward) }}>
                 <SettingItem startIcon={<Icon isClickable={true} type='speed' />} text={<Locale localeKey="setting_menu_change_speed_title" />} >
                     <SettingItemArrowSpan>
-                        {currentPlayBackSpeed}
+                        {speed?.key}
                     </SettingItemArrowSpan>
                     <Icon isClickable={true} type="arrow" />
                 </SettingItem>
