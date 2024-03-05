@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Meta, Story } from '@storybook/react';
 import VideoPlayer from '../components/player/VideoPlayer';
 import { usePlayer } from '../hooks';
@@ -66,6 +66,12 @@ const Demo = ({ length }: DemoProps) => {
     //   volumeUp: <p>hello</p>,
     // }
   })
+
+  useEffect(()=>{
+// setTimeout(() => {
+//   playerConfig.loadVideo()
+// }, 4000);
+  },[])
   return (
     <VideoPlayer config={playerConfig} src="https://cdn.bitmovin.com/content/assets/art-of-motion-dash-hls-progressive/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8" />
   );
