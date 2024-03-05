@@ -33,6 +33,9 @@ const TimeLine = () => {
 
 
     const { changeTime, getIsPlay, changePlayPause, thumbnail } = usePlayerContext({
+        onReady: (e) => {
+            duration.current = e.duration
+        },
         onUpdateTime: (e: OnUpdateTimeType) => {
             duration.current = e.duration
             percentage = e.percentage;
@@ -171,10 +174,17 @@ const TimeLine = () => {
                         changePlayPause(true)
                 }}
             />
-            <Bubble ref={snapShotBox} className="bubble">
-                <Snapshot snapshots={snapshots.current} time={hoverValue} />
-            </Bubble>
-            <ThumbCursor ref={snapShotBoxCursor} />
+
+            {
+                thumbnail &&
+                <>
+                    <Bubble ref={snapShotBox} className="bubble">
+                        <Snapshot snapshots={snapshots.current} time={hoverValue} />
+                    </Bubble>
+                    <ThumbCursor ref={snapShotBoxCursor} />
+                </>
+            }
+
             <BufferSize id="buffer-size" />
         </GeneralStyleForRange>
     )

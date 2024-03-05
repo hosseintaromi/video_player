@@ -137,7 +137,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
       call.onEnd?.();
     };
     el.onloadeddata = () => {
-      call.onReady?.();
+      call.onReady?.(el);
     };
     el.ontimeupdate = () => {
       const currentTime = el.currentTime;

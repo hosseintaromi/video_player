@@ -29,6 +29,7 @@ export type PlayerEventsType = {
   onChangeMute: "onChangeMute";
   onReady: "onReady";
   onChangeSetting: "onChangeSetting";
+  onActivateControls: "onActivateControls";
 };
 
 export interface PlayerConfigType {
