@@ -28,7 +28,7 @@ const Speed = ({ onClick }: HTMLAttributes<HTMLElement>) => {
         isOpen={isOpen}
       >
         <DialogTitle>سرعت پخش</DialogTitle>
-        {getSpeeds().map((speedItem, index) => (
+        {getSpeeds()?.map((speedItem, index) => (
           <SettingMenuItem
             onClick={() => {
               setSpeed(index);

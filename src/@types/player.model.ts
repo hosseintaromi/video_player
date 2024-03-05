@@ -9,6 +9,7 @@ export interface PlayerContextType {
   config: PlayerInstance;
   hls?: Hls;
   listenOnLoad: (() => void)[];
+  state: PlayerState;
 }
 
 export type OnUpdateTimeType = {
@@ -47,7 +48,7 @@ export interface PlayerConfigType {
   defaultQuality?: string;
   thumbnail: string;
   onUpdateTime?: (e: OnUpdateTimeType) => void;
-  // FIXME: we should fix this types
+  // FIXME: we should fix this types   
   onEnd?: (e: OnUpdateTimeType) => void;
   onLoading?: (e: boolean) => void;
   onPlayPause?: (e: OnUpdateTimeType) => void;
@@ -118,4 +119,9 @@ export type PlayerLocaleType = {
 export type KeyValue = {
   key: string;
   value: number;
+};
+
+export type PlayerState = {
+  speeds?: KeyValue[];
+  currentSpeed?: KeyValue;
 };
