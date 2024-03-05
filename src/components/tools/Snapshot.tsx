@@ -45,9 +45,10 @@ const Snapshot = ({ snapshots, time }: SnapshotPropsType) => {
     });
   }, [time]);
   return (
-    <div>
+    <>
       {snapshot && (
         <div
+          id="snapshot"
           style={{
             backgroundImage: `url("${snapshot.img}")`,
             width: `${snapshot.location[2]}px`,
@@ -56,7 +57,7 @@ const Snapshot = ({ snapshots, time }: SnapshotPropsType) => {
           }}
         />
       )}
-    </div>
+    </>
   );
 };
 
