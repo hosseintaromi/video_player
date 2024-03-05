@@ -37,6 +37,7 @@ const Video = () => {
         track.mode = "showing";
 
         for (const cue of track.cues) {
+
             cue.pauseOnExit = true;
         }
 
@@ -45,15 +46,15 @@ const Video = () => {
     return (
         <>
 
-            <button onClick={showMe}>
-                {mode}
-            </button>
+
             <video id='reza' width="600" height="400" controls crossOrigin='anonymous'>
                 <source src="https://brenopolanski.github.io/html5-video-webvtt-example/MIB2.mp4" type="video/mp4" />
                 {/* <track label="en" kind="subtitles" srcLang="en" src={'https://gotranscript.com/samples/captions-example.srt'} /> */}
                 <track label="fa" kind="subtitles" srcLang="fa" src="https://brenopolanski.github.io/html5-video-webvtt-example/MIB2-subtitles-pt-BR.vtt" />
             </video>
-
+            <button style={{ position: 'fixed', zIndex: '10000000' }} onClick={showMe}>
+                {mode}
+            </button>
 
             {/* <VideoTag ref={videoRef} autoPlay={autoPlay} playsInline muted id='video_player' crossOrigin='anonymous' controls>
                 <track label="p1" kind="subtitles" srcLang="en" src={'https://gotranscript.com/samples/captions-example.srt'} default />
