@@ -141,8 +141,7 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     };
     el.ontimeupdate = () => {
       const currentTime = el.currentTime;
-
-      if (Math.floor(currentTime) != Math.floor(timeRef.current)) {
+      if (currentTime != timeRef.current) {
         timeRef.current = currentTime;
         const percentage = (currentTime / el.duration) * 100;
         checkBuffer();

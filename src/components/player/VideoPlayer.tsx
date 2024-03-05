@@ -66,6 +66,8 @@ const VideoPlayer = ({
     }
   };
 
+  initSpeeds();
+
   const setVideoRef = (ref: HTMLVideoElement) => {
     videoRef.current = ref;
     const state = playerStateRef.current;
@@ -88,10 +90,6 @@ const VideoPlayer = ({
   if (config && src) {
     config.src = src;
   }
-
-  useEffect(() => {
-    initSpeeds();
-  }, []);
 
   return (
     <VideoPlayerContext.Provider
