@@ -11,6 +11,7 @@ interface SnapshotPropsType {
   time: any;
 }
 const cashedImages: any = {};
+
 const loadSnapshotImage = (src: string, loaded: () => void) => {
   let cashedImage = cashedImages[src];
   if (!cashedImage) {
@@ -37,6 +38,7 @@ const Snapshot = ({ snapshots, time }: SnapshotPropsType) => {
 
   const findSnapshot = (time: number) =>
     snapshots.find((x) => x.startTime < time && x.endTime >= time);
+
   useEffect(() => {
     const found = findSnapshot(time);
     if (!found) return;
@@ -44,6 +46,7 @@ const Snapshot = ({ snapshots, time }: SnapshotPropsType) => {
       setSnapshot(found);
     });
   }, [time]);
+
   return (
     <div>
       {snapshot && (

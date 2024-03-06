@@ -122,7 +122,6 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
     changeLevel,
     getSubtitle,
     getCurrentSubtitle,
-    changeSubtitle,
     getAudioTracks,
     getAudioTrack,
     changeAudioTrack,

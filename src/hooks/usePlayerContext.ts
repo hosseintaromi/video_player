@@ -3,7 +3,7 @@ import VideoPlayerContext from "../contexts/VideoPlayerContext";
 import {
   GenericEvents,
   KeyValue,
-  PlayerEventsType,
+  PlayerEventsType
 } from "../@types/player.model";
 import { useContextEvents } from "./useContextEvents";
 import { findBufferIndex } from "../utils/player-utils";

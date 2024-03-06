@@ -36,7 +36,7 @@ const VideoPlayer = ({
   config?: PlayerInstance;
   src?: string;
 }) => {
-  const playerStateRef = useRef<PlayerState>({});
+  const playerStateRef = useRef<PlayerState>({} as any);
   const configRef = useRef<PlayerInstance>(config || ({ src } as any));
   const listenOnLoad = useRef<(() => void)[]>([]);
   const playListeners = useRef<((play: boolean) => void)[]>([]);
@@ -58,6 +58,7 @@ const VideoPlayer = ({
       }
       speeds = speedsArr;
     }
+    state.speeds = [];
     if (speeds) {
       state.speeds = speeds;
       state.currentSpeed = speeds.find(
@@ -66,7 +67,20 @@ const VideoPlayer = ({
     }
   };
 
-  initSpeeds();
+  const initSubtitles = () => {
+    if (!config || !config.subTitle) {
+      return;
+    }
+    const state = playerStateRef.current;
+    state.subTitles = config.subTitle || [];
+  };
+
+  const initConfig = () => {
+    initSpeeds();
+    initSubtitles();
+  };
+
+  initConfig();
 
   const setVideoRef = (ref: HTMLVideoElement) => {
     videoRef.current = ref;
