@@ -49,6 +49,10 @@ export const useSubTitle = () => {
       const currentTrack = getSelectedTrack(tracks);
       if (currentTrack && currentTrack?.id !== selected?.code) {
         currentTrack.mode = "hidden";
+        const selectedTitle = titles.find((x) => x.is_selected);
+        if (selectedTitle) {
+          selectedTitle.is_selected = false;
+        }
       }
       if (!selected) {
         state.currentSubtitle = undefined;
@@ -60,6 +64,13 @@ export const useSubTitle = () => {
         const newTrack = await loadTrack(selected);
         if (newTrack) {
           videoRef.append(newTrack);
+          // const cues: any =
+          //   videoRef.textTracks && (videoRef.textTracks[0].activeCues as any);
+          // if (cues && cues.length > 0) {
+          //   cues[0].align = "start";
+          //   cues[0].line = -6;
+          // }
+          selected.is_selected = true;
           selectedTrack = tracks[tracks.length - 1];
         }
       }
