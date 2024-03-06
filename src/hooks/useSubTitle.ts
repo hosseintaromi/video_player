@@ -63,7 +63,6 @@ export const useSubTitle = () => {
       if (!selectedTrack) {
         const newTrack = await loadTrack(selected);
         if (newTrack) {
-          videoRef.append(newTrack);
           // const cues: any =
           //   videoRef.textTracks && (videoRef.textTracks[0].activeCues as any);
           // if (cues && cues.length > 0) {
@@ -71,6 +70,7 @@ export const useSubTitle = () => {
           //   cues[0].line = -6;
           // }
           selected.is_selected = true;
+          videoRef.appendChild(newTrack);
           selectedTrack = tracks[tracks.length - 1];
         }
       }
