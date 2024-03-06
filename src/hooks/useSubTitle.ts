@@ -21,20 +21,15 @@ export const useSubTitle = () => {
 
   const loadTrack = async (subtitle: SubTitle) => {
     try {
-      console.log('fetch')
       const res = await fetch(subtitle.url);
-      console.log('loaded')
       const blob = await res.blob();
-      console.log('converted')
       const vttUrl = await toWebVTT(blob);
-      console.log('toWebvtt')
       const track = document.createElement("track");
       track.kind = "captions";
       track.label = subtitle.title;
       track.id = subtitle.code;
       track.srclang = subtitle.code;
       track.src = vttUrl;
-      console.log('track')
       return track;
     } catch {
       return null;
@@ -65,6 +60,7 @@ export const useSubTitle = () => {
         const newTrack = await loadTrack(selected);
         if (newTrack) {
           videoRef.append(newTrack);
+          console.log('append')
           selectedTrack = tracks[tracks.length - 1];
         }
       }
