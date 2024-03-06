@@ -59,7 +59,6 @@ export const useSubTitle = () => {
       if (!selectedTrack) {
         const newTrack = await loadTrack(selected);
         if (newTrack) {
-          console.log(videoRef.append)
           console.log(videoRef.appendChild)
           videoRef.append(newTrack);
           selectedTrack = tracks[tracks.length - 1];
