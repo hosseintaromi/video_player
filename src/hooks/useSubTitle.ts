@@ -56,6 +56,7 @@ export const useSubTitle = () => {
       }
       if (!selected) {
         state.currentSubtitle = undefined;
+        (videoRef.srcObject as any).removeTrack(currentTrack);
         return;
       }
 
@@ -63,32 +64,30 @@ export const useSubTitle = () => {
       if (!selectedTrack) {
         const newTrack = await loadTrack(selected);
         if (newTrack) {
+          let idx = 0;
+          const subEl: HTMLDivElement = videoRef.nextSibling as any;
           selected.is_selected = true;
           videoRef.appendChild(newTrack);
-          newTrack.oncuechange = function (e) {
-            const cues: any =
-              videoRef.textTracks && (videoRef.textTracks[0].activeCues as any);
-            if (cues && cues.length > 0) {
-              debugger;
-              console.log(4444, cues.length);
-              cues[0].align = "start";
-              cues[0].line = -6;
+          newTrack.track.mode = "hidden";
+          newTrack.oncuechange = (e) => {
+            const cues: any = newTrack.track.activeCues;
+            let cue = cues && cues[0];
+
+            if (cue && subEl) {
+              if (idx >= 0) {
+                subEl.classList.remove("on");
+                subEl.innerHTML = "";
+                subEl.appendChild(cue.getCueAsHTML());
+                subEl.classList.add("on");
+              }
+              idx = ++idx % 2;
             }
-            // if (cue) {
-            //   if (idx >= 0) {
-            //     span1.classList.remove('on');
-            //     span1.innerHTML = '';
-            //     span1.appendChild(cue.getCueAsHTML());
-            //     span1.classList.add('on');
-            //   }
-            //   idx = ++idx % 2;
-            // }
           };
           selectedTrack = tracks[tracks.length - 1];
         }
       }
       if (selectedTrack) {
-        selectedTrack.mode = "showing";
+        selectedTrack.mode = "hidden";
       }
     }
   };
