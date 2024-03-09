@@ -52,10 +52,16 @@
     "typescript": "^4.4.4"
   },
   "peerDependencies": {
+    "hls.js": "^1.3.2",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "react": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "hls.js": {
+      "optional": true
+    }
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -64,7 +70,6 @@
   ],
   "types": "dist/index.d.ts",
   "dependencies": {
-    "hls.js": "^1.3.2",
     "lodash-es": "^4.17.21"
   },
   "keywords": [
