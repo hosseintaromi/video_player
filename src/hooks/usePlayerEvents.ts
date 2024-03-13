@@ -38,8 +38,7 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
     if (!videoEl) return;
 
     const hls = context.hls = new Hls({
-      enableWorker: false,
-      liveMaxLatencyDuration: 1000
+      enableWorker: false
     });
     hls.attachMedia(videoEl);
 
