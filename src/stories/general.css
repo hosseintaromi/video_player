@@ -57,20 +57,3 @@ body {
 *::after {
   box-sizing: border-box;
 }
-
-.subtitle {
-  position: absolute;
-  color: #fff;
-  bottom: 120px;
-  text-align: center;
-  width: 100%;
-  padding: 5px;
-}
-
-.subtitle .on {
-  display: block;
-}
-
-.subtitle .off {
-  display: none;
-}
