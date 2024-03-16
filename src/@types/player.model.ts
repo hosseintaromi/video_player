@@ -36,6 +36,7 @@ export interface PlayerConfigType {
   type: "HLS" | "MP4";
   loop: boolean;
   autoPlay: boolean;
+  muted: boolean;
   locale: PlayerLocaleType;
   speeds: number[] | Record<string, number>;
   theme: "Red" | "Blue" | "Custom";

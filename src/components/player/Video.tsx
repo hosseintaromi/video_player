@@ -8,39 +8,27 @@ const VideoTag = styled.video({
   display: "block",
   backgroundColor: "#000",
 });
+
 const Video = () => {
-  const { setVideoRef, autoPlay } = usePlayerContext();
-  const [mode, setMode] = useState("");
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const { setVideoRef, autoPlay, muted } = usePlayerContext();
+
+  const videoElRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
-    setVideoRef?.(videoRef.current!);
+    setVideoRef?.(videoElRef.current!);
   }, []);
-
-  // const showMe = () => {
-
-  //     console.log('first')
-  //     let trackElem = document.querySelector("track")!;
-  //     let track = trackElem.track as any;
-  //     track.mode = "showing";
-
-  //     for (const cue of track.cues) {
-
-  //         cue.pauseOnExit = true;
-  //     }
-
-  // }
 
   return (
     <>
       <VideoTag
-        ref={videoRef}
+        ref={videoElRef}
         autoPlay={autoPlay}
         playsInline
-        muted
+        muted={muted}
         id="video_player"
         crossOrigin="anonymous"
       >
-        {/* <track label="p2" kind="subtitles" srcLang="en" src="https://brenopolanski.github.io/html5-video-webvtt-example/MIB2-subtitles-pt-BR.vtt" default /> */}
+        {" "}
       </VideoTag>
       <div className="subtitle"></div>
     </>

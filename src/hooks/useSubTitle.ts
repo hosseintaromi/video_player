@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import VideoPlayerContext from "../contexts/VideoPlayerContext";
 import { SubTitle } from "../@types/player.model";
 import toWebVTT from "../utils/srt-to-vtt";
@@ -10,10 +10,10 @@ export const useSubTitle = () => {
     return state.subTitles;
   };
 
-  const getSelectedTrack = (tracks: TextTrackList) => {
+  const getTrackById = (trackId: string, tracks: TextTrackList) => {
     for (let i = 0; i < tracks.length; i++) {
       const track = tracks[i];
-      if (track.mode === "showing") {
+      if (track.id === trackId) {
         return track;
       }
     }
@@ -43,52 +43,63 @@ export const useSubTitle = () => {
     }
 
     const titles = getSubtitles();
-    if (titles) {
-      const tracks = videoRef.textTracks;
-      const selected = titles[index];
-      const currentTrack = getSelectedTrack(tracks);
-      if (currentTrack && currentTrack?.id !== selected?.code) {
-        currentTrack.mode = "hidden";
-        const selectedTitle = titles.find((x) => x.is_selected);
-        if (selectedTitle) {
-          selectedTitle.is_selected = false;
-        }
-      }
-      if (!selected) {
-        state.currentSubtitle = undefined;
-        (videoRef.srcObject as any).removeTrack(currentTrack);
-        return;
-      }
+    if (!titles || titles.length < 1) {
+      return;
+    }
 
-      let selectedTrack = tracks.getTrackById(selected.code);
-      if (!selectedTrack) {
-        const newTrack = await loadTrack(selected);
-        if (newTrack) {
-          let idx = 0;
-          const subEl: HTMLDivElement = videoRef.nextSibling as any;
-          selected.is_selected = true;
-          videoRef.appendChild(newTrack);
-          newTrack.track.mode = "hidden";
-          newTrack.oncuechange = (e) => {
-            const cues: any = newTrack.track.activeCues;
-            let cue = cues && cues[0];
+    const tracks = videoRef.textTracks;
+    const preSubtitle = titles.find((x) => x.is_selected);
 
-            if (cue && subEl) {
-              if (idx >= 0) {
-                subEl.classList.remove("on");
-                subEl.innerHTML = "";
-                subEl.appendChild(cue.getCueAsHTML());
-                subEl.classList.add("on");
-              }
-              idx = ++idx % 2;
-            }
-          };
-          selectedTrack = tracks[tracks.length - 1];
+    let preTrack;
+    if (preSubtitle) {
+      preSubtitle.is_selected = false;
+      preTrack = getTrackById(preSubtitle.code, tracks);
+    }
+
+    if (preTrack) {
+      preTrack.oncuechange = () => {};
+      const subEl: HTMLDivElement = videoRef.nextSibling as any;
+      if (subEl) {
+        subEl.style.display = "none";
+      }
+      preTrack.mode = "disabled";
+    }
+
+    const nextSubtitle = titles[index];
+    if (!nextSubtitle) {
+      state.currentSubtitle = undefined;
+      return;
+    }
+
+    let nextTrack = getTrackById(nextSubtitle.code, tracks);
+    if (!nextTrack) {
+      const newTrack = await loadTrack(nextSubtitle);
+      if (newTrack) {
+        videoRef.appendChild(newTrack);
+
+        nextTrack = tracks[tracks.length - 1];
+      }
+    }
+    if (nextTrack) {
+      state.currentSubtitle = nextSubtitle;
+      nextSubtitle.is_selected = true;
+      nextTrack.mode = "hidden";
+      nextTrack.oncuechange = (e) => {
+        const cues: any = nextTrack?.activeCues;
+        let cue = cues && cues[0];
+        let idx = 0;
+        const subEl: HTMLDivElement = videoRef.nextSibling as any;
+        if (cue && subEl) {
+          subEl.style.display = "block";
+          if (idx >= 0) {
+            subEl.classList.remove("on");
+            subEl.innerHTML = "";
+            subEl.appendChild(cue.getCueAsHTML());
+            subEl.classList.add("on");
+          }
+          idx = ++idx % 2;
         }
-      }
-      if (selectedTrack) {
-        selectedTrack.mode = "hidden";
-      }
+      };
     }
   };
 

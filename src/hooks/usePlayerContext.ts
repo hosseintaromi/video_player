@@ -43,11 +43,13 @@ export const usePlayerContext = (events?: GenericEvents<PlayerEventsType>) => {
     const videoRef = getVideoRef();
     if (videoRef) return { volume: videoRef.volume, isMuted: videoRef.muted };
   };
+
   const changeMute = (e: boolean) => {
     const videoRef = getVideoRef();
     if (videoRef) videoRef.muted = e;
     call.onChangeMute?.(e);
   };
+  
   const changeVolume = (newVolume: number) => {
     const videoRef = getVideoRef();
     if (videoRef) {
