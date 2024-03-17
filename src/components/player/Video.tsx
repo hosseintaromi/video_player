@@ -30,7 +30,9 @@ const Video = () => {
       >
         {" "}
       </VideoTag>
-      <div className="subtitle"></div>
+      <div className="subtitle">
+        <div className="text"></div>
+      </div>
     </>
   );
 };

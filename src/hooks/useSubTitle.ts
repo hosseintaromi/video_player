@@ -93,8 +93,8 @@ export const useSubTitle = () => {
           subEl.style.display = "block";
           if (idx >= 0) {
             subEl.classList.remove("on");
-            subEl.innerHTML = "";
-            subEl.appendChild(cue.getCueAsHTML());
+            subEl.children[0].innerHTML = "";
+            subEl.children[0].appendChild(cue.getCueAsHTML());
             subEl.classList.add("on");
           }
           idx = ++idx % 2;
