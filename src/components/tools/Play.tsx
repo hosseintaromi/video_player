@@ -10,7 +10,7 @@ const Play = ({ children }: { children?: ReactNode }) => {
     changePlayPause(!isPlay);
   };
 
-  const { changePlayPause, autoPlay } = usePlayerContext({
+  const { changePlayPause } = usePlayerContext({
     onPlayPause: (play: boolean) => {
       setIsPlay(play);
     },

@@ -27,8 +27,8 @@ const TouchContainer = ({
     decreaseTime,
     keyControl,
   } = usePlayerContext({
-    onPlayPause: (playStatus: boolean) => {
-      isPlayRef.current = playStatus;
+    onPlayPause: (play: boolean) => {
+      isPlayRef.current = play;
       hideIfIdle();
     },
   });

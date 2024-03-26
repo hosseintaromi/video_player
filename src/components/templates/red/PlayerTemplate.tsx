@@ -10,19 +10,11 @@ import Loading from '../../loading/Loading'
 
 const PlayerTemplate = () => {
     const [isFadeOut, setIsFadeOut] = useState<boolean>(false);
-    const [isPlay, setIsPlay] = useState<boolean>(false)
-    const { style } = usePlayerContext({
-        onPlayPause: (playStatus: boolean) => {
-            setIsPlay(true)
-            setTimeout(() => {
-                setIsPlay(false)
-            }, 450);
-        }
-    })
+    const { style } = usePlayerContext()
     return (
         <ThemeProvider theme={style}>
             <VideoWrapper id="video_wrapper_id">
-                <PlayIconWrapper isClicked={isPlay}>
+                <PlayIconWrapper isClicked={false}>
                     <Play />
                 </PlayIconWrapper>
                 <Loading />
