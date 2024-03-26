@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { usePlayerContext } from "../../hooks/usePlayerContext";
 import Icon from "../icons/Icon";
 
@@ -6,15 +6,22 @@ const Play = ({ children }: { children?: ReactNode }) => {
 
   const [isPlay, setIsPlay] = useState<boolean>(false);
 
-  const togglePlay = () => {
-    changePlayPause(!isPlay);
-  };
-
-  const { changePlayPause } = usePlayerContext({
+  const { changePlayPause, autoPlay, getIsPlay } = usePlayerContext({
     onPlayPause: (play: boolean) => {
+      console.log('play', play)
       setIsPlay(play);
     },
-  });
+  })
+
+  const togglePlay = () => {
+    changePlayPause(!isPlay);
+  }
+
+  useEffect(() => {
+    const isPlay = getIsPlay()
+    if (isPlay)
+      setIsPlay(isPlay)
+  }, [])
 
   return (
     <>
