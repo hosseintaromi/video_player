@@ -9,12 +9,19 @@ export interface HlsVideoEventType {
   onLoaded?: () => void;
 }
 export const usePlayerEvents = (events?: HlsVideoEventType) => {
-  const { type, getVideoRef, listenOnLoad, hls, qualities, subTitle, audioTracks } = usePlayerContext();
+  const {
+    type,
+    getVideoRef,
+    listenOnLoad,
+    hls,
+    qualities,
+    subTitle,
+    audioTracks,
+  } = usePlayerContext();
   const context = useContext(VideoPlayerContext);
 
-
   const loadVideo = useCallback((src: string) => {
-    if (type === "HLS") {
+    if (type === "HLS" && Hls.isSupported()) {
       loadHlsVideo(src);
     } else {
       loadMP4Video(src);
@@ -37,9 +44,9 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
     const videoEl = getVideoRef();
     if (!videoEl) return;
 
-    const hls = context.hls = new Hls({
-      enableWorker: false
-    });
+    const hls = (context.hls = new Hls({
+      enableWorker: false,
+    }));
     hls.attachMedia(videoEl);
 
     hls.on(Hls.Events.MEDIA_ATTACHED, () => {
@@ -50,16 +57,15 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
       }
     });
     hls.on(Hls.Events.ERROR, function (event, data) {
-      if (data)
-        console.log(JSON.stringify(data));
+      if (data) console.log(JSON.stringify(data));
       if (data.fatal) {
         switch (data.type) {
           case Hls.ErrorTypes.MEDIA_ERROR:
-            console.log('MEDIA_ERROR');
+            console.log("MEDIA_ERROR");
             hls.recoverMediaError();
             break;
           case Hls.ErrorTypes.NETWORK_ERROR:
-            console.error('fatal network error encountered', data);
+            console.error("fatal network error encountered", data);
             // All retries and media options have been exhausted.
             // Immediately trying to restart loading could cause loop loading.
             // Consider modifying loading policies to best fit your asset and network
@@ -80,13 +86,15 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   }, []);
 
   const getLevels = () => {
-    return context.hls?.levels.filter((item) => qualities.length ? qualities.includes(item.height) : true)
+    return context.hls?.levels.filter((item) =>
+      qualities.length ? qualities.includes(item.height) : true
+    );
   };
   const getCurrentLevel = () => {
     return {
       currentLevel: context.hls?.currentLevel,
       isAuto: context.hls?.autoLevelEnabled,
-      defaultQuality: context?.config?.defaultQuality || null
+      defaultQuality: context?.config?.defaultQuality || null,
     };
   };
   const changeLevel = (index: number) => {
@@ -94,7 +102,9 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   };
 
   const getSubtitle = () => {
-    return context.hls?.subtitleTracks.filter((item) => subTitle.length ? subTitle.includes(item.name) : true)
+    return context.hls?.subtitleTracks.filter((item) =>
+      subTitle.length ? subTitle.includes(item.name) : true
+    );
   };
   const getCurrentSubtitle = () => {
     return context.hls?.subtitleTrack;
@@ -104,7 +114,9 @@ export const usePlayerEvents = (events?: HlsVideoEventType) => {
   };
 
   const getAudioTracks = () => {
-    return context.hls?.audioTracks.filter((item) => audioTracks.length ? audioTracks.includes(item.name) : true)
+    return context.hls?.audioTracks.filter((item) =>
+      audioTracks.length ? audioTracks.includes(item.name) : true
+    );
   };
   const getAudioTrack = () => {
     return context.hls?.audioTrack;

@@ -98,6 +98,8 @@ export const useSubTitle = () => {
             subEl.classList.add("on");
           }
           idx = ++idx % 2;
+        } else if (subEl) {
+          subEl.classList.remove("on");
         }
       };
     }
