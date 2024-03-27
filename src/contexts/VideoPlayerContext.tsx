@@ -7,7 +7,7 @@ const VideoPlayerContext = createContext<PlayerContextType>({
   setVideoRef: (ref) => {},
   getVideoRef: () => undefined,
   listenOnLoad: [],
-  state: {},
+  state: {} as any,
 });
 
 export default VideoPlayerContext;
